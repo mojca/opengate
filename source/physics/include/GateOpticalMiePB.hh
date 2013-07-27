@@ -23,4 +23,3 @@ See GATE/LICENSE.txt for further details
 MAKE_PROCESS_AUTO_CREATOR(GateOpticalMiePB)
 
 #endif
-

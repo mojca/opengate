@@ -36,7 +36,7 @@
 //#include "TMath.h"
 
 GateSourcePencilBeam::GateSourcePencilBeam(G4String name ):GateVSource( name ), mGaussian2DYPhi(NULL), mGaussian2DXTheta(NULL), mGaussianEnergy(NULL)
-{ 
+{
   //Particle Type
   strcpy(mParticleType,"proton");
   mWeight=1.;
@@ -273,14 +273,14 @@ void GateSourcePencilBeam::GenerateVertex( G4Event* aEvent )
   double pz = pmom*Dir[2]/dtot ;
 
   G4PrimaryParticle* particle =  new G4PrimaryParticle(particle_definition,px,py,pz);
-  vertex->SetPrimary( particle ); 
+  vertex->SetPrimary( particle );
   aEvent->AddPrimaryVertex( vertex );
   mCurrentParticleNumber++;
   //-------- PARTICLE GENERATION - END------------------
 }
 
 //------------------------------------------------------------------------------------------------------
-G4int GateSourcePencilBeam::GeneratePrimaries( G4Event* event ) 
+G4int GateSourcePencilBeam::GeneratePrimaries( G4Event* event )
 {
   GateMessage("Beam", 4, "GeneratePrimaries " << event->GetEventID() << G4endl);
   G4int numVertices = 0;

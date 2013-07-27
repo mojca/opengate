@@ -38,12 +38,12 @@ GateImageRegionalizedVolumeSolid::~GateImageRegionalizedVolumeSolid()
 // Returns kOutside if the point at offset p is outside the shapes
 // boundaries plus Tolerance/2, kSurface if the point is <= Tolerance/2
 // from a surface, otherwise kInside.
-// Uses G4Box::Inside to know if the points falls in the image 
+// Uses G4Box::Inside to know if the points falls in the image
 // and if so picks the label of image to compare it to the label of Gate solid
-// *** WARNING *** 
-// The current implementation of the kSurface tolerance assumes that the 
-// voxel's size if larger than kCarTolerance 
-// (which is consistent with the fact that G4Box of smaller size than  
+// *** WARNING ***
+// The current implementation of the kSurface tolerance assumes that the
+// voxel's size if larger than kCarTolerance
+// (which is consistent with the fact that G4Box of smaller size than
 // kCarTolerance cannot be created)
 EInside GateImageRegionalizedVolumeSolid::Inside(const G4ThreeVector& p) const
 {
@@ -72,7 +72,7 @@ EInside GateImageRegionalizedVolumeSolid::Inside(const G4ThreeVector& p) const
 // kInfinity. The first intersection resulting from `leaving' a
 // surface/volume is discarded. Hence, it is tolerant of points on
 // the surface of the shape.
-G4double GateImageRegionalizedVolumeSolid::DistanceToIn(const G4ThreeVector& p, 
+G4double GateImageRegionalizedVolumeSolid::DistanceToIn(const G4ThreeVector& p,
 					    const G4ThreeVector& v) const
 {
   GateDebugMessage("Volume",7,"GateImageRegionalizedVolumeSolid["<<GetName()
@@ -84,7 +84,7 @@ G4double GateImageRegionalizedVolumeSolid::DistanceToIn(const G4ThreeVector& p,
   return dbox;
 }
 //====================================================================
-  
+
 
 //====================================================================
 // Calculate the distance to the nearest surface of a shape from an
@@ -98,7 +98,7 @@ G4double GateImageRegionalizedVolumeSolid::DistanceToIn(const G4ThreeVector& p) 
   GateDebugMessage("Volume",7," DIST(BB) = " << dbox <<G4endl);
   return dbox;
 }
-//====================================================================  
+//====================================================================
 
 
 //====================================================================
@@ -117,10 +117,10 @@ G4double GateImageRegionalizedVolumeSolid::DistanceToIn(const G4ThreeVector& p) 
 //
 // Must be called as solid.DistanceToOut(p,v) or by specifying all
 // the parameters.
-G4double GateImageRegionalizedVolumeSolid::DistanceToOut(const G4ThreeVector& p, 
+G4double GateImageRegionalizedVolumeSolid::DistanceToOut(const G4ThreeVector& p,
 						  const G4ThreeVector& v,
 						  const G4bool calcNorm,
-						  G4bool *validNorm, 
+						  G4bool *validNorm,
 						  G4ThreeVector *n) const
 {
   GateDebugMessage("Volume",7,"GateImageRegionalizedVolumeSolid["<<GetName()
@@ -134,8 +134,8 @@ G4double GateImageRegionalizedVolumeSolid::DistanceToOut(const G4ThreeVector& p,
 //====================================================================
 
 
-//====================================================================  
- 
+//====================================================================
+
 // Calculate the distance to the nearest surface of a shape from an
 // inside point. The distance can be an underestimate.
 G4double GateImageRegionalizedVolumeSolid::DistanceToOut(const G4ThreeVector& p) const
@@ -160,7 +160,7 @@ G4GeometryType GateImageRegionalizedVolumeSolid::GetEntityType() const
 
 
 //====================================================================
-// Dumps contents of the solid to a stream.  
+// Dumps contents of the solid to a stream.
 std::ostream& GateImageRegionalizedVolumeSolid::StreamInfo(std::ostream& os) const
 {
   os << "-----------------------------------------------------------\n"
@@ -176,5 +176,3 @@ std::ostream& GateImageRegionalizedVolumeSolid::StreamInfo(std::ostream& os) con
   return os;
 }
 //====================================================================
-
-  

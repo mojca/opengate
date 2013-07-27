@@ -24,10 +24,10 @@ See GATE/LICENSE.txt for further details
 
 GateHexagoneMessenger::GateHexagoneMessenger(GateHexagone *itsCreator)
   :GateVolumeMessenger(itsCreator)
-{ 
+{
 
   G4String dir = GetDirectoryName() + "geometry/";
-  
+
   G4String cmdName = dir + "setRadius";
   HexagoneRadiusCmd = new G4UIcmdWithADoubleAndUnit(cmdName.c_str(),this);
   HexagoneRadiusCmd->SetGuidance("Set radius of hexagone.");
@@ -35,7 +35,7 @@ GateHexagoneMessenger::GateHexagoneMessenger(GateHexagone *itsCreator)
   HexagoneRadiusCmd->SetRange("Radius>0.");
   HexagoneRadiusCmd->SetUnitCategory("Length");
 
-  
+
   cmdName = dir + "setHeight";
   G4cout << " GetDirectoryName()+ setHeight = "  << cmdName << G4endl;
   HexagoneHeightCmd = new G4UIcmdWithADoubleAndUnit(cmdName,this);
@@ -44,7 +44,7 @@ GateHexagoneMessenger::GateHexagoneMessenger(GateHexagone *itsCreator)
   HexagoneHeightCmd->SetRange("Height>0.");
   HexagoneHeightCmd->SetUnitCategory("Length");
 
-  
+
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
@@ -58,11 +58,11 @@ GateHexagoneMessenger::~GateHexagoneMessenger()
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
 void GateHexagoneMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
   if( command == HexagoneRadiusCmd )
     { GetHexagoneCreator()->SetHexagoneRadius(HexagoneRadiusCmd->GetNewDoubleValue(newValue));}
   else if( command==HexagoneHeightCmd )
-    { GetHexagoneCreator()->SetHexagoneHeight(HexagoneHeightCmd->GetNewDoubleValue(newValue));}   
+    { GetHexagoneCreator()->SetHexagoneHeight(HexagoneHeightCmd->GetNewDoubleValue(newValue));}
   else
     GateVolumeMessenger::SetNewValue(command,newValue);
 }

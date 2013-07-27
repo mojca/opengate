@@ -18,8 +18,8 @@ See GATE/LICENSE.txt for further details
 #include "GateDetectorConstruction.hh"
 #include <valarray>
 
-class GateTrajectoryNavigator; 
-class GateCompressedVoxelOutputMessenger; 
+class GateTrajectoryNavigator;
+class GateCompressedVoxelOutputMessenger;
 class GateCompressedVoxelParameterized;
 class GateVVolume;
 
@@ -44,10 +44,10 @@ public:
 
 
   virtual void SetVerboseLevel(G4int val);
-  
+
   //! Get the output file name
   inline  const  G4String& GetFileName()const { return m_fileName; }
-  
+
   //! Set the output file name
   void   SetFileName(const G4String aName)    { m_fileName = aName; }
   void   SetSaveUncertainty(G4bool b) ;

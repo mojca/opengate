@@ -20,8 +20,8 @@
 #include "GateOutputMgr.hh"
 #include "GateAnalysis.hh"
 
-static char *theDefaultOutputIDName[ROOT_OUTPUTIDSIZE] = 
- {(char *)"baseID", 
+static char *theDefaultOutputIDName[ROOT_OUTPUTIDSIZE] =
+ {(char *)"baseID",
   (char *)"unused1ID",
   (char *)"unused2ID",
   (char *)"unused3ID",
@@ -40,11 +40,11 @@ static char outputIDLeafList2[ROOT_OUTPUTIDSIZE][24];
 void GateRootDefs::SetDefaultOutputIDNames()
 {
   for (size_t depth=0; depth<ROOT_OUTPUTIDSIZE ; ++depth )
-  SetOutputIDName(theDefaultOutputIDName[depth],depth); 
+  SetOutputIDName(theDefaultOutputIDName[depth],depth);
 }
 
 void GateRootDefs::SetOutputIDName(char * anOutputIDName, size_t depth)
-{  
+{
   sprintf(outputIDName[depth],"%s",anOutputIDName);
   sprintf(outputIDName1[depth],"%s1",anOutputIDName);
   sprintf(outputIDName2[depth],"%s2",anOutputIDName);
@@ -55,7 +55,7 @@ void GateRootDefs::SetOutputIDName(char * anOutputIDName, size_t depth)
 }
 
 /*	HDS : septal penetration
-	The aim of this method is to read the boolean value of the RecordSeptalFlag in the output module 
+	The aim of this method is to read the boolean value of the RecordSeptalFlag in the output module
 	GateAnalysis. If the flag is true, we add a branch "septalNb" in the Hit tree and in all Single
 	Chain trees (not coincidences)."
 	If no GateAnalysis output module is currently running, this method will throw a warning.
@@ -74,7 +74,7 @@ G4bool GateRootDefs::GetRecordSeptalFlag()
 				<< "!!! This is just a warning message. The simulation will continue. !!!";
 	} else {
 		ans = analysis->GetRecordSeptalFlag();
-	} 
+	}
 
 	return ans;
 }
@@ -118,7 +118,7 @@ void GateRootHitBuffer::Clear()
     outputID[d] = -1;
   for ( d = 0 ; d < ROOT_VOLUMEIDSIZE ; ++d )
     volumeID[d] = -1;
-    
+
 // HDS : septal
   septalNb = 0;
 }
@@ -151,20 +151,20 @@ void GateRootHitBuffer::Fill(GateCrystalHit* aHit)
   runID           = aHit->GetRunID();
   SetAxialPos(      aHit->GetScannerPos().z() );
   SetRotationAngle( aHit->GetScannerRotAngle() );
-	  
+
 // HDS : septal
 	septalNb = aHit->GetNSeptal();
-	
+
   strcpy (processName, aHit->GetProcess().c_str());
 
   strcpy (comptonVolumeName,aHit->GetComptonVolumeName().c_str());
   if (aHit->GetComptonVolumeName().length()>=40)
-    G4cout << "GateToRoot::RecordEndOfEvent : length of volume name exceeding 40: " << 
+    G4cout << "GateToRoot::RecordEndOfEvent : length of volume name exceeding 40: " <<
 	      aHit->GetComptonVolumeName().length()+1 << G4endl;
 
   strcpy (RayleighVolumeName,aHit->GetRayleighVolumeName().c_str());
   if (aHit->GetRayleighVolumeName().length()>=40)
-    G4cout << "GateToRoot::RecordEndOfEvent : length of volume name exceeding 40: " << 
+    G4cout << "GateToRoot::RecordEndOfEvent : length of volume name exceeding 40: " <<
 	      aHit->GetRayleighVolumeName().length()+1 << G4endl;
 
   aHit->GetVolumeID().StoreDaughterIDs(volumeID,ROOT_VOLUMEIDSIZE);
@@ -176,7 +176,7 @@ void GateRootHitBuffer::Fill(GateCrystalHit* aHit)
 }
 
 GateCrystalHit* GateRootHitBuffer::CreateHit()
-{	
+{
     // Create a volumeID from the root-hit data
     GateVolumeID aVolumeID(volumeID,ROOT_VOLUMEIDSIZE);
 
@@ -190,8 +190,8 @@ GateCrystalHit* GateRootHitBuffer::CreateHit()
     GateCrystalHit* aHit = new GateCrystalHit();
 
     // Initialise the hit data from the root-hit data
-    aHit->SetEdep(    	      	GetEdep() );  
-    aHit->SetStepLength(      	GetStepLength() );  
+    aHit->SetEdep(    	      	GetEdep() );
+    aHit->SetStepLength(      	GetStepLength() );
     aHit->SetTime(    	      	GetTime() );
     aHit->SetGlobalPos(       	GetPos() );
     aHit->SetLocalPos(        	GetLocalPos() );
@@ -437,7 +437,7 @@ void GateRootCoincBuffer::Clear()
 
 
 void GateRootCoincBuffer::Fill(GateCoincidenceDigi* aDigi)
-{      
+{
       size_t d;
 
       runID          = (aDigi->GetPulse(0)).GetRunID();
@@ -445,7 +445,7 @@ void GateRootCoincBuffer::Fill(GateCoincidenceDigi* aDigi)
       rotationAngle  = (aDigi->GetPulse(0)).GetScannerRotAngle()/deg;
 
       eventID1       = (aDigi->GetPulse(0)).GetEventID();
-      sourceID1      = (aDigi->GetPulse(0)).GetSourceID();      
+      sourceID1      = (aDigi->GetPulse(0)).GetSourceID();
       sourcePosX1    = (aDigi->GetPulse(0)).GetSourcePosition().x()/mm;
       sourcePosY1    = (aDigi->GetPulse(0)).GetSourcePosition().y()/mm;
       sourcePosZ1    = (aDigi->GetPulse(0)).GetSourcePosition().z()/mm;
@@ -460,12 +460,12 @@ void GateRootCoincBuffer::Fill(GateCoincidenceDigi* aDigi)
       comptonCrystal1       = (aDigi->GetPulse(0)).GetNCrystalCompton();
       RayleighPhantom1       = (aDigi->GetPulse(0)).GetNPhantomRayleigh();
       RayleighCrystal1       = (aDigi->GetPulse(0)).GetNCrystalRayleigh();
-     
+
       strcpy (comptonVolumeName1,((aDigi->GetPulse(0)).GetComptonVolumeName()).c_str());
       strcpy (RayleighVolumeName1,((aDigi->GetPulse(0)).GetRayleighVolumeName()).c_str());
 
       eventID2       = (aDigi->GetPulse(1)).GetEventID();
-      sourceID2      = (aDigi->GetPulse(1)).GetSourceID();      
+      sourceID2      = (aDigi->GetPulse(1)).GetSourceID();
       sourcePosX2    = (aDigi->GetPulse(1)).GetSourcePosition().x()/mm;
       sourcePosY2    = (aDigi->GetPulse(1)).GetSourcePosition().y()/mm;
       sourcePosZ2    = (aDigi->GetPulse(1)).GetSourcePosition().z()/mm;
@@ -493,7 +493,7 @@ void GateRootCoincBuffer::Fill(GateCoincidenceDigi* aDigi)
 G4double GateRootCoincBuffer::ComputeSinogramTheta()
 {
   G4double theta;
-  
+
   if ((globalPosX1-globalPosX2) != 0.) {
     theta = atan( (globalPosX1 - globalPosX2) / (globalPosY1 - globalPosY2) );
     if (theta < 0.) theta = theta+3.1416;
@@ -513,13 +513,13 @@ G4double GateRootCoincBuffer::ComputeSinogramS()
 
   G4double denom = (globalPosY1-globalPosY2) * (globalPosY1-globalPosY2) +
                    (globalPosX2-globalPosX1) * (globalPosX2-globalPosX1);
-  
+
   if (denom!=0.) {
     denom = sqrt(denom);
 
     s = ( globalPosX1 * (globalPosY2-globalPosY1) +
-	  globalPosY1 * (globalPosX1-globalPosX2)  ) 
-      	/ denom; 
+	  globalPosY1 * (globalPosX1-globalPosX2)  )
+      	/ denom;
   } else {
     s = 0.;
   }
@@ -549,7 +549,7 @@ void GateCoincTree::Init(GateRootCoincBuffer& buffer)
     Branch("runID",          &buffer.runID,"runID/I");
     Branch("axialPos",       &buffer.axialPos,"axialPos/F");
     Branch("rotationAngle",  &buffer.rotationAngle,"rotationAngle/F");
-    
+
     Branch("eventID1",       &buffer.eventID1,"eventID1/I");
     Branch("sourceID1",      &buffer.sourceID1,"sourceID1/I");
     Branch("sourcePosX1",    &buffer.sourcePosX1,"sourcePosX1/F");
@@ -584,7 +584,7 @@ void GateCoincTree::Init(GateRootCoincBuffer& buffer)
     Branch("comptonCrystal2",&buffer.comptonCrystal2,"comptonCrystal2/I");
     Branch("RayleighPhantom2",&buffer.RayleighPhantom2,"RayleighPhantom2/I");
     Branch("RayleighCrystal2",&buffer.RayleighCrystal2,"RayleighCrystal2/I");
-    
+
     Branch("sinogramTheta",  &buffer.sinogramTheta,"sinogramTheta/F");
     Branch("sinogramS",      &buffer.sinogramS,"sinogramS/F");
 
@@ -597,7 +597,3 @@ void GateCoincTree::Init(GateRootCoincBuffer& buffer)
 
 
 #endif
-
-
-
-

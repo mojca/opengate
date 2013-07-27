@@ -23,7 +23,7 @@ See GATE/LICENSE.txt for further details
 
 //----------------------------------------------------------------------------------------
 GateRunManager::GateRunManager():G4RunManager()
-{ 
+{
   pMessenger = new GateRunManagerMessenger(this);
   mHounsfieldToMaterialsBuilder = new GateHounsfieldToMaterialsBuilder();
   mIsGateInitializationCalled = false;
@@ -32,7 +32,7 @@ GateRunManager::GateRunManager():G4RunManager()
 //----------------------------------------------------------------------------------------
 
 GateRunManager::~GateRunManager()
-{ 
+{
   delete GateActorManager::GetInstance();
   delete pMessenger;
   delete mHounsfieldToMaterialsBuilder;
@@ -43,7 +43,7 @@ GateRunManager::~GateRunManager()
 // Initialise geometry, actors and the physics list
 // This code was derived from the code of G4RunManager::Initialise()
 void GateRunManager::InitializeAll()
-{  
+{
   // Get the current application state
   G4StateManager* stateManager = G4StateManager::GetStateManager();
   G4ApplicationState currentState = stateManager->GetCurrentState();
@@ -55,10 +55,10 @@ void GateRunManager::InitializeAll()
 	     << "G4RunManager::Initialize() ignored." << G4endl;
       return;
     }
-  
+
   GateMessage("Core", 0, "Initialization of geometry" << G4endl);
   InitGeometryOnly();
-      
+
  // if(!physicsInitialized) {
     GateMessage("Core", 0, "Initialization of physics" << G4endl);
     // We call the PurgeIfFictitious method to delete the gamma related processes
@@ -71,7 +71,7 @@ void GateRunManager::InitializeAll()
   GateActorManager::GetInstance() ->CreateListsOfEnabledActors();
 
   initializedAtLeastOnce = true;
-  
+
   // Set this flag to true (prevent in RunInitialisation to use
   // /run/initialize instead of /gate/run/initialize
   mIsGateInitializationCalled = true;
@@ -82,7 +82,7 @@ void GateRunManager::InitializeAll()
 // Initialise only the geometry, to allow the building of the GATE geometry
 // This code was derived from the code of G4RunManager::Initialise()
 void GateRunManager::InitGeometryOnly()
-{                   
+{
 
 
 // Initialise G4Regions
@@ -105,17 +105,17 @@ void GateRunManager::InitGeometryOnly()
 
 
   // Initialise the geometry in the main() programm
-  if (!geometryInitialized) 
+  if (!geometryInitialized)
     {
       GateMessage("Core", 1, "Initialization of geometry" << G4endl);
       G4RunManager::InitializeGeometry();
-    }  
+    }
   else
     {
       // Initialize the geometry by calling /gate/run/initialize
       det = detConstruction->GateDetectorConstruction::GetGateDetectorConstruction();
       det->GateDetectorConstruction::SetGeometryStatusFlag(GateDetectorConstruction::geometry_needs_rebuild);
-      det->GateDetectorConstruction::UpdateGeometry();	  
+      det->GateDetectorConstruction::UpdateGeometry();
       //	  nParallelWorlds = userDetector->ConstructParallelGeometries();
       //          kernel->SetNumberOfParallelWorld(nParallelWorlds);
       //	  geometryInitialized=true;
@@ -144,7 +144,7 @@ void GateRunManager::RunInitialization()
   // GateMessage("Core", 0, "Initialization of the run " << G4endl);
   // Perform a regular initialisation
   G4RunManager::RunInitialization();
-  
+
   // Reset the geometry navigator
   // In G4.5, both "/geometry/navigator/reset" and the new method
   // G4RunManager::ResetNavigator() work only in the Idle state,
@@ -153,8 +153,7 @@ void GateRunManager::RunInitialization()
   G4ThreeVector center(0,0,0);
   G4TransportationManager::GetTransportationManager()
     ->GetNavigatorForTracking()
-    ->LocateGlobalPointAndSetup(center,0,false);  
+    ->LocateGlobalPointAndSetup(center,0,false);
 
 }
 //----------------------------------------------------------------------------------------
-

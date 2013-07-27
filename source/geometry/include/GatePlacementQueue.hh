@@ -23,31 +23,30 @@ typedef std::pair<G4RotationMatrix,G4ThreeVector> GatePlacement;
 //-----------------------------------------------------------
 /*! \class  GatePlacementQueue
     \brief  Class for storing a series of physical volumes' positions
-    
+
     - GatePlacementQueue - by Daniel.Strul@iphe.unil.ch
-    
+
     - This class stores a series of physical volumes' positions as a queue of
-      GatePlacement, where each GatePlacement combines a rotation matrix and a 
+      GatePlacement, where each GatePlacement combines a rotation matrix and a
       translation vector
-*/      
+*/
 class GatePlacementQueue : public std::queue<GatePlacement>
 {
-  public:  
+  public:
 
   GatePlacementQueue() {}
   virtual ~ GatePlacementQueue() {}
-  
+
   virtual inline void push_back(const GatePlacement& aPlacement)
     { std::queue<GatePlacement>::push(aPlacement) ; }
   virtual inline void push_back(const G4RotationMatrix& rotationMatrix,const G4ThreeVector& position)
     { push_back(GatePlacement(rotationMatrix,position)) ; }
   virtual inline GatePlacement pop_front()
   { GatePlacement placement = front();
-    std::queue<GatePlacement>::pop() ; 
+    std::queue<GatePlacement>::pop() ;
     return placement;
   }
 };
 //-----------------------------------------------------------
 
 #endif
-

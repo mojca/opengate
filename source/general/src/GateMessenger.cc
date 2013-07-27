@@ -30,10 +30,10 @@ See GATE/LICENSE.txt for further details
 // The flag 'flagCreateDirectory' tells whether it should create a new UI directory
 // (set this flag to false if the directory is already created by another messenger)
 GateMessenger::GateMessenger(const G4String& itsName,G4bool createDirectory)
-: mName(itsName), 
+: mName(itsName),
   mDirName(ComputeDirectoryName(itsName)),
   pDir(0)
-{ 
+{
   if (createDirectory){
     pDir = new G4UIdirectory(mDirName);
     G4String name;
@@ -56,7 +56,7 @@ GateMessenger::~GateMessenger()
 //-------------------------------------------------------------------------------------
 // UI command interpreter method
 void GateMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
     G4UImessenger::SetNewValue(command,newValue);
 }
 //-------------------------------------------------------------------------------------
@@ -64,21 +64,21 @@ void GateMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
 
 //-------------------------------------------------------------------------------------
 // Tells GATE that the geometrical parameters have undergone a minor modification
-// so that the geometry should be updated 
+// so that the geometry should be updated
 /*
 void GateMessenger::TellGeometryToUpdate()
 {
 
   GateDetectorConstruction::GetGateDetectorConstruction()
-    ->GeometryHasChanged(GateDetectorConstruction::geometry_needs_update);    
-} 
-*/ 
-//-------------------------------------------------------------------------------------    
+    ->GeometryHasChanged(GateDetectorConstruction::geometry_needs_update);
+}
+*/
+//-------------------------------------------------------------------------------------
 
 
 //-------------------------------------------------------------------------------------
 // Tells GATE that the geometrical parameters have undergone a major modification
-// so that the geometry should be rebuilt 
+// so that the geometry should be rebuilt
 /*
 void GateMessenger::TellGeometryToRebuild()
 {
@@ -86,11 +86,11 @@ void GateMessenger::TellGeometryToRebuild()
   GateDetectorConstruction::GetGateDetectorConstruction()
     ->GeometryHasChanged(GateDetectorConstruction::geometry_needs_rebuild);
 
-} 
-*/ 
+}
+*/
 //-------------------------------------------------------------------------------------
 
-    
+
 //-------------------------------------------------------------------------------------
 // Adds a new line to the directory guidance
 void GateMessenger::SetDirectoryGuidance(const G4String& guidance)
@@ -98,4 +98,3 @@ void GateMessenger::SetDirectoryGuidance(const G4String& guidance)
   GetDirectory()->SetGuidance(guidance);
 }
 //-------------------------------------------------------------------------------------
-

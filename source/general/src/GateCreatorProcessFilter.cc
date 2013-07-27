@@ -30,7 +30,7 @@ GateCreatorProcessFilter::~GateCreatorProcessFilter()
 
 
 //---------------------------------------------------------------------------
-G4bool GateCreatorProcessFilter::Accept(const G4Track* aTrack) 
+G4bool GateCreatorProcessFilter::Accept(const G4Track* aTrack)
 {
   const G4VProcess *creatorProcess = aTrack->GetCreatorProcess();
   if (!creatorProcess) return false;

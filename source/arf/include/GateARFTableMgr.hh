@@ -50,7 +50,7 @@ public:
  GateARFTableMgr( G4String, GateARFSD* );
  ~GateARFTableMgr();
 void SaveARFToBinaryFile();
-void SetBinaryFile(G4String theName ){SaveARFTables = 1; theFN = theName;}; 
+void SetBinaryFile(G4String theName ){SaveARFTables = 1; theFN = theName;};
 void LoadARFFromBinaryFile(G4String);
 void SetNBins(G4int);
 G4int GetNBins(){return m_nbins;};
@@ -78,8 +78,3 @@ void SetDistanceFromSourceToDetector( G4double aD ){ m_distance = aD;};
 };
 
 #endif
-
-
-
-
-

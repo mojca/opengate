@@ -19,7 +19,7 @@ See GATE/LICENSE.txt for further details
 // The flag "itsFlagCanBeDisabled" tells whether the user is allowed to disable this object
 // (this flag should be set to false for critical objects, such as the world volume for instance)
  GateClockDependent::GateClockDependent(const G4String& itsName, G4bool canBeDisabled)
-: GateNamedObject(itsName), 
+: GateNamedObject(itsName),
   bIsEnabled(true),
   bCanBeDisabled(canBeDisabled)
 {
@@ -28,7 +28,7 @@ See GATE/LICENSE.txt for further details
 
 
 //-------------------------------------------------------------------------------------------------------
-// Asks the clock and return the current time 
+// Asks the clock and return the current time
 double GateClockDependent::GetCurrentTime()
 {
   GateClock* theClock = GateClock::GetInstance();
@@ -48,4 +48,3 @@ void GateClockDependent::Describe(size_t indent)
     G4cout << GateTools::Indent(indent) << "Is enabled?         " << ( IsEnabled() ? "Yes" : "No") << G4endl;
 }
 //-------------------------------------------------------------------------------------------------------
-

@@ -40,7 +40,7 @@ GateQuadrantRepeater::GateQuadrantRepeater(GateVVolume* itsObjectInserter,
 
 
 GateQuadrantRepeater::~GateQuadrantRepeater()
-{  
+{
   delete m_Messenger;
 }
 
@@ -58,7 +58,7 @@ void GateQuadrantRepeater::PushMyPlacements(const G4RotationMatrix& currentRotat
     G4int orthogonalRepeatNumber = i+1;
 
     G4ThreeVector startPosition = currentPosition + m_lineSpacingVector * i;
-    
+
     for ( G4int j=0 ; j<orthogonalRepeatNumber ; j++) {
 
       G4ThreeVector newPosition = startPosition + j * m_orthogonalRepeatVector;
@@ -84,4 +84,3 @@ void GateQuadrantRepeater::DescribeMyself(size_t indent)
     G4cout << GateTools::Indent(indent) << "Line-spacing vector:    " << G4BestUnit(m_lineSpacingVector,"Length") << "\n";
     G4cout << GateTools::Indent(indent) << "Repetition vector:      " << G4BestUnit(m_orthogonalRepeatVector,"Length") << "\n";
 }
-

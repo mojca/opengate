@@ -40,6 +40,3 @@ See GATE/LICENSE.txt for further details
 #include "G4LivermoreGammaConversionModel.hh"
 #include "G4LivermorePolarizedGammaConversionModel.hh"
 #include "G4PenelopeGammaConversionModel.hh"
-
-
-

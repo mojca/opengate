@@ -21,15 +21,15 @@ See GATE/LICENSE.txt for further details
 /*! \class  GateOutputVolumeID
     \brief  Class for storing an identifier of a volume as a vector of integer
     \brief  This volume ID can be stored into output files for analysis and image reconstruction
-    
+
     - GateOutputVolumeID - by Daniel.Strul@iphe.unil.ch
-    
+
     - Output volume IDs are created by systems (GateVSystem) after analysis of a hit:
       Each output volume ID identifies a volume according to the geometry model defined
       by the system
 
       \sa GateVSystem
-*/      
+*/
 class GateOutputVolumeID : public std::vector<G4int>
 {
   public:
@@ -40,7 +40,7 @@ class GateOutputVolumeID : public std::vector<G4int>
     virtual ~GateOutputVolumeID() {}
 
     //! Friend function: inserts (prints) a GateOutputVolumeID into a stream
-    friend std::ostream& operator<<(std::ostream&, const GateOutputVolumeID& volumeID);    
+    friend std::ostream& operator<<(std::ostream&, const GateOutputVolumeID& volumeID);
 
     //! Check whether the ID is valid, i.e. not empty and with no negative element
     G4bool IsValid() const;

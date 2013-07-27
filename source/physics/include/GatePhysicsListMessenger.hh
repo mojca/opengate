@@ -36,7 +36,7 @@ class GatePhysicsListMessenger:public G4UImessenger
 public:
   GatePhysicsListMessenger(GatePhysicsList * pl);
   ~GatePhysicsListMessenger();
-  
+
   void BuildCommands(G4String base);
   void SetNewValue(G4UIcommand*, G4String);
 
@@ -49,12 +49,12 @@ protected:
   GateUIcmdWith2String * pList;
   G4UIcmdWithoutParameter * pInit;
   G4UIcmdWithAString * pPrint;
- 
+
   G4UIcmdWithAString * gammaCutCmd;
   G4UIcmdWithAString * electronCutCmd;
   G4UIcmdWithAString * positronCutCmd;
  G4UIcmdWithAString * protonCutCmd;
- 
+
   G4UIcmdWithAString * pMaxStepSizeCmd;
   G4UIcmdWithAString * pMaxTrackLengthCmd;
   G4UIcmdWithAString * pMaxToFCmd;
@@ -81,12 +81,12 @@ protected:
   G4UIcmdWithADoubleAndUnit * pMuHandlerSetAtomicShellEMin;
   G4UIcmdWithADoubleAndUnit * pMuHandlerSetAtomicShellTolerance;
   G4UIcmdWithADouble * pMuHandlerSetPrecision;
-  
+
 
 private:
   int nInit;
   int nEMStdOpt;
   GateMaterialMuHandler *nMuHandler;
-}; 
+};
 
 #endif /* end #define GATEPHYSICSLISTMESSENGER_HH */

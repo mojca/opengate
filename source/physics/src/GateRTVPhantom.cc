@@ -1,4 +1,4 @@
-#include "GateRTVPhantom.hh"      
+#include "GateRTVPhantom.hh"
 #include "GateMaterialDatabase.hh"
 #include <cstdlib>
 #include <cstdio>
@@ -65,7 +65,7 @@ G4int GateRTVPhantom::GetNbOfFrames()
 void   GateRTVPhantom::SetNbOfFrames( G4int aNb )
 { NbOfFrames = aNb;}
 
-void   GateRTVPhantom::SetBaseFileName( G4String aFN ) 
+void   GateRTVPhantom::SetBaseFileName( G4String aFN )
 { base_FN = aFN;
   if ( header_FN == G4String("NotDefined") )
   {
@@ -73,14 +73,14 @@ void   GateRTVPhantom::SetBaseFileName( G4String aFN )
    G4Exception( "GateRTVPhantom::SetBaseFileName", "SetBaseFileName", FatalException, " Please set it before setting the base file name. Aborting.");
   }
   current_FN = base_FN+"_atn_1.bin";
-  
+
   if ( set_AttAsAct == 1 ) current_FN = base_FN+"_act_1.bin";
-  
+
   itsGReader->ReadRTFile( header_FN, current_FN );
   XDIM = itsGReader->GetVoxelNx();
   YDIM = itsGReader->GetVoxelNy();
   ZDIM_OUTPUT = itsGReader->GetVoxelNz();
-  pixel_width = itsGReader->GetVoxelSize() * cm; 
+  pixel_width = itsGReader->GetVoxelSize() * cm;
   IsInitialized = 1;
 }
 
@@ -94,7 +94,7 @@ G4cout << " GateRTVPhantom::SetHeaderFileName ::: header file name = " <<header_
 void GateRTVPhantom::Compute(G4double aTime)
 {
   static G4bool IsFirstTime = true;
-  
+
  if ( GetNbOfFrames() == 0 ) { G4Exception( "GateRTVPhantom::Compute", "Compute", FatalException, "ERROR  the Number of Frames is set to 0.");}
 
      G4double time_s = aTime/s;
@@ -112,15 +112,15 @@ if ( cK == 0 ) { cK = 1; }
 std::stringstream st;
 st << cK;
 
-if (  cK != p_cK  && cK <= GetNbOfFrames()  ) 
+if (  cK != p_cK  && cK <= GetNbOfFrames()  )
 {
 
        if ( IsFirstTime == true )
-        { 
+        {
          if ( itsSReader->GetTimeSampling() < 1e-8 ) // if time sampling for time activity curves is too small
            {
-            G4cout << "GateRTVPhantom::Compute  WARNING : Time Sampling for Time Activity Curves is too small - setting default to Time Per Frame."<< G4endl;                                       
-            itsSReader->SetTimeSampling( GetTPF() ); // set it by default to TimePerFrame 
+            G4cout << "GateRTVPhantom::Compute  WARNING : Time Sampling for Time Activity Curves is too small - setting default to Time Per Frame."<< G4endl;
+            itsSReader->SetTimeSampling( GetTPF() ); // set it by default to TimePerFrame
            }
         }
 
@@ -164,7 +164,7 @@ if ( G4GeometryManager::GetInstance()->IsGeometryClosed() == false )
   //m_inserter->ConstructGeometry( m_inserter->GetMotherLogicalVolume() , false);
   m_inserter->Construct(false);
  }
- else 
+ else
      {G4cout << " Destroying Geometry of " << m_inserter->GetObjectName()<<G4endl;
       G4GeometryManager::GetInstance()->OpenGeometry();
       m_inserter->DestroyGeometry();
@@ -196,7 +196,7 @@ G4cout << " #################### REBUILT Geometry of " << m_inserter->GetPhysica
 if ( IsFirstTime == true || (  cK != p_cK  && cK <= GetNbOfFrames()  ) )
 {
 if ( set_ActAsAtt == 1 ) current_FN = base_FN+"_atn_"+st.str()+".bin";
-else current_FN = base_FN+"_act_"+st.str()+".bin";                     
+else current_FN = base_FN+"_act_"+st.str()+".bin";
 itsSReader->ReadRTFile( header_FN, current_FN );
 itsSReader->Dump(0);
 IsFirstTime = false;
@@ -205,12 +205,9 @@ IsFirstTime = false;
 p_cK = cK;
 
 //G4cout << " GateRTVPhantom  :::: UPDATING ACTIVITIES " << G4endl;
-//if ( fabs( GetTPF() - itsSReader->GetTimeSampling() ) > 1e-8 ) 
+//if ( fabs( GetTPF() - itsSReader->GetTimeSampling() ) > 1e-8 )
 itsSReader->UpdateActivities( header_FN, current_FN );
 
 //G4cout <<" GateRTVPhantom::Compute --- leaving " <<G4endl;
 
 }
-
-
-

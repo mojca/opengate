@@ -32,7 +32,7 @@ class GateModuleListManager : public GateListManager
     //! Method overloading GateNamedObject::Describe()
     //! Print-out a description of the object
     virtual void Describe(size_t indent=0);
-     
+
     GateNamedObject* GetMotherObject() const
       { return pMotherObject; }
 
@@ -41,4 +41,3 @@ class GateModuleListManager : public GateListManager
 };
 
 #endif
-

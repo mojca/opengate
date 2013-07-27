@@ -32,7 +32,7 @@ class GatePETVRTSettings{
 public:
     GatePETVRTSettings();
     ~GatePETVRTSettings();
-	
+
 	enum VerbosityLevel {NoVerbose,Verbose,DetailedVerbose};
     void RegisterEnvelope(G4Envelope*);
     void RegisterFictitiousMap(GateVFictitiousMap*, bool deleteWithThis);
@@ -43,7 +43,7 @@ public:
     void SetFictitiousEnergy(double);
     void SetDiscardEnergy(double); //should be equal or below fictitious energy
     void SetApproximations(GatePETVRT::Approx);
-	
+
     inline G4Envelope* GetEnvelope() const;
     inline GateVFictitiousMap* GetFictitiousMap() const;
     GateTotalDiscreteProcess* GetTotalDiscreteProcess() const;

@@ -17,7 +17,7 @@ See GATE/LICENSE.txt for further details
 
 //-----------------------------------------------------------------------------
 GateRayleighPB::GateRayleighPB():GateVProcess("RayleighScattering")
-{  
+{
   SetDefaultParticle("gamma");
   SetProcessInfo("Rayleigh scattering of gammas");
 
@@ -26,7 +26,7 @@ GateRayleighPB::GateRayleighPB():GateVProcess("RayleighScattering")
   AddToModelList("PenelopeModel");
 
 
-  pMessenger = new GateEMStandardProcessMessenger(this);  
+  pMessenger = new GateEMStandardProcessMessenger(this);
 }
 //-----------------------------------------------------------------------------
 
@@ -42,7 +42,7 @@ G4VProcess* GateRayleighPB::CreateProcess(G4ParticleDefinition *)
 //-----------------------------------------------------------------------------
 void GateRayleighPB::ConstructProcess(G4ProcessManager * manager)
 {
-  manager->AddDiscreteProcess(GetProcess());           
+  manager->AddDiscreteProcess(GetProcess());
 }
 //-----------------------------------------------------------------------------
 
@@ -59,7 +59,7 @@ bool GateRayleighPB::IsApplicable(G4ParticleDefinition * par)
 //-----------------------------------------------------------------------------
 bool GateRayleighPB::IsModelApplicable(G4String ,G4ParticleDefinition * par)
 {
-  for(unsigned int k = 0; k<theListOfParticlesWithSelectedModels.size();k++) 
+  for(unsigned int k = 0; k<theListOfParticlesWithSelectedModels.size();k++)
     if(par==theListOfParticlesWithSelectedModels[k]) GateError("A "<< GetG4ProcessName()<<" model has been already selected for "<< par->GetParticleName());
   if(par == G4Gamma::Gamma()) return true;
   return false;

@@ -23,7 +23,7 @@ See GATE/LICENSE.txt for further details
 
 #include "globals.hh"
 #include "G4String.hh"
-#include <iomanip>   
+#include <iomanip>
 #include <vector>
 
 #include "GateVActor.hh"
@@ -35,7 +35,7 @@ See GATE/LICENSE.txt for further details
 
 #include "GateMessageManager.hh"
 
-class GateMultiSensitiveDetector : public G4VSensitiveDetector, public GateNamedObject 
+class GateMultiSensitiveDetector : public G4VSensitiveDetector, public GateNamedObject
 {
 
 public:

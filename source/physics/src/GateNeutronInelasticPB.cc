@@ -18,7 +18,7 @@ See GATE/LICENSE.txt for further details
 
 //-----------------------------------------------------------------------------
 GateNeutronInelasticPB::GateNeutronInelasticPB():GateVProcess("NeutronInelastic")
-{  
+{
   SetDefaultParticle("neutron");
   SetProcessInfo("Inelastic scattering of neutrons");
 
@@ -40,7 +40,7 @@ GateNeutronInelasticPB::GateNeutronInelasticPB():GateVProcess("NeutronInelastic"
   AddToDataSetList("G4NeutronHPInelasticData");
   //--------------------------------------------------------------------------------
 
-  pMessenger = new GateHadronicStandardProcessMessenger(this);  
+  pMessenger = new GateHadronicStandardProcessMessenger(this);
 }
 //-----------------------------------------------------------------------------
 

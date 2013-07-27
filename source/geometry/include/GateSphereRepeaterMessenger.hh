@@ -29,31 +29,31 @@ class GateSphereRepeater;
 
 /*! \class GateSphereRepeaterMessenger
     \brief Messenger for a GateSphereRepeater
-    
+
     - GateSphereRepeaterMessenger -  by Delphine.Lazaro@imed.jussieu.fr
-    
+
     - The GateSphereRepeaterMessenger inherits from the abilities/responsabilities
       of the GateObjectRepeaterMessenger base-class: creation and management
       of a Gate UI directory for a Gate object; UI commands "describe",
       'enable' and 'disable'.
-      
+
     - In addition, it creates UI commands to manage a sphere repeater:
-      'setRepeatNumberY', 'setRepeatNumberZ', 'autoCenter', 'setRadius', 
+      'setRepeatNumberY', 'setRepeatNumberZ', 'autoCenter', 'setRadius',
       'setAlphaAngle', 'setBetaAngle'
 
-*/      
+*/
 class GateSphereRepeaterMessenger: public GateObjectRepeaterMessenger
 {
   public:
     GateSphereRepeaterMessenger(GateSphereRepeater* itsSphereRepeater);
    ~GateSphereRepeaterMessenger();
-    
+
     void SetNewValue(G4UIcommand*, G4String);
 
   public:
-    virtual inline GateSphereRepeater* GetSphereRepeater() 
+    virtual inline GateSphereRepeater* GetSphereRepeater()
       { return (GateSphereRepeater*)GetObjectRepeater(); }
-    
+
   private:
     G4UIcmdWithAnInteger*      SetRepeatNumberWithPhiCmd;
     G4UIcmdWithAnInteger*      SetRepeatNumberWithThetaCmd;
@@ -67,4 +67,3 @@ class GateSphereRepeaterMessenger: public GateObjectRepeaterMessenger
 };
 
 #endif
-

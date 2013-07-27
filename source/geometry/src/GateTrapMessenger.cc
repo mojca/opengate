@@ -26,9 +26,9 @@ class GateVolumeMessenger;
 //----------------------------------------------------------------------------------------------------------
 GateTrapMessenger::GateTrapMessenger(GateTrap *itsCreator)
   :GateVolumeMessenger(itsCreator)
-{ 
+{
   G4String cmdName;
-  
+
   cmdName = GetDirectoryName()+"geometry/setDz";
   TrapDzCmd = new G4UIcmdWithADoubleAndUnit(cmdName.c_str(),this);
   TrapDzCmd->SetGuidance("Set Dz of Trap.");

@@ -15,12 +15,12 @@ See GATE/LICENSE.txt for further details
 
 //-----------------------------------------------------------------------------
 GateMuIonisationPB::GateMuIonisationPB():GateVProcess("MuIonisation")
-{  
+{
   SetDefaultParticle("mu+"); SetDefaultParticle("mu-");
 
 
   SetProcessInfo("Ionization and energy loss by mu+ and mu-");
-  pMessenger = new GateEMStandardProcessMessenger(this);  
+  pMessenger = new GateEMStandardProcessMessenger(this);
 }
 //-----------------------------------------------------------------------------
 
@@ -28,7 +28,7 @@ GateMuIonisationPB::GateMuIonisationPB():GateVProcess("MuIonisation")
 //-----------------------------------------------------------------------------
 G4VProcess* GateMuIonisationPB::CreateProcess(G4ParticleDefinition *)
 {
- return new G4MuIonisation(GetG4ProcessName()); 
+ return new G4MuIonisation(GetG4ProcessName());
 }
 //-----------------------------------------------------------------------------
 
@@ -36,7 +36,7 @@ G4VProcess* GateMuIonisationPB::CreateProcess(G4ParticleDefinition *)
 //-----------------------------------------------------------------------------
 void GateMuIonisationPB::ConstructProcess(G4ProcessManager * manager)
 {
-  manager->AddProcess(GetProcess(),-1, 2, 2);   
+  manager->AddProcess(GetProcess(),-1, 2, 2);
 }
 //-----------------------------------------------------------------------------
 
@@ -52,4 +52,3 @@ bool GateMuIonisationPB::IsApplicable(G4ParticleDefinition * par)
 
 
 MAKE_PROCESS_AUTO_CREATOR_CC(GateMuIonisationPB)
-

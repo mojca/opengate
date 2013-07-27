@@ -22,19 +22,19 @@ class GateLinearRepeaterMessenger;
 /*! \class  GateLinearRepeater
     \brief  The GateLinearRepeater models a repetition of an object along a line,
     \brief  a pattern similar to the repetition of the scanner rings in a PET scanner
-    
-    - GateLinearRepeater - by Daniel.Strul@iphe.unil.ch 
-    
-    - The linear repeater uses three parameters: 
-      	- a number of repetitions 
+
+    - GateLinearRepeater - by Daniel.Strul@iphe.unil.ch
+
+    - The linear repeater uses three parameters:
+      	- a number of repetitions
 	- a repetition vector
 	- a centering flag
       Based on these parameters, it repeats an object at regular steps in a line,
-      the step size being given by the repeat vector. If the centering flag is on, the 
+      the step size being given by the repeat vector. If the centering flag is on, the
       series of copies is centered on the volume current position. If this flag
       is off, the first copy in the series is located at the volume current position.
-    
-*/      
+
+*/
 class GateLinearRepeater  : public GateVGlobalPlacement
 {
   public:
@@ -56,8 +56,8 @@ class GateLinearRepeater  : public GateVGlobalPlacement
 	\param currentRotationMatrix: the rotation matrix that defines the current orientation of the volume
 	\param currentPosition:       the vector that defines the current position of the volume
 	\param aTime:                 the current time
-	
-    */    
+
+    */
      virtual void PushMyPlacements(const G4RotationMatrix& currentRotationMatrix,
 	        	      	   const G4ThreeVector& currentPosition,
 			      	   G4double aTime);
@@ -65,32 +65,32 @@ class GateLinearRepeater  : public GateVGlobalPlacement
       	\brief a description of the repeater
 
 	\param indent: the print-out indentation (cosmetic parameter)
-    */    
+    */
      virtual void DescribeMyself(size_t indent);
-     
+
   public:
     //! \name getters and setters
     //@{
      //! Get the repetition vector
-     inline const G4ThreeVector& GetRepeatVector() 
+     inline const G4ThreeVector& GetRepeatVector()
       	  { return m_repeatVector; }
      //! Get the number of repetitions
-     inline G4int GetRepeatNumber() 
+     inline G4int GetRepeatNumber()
       	  { return m_repeatNumber;}
      //! Get the value of the centering flag
-     inline G4bool GetAutoCenterFlag() 
+     inline G4bool GetAutoCenterFlag()
       	  { return m_flagAutoCenter;}
- 
+
      //! Set the repetition vector
-     void SetRepeatVector(const G4ThreeVector& val) 
+     void SetRepeatVector(const G4ThreeVector& val)
       	  { m_repeatVector = val;  }
      //! Set the number of repetitions
-     void SetRepeatNumber(G4int val) 
+     void SetRepeatNumber(G4int val)
       	  { m_repeatNumber = val;  }
      //! Set the value of the centering flag
      void SetAutoCenterFlag(G4bool val)
       	  { m_flagAutoCenter = val;    }
- 
+
     //@}
 
   protected:
@@ -100,10 +100,9 @@ class GateLinearRepeater  : public GateVGlobalPlacement
     G4int         m_repeatNumber;     	//!< Number of repetitions
     G4bool    	  m_flagAutoCenter;   	//!< Centering flag
     //@}
-    
+
     //! Messenger
-    GateLinearRepeaterMessenger* m_Messenger; 
+    GateLinearRepeaterMessenger* m_Messenger;
 };
 
 #endif
-

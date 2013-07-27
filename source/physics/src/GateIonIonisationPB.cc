@@ -14,7 +14,7 @@ See GATE/LICENSE.txt for further details
 
 //-----------------------------------------------------------------------------
 GateIonIonisationPB::GateIonIonisationPB():GateVProcess("IonIonisation")
-{  
+{
   SetDefaultParticle("GenericIon");
   SetDefaultParticle("alpha");
   SetDefaultParticle("deuteron");
@@ -22,7 +22,7 @@ GateIonIonisationPB::GateIonIonisationPB():GateVProcess("IonIonisation")
   SetDefaultParticle("He3");
 
   SetProcessInfo("Ionization and energy loss by ions");
-  pMessenger = new GateHadronIonIonisationProcessMessenger(this);  
+  pMessenger = new GateHadronIonIonisationProcessMessenger(this);
 }
 //-----------------------------------------------------------------------------
 
@@ -38,7 +38,7 @@ G4VProcess* GateIonIonisationPB::CreateProcess(G4ParticleDefinition *)
 //-----------------------------------------------------------------------------
 void GateIonIonisationPB::ConstructProcess(G4ProcessManager * manager)
 {
-  manager->AddProcess(GetProcess(),-1, 2, 2);           
+  manager->AddProcess(GetProcess(),-1, 2, 2);
 }
 //-----------------------------------------------------------------------------
 
@@ -77,7 +77,7 @@ void GateIonIonisationPB::AddUserModel(GateListOfHadronicModels * /*model*/)
 {
 /*  if(model->GetModelName() == "CalculationOfNuclearStoppingPower_On"){
       dynamic_cast<G4ionIonisation*>(GetUserModelProcess())->ActivateNuclearStopping(true);
-          
+
   }
   else if(model->GetModelName() == "CalculationOfNuclearStoppingPower_Off"){
       dynamic_cast<G4ionIonisation*>(GetUserModelProcess())->ActivateNuclearStopping(false);
@@ -95,4 +95,3 @@ void GateIonIonisationPB::AddUserDataSet(G4String ){}
 
 
 MAKE_PROCESS_AUTO_CREATOR_CC(GateIonIonisationPB)
-

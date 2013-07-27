@@ -27,7 +27,7 @@ class GateGeometryVoxelInterfileReaderMessenger;
 
     - GateGeometryVoxelInterfileReader - by Giovanni.Santin@cern.ch
 
-    - it reads a the voxel info from an ASCII file with the sequence of info: 
+    - it reads a the voxel info from an ASCII file with the sequence of info:
       + nx ny nz
       + dx dy dz (mm)
       + number_of_listed_voxels
@@ -40,14 +40,14 @@ class GateGeometryVoxelInterfileReaderMessenger;
       \sa GateVGeometryVoxelTranslator
       \sa GateVSourceVoxelReader
       \sa GateVSourceVoxelTranslator
-*/      
+*/
 
 class GateGeometryVoxelInterfileReader : public GateVGeometryVoxelReader
 {
 public:
 
   GateGeometryVoxelInterfileReader(GateVVolume* inserter);
-  
+
   virtual ~GateGeometryVoxelInterfileReader();
 
   virtual void Describe(G4int level);
@@ -55,22 +55,22 @@ public:
   virtual void ReadFile(G4String fileName);
 
   void ReadKey(FILE* fp);
-  
+
   /*PY Descourt 08/09/2009 */
   virtual void ReadRTFile(G4String header_fileName, G4String fileName);
   void ReadKeyFrame(FILE*);
   /*PY Descourt 08/09/2009 */
-  
+
 protected:
   typedef unsigned short G4short;
-  
+
   inline void SwapBytes(G4short* buffer, G4int size) {
   	for (G4int i = 0; i < size; ++i) {
   		buffer[i] = ((buffer[i]>> 8) | (buffer[i] << 8));
   	}
   }
-  
-  
+
+
   G4String m_dataFileName;
   G4int m_numPlanes;
   G4float m_planeThickness;
@@ -84,5 +84,3 @@ protected:
 };
 
 #endif
-
-

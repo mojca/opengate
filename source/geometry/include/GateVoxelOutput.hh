@@ -18,8 +18,8 @@ See GATE/LICENSE.txt for further details
 #include "GateDetectorConstruction.hh"
 #include <valarray>
 
-class GateTrajectoryNavigator; 
-class GateVoxelOutputMessenger; 
+class GateTrajectoryNavigator;
+class GateVoxelOutputMessenger;
 class GateVoxelBoxParameterized;
 class GateRegularParameterized;
 class GateFictitiousVoxelMapParameterized;
@@ -32,7 +32,7 @@ class GateVoxelOutput :  public GateVOutputModule
 public:
 
   GateVoxelOutput(const G4String& name, const G4String& phantomName, GateOutputMgr* outputMgr,DigiMode digiMode, GateVoxelBoxParameterized* inserter);
-  
+
   GateVoxelOutput(const G4String& name, const G4String& phantomName, GateOutputMgr* outputMgr,DigiMode digiMode, GateRegularParameterized* inserter);
 
   GateVoxelOutput(const G4String& name, const G4String& phantomName, GateOutputMgr* outputMgr,DigiMode digiMode, GateFictitiousVoxelMapParameterized* inserter);
@@ -51,10 +51,10 @@ public:
 
 
   virtual void SetVerboseLevel(G4int val);
-  
+
   //! Get the output file name
   inline  const  G4String& GetFileName()const { return m_fileName; }
-  
+
   //! Set the output file name
   void   SetFileName(const G4String aName)    { m_fileName = aName; }
   void   SetSaveUncertainty(G4bool b) ;

@@ -64,7 +64,7 @@ void GatePETVRTSettings::SetDiscardEnergy ( G4double en )
 	m_nDiscardEnergy=en;
 	if (m_nFictitiousEnergy>=0)
 	{
-	
+
 		if (m_nVerbosityLevel>=Verbose)
 		{
 			G4cout << "GatePETVRTSettings::SetDiscardEnergy: Set to "<< m_nDiscardEnergy << G4endl;

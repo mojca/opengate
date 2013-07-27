@@ -21,12 +21,12 @@ class GateRTPhantomMgrMessenger: public GateMessenger
 public:
   GateRTPhantomMgrMessenger(GateRTPhantomMgr* PhMgr);
   ~GateRTPhantomMgrMessenger();
-  
+
   void SetNewValue(G4UIcommand*, G4String);
-    
+
 private:
   GateRTPhantomMgr*                       m_PhMgr;
-    
+
   G4UIcmdWithoutParameter*             DescribeCmd;
   G4UIcmdWithAnInteger*                VerboseCmd;
   G4UIcmdWithAString*                  insertCmd;
@@ -34,4 +34,3 @@ private:
 };
 
 #endif
-

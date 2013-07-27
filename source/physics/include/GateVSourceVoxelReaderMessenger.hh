@@ -36,12 +36,12 @@ class GateVSourceVoxelReaderMessenger: public GateMessenger
 public:
   GateVSourceVoxelReaderMessenger(GateVSourceVoxelReader* voxelReader);
   ~GateVSourceVoxelReaderMessenger();
-  
+
   void SetNewValue(G4UIcommand* , G4String);
-    
+
 protected:
   GateVSourceVoxelReader*             m_voxelReader;
-    
+
   G4UIcmdWith3VectorAndUnit*          PositionCmd;
   G4UIcmdWith3VectorAndUnit*          VoxelSizeCmd;
 
@@ -53,4 +53,3 @@ protected:
 };
 
 #endif
-

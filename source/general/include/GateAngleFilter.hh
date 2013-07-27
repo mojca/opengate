@@ -24,7 +24,7 @@ See GATE/LICENSE.txt for further details
 #include "GateAngleFilterMessenger.hh"
 
 
-class GateAngleFilter : 
+class GateAngleFilter :
   public GateVFilter
 {
 public:
@@ -41,7 +41,7 @@ public:
   void SetAngle(G4double angle);
   // Set acceptable direction.
   //
- 
+
   virtual void show();
 
 

@@ -17,7 +17,7 @@ See GATE/LICENSE.txt for further details
 
 //-----------------------------------------------------------------------------
 GateIonInelasticPB::GateIonInelasticPB():GateVProcess("IonInelastic")
-{  
+{
   SetDefaultParticle("GenericIon");
   SetDefaultParticle("alpha");
   SetDefaultParticle("deuteron");
@@ -39,7 +39,7 @@ GateIonInelasticPB::GateIonInelasticPB():GateVProcess("IonInelastic")
   AddToDataSetList("G4TripathiLightCrossSection");
   AddToDataSetList("G4HadronInelasticDataSet");
 
-  pMessenger = new GateHadronicStandardProcessMessenger(this);  
+  pMessenger = new GateHadronicStandardProcessMessenger(this);
 }
 //-----------------------------------------------------------------------------
 
@@ -52,8 +52,8 @@ G4VProcess* GateIonInelasticPB::CreateProcess(G4ParticleDefinition * par)
   if(par==G4Alpha::Alpha() ) return new G4AlphaInelasticProcess(GetG4ProcessName());
   if(par==G4Deuteron::Deuteron() ) return new G4DeuteronInelasticProcess(GetG4ProcessName());
   else {
-    GateError("Error in GateIonInelasticPB::CreateProcess particle should be GenericIon/Triton/Alpha/Deuteron " 
-	      << "\n while it is " << par->GetParticleName() 
+    GateError("Error in GateIonInelasticPB::CreateProcess particle should be GenericIon/Triton/Alpha/Deuteron "
+	      << "\n while it is " << par->GetParticleName()
 	      << G4endl);
     return NULL;
   }
@@ -64,7 +64,7 @@ G4VProcess* GateIonInelasticPB::CreateProcess(G4ParticleDefinition * par)
 //-----------------------------------------------------------------------------
 void GateIonInelasticPB::ConstructProcess( G4ProcessManager * manager)
 {
-  manager->AddDiscreteProcess(GetProcess());        
+  manager->AddDiscreteProcess(GetProcess());
 }
 //-----------------------------------------------------------------------------
 
@@ -84,15 +84,15 @@ bool GateIonInelasticPB::IsApplicable(G4ParticleDefinition * par)
 //-----------------------------------------------------------------------------
 bool GateIonInelasticPB::IsModelApplicable(G4String model,G4ParticleDefinition * par)
 {
-  if( (model=="G4BinaryLightIonReaction" || model=="G4QMDReaction") && 
+  if( (model=="G4BinaryLightIonReaction" || model=="G4QMDReaction") &&
       (par == G4GenericIon::GenericIon()
        || par==G4Triton::Triton()
        || par==G4Alpha::Alpha()
        || par==G4Deuteron::Deuteron())) return true;
   else if(par == G4GenericIon::GenericIon() && model == "G4WilsonAbrasionModel") return true;
   else if(par == G4Triton::Triton() && model == "G4LETritonInelastic" ) return true;
-  else if(par == G4Deuteron::Deuteron() && model == "G4LEDeuteronInelastic" ) return true; 
-  else if(par == G4Alpha::Alpha() && model == "G4LEAlphaInelastic" ) return true; 
+  else if(par == G4Deuteron::Deuteron() && model == "G4LEDeuteronInelastic" ) return true;
+  else if(par == G4Alpha::Alpha() && model == "G4LEAlphaInelastic" ) return true;
   return false;
 }
 //-----------------------------------------------------------------------------
@@ -106,7 +106,7 @@ bool GateIonInelasticPB::IsDatasetApplicable(G4String cs,G4ParticleDefinition * 
        || cs == "G4IonsKoxCrossSection"
        || cs == "G4IonsShenCrossSection"
        || cs == "G4IonsSihverCrossSection" )) return true;
-  else if( (cs == "G4TripathiLightCrossSection" 
+  else if( (cs == "G4TripathiLightCrossSection"
             || cs == "G4HadronInelasticDataSet") &&
 	  (par == G4Triton::Triton()
            || par == G4Deuteron::Deuteron()

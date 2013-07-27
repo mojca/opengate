@@ -49,7 +49,7 @@ GateGeneralTrpd::GateGeneralTrpd(const G4String& itsName, const G4String& itsMat
   m_Phi= itsPhi;
   m_Alp1= itsAlp1;
   m_Alp2= itsAlp2;
-  
+
   SetMaterialName(itsMaterialName);
 }
 //------------------------------------------------------------------------------------------------
@@ -74,14 +74,14 @@ GateGeneralTrpd::GateGeneralTrpd(const G4String& itsName,
   m_Theta= 0.;
   m_Phi= 0.;
   m_Alp1= 0.;
-  m_Alp2= 0.;  
+  m_Alp2= 0.;
 }
 //------------------------------------------------------------------------------------------------
 
 
 //------------------------------------------------------------------------------------------------
 GateGeneralTrpd::~GateGeneralTrpd()
-{  
+{
   if (m_Messenger) delete m_Messenger;
 }
 //------------------------------------------------------------------------------------------------
@@ -90,20 +90,20 @@ GateGeneralTrpd::~GateGeneralTrpd()
 //------------------------------------------------------------------------------------------------
 G4LogicalVolume* GateGeneralTrpd::ConstructOwnSolidAndLogicalVolume(G4Material* mater, G4bool flagUpdateOnly)
 {
-  G4RotationMatrix rotMatrix; // Unit matrix created by defaut 
+  G4RotationMatrix rotMatrix; // Unit matrix created by defaut
   if (!flagUpdateOnly|| !m_general_trpd_solid) {
     m_general_trpd_solid
-      = new G4Trap (GetSolidName(), 
-                    GetTrpdZLength()/2.0, 
-                    GetTrpdTheta(), 
-                    GetTrpdPhi(), 
-                    GetTrpdY1Length()/2.0, 
-                    GetTrpdX1Length()/2.0, 
-                    GetTrpdX2Length()/2.0, 
-                    GetTrpdAlp1(), 
-                    GetTrpdY2Length()/2.0, 
-                    GetTrpdX3Length()/2.0, 
-                    GetTrpdX4Length()/2.0, 
+      = new G4Trap (GetSolidName(),
+                    GetTrpdZLength()/2.0,
+                    GetTrpdTheta(),
+                    GetTrpdPhi(),
+                    GetTrpdY1Length()/2.0,
+                    GetTrpdX1Length()/2.0,
+                    GetTrpdX2Length()/2.0,
+                    GetTrpdAlp1(),
+                    GetTrpdY2Length()/2.0,
+                    GetTrpdX3Length()/2.0,
+                    GetTrpdX4Length()/2.0,
                     GetTrpdAlp2());
     delete m_general_trpd_log;
     m_general_trpd_log
@@ -149,7 +149,7 @@ void GateGeneralTrpd::DescribeMyself(size_t indent)
 void GateGeneralTrpd::DestroyOwnVolume()
 {
   if (m_general_trpd_log) delete m_general_trpd_log;
-  m_general_trpd_log = 0; 
+  m_general_trpd_log = 0;
 
   if (m_general_trpd_solid) delete m_general_trpd_solid;
   m_general_trpd_solid = 0;
@@ -162,5 +162,5 @@ void GateGeneralTrpd::DestroyOwnSolidAndLogicalVolume()
   if (m_general_trpd_log)   delete m_general_trpd_log;
   if (m_general_trpd_solid) delete m_general_trpd_solid;
   m_general_trpd_solid = 0;
-}  
+}
 //------------------------------------------------------------------------------------------------

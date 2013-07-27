@@ -24,7 +24,7 @@ GateGeometryVoxelArrayStore::~GateGeometryVoxelArrayStore()
   if (m_compressor) delete m_compressor;
 }
 
-void GateGeometryVoxelArrayStore::Describe(G4int level) 
+void GateGeometryVoxelArrayStore::Describe(G4int level)
 {
 
   GateVGeometryVoxelStore::Describe(level);
@@ -38,7 +38,7 @@ void GateGeometryVoxelArrayStore::Describe(G4int level)
       for (G4int iz=0; iz<m_voxelNz; iz++) {
 	for (G4int iy=0; iy<m_voxelNy; iy++) {
 	  for (G4int ix=0; ix<m_voxelNx; ix++) {
-	    G4cout << "   Index" 
+	    G4cout << "   Index"
 		   << " " << ix
 		   << " " << iy
 		   << " " << iz
@@ -64,13 +64,13 @@ void GateGeometryVoxelArrayStore::InitStore(GateVoxelMaterialArray store, G4int 
   if (store) {
     for (G4int i=0; i<nx*ny*nz; i++) {
       store[i] = m_defaultMaterial;
-    }    
+    }
   }
 }
 
 void GateGeometryVoxelArrayStore::AddVoxel(G4int ix, G4int iy, G4int iz, G4Material* material)
 {
-  // this method is used by the ReadFile method of the VoxelReaders. 
+  // this method is used by the ReadFile method of the VoxelReaders.
   if (m_geometryVoxelMaterials) {
     if ((ix<m_voxelNx) && (iy<m_voxelNy) && (iz<m_voxelNz)) {
       m_geometryVoxelMaterials[RealArrayIndex(ix,iy,iz,m_voxelNx,m_voxelNy,m_voxelNz)] = material;
@@ -93,7 +93,7 @@ G4Material* GateGeometryVoxelArrayStore::GetVoxelMaterial(G4int ix, G4int iy, G4
       material = m_geometryVoxelMaterials[RealArrayIndex(ix,iy,iz,m_voxelNx,m_voxelNy,m_voxelNz)];
     } else {
       G4cout << "GateGeometryVoxelArrayStore::GetVoxelMaterial: WARNING: requested voxel position outside the present voxel store" << G4endl;
-    } 
+    }
   } else {
     G4cout << "GateGeometryVoxelArrayStore::GetVoxelMaterial: WARNING: voxel store not yet defined " << G4endl;
   }
@@ -118,7 +118,7 @@ std::vector<G4int> GateGeometryVoxelArrayStore::GetVoxel(G4int index)
 }
 
 void GateGeometryVoxelArrayStore::SetVoxelNx(G4int n)
-{  
+{
   if (n>0) {
 
     G4int nMax = n;
@@ -134,21 +134,21 @@ void GateGeometryVoxelArrayStore::SetVoxelNx(G4int n)
 	for (G4int iz=0; iz<m_voxelNz; iz++) {
 	  for (G4int iy=0; iy<m_voxelNy; iy++) {
 	    for (G4int ix=0; ix<nMax; ix++) {
-//  	      G4cout << "GateGeometryVoxelArrayStore::SetVoxelNx " 
-//  		     << " Nxyz " 
+//  	      G4cout << "GateGeometryVoxelArrayStore::SetVoxelNx "
+//  		     << " Nxyz "
 //  		     << " " << m_voxelNx
 //  		     << " " << m_voxelNy
 //  		     << " " << m_voxelNz
-//  		     << " Index" 
+//  		     << " Index"
 //  		     << " " << ix
 //  		     << " " << iy
 //  		     << " " << iz
-//  		     << " RealArrayIndex old " 
-//  		     << RealArrayIndex(ix,iy,iz,m_voxelNx,m_voxelNy,m_voxelNz) 
-//  		     << " new " 
-//  		     << RealArrayIndex(ix,iy,iz,        n,m_voxelNy,m_voxelNz) 
+//  		     << " RealArrayIndex old "
+//  		     << RealArrayIndex(ix,iy,iz,m_voxelNx,m_voxelNy,m_voxelNz)
+//  		     << " new "
+//  		     << RealArrayIndex(ix,iy,iz,        n,m_voxelNy,m_voxelNz)
 //  		     << G4endl;
-	      newStore[ RealArrayIndex(ix,iy,iz,n,m_voxelNy,m_voxelNz) ] = 
+	      newStore[ RealArrayIndex(ix,iy,iz,n,m_voxelNy,m_voxelNz) ] =
 		m_geometryVoxelMaterials[ RealArrayIndex(ix,iy,iz,m_voxelNx,m_voxelNy,m_voxelNz) ];
 	    }
 	  }
@@ -178,7 +178,7 @@ void GateGeometryVoxelArrayStore::SetVoxelNy(G4int n)
 	for (G4int iz=0; iz<m_voxelNz; iz++) {
 	  for (G4int iy=0; iy<nMax; iy++) {
 	    for (G4int ix=0; ix<m_voxelNx; ix++) {
-	      newStore[ RealArrayIndex(ix,iy,iz,m_voxelNx,n,m_voxelNz) ] = 
+	      newStore[ RealArrayIndex(ix,iy,iz,m_voxelNx,n,m_voxelNz) ] =
 		m_geometryVoxelMaterials[ RealArrayIndex(ix,iy,iz,m_voxelNx,m_voxelNy,m_voxelNz) ];
 	    }
 	  }
@@ -208,7 +208,7 @@ void GateGeometryVoxelArrayStore::SetVoxelNz(G4int n)
 	for (G4int iz=0; iz<nMax; iz++) {
 	  for (G4int iy=0; iy<m_voxelNy; iy++) {
 	    for (G4int ix=0; ix<m_voxelNx; ix++) {
-	      newStore[ RealArrayIndex(ix,iy,iz,m_voxelNx,m_voxelNy,n) ] = 
+	      newStore[ RealArrayIndex(ix,iy,iz,m_voxelNx,m_voxelNy,n) ] =
 		m_geometryVoxelMaterials[ RealArrayIndex(ix,iy,iz,m_voxelNx,m_voxelNy,m_voxelNz) ];
 	    }
 	  }

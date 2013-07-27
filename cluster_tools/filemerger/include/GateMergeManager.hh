@@ -68,16 +68,16 @@ public:
   void MergeRoot();
 
 private:
-  void FastMergeRoot(); 
+  void FastMergeRoot();
   bool FastMergeGate(string name);
   bool FastMergeSing(string name);
-  bool FastMergeCoin(string name); 
+  bool FastMergeCoin(string name);
   bool           m_forced;             // if to overwrite existing files
-  int      m_verboseLevel;  
+  int      m_verboseLevel;
   TFile**         filearr;
   Long64_t      m_maxRoot;             // maximum size of root output file
   int         m_CompLevel;             // compression level for root output
-  string            m_dir;             // .Gate directory path 
+  string            m_dir;             // .Gate directory path
   string         m_outDir;             // where to save the output files
   int            m_Nfiles;             // number of files to mergw
   vector<int> m_lastEvents;            // latestevent from al files

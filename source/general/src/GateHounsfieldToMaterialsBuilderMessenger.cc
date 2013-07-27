@@ -9,12 +9,12 @@ See GATE/LICENSE.txt for further details
 ----------------------*/
 
 
-/*! 
+/*!
   \class  GateHounsfieldToMaterialsBuilderMessenger.cc
-  \brief  
+  \brief
   \author david.sarrut@creatis.insa-lyon.fr
 */
- 
+
 #include "GateHounsfieldToMaterialsBuilderMessenger.hh"
 #include "GateHounsfieldToMaterialsBuilder.hh"
 #include "G4UIcmdWithoutParameter.hh"
@@ -24,12 +24,12 @@ See GATE/LICENSE.txt for further details
 //-----------------------------------------------------------------------------------------
 GateHounsfieldToMaterialsBuilderMessenger::GateHounsfieldToMaterialsBuilderMessenger(GateHounsfieldToMaterialsBuilder * m)
 {
-  mBuilder = m; 
+  mBuilder = m;
 
   // Create folder
   G4String dir = "/gate/HounsfieldMaterialGenerator/";
   G4String cmdName;
-  
+
   // Create commands
   cmdName = dir+"Generate";
   pGenerateCmd = new G4UIcmdWithoutParameter(cmdName.c_str(),this);
@@ -66,14 +66,12 @@ GateHounsfieldToMaterialsBuilderMessenger::~GateHounsfieldToMaterialsBuilderMess
 //-----------------------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------------------
-void GateHounsfieldToMaterialsBuilderMessenger::SetNewValue(G4UIcommand *c, G4String s) {  
+void GateHounsfieldToMaterialsBuilderMessenger::SetNewValue(G4UIcommand *c, G4String s) {
   if (c == pSetMaterialTable) mBuilder->SetMaterialTable(s);
   if (c == pSetDensityTable)  mBuilder->SetDensityTable(s);
   if (c == pSetOutputMaterialDatabaseFilename)  mBuilder->SetOutputMaterialDatabaseFilename(s);
   if (c == pSetOutputHUMaterialFilename)  mBuilder->SetOutputHUMaterialFilename(s);
   if (c == pSetDensityTolerance)  mBuilder->SetDensityTolerance(pSetDensityTolerance->GetNewDoubleValue(s));
-  if (c == pGenerateCmd) mBuilder->BuildAndWriteMaterials();  
+  if (c == pGenerateCmd) mBuilder->BuildAndWriteMaterials();
 }
 //-----------------------------------------------------------------------------------------
-
-

@@ -24,10 +24,10 @@ See GATE/LICENSE.txt for further details
 //-------------------------------------------------------------------------------------------------------------------------
 GateElTubMessenger::GateElTubMessenger(GateElTub *itsCreator)
   :GateVolumeMessenger(itsCreator)
-{ 
+{
 
   G4String dir = GetDirectoryName() + "geometry/";
-  
+
   G4String cmdName = dir +"setShort";
   pElTubRshortCmd = new G4UIcmdWithADoubleAndUnit(cmdName.c_str(),this);
   pElTubRshortCmd->SetGuidance("Set short radius of the Elliptical Tub.");
@@ -65,14 +65,14 @@ GateElTubMessenger::~GateElTubMessenger()
 
 //-------------------------------------------------------------------------------------------------------------------------
 void GateElTubMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
   if( command == pElTubRshortCmd )
-    { 
+    {
      GetElTubCreator()->SetElTubRshort(pElTubRshortCmd->GetNewDoubleValue(newValue));/*TellGeometryToUpdate();*/}
   else if( command == pElTubRlongCmd )
     { GetElTubCreator()->SetElTubRlong(pElTubRlongCmd->GetNewDoubleValue(newValue));/*TellGeometryToUpdate();*/}
   else if( command==pElTubHeightCmd )
-    { GetElTubCreator()->SetElTubHeight(pElTubHeightCmd->GetNewDoubleValue(newValue)); /*TellGeometryToUpdate();*/}   
+    { GetElTubCreator()->SetElTubHeight(pElTubHeightCmd->GetNewDoubleValue(newValue)); /*TellGeometryToUpdate();*/}
   else
     GateVolumeMessenger::SetNewValue(command,newValue);
 }

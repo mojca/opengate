@@ -13,13 +13,13 @@ See GATE/LICENSE.txt for further details
 #define GateToPlatform_h 1
 #include "globals.hh"
 #include "vector"
-#include <iostream> 
+#include <iostream>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <sstream> 
-#include <fstream> 
+#include <sstream>
+#include <fstream>
 using namespace std;
-              
+
 /*use this class to generate submit files for different platforms
 based on output from GateMacfileParser*/
 
@@ -32,13 +32,13 @@ public:
   void SetVerboseLevel(G4int value) { m_verboseLevel = value; };
   int GenerateSubmitfile(G4String outputMacDir);
 
-protected: 
+protected:
   int GenerateOpenMosixSubmitfile();
   int GenerateOpenPBSSubmitfile();
   int GenerateOpenPBSScriptfile();
   int GenerateCondorSubmitfile();
-  int GenerateXgridSubmitfile();    
-  G4int m_verboseLevel;  
+  int GenerateXgridSubmitfile();
+  G4int m_verboseLevel;
   G4int nSplits;
   G4String platform;
   G4String pbsScript;
@@ -48,5 +48,3 @@ protected:
   G4int useTiming;
 };
 #endif
-
-

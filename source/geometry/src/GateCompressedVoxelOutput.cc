@@ -49,7 +49,7 @@ See GATE/LICENSE.txt for further details
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
-GateCompressedVoxelOutput::GateCompressedVoxelOutput(const G4String& name,const G4String& phantomName, GateOutputMgr* outputMgr,DigiMode digiMode,GateCompressedVoxelParameterized* inserter) 
+GateCompressedVoxelOutput::GateCompressedVoxelOutput(const G4String& name,const G4String& phantomName, GateOutputMgr* outputMgr,DigiMode digiMode,GateCompressedVoxelParameterized* inserter)
   : GateVOutputModule(name,outputMgr,digiMode),
     m_array(new std::valarray<float>),
     m_arraySquare(new std::valarray<float>),
@@ -72,7 +72,7 @@ GateCompressedVoxelOutput::GateCompressedVoxelOutput(const G4String& name,const 
 //----------------------------------------------------------------------------
 
 //----------------------------------------------------------------------------
-GateCompressedVoxelOutput::~GateCompressedVoxelOutput() 
+GateCompressedVoxelOutput::~GateCompressedVoxelOutput()
 {
   delete m_outputMessenger;
   if (nVerboseLevel > 0) G4cout << "GateCompressedVoxelOutput deleting..." << G4endl;
@@ -94,7 +94,7 @@ void GateCompressedVoxelOutput::RecordBeginOfAcquisition()
 
   if (nVerboseLevel > 2)
     G4cout << "GateCompressedVoxelOutput::RecordBeginOfAcquisition - Entered " << G4endl;
-  
+
   G4cout<< (*G4Material::GetMaterialTable()) << G4endl;
 
 }
@@ -146,11 +146,11 @@ void GateCompressedVoxelOutput::RecordEndOfAcquisition()
   // Output the dose array
   std::ofstream f;
   f.open(m_fileName, std::ofstream::out | std::ofstream::binary);
-  
+
   for (unsigned int i=0; i< expandedArray->size(); i++)
     f.write( (char*)&(*expandedArray)[i], sizeof(float));
   f.close();
-  
+
   delete expandedArray;
 
 }
@@ -195,7 +195,7 @@ void GateCompressedVoxelOutput::RecordEndOfEvent(const G4Event* )
       m_arrayCounts->resize(voxelNumber);
     }
   }
-  
+
 
   if (nVerboseLevel > 2)
     G4cout << "GateCompressedVoxelOutput::RecordEndOfEvent - Entered for phantom "<< m_phantomName << G4endl;
@@ -213,23 +213,23 @@ void GateCompressedVoxelOutput::RecordEndOfEvent(const G4Event* )
     if( 0 == physVolName.compare(0, m_phantomName.size(), m_phantomName) ){
 
       //  G4cout << "GateCompressedVoxelOutput::RecordEndOfEvent - HIT at voxel "<< n  << " in "<< physVolName << G4endl;
-      
+
       (*m_array)[n]+=edep;
       if (m_uncertainty){
 	(*m_arrayCounts) [n]++;
 	(*m_arraySquare) [n]+= edep*edep;
       }
 
-      if (nVerboseLevel > 2) 
-	G4cout << "hit= " << i 
-	       << ", n= " << n 
+      if (nVerboseLevel > 2)
+	G4cout << "hit= " << i
+	       << ", n= " << n
 	       << ", edep " << edep
 	       << ", process "   <<  h->GetProcess()
 	       << ", array[n] "  <<  (*m_array)[n]
 	       << ", square[n] " <<  (*m_arraySquare)[n]
 	       << ", counts[n] " <<  (*m_arrayCounts)[n]
 	       << G4endl;
-      
+
     }// end if phantom
   }//end for loop
 }
@@ -244,14 +244,14 @@ void GateCompressedVoxelOutput::RecordStepWithVolume(const GateVVolume *, const 
 //---------------------------------------------------------------------------
 
 //---------------------------------------------------------------------------
-void GateCompressedVoxelOutput::SetVerboseLevel(G4int val) { 
-  nVerboseLevel = val; 
+void GateCompressedVoxelOutput::SetVerboseLevel(G4int val) {
+  nVerboseLevel = val;
   if (m_trajectoryNavigator) m_trajectoryNavigator->SetVerboseLevel(val);
 }
 //---------------------------------------------------------------------------
 
 //---------------------------------------------------------------------------
-void GateCompressedVoxelOutput::SetSaveUncertainty(G4bool b) { 
-  m_uncertainty=b; 
+void GateCompressedVoxelOutput::SetSaveUncertainty(G4bool b) {
+  m_uncertainty=b;
 }
 //---------------------------------------------------------------------------

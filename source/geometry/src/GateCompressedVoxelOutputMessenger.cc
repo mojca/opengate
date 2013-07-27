@@ -26,7 +26,7 @@ See GATE/LICENSE.txt for further details
 GateCompressedVoxelOutputMessenger::GateCompressedVoxelOutputMessenger(GateCompressedVoxelOutput* g)
   : GateOutputModuleMessenger(g)
   , m_gateVoxelOutput(g)
-{ 
+{
   G4String cmdName;
 
   cmdName = GetDirectoryName()+"setFileName";
@@ -62,4 +62,3 @@ void GateCompressedVoxelOutputMessenger::SetNewValue(G4UIcommand* command,G4Stri
   }
 
 }
-

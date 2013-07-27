@@ -33,7 +33,7 @@ public:
     //! Implementation of virtual methods Construct and Destruct OwnPhysicalVolumes
     void ConstructOwnPhysicalVolume(G4bool flagUpdate);
     void DestroyGeometry();
-    
+
     //! Get the parameterization
     inline GateRegularParameterization* GetParameterization() {return m_parameterization;}
 

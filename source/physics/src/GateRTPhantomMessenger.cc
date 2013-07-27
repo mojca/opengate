@@ -25,7 +25,7 @@
 GateRTPhantomMessenger::GateRTPhantomMessenger(GateRTPhantom* Ph)
   : GateMessenger(Ph->GetName()),
     m_Ph(Ph)
-{ 
+{
 
   G4String cmdName;
 
@@ -75,7 +75,7 @@ GateRTPhantomMessenger::~GateRTPhantomMessenger()
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
 void GateRTPhantomMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
 
   if( command == VerboseCmd ) {
     m_Ph->SetVerboseLevel(VerboseCmd->GetNewIntValue(newValue));
@@ -96,6 +96,3 @@ void GateRTPhantomMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
-
-
-

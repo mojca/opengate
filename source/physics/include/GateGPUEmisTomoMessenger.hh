@@ -21,9 +21,9 @@ class GateGPUEmisTomoMessenger: public GateSourceVoxellizedMessenger
 public:
   GateGPUEmisTomoMessenger(GateGPUEmisTomo* source);
   ~GateGPUEmisTomoMessenger();
-  
+
   virtual void SetNewValue(G4UIcommand*, G4String);
-  
+
 private:
   GateGPUEmisTomo * m_gpu_source;
   G4UIcmdWithAString * m_attach_to_cmd;
@@ -32,4 +32,3 @@ private:
 };
 
 #endif
-

@@ -38,12 +38,12 @@ class GateVSourceMessenger: public GateMessenger
 public:
   GateVSourceMessenger(GateVSource* source);
   ~GateVSourceMessenger();
-  
+
   void SetNewValue(G4UIcommand*, G4String);
-    
+
 protected:
   GateVSource*                        m_source;
-    
+
 //    G4UIdirectory*                       GateSourceDir;
   G4UIcmdWithADoubleAndUnit*           ActivityCmd;
   G4UIcmdWithADoubleAndUnit*           StartTimeCmd;
@@ -68,4 +68,3 @@ protected:
 };
 
 #endif
-

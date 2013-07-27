@@ -32,7 +32,7 @@ class GateParallelBeam : public GateBox
    public:
      // Constructor1
      GateParallelBeam(const G4String& itsName, G4bool acceptsChildren=true, G4int depth=0);
-     
+
      // Constructor2
      GateParallelBeam(const G4String& itsName,const G4String& itsMaterialName,
      			      G4double itsSeptalThickness,G4double itsInnerRadius,G4double itsHeight,
@@ -45,7 +45,7 @@ class GateParallelBeam : public GateBox
      virtual void ResizeParallelBeam();
 
      void PreComputeConstants();
-     
+
      GateBox* GetParallelBeamCreator() const
       { return (GateBox*) GetCreator(); }
 

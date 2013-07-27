@@ -22,7 +22,7 @@ See GATE/LICENSE.txt for further details
 
 //--------------------------------------------------------------------------
 GateClockMessenger::GateClockMessenger()
-{ 
+{
   pGateTimingDir = new G4UIdirectory("/gate/timing/");
   pGateTimingDir->SetGuidance("GATE timing control.");
 
@@ -51,14 +51,14 @@ GateClockMessenger::~GateClockMessenger()
 
 //--------------------------------------------------------------------------
 void GateClockMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
   GateClock* theClock = GateClock::GetInstance();
-  if( command == pTimeCmd ) { 
+  if( command == pTimeCmd ) {
     theClock->SetTime(pTimeCmd->GetNewDoubleValue(newValue));
-  } 
+  }
   if( command == pVerboseCmd ) {
     theClock->SetVerboseLevel(pVerboseCmd->GetNewIntValue(newValue));
-  }   
-  
+  }
+
 }
 //--------------------------------------------------------------------------

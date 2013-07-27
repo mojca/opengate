@@ -49,8 +49,8 @@ void GateSourceVoxelTestReader::ReadFile(G4String fileName)
   // read the list of voxels
   for (G4int iV = 0; iV< nVoxels; iV++) {
     inFile >> ix >> iy >> iz >> activity;
-    G4cout << "GateSourceVoxelTestReader::ReadFile : index: " 
-	   << ix << " " << iy << " " << iz 
+    G4cout << "GateSourceVoxelTestReader::ReadFile : index: "
+	   << ix << " " << iy << " " << iz
 	   << " activity " << activity << G4endl;
 
     // create a new voxel only if the corresponding activity is > 0.

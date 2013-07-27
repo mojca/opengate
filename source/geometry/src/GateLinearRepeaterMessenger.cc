@@ -24,7 +24,7 @@ See GATE/LICENSE.txt for further details
 //------------------------------------------------------------------------------------------------------------------
 GateLinearRepeaterMessenger::GateLinearRepeaterMessenger(GateLinearRepeater* itsLinearRepeater)
   :GateObjectRepeaterMessenger(itsLinearRepeater)
-{ 
+{
     G4String cmdName;
 
     cmdName = GetDirectoryName()+"setRepeatVector";
@@ -61,18 +61,18 @@ GateLinearRepeaterMessenger::~GateLinearRepeaterMessenger()
 
 //------------------------------------------------------------------------------------------------------------------
 void GateLinearRepeaterMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
-  
+{
+
   if( command==SetRepeatVectorCmd )
 
-    {  GateMessage("Geometry", 5, "Linear repeater : repeat vector = " << SetRepeatVectorCmd->GetNew3VectorValue(newValue) << G4endl;);      
-    GetLinearRepeater()->SetRepeatVector(SetRepeatVectorCmd->GetNew3VectorValue(newValue));}   
+    {  GateMessage("Geometry", 5, "Linear repeater : repeat vector = " << SetRepeatVectorCmd->GetNew3VectorValue(newValue) << G4endl;);
+    GetLinearRepeater()->SetRepeatVector(SetRepeatVectorCmd->GetNew3VectorValue(newValue));}
   else if( command==SetRepeatNumberCmd )
-    { GateMessage("Geometry", 5, "Linear repeater : repeat number = " << SetRepeatNumberCmd->GetNewIntValue(newValue) << G4endl; ); 
-    GetLinearRepeater()->SetRepeatNumber(SetRepeatNumberCmd->GetNewIntValue(newValue)); }   
+    { GateMessage("Geometry", 5, "Linear repeater : repeat number = " << SetRepeatNumberCmd->GetNewIntValue(newValue) << G4endl; );
+    GetLinearRepeater()->SetRepeatNumber(SetRepeatNumberCmd->GetNewIntValue(newValue)); }
   else if( command==AutoCenterCmd )
-    { GetLinearRepeater()->SetAutoCenterFlag(AutoCenterCmd->GetNewBoolValue(newValue));}   
-  else 
+    { GetLinearRepeater()->SetAutoCenterFlag(AutoCenterCmd->GetNewBoolValue(newValue));}
+  else
     GateObjectRepeaterMessenger::SetNewValue(command,newValue);
 }
 //------------------------------------------------------------------------------------------------------------------

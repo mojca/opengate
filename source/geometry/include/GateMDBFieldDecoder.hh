@@ -37,7 +37,7 @@ public:
     prefix_natoms,
     prefix_error
     };
-    
+
 public:
   static char thePrefixSeparator;
   static char theUnitOptionalPrefixChar;

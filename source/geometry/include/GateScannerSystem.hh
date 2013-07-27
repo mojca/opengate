@@ -20,14 +20,14 @@ class GateClockDependentMessenger;
 
 /*! \class  GateScannerSystem
     \brief  The GateScannerSystem is a generic-purpose model for PET scanners
-    
+
     - GateScannerSystem - by Daniel.Strul@iphe.unil.ch
-    
+
     - A GateScannerSystem is a very generalistic model of PET scanners. The component tree
       is a linear hierarchy of 6 components (base, level1, level2, level3, level4, level5).
       These components don't have any specific properties, so that this system may be use for
       everything... and nothing!
-*/      
+*/
 class GateScannerSystem : public GateVSystem
 {
   public:
@@ -39,4 +39,3 @@ class GateScannerSystem : public GateVSystem
 };
 
 #endif
-

@@ -30,15 +30,15 @@ See GATE/LICENSE.txt for further details
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
 GateSourceVoxelRangeTranslatorMessenger::GateSourceVoxelRangeTranslatorMessenger(GateSourceVoxelRangeTranslator* voxelTranslator)
-  : GateMessenger(G4String("source/") + 
-		  voxelTranslator->GetReader()->GetSource()->GetName() + 
+  : GateMessenger(G4String("source/") +
+		  voxelTranslator->GetReader()->GetSource()->GetName() +
 		  G4String("/") +
-		  voxelTranslator->GetReader()->GetName() + 
+		  voxelTranslator->GetReader()->GetName() +
 		  G4String("/") +
-		  voxelTranslator->GetName(), 
+		  voxelTranslator->GetName(),
 		  true),
   m_voxelTranslator(voxelTranslator)
-{ 
+{
 
   G4String cmdName;
 
@@ -65,15 +65,12 @@ GateSourceVoxelRangeTranslatorMessenger::~GateSourceVoxelRangeTranslatorMessenge
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
 void GateSourceVoxelRangeTranslatorMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
   if( command == ReadTableCmd ) {
     m_voxelTranslator->ReadTranslationTable(newValue);
   } else if ( command == DescribeCmd ) {
     m_voxelTranslator->Describe(DescribeCmd->GetNewIntValue(newValue));
-  } 
+  }
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
-
-
-

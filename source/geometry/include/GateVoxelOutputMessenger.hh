@@ -25,15 +25,14 @@ class GateVoxelOutputMessenger: public GateOutputModuleMessenger
   public:
     GateVoxelOutputMessenger(GateVoxelOutput* g);
    ~GateVoxelOutputMessenger();
-    
+
     virtual void SetNewValue(G4UIcommand*, G4String);
-    
+
   protected:
     GateVoxelOutput*          m_gateVoxelOutput;
     G4UIcmdWithAString*       SetFileNameCmd;
     G4UIcmdWithABool*         saveUncertaintyCmd;
-   
+
 };
 
 #endif
-

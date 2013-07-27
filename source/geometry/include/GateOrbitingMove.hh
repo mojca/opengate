@@ -23,19 +23,19 @@ class GateOrbitingMoveMessenger;
 /*! \class  GateOrbitingMove
     \brief  The GateRotationMove models a movement where the volume orbits
     \brief  around an axis
-    
-    - GateOrbitingMove - by Daniel.Strul@iphe.unil.ch 
-    
+
+    - GateOrbitingMove - by Daniel.Strul@iphe.unil.ch
+
     - The movement modeled by this class is an orbit, where the volume revolves
       around an axis at a constant speed. At any moment, the volume remains at
-      the same distance from the axis, along a direction whose angle is theta(t) = V x t 
+      the same distance from the axis, along a direction whose angle is theta(t) = V x t
       where V is the angular rotation speed and t the time.
 
     - If the auto-rotation mode is enabled, the object rotates at the same time as it revolves.
       If the auto-rotation mode is disbaled, the object always keeps the same orientation.
 
-      
-*/      
+
+*/
 class GateOrbitingMove  : public GateVGlobalPlacement
 {
   public:
@@ -58,10 +58,10 @@ class GateOrbitingMove  : public GateVGlobalPlacement
 	\param currentRotationMatrix: the rotation matrix that defines the current orientation of the volume
 	\param currentPosition:       the vector that defines the current position of the volume
 	\param aTime:                 the current time
-	
+
 	\return an object GatePlacement combining the new position and the new orientation of the volume
 	        computed by the movement equation
-    */    
+    */
      virtual void PushMyPlacements(const G4RotationMatrix& currentRotationMatrix,
 	        	      	      	      const G4ThreeVector& currentPosition,
 					      G4double aTime);
@@ -69,40 +69,40 @@ class GateOrbitingMove  : public GateVGlobalPlacement
       	\brief a description of the movement
 
 	\param indent: the print-out indentation (cosmetic parameter)
-    */    
+    */
      virtual void DescribeMyself(size_t indent);
-     
+
   public:
     //! \name getters and setters
     //@{
     //! Get the first point (origin) of the rotation axis
-    inline const G4Point3D& GetPoint1() 
+    inline const G4Point3D& GetPoint1()
       	  { return m_point1;}
     //! Get the second point (end-point) of the rotation axis
-    inline const G4Point3D& GetPoint2() 
+    inline const G4Point3D& GetPoint2()
       	  { return m_point2;}
     //! Get the rotation speed
-    inline G4double GetVelocity() 
+    inline G4double GetVelocity()
       	  { return m_velocity;}
     //! Get the auto-rotation mode flag
-    inline G4bool GetAutoRotation() 
+    inline G4bool GetAutoRotation()
       	  { return m_flagAutoRotation;}
 
     //! Set the first point (origin) of the rotation axis
-    void SetPoint1(const G4Point3D& val) 
+    void SetPoint1(const G4Point3D& val)
       	  { m_point1 = val; }
     //! Set the second point (end-point) of the rotation axis
-    void SetPoint2(const G4Point3D& val) 
+    void SetPoint2(const G4Point3D& val)
       	  { m_point2 = val;  }
     //! Set the rotation speed
-    void SetVelocity(double val) 
+    void SetVelocity(double val)
       	  {  m_velocity = val; }
     //! Set the auto-rotation mode flag
     void SetAutoRotation(G4bool val)
       	  { m_flagAutoRotation = val;  }
 
     //! Get the value of the rotation angle that was last computed by PushMyPlacement()
-    inline G4double GetCurrentAngle() 
+    inline G4double GetCurrentAngle()
       	  { return m_currentAngle;}
     //@}
 
@@ -114,14 +114,13 @@ class GateOrbitingMove  : public GateVGlobalPlacement
     G4double m_velocity;     	      	  //!< Rotation velocity (angular speed)
     G4bool   m_flagAutoRotation;      	  //!< Auto-rotation mode flag
     //@}
-    
+
     //! Rotation angle that was last computed by PushMyPlacement()
     G4double m_currentAngle;
 
     //! Messenger
-    GateOrbitingMoveMessenger* m_Messenger; 
+    GateOrbitingMoveMessenger* m_Messenger;
 
 };
 
 #endif
-

@@ -25,14 +25,14 @@ class GateParameterisedCollimatorMessenger: public GateVolumeMessenger
   public:
     GateParameterisedCollimatorMessenger(GateParameterisedCollimator* itsInserter);
    ~GateParameterisedCollimatorMessenger();
-    
+
     void SetNewValue(G4UIcommand*, G4String);
-    
-    virtual inline GateParameterisedCollimator* GetCollimatorInserter() 
+
+    virtual inline GateParameterisedCollimator* GetCollimatorInserter()
       { return (GateParameterisedCollimator*) GetVolumeCreator(); }
 
   private:
-  
+
     G4String                    name_Geometry;
     G4UIdirectory*              dir_Geometry;
 
@@ -50,4 +50,3 @@ class GateParameterisedCollimatorMessenger: public GateVolumeMessenger
 };
 
 #endif
-

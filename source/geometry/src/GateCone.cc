@@ -31,10 +31,10 @@ See GATE/LICENSE.txt for further details
 //----------------------------------------------------------------------------------------------------------
 GateCone::GateCone(const G4String& itsName, const G4String& /*itsMaterialName*/, //DS comment to avoid warning
       	      	   G4double itsRmax1, G4double itsRmax2, G4double itsHeight,
-		   G4double itsRmin1, G4double itsRmin2, G4double itsSPhi, G4double itsDPhi, 
+		   G4double itsRmin1, G4double itsRmin2, G4double itsSPhi, G4double itsDPhi,
 		   G4bool itsFlagAcceptChildren, G4int depth)
   : GateVVolume(itsName, itsFlagAcceptChildren, depth),
-    m_cone_solid(0), m_cone_log(0), 
+    m_cone_solid(0), m_cone_log(0),
     m_coneHeight(itsHeight),
     m_coneRmin1(itsRmin1),m_coneRmax1(itsRmax1),
     m_coneRmin2(itsRmin2),m_coneRmax2(itsRmax2),
@@ -61,14 +61,14 @@ GateCone::GateCone(const G4String& itsName,
     m_coneRmax2 = 1.0*cm;
     m_coneSPhi = 0.;
     m_coneDPhi = 2*M_PI;
-    
+
    m_Messenger = new GateConeMessenger(this);
 }
 //----------------------------------------------------------------------------------------------------------
 
 
 GateCone::~GateCone()
-{  
+{
   delete m_Messenger;
 }
 
@@ -78,20 +78,20 @@ G4LogicalVolume* GateCone::ConstructOwnSolidAndLogicalVolume(G4Material* mater, 
 {
 
   if (!flagUpdateOnly || !m_cone_solid) {
- 
+
   m_cone_solid
-      = new G4Cons(GetSolidName(), 
+      = new G4Cons(GetSolidName(),
         	   m_coneRmin1, m_coneRmax1,
       		   m_coneRmin2, m_coneRmax2,
 	  	       m_coneHeight/2.,
 		       m_coneSPhi,
 		       m_coneDPhi);
-		   
+
     m_cone_log = new G4LogicalVolume(m_cone_solid, mater, GetLogicalVolumeName());
-    
-  } 
+
+  }
   else {
-    
+
      G4cout << " second" << G4endl;
 	    m_cone_solid->SetZHalfLength(GetConeHalfHeight());
 	    m_cone_solid->SetInnerRadiusMinusZ(GetConeRmin1());
@@ -101,7 +101,7 @@ G4LogicalVolume* GateCone::ConstructOwnSolidAndLogicalVolume(G4Material* mater, 
 	    m_cone_solid->SetStartPhiAngle(GetConeSPhi());
 	    m_cone_solid->SetDeltaPhiAngle(GetConeDPhi());
   }
-  
+
   return m_cone_log;
 }
 //----------------------------------------------------------------------------------------------------------

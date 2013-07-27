@@ -41,13 +41,13 @@ public:
   virtual G4double GetTotalActivity() { return m_activityTotal; };
 
   virtual G4double GetTempTotalActivity() { return m_tactivityTotal; };  // added by I. Martinez-Rovira (immamartinez@gmail.com)
-    
+
   virtual void SetTempTotalActivity(G4double value) { m_tactivityTotal = value; };  // added by I. Martinez-Rovira (immamartinez@gmail.com)
 
   virtual void SetVerboseLevel(G4int value) { nVerboseLevel = value; };
 
   virtual void AddVoxel(G4int ix, G4int iy, G4int iz, G4double activity);
-  
+
   /* PY Descourt 08/09/2009*/
   virtual void AddVoxel_FAST(G4int, G4int, G4int, G4double);
   void SetTimeActivTables( G4String );
@@ -56,13 +56,13 @@ public:
   virtual void ReadRTFile(G4String header_fileName, G4String fileName) = 0;
 
   void UpdateActivities();
-  
+
   virtual void Initialize();
-  
+
   void UpdateActivities(G4String,G4String);
   /* PY Descourt 08/09/2009*/
-  
-  
+
+
   virtual void          SetVoxelSize(G4ThreeVector size) { m_voxelSize = size; };
   virtual G4ThreeVector GetVoxelSize()                   { return m_voxelSize; };
 
@@ -84,7 +84,7 @@ protected:
   GateVSource*                    m_source;
 
   std::vector<G4int>                  m_firstSource;
-  
+
   typedef std::map<G4double,std::vector<G4int> >  GateSourceIntegratedActivityMap;
   GateSourceActivityMap           m_sourceVoxelActivities;
   GateSourceIntegratedActivityMap m_sourceVoxelIntegratedActivities;
@@ -101,16 +101,14 @@ protected:
   G4String                       m_type;
 
   GateVSourceVoxelTranslator*    m_voxelTranslator;
-  
+
   /* PY Descourt 08/09/2009 */
 
   G4double m_TS; // time sampling for time dependent activities
   G4int cK;
   G4bool IsFirstTime;
-  std::map< std::pair<G4double,G4double> , std::vector<std::pair<G4double,G4double> >  > m_TimeActivTables; // for time activity curves  
+  std::map< std::pair<G4double,G4double> , std::vector<std::pair<G4double,G4double> >  > m_TimeActivTables; // for time activity curves
   /* PY Descourt 08/09/2008 */
 };
 
 #endif
-
-

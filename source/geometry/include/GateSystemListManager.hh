@@ -24,15 +24,15 @@ class GateVVolume;
 
 /*! \class  GateSystemListManager
     \brief  Stores the list of systems
-    
+
     - GateSystemListManager - by Daniel.Strul@iphe.unil.ch (May 16 2002)
-    
+
     - The GateSystemListManager is a singleton. Its task is to handle a list of systems,
       provide tools for retrieving systems ort system-components, and allow the
       insertion of new systems.
-    
+
       \sa GateVSystem
-*/      
+*/
 //    Last modification in 12/2011 by Abdul-Fattah.Mohamad-Hadi@subatech.in2p3.fr, for the multi-system approach.
 //    Last modification in 07/2012 by vesna.cuplov@gmail.com, for the OPTICAL system.
 
@@ -45,7 +45,7 @@ class GateSystemListManager : public GateListManager
 	If this singleton does not exist yet, GetInstance creates it by calling the private
 	GateSystemListManager constructor
     */
-    static GateSystemListManager* GetInstance(); 
+    static GateSystemListManager* GetInstance();
 
     virtual ~GateSystemListManager(); //!< Public destructor
 
@@ -62,19 +62,19 @@ class GateSystemListManager : public GateListManager
       { TheListElements();}
       //{ TheListElements();}
     //@}
-        
+
     //! \name Methods to retrieve a system
     //@{
 
     //! Retrieves a system from its name
-    inline GateVSystem* FindSystem(const G4String& name)        	      
+    inline GateVSystem* FindSystem(const G4String& name)
       { return (GateVSystem*) FindElement(name); }
 
     /*! Tries to find to which system an inserter is attached
       	(either directly or through one of its ancestors)
 
       	\param anCreator the inserter to test
-  
+
       	\return the system to which the inserter is attached, if any
     */
     GateVSystem* FindSystemOfCreator(GateVVolume* anCreator);
@@ -83,7 +83,7 @@ class GateSystemListManager : public GateListManager
 
     //! \name Access methods
     //@{
-    GateVSystem* GetSystem(size_t i) 
+    GateVSystem* GetSystem(size_t i)
       {return (GateVSystem*) GetElement(i);}      	     //!< Retrieves a system from a store-iterator
     //@}
 
@@ -93,22 +93,22 @@ class GateSystemListManager : public GateListManager
     /*! Check whether a new inserter has the same name as one of the predefined systems
       	If that's the case, auto-create the system
 
-      	\param newChildCreator the newly-created inserter  
+      	\param newChildCreator the newly-created inserter
     */
     void CheckScannerAutoCreation(GateVVolume* newChildCreator);
 
     /*! Checks whether a name corresponds to onw of the predefined system-names
-    
+
       	\param name the name to check
-	
+
 	\return the position of the name in the name-table (-1 if not found)
     */
     G4int DecodeTypeName(const G4String& name);
 
     /*! Create a new system of a specific type
-      	
+
 	\param childTypeName: the type-name of the system to create
-	
+
 	\return the newly created system
     */
     virtual GateVSystem* InsertNewSystem(const G4String& typeName);
@@ -119,7 +119,7 @@ class GateSystemListManager : public GateListManager
     virtual const G4String& DumpChoices();
 
     //! Lists all the system-names onto the standard output
-    virtual void ListChoices() 
+    virtual void ListChoices()
       { G4cout << "The available choices are: " << DumpChoices() << "\n"; }
 
     // Get the list of inserted systems names
@@ -139,4 +139,3 @@ class GateSystemListManager : public GateListManager
 
 
 #endif
-

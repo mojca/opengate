@@ -41,12 +41,12 @@ class GateSourceVoxellizedMessenger: public GateMessenger
 public:
   GateSourceVoxellizedMessenger(GateSourceVoxellized* source);
   ~GateSourceVoxellizedMessenger();
-  
+
   virtual void SetNewValue(G4UIcommand*, G4String);
-    
+
 private:
   GateSourceVoxellized*                        m_source;
-    
+
   G4UIcmdWith3VectorAndUnit*          PositionCmd;
   GateUIcmdWithAVector<G4String>*     ReaderInsertCmd;
   G4UIcmdWithoutParameter*            ReaderRemoveCmd;
@@ -54,4 +54,3 @@ private:
 };
 
 #endif
-

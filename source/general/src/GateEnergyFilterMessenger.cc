@@ -42,16 +42,16 @@ void GateEnergyFilterMessenger::BuildCommands(G4String base)
 {
   G4String guidance;
   G4String bb;
-  
+
   bb = base+"/setEmin";
-  pSetEminCmd = new G4UIcmdWithADoubleAndUnit(bb,this);  
+  pSetEminCmd = new G4UIcmdWithADoubleAndUnit(bb,this);
   guidance = G4String("Set the Emin");
   pSetEminCmd->SetGuidance(guidance);
   pSetEminCmd->SetParameterName("Emin", false);
   pSetEminCmd->SetDefaultUnit("MeV");
 
   bb = base+"/setEmax";
-  pSetEmaxCmd = new G4UIcmdWithADoubleAndUnit(bb,this);  
+  pSetEmaxCmd = new G4UIcmdWithADoubleAndUnit(bb,this);
   guidance = G4String("Set the Emax");
   pSetEmaxCmd->SetGuidance(guidance);
   pSetEmaxCmd->SetParameterName("Emax", false);
@@ -64,12 +64,12 @@ void GateEnergyFilterMessenger::BuildCommands(G4String base)
 //-----------------------------------------------------------------------------
 void GateEnergyFilterMessenger::SetNewValue(G4UIcommand* command, G4String param)
 {
-  if(command == pSetEminCmd) 
+  if(command == pSetEminCmd)
     {
       pEnergyFilter->SetEmin(pSetEminCmd->GetNewDoubleValue(param) );
     }
 
-  if(command == pSetEmaxCmd) 
+  if(command == pSetEmaxCmd)
     {
       pEnergyFilter->SetEmax(pSetEmaxCmd->GetNewDoubleValue(param) );
     }

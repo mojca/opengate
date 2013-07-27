@@ -26,7 +26,7 @@ class GateHoleParameterisation : public GatePVParameterisation
          G4int itsNx,G4int itsNy,G4double itsOffsetX,G4double itsOffsetY1,G4double itsOffsetY2,
 	 G4double itsDz, G4double itsDy1, G4double itsDy2, G4double itsDx1,
          G4double itsDx2, G4double itsDx3, G4double itsDx4);
-   
+
    virtual ~GateHoleParameterisation() {}
 
    virtual void ComputeTransformation(const G4int copyNumber, G4VPhysicalVolume *aVolume) const;
@@ -39,7 +39,7 @@ class GateHoleParameterisation : public GatePVParameterisation
 
    void Update(G4double fdX,G4double fdY,G4double dX,G4double dY,G4int nX,G4int nY,G4double offsetX,G4double offsetY1,
    	G4double offsetY2,G4double dZ,G4double dY1,G4double dY2,G4double dX1,G4double dX2,G4double dX3,G4double dX4);
-	
+
    void PreComputeConsts();
 
    protected:
@@ -50,4 +50,3 @@ class GateHoleParameterisation : public GatePVParameterisation
 
 };
 #endif
-

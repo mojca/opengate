@@ -42,32 +42,32 @@ GateVGeometryVoxelStore::~GateVGeometryVoxelStore()
 {
 }
 
-void GateVGeometryVoxelStore::SetDefaultMaterial(G4String materialName) 
-{ 
+void GateVGeometryVoxelStore::SetDefaultMaterial(G4String materialName)
+{
   SetDefaultMaterial( GateDetectorConstruction::GetGateDetectorConstruction()->mMaterialDatabase.GetMaterial(materialName) );
 }
 
-void GateVGeometryVoxelStore::Describe(G4int ) 
+void GateVGeometryVoxelStore::Describe(G4int )
 {
 
   G4cout << "  Geom. voxel store -----> " << m_type << G4endl
-	 << "  position  (mm)         : " 
-	 << GetPosition().x()/mm << " " 
-	 << GetPosition().y()/mm << " " 
+	 << "  position  (mm)         : "
+	 << GetPosition().x()/mm << " "
+	 << GetPosition().y()/mm << " "
 	 << GetPosition().z()/mm << G4endl
-	 << "  voxel size  (mm)       : " 
-	 << GetVoxelSize().x()/mm << " " 
-	 << GetVoxelSize().y()/mm << " " 
+	 << "  voxel size  (mm)       : "
+	 << GetVoxelSize().x()/mm << " "
+	 << GetVoxelSize().y()/mm << " "
 	 << GetVoxelSize().z()/mm << G4endl;
 
 }
 
-void GateVGeometryVoxelStore::Dump() 
+void GateVGeometryVoxelStore::Dump()
 {
 #ifdef G4ANALYSIS_USE_GENERAL
   // Here we fill the histograms through the OutputMgr manager
   GateOutputMgr* outputMgr = GateOutputMgr::GetInstance();
   outputMgr->RecordVoxels(this);
 #endif
-  
+
 }

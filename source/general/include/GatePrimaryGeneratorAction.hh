@@ -40,7 +40,7 @@ public:
 
 private:
   G4GeneralParticleSource*       m_particleGun;
-  G4String                       m_rndmFlag;	    //flag for a random impact point 
+  G4String                       m_rndmFlag;	    //flag for a random impact point
   GatePrimaryGeneratorMessenger* m_messenger;
   //    G4double m_timeSlice;
 
@@ -57,6 +57,3 @@ private:
 };
 
 #endif
-
-
-

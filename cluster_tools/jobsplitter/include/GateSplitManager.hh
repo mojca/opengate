@@ -31,12 +31,10 @@ protected:
 
   GateToPlatform*    toPlatform;
   GateMacfileParser* macParser;
-  G4String      m_name;       
-  G4int         m_verboseLevel;  
+  G4String      m_name;
+  G4int         m_verboseLevel;
   void CleanAbort();
   void CheckEnvironment();
   G4int numberOfSplits;
 };
 #endif
-
-

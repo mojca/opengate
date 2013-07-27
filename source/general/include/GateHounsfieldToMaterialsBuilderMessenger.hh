@@ -9,12 +9,12 @@ See GATE/LICENSE.txt for further details
 ----------------------*/
 
 
-/*! 
+/*!
   \class  GateHounsfieldToMaterialsBuilderMessenger.hh
-  \brief  
+  \brief
   \author david.sarrut@creatis.insa-lyon.fr
 */
- 
+
 #ifndef __GateHounsfieldToMaterialsBuilderMessenger__hh__
 #define __GateHounsfieldToMaterialsBuilderMessenger__hh__
 
@@ -30,7 +30,7 @@ class GateHounsfieldToMaterialsBuilderMessenger: public G4UImessenger
 public:
   GateHounsfieldToMaterialsBuilderMessenger(GateHounsfieldToMaterialsBuilder * m);
   virtual ~GateHounsfieldToMaterialsBuilderMessenger();
-  
+
   void SetNewValue(G4UIcommand*, G4String);
 
 protected:

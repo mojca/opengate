@@ -44,7 +44,7 @@ GateArrayRepeater::GateArrayRepeater(GateVVolume* itsObjectInserter,
 
 //--------------------------------------------------------------------------------------------
 GateArrayRepeater::~GateArrayRepeater()
-{  
+{
   delete m_Messenger;
 }
 //--------------------------------------------------------------------------------------------
@@ -58,7 +58,7 @@ void GateArrayRepeater::PushMyPlacements(const G4RotationMatrix& currentRotation
 					 const G4ThreeVector& currentPosition,
 					 G4double )
 {
-  
+
   G4double dx = m_repeatVector[0],
     dy = m_repeatVector[1],
     dz = m_repeatVector[2];
@@ -70,22 +70,22 @@ void GateArrayRepeater::PushMyPlacements(const G4RotationMatrix& currentRotation
   G4ThreeVector firstCopyOffset(0.,0.,0.);
 
   if (GetAutoCenterFlag())
-    firstCopyOffset = .5 * G4ThreeVector( ( 1 - nx ) * dx, ( 1 - ny ) * dy, ( 1 - nz ) * dz);  
-      
+    firstCopyOffset = .5 * G4ThreeVector( ( 1 - nx ) * dx, ( 1 - ny ) * dy, ( 1 - nz ) * dz);
+
   G4double x_0 = currentPosition[0] + firstCopyOffset[0],
     y_0 = currentPosition[1] + firstCopyOffset[1],
     z_0 = currentPosition[2] + firstCopyOffset[2];
-   
+
   for ( G4int k=0 ; k < nz ; k++)
-    for ( G4int j=0 ; j < ny ; j++)      
+    for ( G4int j=0 ; j < ny ; j++)
       for ( G4int i=0 ; i < nx ; i++) {
-          	   
+
 	G4double x = x_0 + i * dx,
 	  y = y_0 + j * dy,
 	  z = z_0 + k * dz;
-	  
+
 	G4ThreeVector newPosition = G4ThreeVector(x,y,z);
-	   
+
 	PushBackPlacement(currentRotationMatrix,newPosition);
       }
 }

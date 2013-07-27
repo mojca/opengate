@@ -31,11 +31,11 @@ __device__ unsigned int binary_search(float position, float *tab, unsigned int m
     return medIdx;
 }
 
-__global__ void kernel_map_entry(float *d_px, float *d_py, float *d_pz, 
+__global__ void kernel_map_entry(float *d_px, float *d_py, float *d_pz,
                                  float *d_entry_collim_y, float *d_entry_collim_z,
                                  int *d_hole, unsigned int y_size, unsigned int z_size,
                                  int particle_size) {
-    
+
     unsigned int id = __umul24(blockIdx.x, blockDim.x) + threadIdx.x;
     if (id >= particle_size) {return;}
     if( d_py[ id ] > d_entry_collim_y[ 0 ] || d_py[ id ] < d_entry_collim_y[ y_size - 1 ] )
@@ -62,9 +62,9 @@ __global__ void kernel_map_entry(float *d_px, float *d_py, float *d_pz,
 
 __global__ void kernel_map_projection(float *d_px, float *d_py, float *d_pz,
                                       float *d_dx, float *d_dy, float *d_dz,
-                                      int *d_hole, float planeToProject, 
+                                      int *d_hole, float planeToProject,
                                       unsigned int particle_size) {
-    
+
     unsigned int id = __umul24( blockIdx.x, blockDim.x ) + threadIdx.x;
     if( id >= particle_size ) return;
     if( d_hole[ id ] == -1 ) return;
@@ -87,7 +87,7 @@ __global__ void kernel_map_exit(float *d_px, float *d_py, float *d_pz,
                                 float *d_exit_collim_y, float *d_exit_collim_z,
                                 int *d_hole, unsigned int y_size, unsigned int z_size,
                                 int particle_size) {
-    
+
     unsigned int id = __umul24( blockIdx.x, blockDim.x ) + threadIdx.x;
     if( id >= particle_size ) return;
     if( d_hole[ id ] == -1 ) return;
@@ -136,13 +136,13 @@ void GateGPUCollimator_init(GateGPUCollimator *collimator) {
 
     unsigned int mem_float_y = y_size * sizeof(float);
     unsigned int mem_float_z = z_size * sizeof(float);
-    
+
 
     float* d_entry_collim_y;
     float* d_entry_collim_z;
     float* d_exit_collim_y;
     float* d_exit_collim_z;
-    
+
     cudaMalloc((void**) &d_entry_collim_y, mem_float_y);
     cudaMalloc((void**) &d_entry_collim_z, mem_float_z);
     cudaMalloc((void**) &d_exit_collim_y, mem_float_y);
@@ -160,14 +160,14 @@ void GateGPUCollimator_init(GateGPUCollimator *collimator) {
 }
 
 void GateGPUCollimator_process(GateGPUCollimator *collimator, GateGPUParticle *particle) {
-    
+
     cudaSetDevice(collimator->cudaDeviceID);
 
     // Read collimator geometry
     float* d_entry_collim_y = collimator->gpu_entry_collim_y;
     float* d_entry_collim_z = collimator->gpu_entry_collim_z;
     float* d_exit_collim_y  = collimator->gpu_exit_collim_y;
-    float* d_exit_collim_z  = collimator->gpu_exit_collim_z; 
+    float* d_exit_collim_z  = collimator->gpu_exit_collim_z;
     unsigned int y_size     = collimator->y_size;
     unsigned int z_size     = collimator->z_size;
     float planeToProject    = collimator->planeToProject + particle->px[0];
@@ -206,7 +206,7 @@ void GateGPUCollimator_process(GateGPUCollimator *collimator, GateGPUParticle *p
     grid.x = grid_size;
 
     // Kernel map entry
-    kernel_map_entry<<<grid, threads>>>(d_px, d_py, d_pz, 
+    kernel_map_entry<<<grid, threads>>>(d_px, d_py, d_pz,
                                         d_entry_collim_y, d_entry_collim_z,
                                         d_hole, y_size, z_size,
                                         particle_size);
@@ -221,7 +221,7 @@ void GateGPUCollimator_process(GateGPUCollimator *collimator, GateGPUParticle *p
                                        d_exit_collim_y, d_exit_collim_z,
                                        d_hole, y_size, z_size,
                                        particle_size);
-    
+
     // Copy particles from device to host
     cudaMemcpy(particle->px, d_px, mem_float_particle, cudaMemcpyDeviceToHost);
     cudaMemcpy(particle->py, d_py, mem_float_particle, cudaMemcpyDeviceToHost);
@@ -256,7 +256,7 @@ void GateGPUCollimator_process(GateGPUCollimator *collimator, GateGPUParticle *p
         ++i;
     }
 
-    particle->size = c;    
+    particle->size = c;
 
     // Free memory
     cudaFree(d_px);

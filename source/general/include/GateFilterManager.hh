@@ -31,7 +31,7 @@ See GATE/LICENSE.txt for further details
 #include "G4Track.hh"
 
 
-class GateFilterManager : 
+class GateFilterManager :
   public G4VSDFilter
 {
 public:
@@ -50,7 +50,7 @@ protected:
   std::vector<GateVFilter*> theFilters;
 
 private:
-  
+
 };
 
 

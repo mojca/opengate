@@ -9,9 +9,9 @@ See GATE/LICENSE.txt for further details
 ----------------------*/
 
 
-/*! 
+/*!
   \brief Class GateAnalyzeHeader :
-  \brief Handler for "Analyze" header files (free 3D medical images headers). 
+  \brief Handler for "Analyze" header files (free 3D medical images headers).
   \brief By laurent.guigues@creatis.insa-lyon.fr
 
 */
@@ -22,7 +22,7 @@ See GATE/LICENSE.txt for further details
 //-----------------------------------------------------------------------------
 // namespace	: -
 // classe		: AnalyzeHeader
-// Handles Analyze Headers (.hdr) for 3D medical images 
+// Handles Analyze Headers (.hdr) for 3D medical images
 // See :
 // http://www.mayo.edu/bir/PDF/ANALYZE75.pdf
 // http://www.grahamwideman.com/gw/brain/analyze/formatdoc.htm
@@ -37,13 +37,13 @@ See GATE/LICENSE.txt for further details
 class G4String;
 
 /// \brief Handler for "Analyze" header files (free 3D medical images
-/// headers) 
-class GateAnalyzeHeader 
+/// headers)
+class GateAnalyzeHeader
 {
 public:
   typedef float PixelType;
   //-----------------------------------------------------------------------------
-  /// Structure storing general information 
+  /// Structure storing general information
   typedef struct Header_key          		/*      header_key       */
   {                                  		/* off + size*/
     int sizeof_hdr;                		/* 0 + 4     */
@@ -57,11 +57,11 @@ public:
   //-----------------------------------------------------------------------------
 
   //-----------------------------------------------------------------------------
-  /// Structure storing the image characteristics : 
-  /// dimensions, voxel size, type, etc. 
+  /// Structure storing the image characteristics :
+  /// dimensions, voxel size, type, etc.
   typedef struct Image_characteristics  /*      image_dimension  */
   {                               	/* off + size*/
-    /* 
+    /*
        dim[] specifies the image dimensions
        dim[1] - size in x dimension
        dim[2] - size in y dimension
@@ -72,13 +72,13 @@ public:
     char vox_units[4];			/* 16 + 4    */
     char cal_units[8];			/* 20 + 4    */
     // I use unused1 to code the number of channels
-    short int unused1;			/* 24 + 2    */ 
+    short int unused1;			/* 24 + 2    */
     // datatype encodes the voxel type (use the constants below)
     short int datatype;			/* 30 + 2    */
-    // number of bits per pixel 
+    // number of bits per pixel
     short int bitpix;                   /* 32 + 2    */
     short int dim_un0;                  /* 34 + 2    */
-    /* 
+    /*
        pixdim[] specifies the voxel dimensions:
        pixdim[1] - voxel width
        pixdim[2] - voxel height
@@ -97,9 +97,9 @@ public:
     int glmax, glmin;                 	/* 100 + 8   */
   } i_c;          			/* total=108 */
   //-----------------------------------------------------------------------------
-         
+
   //-----------------------------------------------------------------------------
-  /// Structure storing data concerning the history 
+  /// Structure storing data concerning the history
   /// of the acquisition (metadata)
   typedef struct History          	/*      data_history     */
   {                                    	/* off + size*/
@@ -170,11 +170,11 @@ public:
 
   /// Reads a .hdr file
   /// \param 	filename
-  /// \return true if read successful 
+  /// \return true if read successful
   bool Read( const G4String& filename );
-  /// Writes the header 
+  /// Writes the header
   /// \param 	filename
-  /// \return true if read successful 
+  /// \return true if read successful
   bool Write( const G4String& filename );
 
   /// Returns true iff the header was encoded with the same machine type (little/big endian).
@@ -182,15 +182,15 @@ public:
   /// If returns false (after header read) then the data (.img) should be read with endian bytes coding reversal (assuming header and data were encoded the same way).
   bool IsRightEndian() const { return m_rightEndian; }
 
-  /// Returns a const ref on the header information 
+  /// Returns a const ref on the header information
   const Analyze_struct& GetData() const { return m_data; }
-  /// Returns a ref on the header information 
+  /// Returns a ref on the header information
   Analyze_struct& GetData() { return m_data; }
 
 
   /// Sets the type of the voxel
-  void SetVoxelType ( TypeCode t ) { 
-    m_data.ic.datatype = t; 
+  void SetVoxelType ( TypeCode t ) {
+    m_data.ic.datatype = t;
     //    m_data.ic.bitpix = BitPix( t ) ;
   }
   /// Gets the type of the voxel
@@ -198,39 +198,39 @@ public:
 
 
   /// Sets the image size
-  void SetImageSize ( short int sx, short int sy, short int sz, short int nbchannels = 1) { 
+  void SetImageSize ( short int sx, short int sy, short int sz, short int nbchannels = 1) {
     m_data.ic.dim[1] = sx;
     m_data.ic.dim[2] = sy;
     m_data.ic.dim[3] = sz;
     m_data.ic.unused1 = nbchannels;
   }
   /// Gets the image size
-  void GetImageSize ( short int& sx, short int& sy, short int& sz, short int& nbchannels ) { 
+  void GetImageSize ( short int& sx, short int& sy, short int& sz, short int& nbchannels ) {
     sx = m_data.ic.dim[1];
     sy = m_data.ic.dim[2];
     sz = m_data.ic.dim[3];
     nbchannels = m_data.ic.unused1;
   }
-  /// Sets the voxels size 
+  /// Sets the voxels size
   //FIXME pixel type is not the same as pixel size type !!!
-  void SetVoxelSize ( PixelType sx, PixelType sy, PixelType sz ) { 
+  void SetVoxelSize ( PixelType sx, PixelType sy, PixelType sz ) {
     m_data.ic.pixdim[1] = sx;
     m_data.ic.pixdim[2] = sy;
     m_data.ic.pixdim[3] = sz;
   }
   /// Gets the voxels size
-  void GetVoxelSize ( PixelType& sx, PixelType& sy, PixelType& sz ) { 
+  void GetVoxelSize ( PixelType& sx, PixelType& sy, PixelType& sz ) {
     sx = m_data.ic.pixdim[1];
     sy = m_data.ic.pixdim[2];
     sz = m_data.ic.pixdim[3];
   }
   /// Sets the voxel unit
-  void SetVoxelUnit ( const G4String& unit) 
+  void SetVoxelUnit ( const G4String& unit)
   {
       strcpy(m_data.ic.vox_units,unit);
   }
   /// Sets the voxel unit
-  G4String GetVoxelUnit () 
+  G4String GetVoxelUnit ()
   {
       return m_data.ic.vox_units;
   }

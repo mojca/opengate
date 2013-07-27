@@ -42,7 +42,7 @@ See GATE/LICENSE.txt for further details
 #include "GateRecorderBase.hh"
 
 //--------------------------------------------------------------------------------------------------
-GateVoxelOutput::GateVoxelOutput(const G4String& name,const G4String& phantomName, GateOutputMgr* outputMgr,DigiMode digiMode,GateVoxelBoxParameterized* inserter) 
+GateVoxelOutput::GateVoxelOutput(const G4String& name,const G4String& phantomName, GateOutputMgr* outputMgr,DigiMode digiMode,GateVoxelBoxParameterized* inserter)
   : GateVOutputModule(name,outputMgr,digiMode),
     m_array(new std::valarray<float>),
     m_arraySquare(new std::valarray<float>),
@@ -65,7 +65,7 @@ GateVoxelOutput::GateVoxelOutput(const G4String& name,const G4String& phantomNam
 //--------------------------------------------------------------------------------------------------
 
 //--------------------------------------------------------------------------------------------------
-GateVoxelOutput::GateVoxelOutput(const G4String& name,const G4String& phantomName, GateOutputMgr* outputMgr,DigiMode digiMode,GateRegularParameterized* inserter) 
+GateVoxelOutput::GateVoxelOutput(const G4String& name,const G4String& phantomName, GateOutputMgr* outputMgr,DigiMode digiMode,GateRegularParameterized* inserter)
   : GateVOutputModule(name,outputMgr,digiMode),
     m_array(new std::valarray<float>),
     m_arraySquare(new std::valarray<float>),
@@ -87,7 +87,7 @@ GateVoxelOutput::GateVoxelOutput(const G4String& name,const G4String& phantomNam
 //--------------------------------------------------------------------------------------------------
 
 //--------------------------------------------------------------------------------------------------
-GateVoxelOutput::GateVoxelOutput(const G4String& name,const G4String& phantomName, GateOutputMgr* outputMgr,DigiMode digiMode,GateFictitiousVoxelMapParameterized* inserter) 
+GateVoxelOutput::GateVoxelOutput(const G4String& name,const G4String& phantomName, GateOutputMgr* outputMgr,DigiMode digiMode,GateFictitiousVoxelMapParameterized* inserter)
   : GateVOutputModule(name,outputMgr,digiMode),
     m_array(new std::valarray<float>),
     m_arraySquare(new std::valarray<float>),
@@ -109,7 +109,7 @@ GateVoxelOutput::GateVoxelOutput(const G4String& name,const G4String& phantomNam
 //--------------------------------------------------------------------------------------------------
 
 //--------------------------------------------------------------------------------------------------
-GateVoxelOutput::~GateVoxelOutput() 
+GateVoxelOutput::~GateVoxelOutput()
 {
   delete m_outputMessenger;
   if (nVerboseLevel > 0) G4cout << "GateVoxelOutput deleting..." << G4endl;
@@ -131,7 +131,7 @@ void GateVoxelOutput::RecordBeginOfAcquisition()
 
   if (nVerboseLevel > 2)
     G4cout << "GateVoxelOutput::RecordBeginOfAcquisition - Entered " << G4endl;
-  
+
   G4cout<< (*G4Material::GetMaterialTable()) << G4endl;
 }
 //--------------------------------------------------------------------------------------------------
@@ -144,12 +144,12 @@ void GateVoxelOutput::RecordEndOfAcquisition()
   static const double cGy(Gy/100.0);
 
   // G4cout << "GateVoxelOutput::RecordEndOfAcquisition - Entered at " << this << " for "<< GetName()  << G4endl  << std::flush ;
-  
+
   if (nVerboseLevel > 0)
     G4cout << "GateVoxelOutput::RecordEndOfAcquisition - Writing to "<< m_fileName << G4endl;
-  
+
   std::ofstream f;
-  
+
   GateVGeometryVoxelReader* theReader=0;
   switch ( m_inserterType )
   {
@@ -169,31 +169,31 @@ void GateVoxelOutput::RecordEndOfAcquisition()
 
 //  GateVGeometryVoxelReader* theReader( m_inserter->GetReader());
   if(!theReader) G4Exception( "GateVoxelOutput::RecordEndOfAcquisition", "RecordEndOfAcquisition", FatalException, "No reader" );
-  
-  const double voxelSize ( theReader->GetVoxelSize().x() * 
-			   theReader->GetVoxelSize().y() * 
+
+  const double voxelSize ( theReader->GetVoxelSize().x() *
+			   theReader->GetVoxelSize().y() *
 			   theReader->GetVoxelSize().z()
 			   );
-  
+
   // Output the dose collection (main file)
   f.open(m_fileName, std::ofstream::out | std::ofstream::binary);
-  
+
   for (unsigned int i=0; i<m_array->size(); i++){
     double mass ( voxelSize * theReader->GetVoxelMaterial(i)->GetDensity() );
     float  dose ( (*m_array)[i] / mass / cGy );   // float to get a 32 bits floating point number
     f.write( (char*)&dose, sizeof(dose));
-    
+
     if (nVerboseLevel >0 )
       G4cout << "bin " << i
-	     << ", energy "<< (*m_array)[i] 
-	     << ", dose "<<   dose 
+	     << ", energy "<< (*m_array)[i]
+	     << ", dose "<<   dose
 	     << G4endl;
   }
   f.close();
-  
+
   // Output the uncertainty file if requested
   // The relative error on dose is calculated with the folowing formula:
-  // 
+  //
   //              /                                     \ ^1/2
   //              |      N*Sum( di^2 )  -  Sum^2(di)    |
   //  relError =  |   ________________________________  |
@@ -201,26 +201,26 @@ void GateVoxelOutput::RecordEndOfAcquisition()
   //              \           (N-1)*Sum^2(di)           /
   //
   //   where di represents the energy deposit in one hit and N the number of energy deposits (hits)
-  
+
   if (m_uncertainty){
     f.open( (m_fileName+"U").c_str(), std::ofstream::out | std::ofstream::binary);
-    
+
     for (unsigned int i=0; i<m_array->size(); i++){
       float relativeError(0) ;
       float relativeErrorSquared(0);
-      
+
       // Safeguard check against nan's
       if ((*m_arrayCounts)[i]>1 && (*m_array)[i] !=0 ){
 	double N ( (*m_arrayCounts)[i]                );
 	double SS( (*m_array)[i] * (*m_array)[i]      );
 	double S2( (*m_arraySquare)[i]                );
 	relativeErrorSquared = ( N*S2 - SS )/ ( (N-1)*SS );
-	if ( abs(relativeErrorSquared) < 1.0e-15 ) relativeErrorSquared=0; // Chop tiny values 
+	if ( abs(relativeErrorSquared) < 1.0e-15 ) relativeErrorSquared=0; // Chop tiny values
 	relativeError=sqrt(relativeErrorSquared);
       }
-      
+
       f.write( (char*)&relativeError, sizeof(relativeError));
-      
+
       if (nVerboseLevel >0 )
 	G4cout << "bin " << i
 	       << ", sum of squares " << (*m_arraySquare)[i]
@@ -231,7 +231,7 @@ void GateVoxelOutput::RecordEndOfAcquisition()
     }
     f.close();
   }
-  
+
 }
 //--------------------------------------------------------------------------------------------------
 
@@ -291,7 +291,7 @@ void GateVoxelOutput::RecordEndOfEvent(const G4Event* )
       m_arrayCounts->resize(voxelNumber);
     }
   }
-  
+
 
   if (nVerboseLevel > 2)
     G4cout << "GateVoxelOutput::RecordEndOfEvent - Entered for phantom "<< m_phantomName << G4endl;
@@ -309,24 +309,24 @@ void GateVoxelOutput::RecordEndOfEvent(const G4Event* )
     if( 0 == physVolName.compare(0, m_phantomName.size(), m_phantomName) ){
 
       //  G4cout << "GateVoxelOutput::RecordEndOfEvent - HIT at voxel "<< n  << " in "<< physVolName << G4endl;
-      
+
       (*m_array)[n]+=edep;
       if (m_uncertainty){
 	(*m_arrayCounts) [n]++;
 	(*m_arraySquare) [n]+= edep*edep;
       }
 
-      if (nVerboseLevel > 2) 
-	G4cout << "hit= " << i 
-	       << ", n= " << n 
+      if (nVerboseLevel > 2)
+	G4cout << "hit= " << i
+	       << ", n= " << n
 	       << ", edep " << edep
 	       << ", process "   <<  h->GetProcess()
 	       << ", array[n] "  <<  (*m_array)[n]
 	       << ", square[n] " <<  (*m_arraySquare)[n]
 	       << ", counts[n] " <<  (*m_arrayCounts)[n]
 	       << G4endl;
-      
-    }// end if phantom    
+
+    }// end if phantom
   }//end for loop
 }
 //--------------------------------------------------------------------------------------------------
@@ -340,16 +340,14 @@ void GateVoxelOutput::RecordStepWithVolume(const GateVVolume *, const G4Step* )
 //--------------------------------------------------------------------------------------------------
 
 //--------------------------------------------------------------------------------------------------
-void GateVoxelOutput::SetVerboseLevel(G4int val) { 
-  nVerboseLevel = val; 
+void GateVoxelOutput::SetVerboseLevel(G4int val) {
+  nVerboseLevel = val;
   if (m_trajectoryNavigator) m_trajectoryNavigator->SetVerboseLevel(val);
 }
 //--------------------------------------------------------------------------------------------------
 
 //--------------------------------------------------------------------------------------------------
-void GateVoxelOutput::SetSaveUncertainty(G4bool b) { 
-  m_uncertainty=b; 
+void GateVoxelOutput::SetSaveUncertainty(G4bool b) {
+  m_uncertainty=b;
  }
 //--------------------------------------------------------------------------------------------------
-
-

@@ -35,7 +35,7 @@ GateTranslationMove::GateTranslationMove(GateVVolume* itsObjectInserter,
 
 //-------------------------------------------------------------------------------------------------
 GateTranslationMove::~GateTranslationMove()
-{  
+{
   delete m_Messenger;
 }
 //-------------------------------------------------------------------------------------------------
@@ -49,7 +49,7 @@ void GateTranslationMove::PushMyPlacements(const G4RotationMatrix& currentRotati
     m_currentTranslation =  m_velocity * aTime ;
     G4ThreeVector newPosition = currentPosition + m_currentTranslation;
 
-    PushBackPlacement(GatePlacement(currentRotationMatrix,newPosition));  
+    PushBackPlacement(GatePlacement(currentRotationMatrix,newPosition));
 //    return GatePlacement(currentRotationMatrix,newPosition);
 }
 //-------------------------------------------------------------------------------------------------

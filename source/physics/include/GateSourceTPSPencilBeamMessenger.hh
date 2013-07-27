@@ -67,4 +67,3 @@ class GateSourceTPSPencilBeamMessenger: public GateVSourceMessenger
 #endif
 
 #endif
-

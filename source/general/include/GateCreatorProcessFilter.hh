@@ -22,7 +22,7 @@
 
 #include <list>
 
-class  GateCreatorProcessFilter : 
+class  GateCreatorProcessFilter :
   public GateVFilter
 {
   public:

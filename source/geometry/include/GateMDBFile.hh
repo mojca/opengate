@@ -46,7 +46,7 @@ protected:
   GateEByFComponentCreator*  ReadEByFComponent(const G4String& materialName,const G4String& componentOrdinal,
       	      	      	      	      	       const G4String& field, const G4String& componentName);
   GateMatComponentCreator*   ReadMatComponent(const G4String& materialName,const G4String& componentOrdinal,const G4String& line);
-  
+
   void     ReadAllMaterialOptions(const G4String& materialName,const G4String& line,GateMaterialCreator* creator);
   void     ReadMaterialOption(const G4String& materialName,const G4String& field,GateMaterialCreator* creator);
 

@@ -20,4 +20,3 @@ void GateNamedObject::Describe(size_t indent)
   G4cout << G4endl << GateTools::Indent(indent) << "GATE object:        '" << mName << "'" << G4endl;
 }
 //----------------------------------------------------------------------------------------------------
-

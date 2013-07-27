@@ -16,12 +16,12 @@ See GATE/LICENSE.txt for further details
 
 
 // Friend function: inserts (prints) a GateOutputVolumeID into a stream
-std::ostream& operator<<(std::ostream& flux, const GateOutputVolumeID& volumeID)    
+std::ostream& operator<<(std::ostream& flux, const GateOutputVolumeID& volumeID)
 {
   int w = flux.width();
   for (size_t i=0; i<volumeID.size(); ++i)
       flux << std::setw(w) << volumeID[i] << " ";
-  
+
   return flux;
 }
 
@@ -30,7 +30,7 @@ std::ostream& operator<<(std::ostream& flux, const GateOutputVolumeID& volumeID)
 
 // Check whether the ID is valid, i.e. not empty and with no negative element
 G4bool GateOutputVolumeID::IsValid() const
-{ 
+{
   if (empty())
     return false;
   for (const_iterator iter=begin(); iter!=end(); ++iter)
@@ -51,4 +51,3 @@ GateOutputVolumeID GateOutputVolumeID::Top(size_t maxDepth) const
     topID[depth] = (*this)[depth];
   return topID;
 }
-

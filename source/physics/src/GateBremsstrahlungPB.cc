@@ -15,7 +15,7 @@ See GATE/LICENSE.txt for further details
 
 //-----------------------------------------------------------------------------
 GateBremsstrahlungPB::GateBremsstrahlungPB():GateVProcess("Bremsstrahlung")
-{  
+{
   SetDefaultParticle("e+");
   SetDefaultParticle("e-");
   SetProcessInfo("Bremsstrahlung by electrons and positrons");
@@ -24,7 +24,7 @@ GateBremsstrahlungPB::GateBremsstrahlungPB():GateVProcess("Bremsstrahlung")
   AddToModelList("LivermoreModel");
   AddToModelList("PenelopeModel");
 
-  pMessenger = new GateEMStandardProcessMessenger(this);  
+  pMessenger = new GateEMStandardProcessMessenger(this);
 }
 //-----------------------------------------------------------------------------
 
@@ -39,7 +39,7 @@ G4VProcess* GateBremsstrahlungPB::CreateProcess(G4ParticleDefinition *)
 //-----------------------------------------------------------------------------
 void GateBremsstrahlungPB::ConstructProcess(G4ProcessManager * manager)
 {
-  manager->AddProcess(pFinalProcess,-1, -3, 3);           
+  manager->AddProcess(pFinalProcess,-1, -3, 3);
 }
 //-----------------------------------------------------------------------------
 
@@ -56,7 +56,7 @@ bool GateBremsstrahlungPB::IsApplicable(G4ParticleDefinition * par)
 //-----------------------------------------------------------------------------
 bool GateBremsstrahlungPB::IsModelApplicable(G4String ,G4ParticleDefinition * par)
 {
-  for(unsigned int k = 0; k<theListOfParticlesWithSelectedModels.size();k++) 
+  for(unsigned int k = 0; k<theListOfParticlesWithSelectedModels.size();k++)
     if(par==theListOfParticlesWithSelectedModels[k]) GateError("A "<< GetG4ProcessName()<<" model has been already selected for "<< par->GetParticleName());
   if(par == G4Electron::Electron() || par == G4Positron::Positron()) return true;
   return false;
@@ -102,4 +102,3 @@ void GateBremsstrahlungPB::AddUserModel(GateListOfHadronicModels *model){
 
 
 MAKE_PROCESS_AUTO_CREATOR_CC(GateBremsstrahlungPB)
-

@@ -33,7 +33,7 @@ GateOPETSystem::GateOPETSystem(const G4String& itsName)
   // Set up a messenger
   m_messenger = new GateClockDependentMessenger(this);
   m_messenger->SetDirectoryGuidance(G4String("Controls the system '") + GetObjectName() + "'" );
-  
+
   // Define the scanner components
   GateBoxComponent* rSectorComponent = new GateBoxComponent("rsector",GetBaseComponent(),this);
   GateArrayComponent* moduleComponent = new GateArrayComponent("module",rSectorComponent,this);
@@ -49,21 +49,21 @@ GateOPETSystem::GateOPETSystem(const G4String& itsName)
     new GateWedgeComponent("layer6",wedgecrystalComponent,this);
     new GateWedgeComponent("layer7",wedgecrystalComponent,this);
 
- 
+
   // Integrate a coincidence sorter into the digitizer
   G4double coincidenceWindow = 10.* ns;
   GateDigitizer* digitizer = GateDigitizer::GetInstance();
   GateCoincidenceSorter* coincidenceSorter = new GateCoincidenceSorter(digitizer,"Coincidences",coincidenceWindow);
   digitizer->StoreNewCoincidenceSorter(coincidenceSorter);
-  
+
 #ifdef GATE_USE_LMF
 
   // Insert an LMF output module into the output manager
   GateOutputMgr *outputMgr = GateOutputMgr::GetInstance();
   GateToLMF* gateToLMF1 = new GateToLMF("lmf1", outputMgr,this,GateOutputMgr::GetDigiMode()); // this for geometry
   outputMgr->AddOutputModule((GateVOutputModule*)gateToLMF1);
- 
-#endif 
+
+#endif
 
   SetOutputIDName((char *)"gantryID",0);
   SetOutputIDName((char *)"rsectorID",1);
@@ -77,7 +77,7 @@ GateOPETSystem::GateOPETSystem(const G4String& itsName)
 
 
 // Destructor
-GateOPETSystem::~GateOPETSystem() 
+GateOPETSystem::~GateOPETSystem()
 {
   delete m_messenger;
 }
@@ -89,7 +89,7 @@ GateOPETSystem::~GateOPETSystem()
     optimised for creating LMF header files
 
 	indent: the print-out indentation (cosmetic parameter)
-*/    
+*/
 void GateOPETSystem::Describe(size_t indent)
 {
   GateVSystem::Describe(indent);
@@ -104,7 +104,7 @@ void GateOPETSystem::Describe(size_t indent)
 
 	aStream: the output stream
 	doPrintNumbers: tells whether we print-out the volume numbers in addition to their dimensions
-*/    
+*/
 void GateOPETSystem::PrintToStream(std::ostream& aStream,G4bool doPrintNumbers)
 {
   aStream << "geometrical design type: " << 1   	      	      	      	      	  << G4endl;
@@ -115,9 +115,9 @@ void GateOPETSystem::PrintToStream(std::ostream& aStream,G4bool doPrintNumbers)
 
   G4double rsectorAxialPitch = rsectorComponent->GetLinearRepeatVector().z();
   aStream << "rsector axial pitch: " << G4BestUnit( rsectorAxialPitch ,"Length")  	  << G4endl;
-  
+
   G4double rsectorAzimuthalPitch = rsectorComponent->GetAngularRepeatPitch();
-  aStream << "rsector azimuthal pitch: " << rsectorAzimuthalPitch/degree << " degree"  	 	  << G4endl;    
+  aStream << "rsector azimuthal pitch: " << rsectorAzimuthalPitch/degree << " degree"  	 	  << G4endl;
 
   G4double rsectorRadialSize     = rsectorComponent->GetBoxLength(0) ;
   G4double rsectorTangentialSize = rsectorComponent->GetBoxLength(1) ;
@@ -127,33 +127,33 @@ void GateOPETSystem::PrintToStream(std::ostream& aStream,G4bool doPrintNumbers)
 
   GateArrayComponent* moduleComponent = FindArrayComponent("module");
 
-  GateBox* moduleCreator =   moduleComponent->GetBoxCreator();	      	      	      	      	  
+  GateBox* moduleCreator =   moduleComponent->GetBoxCreator();
   G4double moduleRadialSize     = moduleCreator ? moduleCreator->GetBoxLength(0) : rsectorRadialSize ;
   G4double moduleTangentialSize = moduleCreator ? moduleCreator->GetBoxLength(1) : rsectorTangentialSize ;
   G4double moduleAxialSize      = moduleCreator ? moduleCreator->GetBoxLength(2) : rsectorAxialSize ;
   aStream << "module axial size: " << G4BestUnit( moduleAxialSize ,"Length")  	      	  << G4endl;
   aStream << "module tangential size: " << G4BestUnit( moduleTangentialSize ,"Length")  	  << G4endl;
 
-  G4ThreeVector modulePitchVector = moduleComponent->GetRepeatVector(); 
+  G4ThreeVector modulePitchVector = moduleComponent->GetRepeatVector();
   aStream << "module axial pitch: " << G4BestUnit( modulePitchVector.z() ,"Length")    	  << G4endl;
   aStream << "module tangential pitch: " << G4BestUnit( modulePitchVector.y() ,"Length")    	  << G4endl;
 
   GateArrayComponent* submoduleComponent = FindArrayComponent("submodule");
 
-  GateBox* submoduleCreator =   submoduleComponent->GetBoxCreator();	      	      	      	      	  
+  GateBox* submoduleCreator =   submoduleComponent->GetBoxCreator();
   G4double submoduleRadialSize     = submoduleCreator ? submoduleCreator->GetBoxLength(0) : moduleRadialSize ;
   G4double submoduleTangentialSize = submoduleCreator ? submoduleCreator->GetBoxLength(1) : moduleTangentialSize ;
   G4double submoduleAxialSize      = submoduleCreator ? submoduleCreator->GetBoxLength(2) : moduleAxialSize ;
   aStream << "submodule axial size: " << G4BestUnit( submoduleAxialSize ,"Length")  	      	  << G4endl;
   aStream << "submodule tangential size: " << G4BestUnit( submoduleTangentialSize ,"Length")  	  << G4endl;
 
-  G4ThreeVector submodulePitchVector = submoduleComponent->GetRepeatVector(); 
+  G4ThreeVector submodulePitchVector = submoduleComponent->GetRepeatVector();
   aStream << "submodule axial pitch: " << G4BestUnit( submodulePitchVector.z() ,"Length")    	  << G4endl;
   aStream << "submodule tangential pitch: " << G4BestUnit( submodulePitchVector.y() ,"Length")     << G4endl;
 
   GateArrayComponent* wedgecrystalComponent   = FindArrayComponent("wedge");
 
-  GateBox* wedgecrystalCreator =   wedgecrystalComponent->GetBoxCreator();	      	      	      	      	  
+  GateBox* wedgecrystalCreator =   wedgecrystalComponent->GetBoxCreator();
   G4double crystalRadialSize     = wedgecrystalCreator ? wedgecrystalCreator->GetBoxLength(0) : submoduleRadialSize ;
   G4double crystalTangentialSize = wedgecrystalCreator ? wedgecrystalCreator->GetBoxLength(1) : submoduleTangentialSize ;
   G4double crystalAxialSize      = wedgecrystalCreator ? wedgecrystalCreator->GetBoxLength(2) : submoduleAxialSize ;
@@ -161,7 +161,7 @@ void GateOPETSystem::PrintToStream(std::ostream& aStream,G4bool doPrintNumbers)
   aStream << "crystal axial size: " << G4BestUnit( crystalAxialSize ,"Length")  	      	  << G4endl;
   aStream << "crystal tangential size: " << G4BestUnit( crystalTangentialSize ,"Length")  	  << G4endl;
 
-  G4ThreeVector crystalPitchVector = wedgecrystalComponent->GetRepeatVector() ; 
+  G4ThreeVector crystalPitchVector = wedgecrystalComponent->GetRepeatVector() ;
   aStream << "crystal axial pitch: " << G4BestUnit( crystalPitchVector.z() ,"Length")    	  << G4endl;
   aStream << "crystal tangential pitch: " << G4BestUnit( crystalPitchVector.y() ,"Length")    	  << G4endl;
 
@@ -209,9 +209,6 @@ G4double GateOPETSystem::ComputeInternalRadius()
 
   // Add the offset to the innermost edge of the first layer
   radius += FindComponent("layer0")->ComputeOffset(0,GateSystemComponent::align_left,GateSystemComponent::align_left);
-    
+
   return radius;
 }
-
-
-

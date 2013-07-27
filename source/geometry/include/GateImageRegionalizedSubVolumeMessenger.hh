@@ -9,14 +9,14 @@ See GATE/LICENSE.txt for further details
 ----------------------*/
 
 
-/*! 
-   \class  GateImageRegionalizedSubVolumeMessenger : 
+/*!
+   \class  GateImageRegionalizedSubVolumeMessenger :
    \brief  Messenger of GateImageRegionalizedSubVolume.
    \author thibault.frisson@creatis.insa-lyon.fr
            laurent.guigues@creatis.insa-lyon.fr
 	   david.sarrut@creatis.insa-lyon.fr
  */
- 
+
 #ifndef __GateImageRegionalizedSubVolumeMessenger__hh__
 #define __GateImageRegionalizedSubVolumeMessenger__hh__
 
@@ -32,14 +32,13 @@ class GateImageRegionalizedSubVolumeMessenger : public GateVolumeMessenger
 public:
   GateImageRegionalizedSubVolumeMessenger(GateImageRegionalizedSubVolume* volume);
   ~GateImageRegionalizedSubVolumeMessenger();
-    
+
   void SetNewValue(G4UIcommand*, G4String);
 
 private:
-  GateImageRegionalizedSubVolume* pVolume; 
+  GateImageRegionalizedSubVolume* pVolume;
 
 };
 //====================================================================
 
 #endif
-

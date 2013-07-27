@@ -121,4 +121,3 @@ bool computeDiscretePowerDiagram(const Longvol &V, Longvol &dx, Longvol &dy, Lon
 bool computeDiscretePowerDiagram(const Longvol &V, Longvol &rdma, Longvol &dx, Longvol &dy, Longvol &dz);
 
 #endif
-

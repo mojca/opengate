@@ -31,32 +31,32 @@ GateMaterialFilter::GateMaterialFilter(G4String name)
 //---------------------------------------------------------------------------
 GateMaterialFilter::~GateMaterialFilter()
 {
-  if(nFilteredParticles==0) GateWarning("No particle has been selected by filter: " << GetObjectName()); 
+  if(nFilteredParticles==0) GateWarning("No particle has been selected by filter: " << GetObjectName());
   delete pMatMessenger ;
 }
 //---------------------------------------------------------------------------
 
 //---------------------------------------------------------------------------
-G4bool GateMaterialFilter::Accept(const G4Step* aStep) 
+G4bool GateMaterialFilter::Accept(const G4Step* aStep)
 {
     for ( size_t i = 0; i < theMdef.size(); i++){
       if ( theMdef[i] == aStep->GetPreStepPoint()->GetMaterial()->GetName() ) {
         nFilteredParticles++;
         return true;
-      } 
+      }
     }
   return false;
 }
 //---------------------------------------------------------------------------
 
 //---------------------------------------------------------------------------
-G4bool GateMaterialFilter::Accept(const G4Track* aTrack) 
+G4bool GateMaterialFilter::Accept(const G4Track* aTrack)
 {
-    for ( size_t i = 0; i < theMdef.size(); i++){ 	
+    for ( size_t i = 0; i < theMdef.size(); i++){
       if ( theMdef[i] == aTrack->GetMaterial()->GetName() ) {
         nFilteredParticles++;
         return true;
-      } 
+      }
     }
   return false;
 }

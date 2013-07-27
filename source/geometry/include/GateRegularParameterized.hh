@@ -24,7 +24,7 @@ class GateRegularParameterized : public GateBox
 public:
     //! Constructor1
     GateRegularParameterized(const G4String& name,
-    				     G4bool acceptsChildren=true, 
+    				     G4bool acceptsChildren=true,
 		 		     G4int depth=0);
 
     //! Constructor2

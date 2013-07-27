@@ -26,7 +26,7 @@ See GATE/LICENSE.txt for further details
 //---------------------------------------------------------------------------------------------------------
 GateQuadrantRepeaterMessenger::GateQuadrantRepeaterMessenger(GateQuadrantRepeater* itsQuadrantRepeater)
   :GateObjectRepeaterMessenger(itsQuadrantRepeater)
-{ 
+{
     G4String cmdName;
 
     cmdName = GetDirectoryName()+"setLineNumber";
@@ -73,16 +73,16 @@ GateQuadrantRepeaterMessenger::~GateQuadrantRepeaterMessenger()
 
 //---------------------------------------------------------------------------------------------------------
 void GateQuadrantRepeaterMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
   if( command==SetOrientationCmd )
-    { GetQuadrantRepeater()->SetOrientation(SetOrientationCmd->GetNewDoubleValue(newValue));}   
+    { GetQuadrantRepeater()->SetOrientation(SetOrientationCmd->GetNewDoubleValue(newValue));}
   else if( command==SetCopySpacingCmd )
-    { GetQuadrantRepeater()->SetCopySpacing(SetCopySpacingCmd->GetNewDoubleValue(newValue));}   
+    { GetQuadrantRepeater()->SetCopySpacing(SetCopySpacingCmd->GetNewDoubleValue(newValue));}
   else if( command==SetLineNumberCmd )
-    { GetQuadrantRepeater()->SetLineNumber(SetLineNumberCmd->GetNewIntValue(newValue));}   
+    { GetQuadrantRepeater()->SetLineNumber(SetLineNumberCmd->GetNewIntValue(newValue));}
   else if( command==SetMaxRangeCmd )
-    { GetQuadrantRepeater()->SetMaxRange(SetMaxRangeCmd->GetNewDoubleValue(newValue));}   
-  else 
+    { GetQuadrantRepeater()->SetMaxRange(SetMaxRangeCmd->GetNewDoubleValue(newValue));}
+  else
     GateObjectRepeaterMessenger::SetNewValue(command,newValue);
 }
 //---------------------------------------------------------------------------------------------------------

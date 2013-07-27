@@ -20,7 +20,7 @@ class GateBackToBack
 public:
   GateBackToBack( GateVSource* );
   ~GateBackToBack();
-	
+
   void Initialize();
   void GenerateVertex( G4Event*, G4bool);
 

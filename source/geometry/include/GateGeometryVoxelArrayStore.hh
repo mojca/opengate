@@ -16,22 +16,22 @@
 
 /*! \class  GateGeometryVoxelArrayStore
     \brief  This class can read a file with the material info for a matrix of voxels (digital image)
-    
+
     - GateGeometryVoxelArrayStore - by Giovanni.Santin@cern.ch
-    
-    - It reads the image file, asks the translator to convert the digital info into material info, and 
+
+    - It reads the image file, asks the translator to convert the digital info into material info, and
       stores the material information. This material info is used by the GateVoxelReplicaMatrixInserter
       at the moment of the matrix construction
 
     - The translator has to be inserted befor reading the image file
 
     - The material information is a 3D array, to speed-up the computation
-      
+
       \sa GateGeometryVoxelArrayStoreMessenger
       \sa GateVGeometryVoxelTranslator
       \sa GateVSourceVoxelReader
       \sa GateVSourceVoxelTranslator
-*/      
+*/
 
 class GateGeometryVoxelArrayStore : public GateVGeometryVoxelStore
 {
@@ -46,10 +46,10 @@ public:
   //! it adds an entry in the voxel store
   virtual void             AddVoxel(G4int ix, G4int iy, G4int iz, G4Material* material);
 
-  //! it sets the material of the voxel in the logical position (ix,iy,iz) 
+  //! it sets the material of the voxel in the logical position (ix,iy,iz)
   virtual void             SetVoxelMaterial(G4int ix, G4int iy, G4int iz, G4Material* material);
 
-  //! it gives the material of the voxel in the logical position (ix,iy,iz) 
+  //! it gives the material of the voxel in the logical position (ix,iy,iz)
   virtual G4Material*      GetVoxelMaterial(G4int ix, G4int iy, G4int iz);
   //! it gives the material of the voxel in the logical position (ix,iy,iz) NO CHECK of indices!!
   virtual inline G4Material*      GetVoxelMaterial_noCheck(G4int ix, G4int iy, G4int iz) const;
@@ -82,9 +82,9 @@ protected:
 
 protected:
 
-  inline G4int             RealArrayIndex(G4int ix, G4int iy, G4int iz, G4int nx, G4int ny, G4int nz) 
-  { 
-    G4int rai =  ix + iy*nx + iz*nx*ny; 
+  inline G4int             RealArrayIndex(G4int ix, G4int iy, G4int iz, G4int nx, G4int ny, G4int nz)
+  {
+    G4int rai =  ix + iy*nx + iz*nx*ny;
     //    G4cout << " " << rai;
     if (rai<0 || rai>=nx*ny*nz) G4cout << "RealArrayIndex: ERROR: index out of range!!!!" << G4endl;
     return rai;

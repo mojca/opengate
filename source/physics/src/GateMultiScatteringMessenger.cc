@@ -17,7 +17,7 @@ See GATE/LICENSE.txt for further details
 //-----------------------------------------------------------------------------
 GateMultiScatteringMessenger::GateMultiScatteringMessenger(GateVProcess *pb):GateEMStandardProcessMessenger(pb)
 {
-  
+
   pSetDistanceToBoundary=0;
   BuildCommands(pb->GetG4ProcessName() );
 
@@ -73,4 +73,3 @@ void GateMultiScatteringMessenger::SetNewValue(G4UIcommand* command, G4String pa
 
 }
 //-----------------------------------------------------------------------------
-

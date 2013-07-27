@@ -37,7 +37,7 @@ GateRotationMove::GateRotationMove(GateVVolume* itsObjectInserter,
 
 //-------------------------------------------------------------------------------------------------
 GateRotationMove::~GateRotationMove()
-{  
+{
   delete m_Messenger;
 }
 //-------------------------------------------------------------------------------------------------
@@ -54,7 +54,7 @@ void GateRotationMove::PushMyPlacements(const G4RotationMatrix& currentRotationM
   newRotationMatrix.rotate(-m_currentAngle, m_rotationAxis);
 
   PushBackPlacement(GatePlacement(newRotationMatrix,currentPosition));
-    
+
   // return GatePlacement(newRotationMatrix,currentPosition);
 }
 //-------------------------------------------------------------------------------------------------

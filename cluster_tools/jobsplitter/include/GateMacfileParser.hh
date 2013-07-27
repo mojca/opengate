@@ -13,11 +13,11 @@ See GATE/LICENSE.txt for further details
 #define GateMacfileParser_h 1
 #include "globals.hh"
 #include <vector>
-#include <iostream> 
+#include <iostream>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <sstream> 
-#include <fstream> 
+#include <sstream>
+#include <fstream>
 #include <math.h>
 
 using namespace std;
@@ -35,15 +35,15 @@ public:
   void SetVerboseLevel(G4int value) { m_verboseLevel = value; };
   G4int GenerateResolvedMacros(G4String directory);
   G4String GetOutputMacDir();
-  G4String GetoutputDir(){return outputDir;}; 
+  G4String GetoutputDir(){return outputDir;};
   void CleanAbort(ofstream& output, ofstream& splitfile);
-  
+
  protected:
-  
-  // Misc variables   
+
+  // Misc variables
   G4int m_verboseLevel;
   G4String macName;
-  G4int nSplits; 
+  G4int nSplits;
   G4int nAliases;
   G4String* aliases;
   char buffer[256];
@@ -109,5 +109,3 @@ public:
 
 };
 #endif
-
-

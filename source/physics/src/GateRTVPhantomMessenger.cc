@@ -21,18 +21,18 @@
 GateRTVPhantomMessenger::GateRTVPhantomMessenger(GateRTVPhantom* RTVPhantom)
   : GateMessenger(RTVPhantom->GetName()),
     m_RTVPhantom(RTVPhantom)
-{ 
+{
 
   G4String cmdName;
 
 
-  cmdName = GetDirectoryName() + "setBaseFileName"; 
+  cmdName = GetDirectoryName() + "setBaseFileName";
 
 
   SetRTVPhantomCmd = new G4UIcmdWithAString(cmdName,this);
   SetRTVPhantomCmd->SetGuidance("sets the base File Name of all Frames files");
- 
-  cmdName = GetDirectoryName() + "SetNumberOfFrames"; 
+
+  cmdName = GetDirectoryName() + "SetNumberOfFrames";
 
 
   SetRTVPhantomTPFCmd = new G4UIcmdWithAnInteger(cmdName,this);
@@ -79,7 +79,7 @@ GateRTVPhantomMessenger::~GateRTVPhantomMessenger()
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
 void GateRTVPhantomMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
 
 
  if ( command==SetTPFCmd )
@@ -94,7 +94,7 @@ if( command==SetRTVPhantomHeaderFileCmd )
 {      m_RTVPhantom->SetHeaderFileName(newValue);
 return;  }
 
- 
+
  if ( command==SetRTVPhantomTPFCmd )
 {
 G4int NbOfFrames = (G4int)(SetRTVPhantomTPFCmd->GetNewIntValue(newValue));
@@ -104,14 +104,14 @@ return;  }
 
 if( command==SetRTVPhantomCmd )
 {      m_RTVPhantom->SetBaseFileName(newValue);
-return;  }   
+return;  }
 
 if( command == SetActAsAttCmd )
 {      m_RTVPhantom->SetActAsAtt();
-return;  }   
+return;  }
 if( command == SetAttAsActCmd )
 {      m_RTVPhantom->SetAttAsAct();
-return;  }  
+return;  }
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....

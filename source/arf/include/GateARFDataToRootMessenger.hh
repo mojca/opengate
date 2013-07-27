@@ -35,12 +35,12 @@ class GateARFDataToRootMessenger: public GateOutputModuleMessenger
   public:
     GateARFDataToRootMessenger(GateARFDataToRoot* GateARFDataToRoot);
    ~GateARFDataToRootMessenger();
-    
+
     void SetNewValue(G4UIcommand*, G4String);
 
   protected:
     GateARFDataToRoot* m_GateARFDataToRoot;
-    
+
     G4UIcmdWithAString* setARFDataFilecmd;
     G4UIcmdWithADoubleAndUnit* setDepth;
     G4UIcmdWithAString* smoothDRFcmd;
@@ -48,4 +48,3 @@ class GateARFDataToRootMessenger: public GateOutputModuleMessenger
 
 #endif
 #endif
-

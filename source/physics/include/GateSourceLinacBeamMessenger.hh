@@ -24,9 +24,9 @@ class GateSourceLinacBeamMessenger: public GateVSourceMessenger
 public:
   GateSourceLinacBeamMessenger(GateSourceLinacBeam * source);
   ~GateSourceLinacBeamMessenger();
-  
+
   void SetNewValue(G4UIcommand*, G4String);
-    
+
 private:
   GateSourceLinacBeam *  mSource;
   G4UIcmdWith3VectorAndUnit * mRefPosCmd;
@@ -35,4 +35,3 @@ private:
 };
 
 #endif
-

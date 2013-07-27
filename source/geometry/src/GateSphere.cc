@@ -56,11 +56,11 @@ GateSphere::GateSphere(const G4String& itsName,
 {
     m_sphereRmin = 1. *cm;
     m_sphereRmax = 1. *cm;
-    m_sphereSPhi = 0.; 
+    m_sphereSPhi = 0.;
     m_sphereDPhi = 2*M_PI;
     m_sphereSTheta = 0.;
     m_sphereDTheta = M_PI;
-   
+
     m_Messenger = new GateSphereMessenger(this);
 }
 //-----------------------------------------------------------------------------------------------
@@ -69,7 +69,7 @@ GateSphere::GateSphere(const G4String& itsName,
 //-----------------------------------------------------------------------------------------------
 // Destructor
 GateSphere::~GateSphere()
-{  
+{
   delete m_Messenger;
 }
 //-----------------------------------------------------------------------------------------------
@@ -84,8 +84,8 @@ G4LogicalVolume* GateSphere::ConstructOwnSolidAndLogicalVolume(G4Material* mater
   if (!flagUpdateOnly || !m_sphere_solid) {
   // Build mode: build the solid, then the logical volume
     m_sphere_solid
-      = new G4Sphere(GetSolidName(), 
-		     m_sphereRmin, m_sphereRmax, 
+      = new G4Sphere(GetSolidName(),
+		     m_sphereRmin, m_sphereRmax,
 		     m_sphereSPhi, m_sphereDPhi,
 		     m_sphereSTheta, m_sphereDTheta);
     m_sphere_log
@@ -100,12 +100,12 @@ G4LogicalVolume* GateSphere::ConstructOwnSolidAndLogicalVolume(G4Material* mater
 	    m_sphere_solid->SetStartThetaAngle(m_sphereSTheta);
 	    m_sphere_solid->SetDeltaThetaAngle(m_sphereDTheta);
   }
-  
+
   // To visualisation of the sphere
   m_own_visAtt = new G4VisAttributes();
   m_own_visAtt->SetForceAuxEdgeVisible(true);
   m_sphere_log->SetVisAttributes(m_own_visAtt);
-  
+
   return m_sphere_log;
 }
 //-----------------------------------------------------------------------------------------------
@@ -132,7 +132,7 @@ void GateSphere::DestroyOwnSolidAndLogicalVolume()
 /* Implementation of the virtual method DescribeMyself(), to print-out a description of the creator
 
 	indent: the print-out indentation (cosmetic parameter)
-*/    
+*/
 void GateSphere::DescribeMyself(size_t level)
 {
   G4cout << GateTools::Indent(level) << "Shape:              sphere\n";
@@ -157,7 +157,7 @@ G4double GateSphere::ComputeMyOwnVolume() const
   G4double Vmax = (4./3.) * M_PI * m_sphereRmax * m_sphereRmax * m_sphereRmax;
   G4double Vmin = (4./3.) * M_PI * m_sphereRmin * m_sphereRmin * m_sphereRmin;
   G4double dV = Vmax - Vmin;
-  
+
   return ( dV * ( m_sphereDPhi / (360.*deg) ) );
 }
 //-----------------------------------------------------------------------------------------------

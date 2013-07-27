@@ -30,7 +30,7 @@ GatePhysicsListMessenger::GatePhysicsListMessenger(GatePhysicsList * pl)
 
 //----------------------------------------------------------------------------------------
 GatePhysicsListMessenger::~GatePhysicsListMessenger()
-{   
+{
   delete pList;
   delete pRemove;
   delete pAdd;
@@ -103,7 +103,7 @@ void GatePhysicsListMessenger::BuildCommands(G4String base)
   bb = base+"/init";
   pInit = new G4UIcmdWithoutParameter(bb,this);
   guidance = "Physics list Initialisation";
-  pInit->SetGuidance(guidance); 
+  pInit->SetGuidance(guidance);
 
   // Cuts messengers
 
@@ -113,47 +113,47 @@ void GatePhysicsListMessenger::BuildCommands(G4String base)
   pCutInMaterial->SetGuidance(guidance);
 
   bb = base+"/Gamma/SetCutInRegion";
-  gammaCutCmd = new G4UIcmdWithAString(bb,this);  
+  gammaCutCmd = new G4UIcmdWithAString(bb,this);
   gammaCutCmd->SetGuidance("Set gamma production cut for a given region (two parameters 'regionName' and 'cutValue')");
-  
+
   bb = base+"/Electron/SetCutInRegion";
-  electronCutCmd = new G4UIcmdWithAString(bb,this);  
+  electronCutCmd = new G4UIcmdWithAString(bb,this);
   electronCutCmd->SetGuidance("Set electron production cut for a given region (two parameters 'regionName' and 'cutValue')");
-  
+
   bb = base+"/Positron/SetCutInRegion";
-  positronCutCmd = new G4UIcmdWithAString(bb,this);  
+  positronCutCmd = new G4UIcmdWithAString(bb,this);
   positronCutCmd->SetGuidance("Set positron production cut for a given region (two parameters 'regionName' and 'cutValue')");
-  
+
   bb = base+"/Proton/SetCutInRegion";
-  protonCutCmd = new G4UIcmdWithAString(bb,this);  
+  protonCutCmd = new G4UIcmdWithAString(bb,this);
   protonCutCmd->SetGuidance("Set proton production cut for a given region (two parameters 'regionName' and 'cutValue')");
-  
+
   bb = base+"/SetMaxStepSizeInRegion";
-  pMaxStepSizeCmd = new G4UIcmdWithAString(bb,this);  
+  pMaxStepSizeCmd = new G4UIcmdWithAString(bb,this);
   pMaxStepSizeCmd->SetGuidance("Set the maximum step size for a given region (two parameters 'regionName' and 'cutValue') YOU ALSO NEED TO SET ActivateStepLimiter");
 
   bb = base+"/SetMaxToFInRegion";
-  pMaxToFCmd = new G4UIcmdWithAString(bb,this);  
+  pMaxToFCmd = new G4UIcmdWithAString(bb,this);
   pMaxToFCmd->SetGuidance("Set the maximum time of flight for a given region (two parameters 'regionName' and 'cutValue') YOU ALSO NEED TO SET ActivateSpecialCuts");
 
   bb = base+"/SetMinKineticEnergyInRegion";
-  pMinKineticEnergyCmd = new G4UIcmdWithAString(bb,this);  
+  pMinKineticEnergyCmd = new G4UIcmdWithAString(bb,this);
   pMinKineticEnergyCmd->SetGuidance("Set the minimum energy of the track for a given region (two parameters 'regionName' and 'cutValue') YOU ALSO NEED TO SET ActivateSpecialCuts");
 
   bb = base+"/SetMaxTrackLengthInRegion";
-  pMaxTrackLengthCmd = new G4UIcmdWithAString(bb,this);  
+  pMaxTrackLengthCmd = new G4UIcmdWithAString(bb,this);
   pMaxTrackLengthCmd->SetGuidance("Set the maximum length of the track for a given region (two parameters 'regionName' and 'cutValue') YOU ALSO NEED TO SET ActivateSpecialCuts");
 
   bb = base+"/SetMinRemainingRangeInRegion";
-  pMinRemainingRangeCmd = new G4UIcmdWithAString(bb,this);  
+  pMinRemainingRangeCmd = new G4UIcmdWithAString(bb,this);
   pMinRemainingRangeCmd->SetGuidance("Set the minimum remaining range of the track for a given region (two parameters 'regionName' and 'cutValue') YOU ALSO NEED TO SET ActivateSpecialCuts");
 
   bb = base+"/ActivateStepLimiter";
-  pActivateStepLimiterCmd = new G4UIcmdWithAString(bb,this);  
+  pActivateStepLimiterCmd = new G4UIcmdWithAString(bb,this);
   pActivateStepLimiterCmd->SetGuidance("Activate step limiter for a given particle");
 
   bb = base+"/ActivateSpecialCuts";
-  pActivateSpecialCutsCmd = new G4UIcmdWithAString(bb,this);  
+  pActivateSpecialCutsCmd = new G4UIcmdWithAString(bb,this);
   pActivateSpecialCutsCmd->SetGuidance("Activate special cuts for a given particle");
 
 
@@ -184,13 +184,13 @@ void GatePhysicsListMessenger::BuildCommands(G4String base)
   pSetSplineFlag->SetGuidance(guidance);
 
 
-  
+
   // Mu Handler commands
   bb = base+"/MuHandler/setElementFolderName";
   pMuHandlerUsePrecalculatedElements = new G4UIcmdWithAString(bb,this);
   guidance = "Point the folder where the Mu and Muen files per elements are stored";
   pMuHandlerUsePrecalculatedElements->SetGuidance(guidance);
-  
+
   bb = base+"/MuHandler/setEMin";
   pMuHandlerSetEMin = new G4UIcmdWithADoubleAndUnit(bb,this);
   guidance = "Set minimal energy for attenuation and energy-absorption coefficients simulation";
@@ -200,17 +200,17 @@ void GatePhysicsListMessenger::BuildCommands(G4String base)
   pMuHandlerSetEMax = new G4UIcmdWithADoubleAndUnit(bb,this);
   guidance = "Set maximum energy for attenuation and energy-absorption coefficients simulation";
   pMuHandlerSetEMax->SetGuidance(guidance);
-  
+
   bb = base+"/MuHandler/setENumber";
   pMuHandlerSetENumber = new G4UIcmdWithAnInteger(bb,this);
   guidance = "Set number of energies for attenuation and energy-absorption coefficients simulation";
   pMuHandlerSetENumber->SetGuidance(guidance);
-  
+
   bb = base+"/MuHandler/setAtomicShellEMin";
   pMuHandlerSetAtomicShellEMin = new G4UIcmdWithADoubleAndUnit(bb,this);
   guidance = "Set atomic shell minimal energy";
   pMuHandlerSetAtomicShellEMin->SetGuidance(guidance);
-  
+
   bb = base+"/MuHandler/setPrecision";
   pMuHandlerSetPrecision = new G4UIcmdWithADouble(bb,this);
   guidance = "Set precision to be reached in %";
@@ -230,7 +230,7 @@ void GatePhysicsListMessenger::SetNewValue(G4UIcommand* command, G4String param)
     if (command == gammaCutCmd) { pPhylist->SetCutInRegion("gamma", regionName, cutValue); }
     if (command == electronCutCmd){ pPhylist->SetCutInRegion("e-", regionName, cutValue); }
     if (command == positronCutCmd){ pPhylist->SetCutInRegion("e+", regionName, cutValue); }
-    if (command == protonCutCmd){ pPhylist->SetCutInRegion("proton", regionName, cutValue);} 
+    if (command == protonCutCmd){ pPhylist->SetCutInRegion("proton", regionName, cutValue);}
 
     if (command == pMaxStepSizeCmd) pPhylist->SetSpecialCutInRegion("MaxStepSize", regionName, cutValue);
     if (command == pMaxToFCmd) pPhylist->SetSpecialCutInRegion("MaxToF", regionName, cutValue);
@@ -245,7 +245,7 @@ void GatePhysicsListMessenger::SetNewValue(G4UIcommand* command, G4String param)
 
   // processes
   if(command == pInit)
-    { 
+    {
       if(nInit!=0)
         {
           GateWarning("Physic List already initialized\n");
@@ -273,7 +273,7 @@ void GatePhysicsListMessenger::SetNewValue(G4UIcommand* command, G4String param)
   char par2[30];
   std::istringstream is(param);
   is >> par1 >> par2;
-  
+
   if(command == pList)
     {
       pPhylist->Print(par1,par2);
@@ -288,14 +288,14 @@ void GatePhysicsListMessenger::SetNewValue(G4UIcommand* command, G4String param)
               return;
             }
           pPhylist->RemoveProcesses(par1,par2);
-        }    
+        }
       if (command == pAdd)
         {
           if(nInit!=0)
             {
               GateWarning("Physic List already initialized: you can't add process\n");
               return;
-            } 
+            }
           pPhylist->AddProcesses(par1,par2);
         }
     }

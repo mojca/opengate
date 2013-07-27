@@ -29,39 +29,39 @@ class GateElTubMessenger;
 
 class GateElTub : public GateVVolume
 {
-  
-   public : 
-   
+
+   public :
+
    GateElTub(const G4String& itsName,
-		       G4bool acceptsChildren=true, 
+		       G4bool acceptsChildren=true,
 		       G4int depth=0);
    // Constructor
     GateElTub(const G4String& itsName,const G4String& itsMaterialName,
       	      	         G4double itsRlong, G4double itsHeight,
 		         G4double itsRshort=1.,
-			 G4bool acceptsChildren=true, 
+			 G4bool acceptsChildren=true,
 		         G4int depth=0);
-  
-    //Destructor 
+
+    //Destructor
     virtual ~GateElTub();
-    
+
     FCT_FOR_AUTO_CREATOR_VOLUME(GateElTub)
-    
+
     virtual G4LogicalVolume* ConstructOwnSolidAndLogicalVolume(G4Material*, G4bool);
-    
-    
+
+
     //! Implementation of the pure virtual method DestroyOwnSolidAndLogicalVolume() declared by the base-class.
     //! Destroy the solid, logical and physical volumes created by ConstructOwnVolume()
-    virtual void DestroyOwnSolidAndLogicalVolume();  
-   
+    virtual void DestroyOwnSolidAndLogicalVolume();
+
     //! \brief Implementation of the virtual method DescribeMyself(), to print-out
-    //  \brief a description of the creator 
-//    virtual void DescribeMyself(size_t indent); 
-  
+    //  \brief a description of the creator
+//    virtual void DescribeMyself(size_t indent);
+
     //! Implementation of the pure virtual method GetHalfDimension() declared by the base-class
      //! Must return the half-size of the ElTub along an axis (X=0, Y=1, Z=2)
      //! Returns the radiusor the height depending on the axis: accurate only for full ElTubs
-     inline G4double GetHalfDimension(size_t axis) 
+     inline G4double GetHalfDimension(size_t axis)
      { if (axis==2)
       	  return GetElTubHalfHeight();
        else
@@ -70,7 +70,7 @@ class GateElTub : public GateVVolume
 
      //! Overload of the dummy virtual method ComputeMyOwnVolume() defined by the base-class
      //! Returns the volume of the solid
-//     G4double ComputeMyOwnVolume()  const;	 
+//     G4double ComputeMyOwnVolume()  const;
 
 
     //! \name getters and setters
@@ -86,34 +86,34 @@ class GateElTub : public GateVVolume
      inline G4double GetElTubRlong()        {return mElTubRlong;};
 
      //! Set the height
-     void SetElTubHeight   (G4double val) 
+     void SetElTubHeight   (G4double val)
       	//{ pElTubHeight = val; ComputeParameters(); }
 	{ mElTubHeight = val;}
      //! Set the internal diameter
-     void SetElTubRshort  (G4double val) 
+     void SetElTubRshort  (G4double val)
       	//{ pElTubRshort = val; ComputeParameters(); }
 	{ mElTubRshort = val;}
      //! Set the external diameter
-     void SetElTubRlong  (G4double val) 
+     void SetElTubRlong  (G4double val)
       	//{  pElTubRlong = val; ComputeParameters(); }
 	{  mElTubRlong = val;}
 
     //@}
-    
+
    private :
-   
+
    G4EllipticalTube* pElTubSolid;
    G4LogicalVolume* pElTubLog;
-//   G4VPhysicalVolume* pElTubPhys; 
-   
+//   G4VPhysicalVolume* pElTubPhys;
+
    //@{
    G4double mElTubHeight;   	      	    //!< height
    G4double mElTubRshort;   	      	      	    //!< internal diameter
    G4double mElTubRlong;   	      	      	    //!< external diameter
    //@}
-  
+
    //! Messenger
-   GateElTubMessenger* pMessenger;  
+   GateElTubMessenger* pMessenger;
 };
 
 MAKE_AUTO_CREATOR_VOLUME(eltub,GateElTub)

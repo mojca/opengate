@@ -36,7 +36,7 @@ GateParameterisedHole::~GateParameterisedHole()
 
   if (m_parameterisation)
     delete m_parameterisation;
-    
+
 }
 
 void GateParameterisedHole::PreComputeConstants()
@@ -124,7 +124,7 @@ void GateParameterisedHole::ResizeHole(G4double FocalDistanceX,G4double FocalDis
 // Implementation of the pure virtual method declared by the base class GateVCreator
 // If flagUpdateOnly is 0, it creates a new parameterised, using the parameterisation
 // This parameterisation must have been created by a concrete class derived from GateVParameterised
-// If flagUpdateOnly is set to 1, the default position is updated 
+// If flagUpdateOnly is set to 1, the default position is updated
 void GateParameterisedHole::ConstructOwnPhysicalVolume(G4bool flagUpdateOnly)
 {
   // In build mode, we must create a new parameterised
@@ -132,12 +132,12 @@ void GateParameterisedHole::ConstructOwnPhysicalVolume(G4bool flagUpdateOnly)
   if (!flagUpdateOnly) {
     // Create the parameterised
     G4VPhysicalVolume *physicalVolume
-      	    = new G4PVParameterised(mPhysicalVolumeName,       
-                              	    GetCreator()->GetLogicalVolume(),    
-                              	    pMotherLogicalVolume,    
+      	    = new G4PVParameterised(mPhysicalVolumeName,
+                              	    GetCreator()->GetLogicalVolume(),
+                              	    pMotherLogicalVolume,
 				    kZAxis,
-                              	    m_parameterisation->GetNbOfCopies(), 
-                              	    m_parameterisation); 
+                              	    m_parameterisation->GetNbOfCopies(),
+                              	    m_parameterisation);
     // Store it into the physical volume vector
     PushPhysicalVolume(physicalVolume);
   }

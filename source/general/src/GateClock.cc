@@ -13,7 +13,7 @@ See GATE/LICENSE.txt for further details
 #include "GateClockMessenger.hh"
 #include "GateDetectorConstruction.hh"
 
-GateClock* GateClock::pInstance = 0; 
+GateClock* GateClock::pInstance = 0;
 
 //------------------------------------------------------------------------------------
 GateClock::GateClock() : mTime(0.)
@@ -26,7 +26,7 @@ GateClock::GateClock() : mTime(0.)
 
 
 //------------------------------------------------------------------------------------
-GateClock::~GateClock() 
+GateClock::~GateClock()
 {
   delete pClockMessenger;
 }
@@ -34,7 +34,7 @@ GateClock::~GateClock()
 
 
 //------------------------------------------------------------------------------------
-void GateClock::SetTime(G4double aTime) 
+void GateClock::SetTime(G4double aTime)
 {
   mTime = aTime;
   if (nVerboseLevel>0) GateMessage("Time", 1, "Time set to (s) " << mTime/s << G4endl);
@@ -45,7 +45,7 @@ void GateClock::SetTime(G4double aTime)
 
 
 //------------------------------------------------------------------------------------
-void GateClock::SetTimeNoGeoUpdate(G4double aTime) 
+void GateClock::SetTimeNoGeoUpdate(G4double aTime)
 {
   mTime = aTime;
   if (nVerboseLevel>0) GateMessage("Time", 1, "Time set to (s) without Geometry update " << mTime/s << G4endl);
@@ -54,10 +54,8 @@ void GateClock::SetTimeNoGeoUpdate(G4double aTime)
 
 
 //------------------------------------------------------------------------------------
-G4double GateClock::GetTime() 
+G4double GateClock::GetTime()
 {
   return mTime;
 }
 //------------------------------------------------------------------------------------
-
-

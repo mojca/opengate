@@ -24,10 +24,10 @@ See GATE/LICENSE.txt for further details
 //-------------------------------------------------------------------------------------------------------------------------
 GateCylinderMessenger::GateCylinderMessenger(GateCylinder *itsCreator)
   :GateVolumeMessenger(itsCreator)
-{ 
+{
 
   G4String dir = GetDirectoryName() + "geometry/";
-  
+
   G4String cmdName = dir +"setRmin";
   pCylinderRminCmd = new G4UIcmdWithADoubleAndUnit(cmdName.c_str(),this);
   pCylinderRminCmd->SetGuidance("Set internal radius of the cylinder (0 for full cylinder).");
@@ -79,14 +79,14 @@ GateCylinderMessenger::~GateCylinderMessenger()
 
 //-------------------------------------------------------------------------------------------------------------------------
 void GateCylinderMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
   if( command == pCylinderRminCmd )
-    { 
+    {
      GetCylinderCreator()->SetCylinderRmin(pCylinderRminCmd->GetNewDoubleValue(newValue));/*TellGeometryToUpdate();*/}
   else if( command == pCylinderRmaxCmd )
     { GetCylinderCreator()->SetCylinderRmax(pCylinderRmaxCmd->GetNewDoubleValue(newValue));/*TellGeometryToUpdate();*/}
   else if( command==pCylinderHeightCmd )
-    { GetCylinderCreator()->SetCylinderHeight(pCylinderHeightCmd->GetNewDoubleValue(newValue)); /*TellGeometryToUpdate();*/}   
+    { GetCylinderCreator()->SetCylinderHeight(pCylinderHeightCmd->GetNewDoubleValue(newValue)); /*TellGeometryToUpdate();*/}
   else if( command == pCylinderSPhiCmd )
     { GetCylinderCreator()->SetCylinderSPhi(pCylinderSPhiCmd->GetNewDoubleValue(newValue));/*TellGeometryToUpdate();*/}
   else if( command == pCylinderDPhiCmd )

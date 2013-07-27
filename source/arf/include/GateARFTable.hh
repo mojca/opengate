@@ -55,7 +55,7 @@ G4double m_ElowOut; // window energy specified by the user
 G4double m_EhighOut;// window energy specified by the user
 
 G4double* m_theta;
-G4double* cosTheta; 
+G4double* cosTheta;
 G4double* cosTheta_i ;
 G4double* tanPhi;
 G4double* tanPhi_i;

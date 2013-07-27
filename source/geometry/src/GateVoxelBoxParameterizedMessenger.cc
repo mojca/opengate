@@ -26,9 +26,9 @@ See GATE/LICENSE.txt for further details
 GateVoxelBoxParameterizedMessenger::GateVoxelBoxParameterizedMessenger(GateVoxelBoxParameterized *itsInserter)
   :GateMessenger(itsInserter->GetObjectName()+"/geometry"),
    m_inserter(itsInserter)
-{ 
- 
-  // G4cout << "GateVoxelBoxParameterizedMessenger::GateVoxelBoxParameterizedMessenger - Entered " << GetDirectoryName() << G4endl; 
+{
+
+  // G4cout << "GateVoxelBoxParameterizedMessenger::GateVoxelBoxParameterizedMessenger - Entered " << GetDirectoryName() << G4endl;
 
   GetDirectory()->SetGuidance("Control the parameterized geometry.");
 
@@ -37,7 +37,7 @@ GateVoxelBoxParameterizedMessenger::GateVoxelBoxParameterizedMessenger(GateVoxel
   AttachPhantomSDCmd = new G4UIcmdWithoutParameter(cmdName,this);
   AttachPhantomSDCmd->SetGuidance("Attach the phantom-SD to the matrix.");
 
-  cmdName = G4String("/gate/") + itsInserter->GetObjectName()+ "/addOutput"; 
+  cmdName = G4String("/gate/") + itsInserter->GetObjectName()+ "/addOutput";
   AddOutputCmd = new G4UIcmdWithAString(cmdName,this);
   AddOutputCmd->SetGuidance("adds an output module to write the dose matrix");
   AddOutputCmd->SetGuidance("1. output module name");
@@ -68,10 +68,10 @@ GateVoxelBoxParameterizedMessenger::~GateVoxelBoxParameterizedMessenger()
 
 //-------------------------------------------------------------------------------------------
 void GateVoxelBoxParameterizedMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
   if( command==AttachPhantomSDCmd )
-    {       
-      GetVoxelParameterizedInserter()->AttachPhantomSD();  }   
+    {
+      GetVoxelParameterizedInserter()->AttachPhantomSD();  }
 
   else if ( command == AddOutputCmd )
     { GetVoxelParameterizedInserter()->AddOutput(newValue); }

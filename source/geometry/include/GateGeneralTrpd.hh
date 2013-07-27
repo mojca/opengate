@@ -26,7 +26,7 @@ class GateGeneralTrpdMessenger;
 class GateGeneralTrpd  : public GateVVolume
 {
 public:
-  GateGeneralTrpd(const G4String& itsName, G4bool acceptsChildren=true, G4int depth=0); 
+  GateGeneralTrpd(const G4String& itsName, G4bool acceptsChildren=true, G4int depth=0);
   GateGeneralTrpd(const G4String& itsName,const G4String& itsMaterialName,
                   G4double itsX1Length, G4double itsY1Length,
                   G4double itsX2Length, G4double itsY2Length,
@@ -37,13 +37,13 @@ public:
                   G4bool itsFlagAcceptChildren=true,
                   G4int depth=0);
   virtual ~GateGeneralTrpd();
-   
+
   FCT_FOR_AUTO_CREATOR_VOLUME(GateGeneralTrpd)
 
   virtual void DestroyOwnVolume();
   void DestroyOwnSolidAndLogicalVolume();
 
-  virtual G4LogicalVolume* ConstructOwnSolidAndLogicalVolume(G4Material* mater, G4bool flagUpdateOnly); 
+  virtual G4LogicalVolume* ConstructOwnSolidAndLogicalVolume(G4Material* mater, G4bool flagUpdateOnly);
   virtual void DescribeMyself(size_t indent);
   inline G4double GetHalfDimension(size_t /*axis*/)	  {return 0.; }
 
@@ -77,7 +77,7 @@ protected:
   G4VPhysicalVolume*  pGeneralTrpdPhys;
   G4double m_X1,m_X2,m_X3,m_X4,m_Y1,m_Y2,m_Z,m_Theta,m_Phi,m_Alp1,m_Alp2;
   //! Messenger
-  GateGeneralTrpdMessenger* m_Messenger; 
+  GateGeneralTrpdMessenger* m_Messenger;
 
 };
 //---------------------------------------------------------------------

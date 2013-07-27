@@ -24,15 +24,15 @@ class G4VPhysicalVolume;
 class G4Material;
 
 class GateVoxelBoxParameterization : public GatePVParameterisation
-{ 
+{
   public:
-  
+
   //! Constructor.
   GateVoxelBoxParameterization( GateVGeometryVoxelReader* voxR, const G4ThreeVector& voxN, const G4ThreeVector& voxS);
 
   ~GateVoxelBoxParameterization(){;}
- 
- 
+
+
   using G4VPVParameterisation::ComputeMaterial;
   G4Material* ComputeMaterial(const G4int copyNo, G4VPhysicalVolume * aVolume);
 
@@ -52,12 +52,12 @@ private:
 
     div_t  qr  ( div(copyNo, nxy) );
     div_t  qr2 ( div(qr.rem, nx ) );
-    
+
     return G4ThreeVector( qr2.rem, qr2.quot, qr.quot );
-    
+
   }
 
-  
+
 private:
   const G4ThreeVector voxelNumber;
   const G4ThreeVector voxelSize;
@@ -65,12 +65,10 @@ private:
 
   GateVGeometryVoxelReader* voxelReader;
   GateVGeometryVoxelTranslator* translator;
-  
+
   const int nxy;
   const int nx;
-  
+
 };
 
 #endif
-
-

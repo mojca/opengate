@@ -40,7 +40,7 @@ public:
   virtual G4double GetMaxCrossSection(G4double kin_en) const =0;
   virtual G4Material* GetMaterial(const G4ThreeVector& pos) const =0;
   virtual void GetMaterials(std::vector<G4Material*>&) const =0;
-  // check if everything is correctly initialized, otherwise throw exception	
+  // check if everything is correctly initialized, otherwise throw exception
   virtual void Check() const =0;
 
  // void RegisterMaxMaterial( G4Material*);

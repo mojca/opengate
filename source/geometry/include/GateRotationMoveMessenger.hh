@@ -30,18 +30,18 @@ class G4UIcmdWithADouble;
 
 /*! \class GateRotationMoveMessenger
     \brief A messenger for a GateRotationMove (a constant speed rotation)
-    
+
     - GateRotationMoveMessenger - by Daniel.Strul@iphe.unil.ch
-    
+
     - The GateRotationMoveMessenger inherits from the abilities/responsabilities
       of the GateObjectRepeaterMessenger base-class: creation and management
-      of a Gate UI directory for a Gate movement object; creation of the UI commands 
+      of a Gate UI directory for a Gate movement object; creation of the UI commands
       "describe", "enable" and "disable"
-      
+
     - In addition, it proposes and manages UI commands that are specific
       to a rotation movement: 'setRotationAxis', 'setVelocity'
 
-*/      
+*/
 class GateRotationMoveMessenger: public GateObjectRepeaterMessenger
 {
   public:
@@ -49,14 +49,14 @@ class GateRotationMoveMessenger: public GateObjectRepeaterMessenger
     GateRotationMoveMessenger(GateRotationMove* itsMove);
     //! destructor
    ~GateRotationMoveMessenger();
-    
+
     //! Command interpreter
     void SetNewValue(G4UIcommand*, G4String);
 
     //! Returns the rotation move controled by the messenger
-    virtual inline GateRotationMove* GetRotationMove() 
+    virtual inline GateRotationMove* GetRotationMove()
       { return (GateRotationMove*)GetObjectRepeater(); }
-    
+
   private:
     //! \name command objects
     //@{
@@ -68,4 +68,3 @@ class GateRotationMoveMessenger: public GateObjectRepeaterMessenger
 };
 
 #endif
-

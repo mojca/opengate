@@ -34,12 +34,12 @@ GateVoxelBoxParam::~GateVoxelBoxParam()
 //
 void GateVoxelBoxParam::ConstructOwnPhysicalVolume(G4bool flagUpdate){
   // G4cout << "GateVoxelBoxParam::ConstructOwnPhysicalVolumes - Entered, name "<< mName <<", flag "<< std::boolalpha << flagUpdate <<  G4endl<<std::flush;
-  
+
   // For the update case; there is nothing to do here.
   if (flagUpdate) return;
-    
-  DestroyGeometry();  
-  
+
+  DestroyGeometry();
+
   // Build the parameterization
   GateVGeometryVoxelReader* itsReader ( itsInserter->GetReader() );
   G4ThreeVector voxelSize(  itsReader->GetVoxelSize()  );
@@ -58,18 +58,18 @@ void GateVoxelBoxParam::ConstructOwnPhysicalVolume(G4bool flagUpdate){
 					    m_parameterization
 					    );
   PushPhysicalVolume(m_pvParameterized);
-  
+
 }
 
 
 void GateVoxelBoxParam::DestroyGeometry(){
-  
+
   // G4cout << "GateVoxelBoxParam::DestructOwnPhysicalVolumes - Entered"<<G4endl<<std::flush;
   if (m_parameterization) {
     delete m_parameterization;
   }
   m_parameterization=0;
-  
+
   m_pvParameterized=0;
   GateVVolume::DestroyGeometry();
 }

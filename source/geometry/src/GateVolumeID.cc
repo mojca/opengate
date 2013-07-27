@@ -23,24 +23,24 @@ See GATE/LICENSE.txt for further details
 // Constructs a GateVolumeSelector for a physical volume
 GateVolumeSelector::GateVolumeSelector(G4VPhysicalVolume* itsVolume)
 {
-   
+
   m_creator = GateObjectStore::GetInstance()->FindVolumeCreator(itsVolume);
-  
+
   m_copyNo = itsVolume->GetCopyNo();
-    
-  if (m_creator->GetMotherList()){ 
+
+  if (m_creator->GetMotherList()){
     m_daughterID = m_creator->GetMotherList()->GetChildNo(m_creator,m_copyNo);
-  }  
+  }
   else{
     m_daughterID = 0;}
-  
+
 }
-//-----------------------------------------------------------------------------------   
+//-----------------------------------------------------------------------------------
 
 
 //-----------------------------------------------------------------------------------
 // Friend function: inserts (prints) a GateVolumeSelector into a stream
-std::ostream& operator<<(std::ostream& flux, const GateVolumeSelector& volumeLevelID)    
+std::ostream& operator<<(std::ostream& flux, const GateVolumeSelector& volumeLevelID)
 {
     flux << volumeLevelID.GetCreator()->GetObjectName() << "-" << volumeLevelID.GetCopyNo() << "/" << volumeLevelID.GetVolume()->GetName() << "-" << volumeLevelID.GetDaughterID() ;
     return flux;
@@ -51,8 +51,8 @@ std::ostream& operator<<(std::ostream& flux, const GateVolumeSelector& volumeLev
 //-----------------------------------------------------------------------------------
 // Computes a new GateVolumeID for a touchable,
 GateVolumeID::GateVolumeID(const G4TouchableHistory* touchable)
-{ 	
-   
+{
+
   // Get the current physical volume
   if ( !touchable) {
       G4cout << "[GateVolumeID::GateVolumeID]: The touchable is null!\n";
@@ -63,8 +63,8 @@ GateVolumeID::GateVolumeID(const G4TouchableHistory* touchable)
   if ( !physVol) {
       G4cout << "[GateVolumeID::GateVolumeID]: The volume is null!\n";
       return;
-      
-  G4cout << " FIN Constructeur GateVolumeID" << G4endl;    
+
+  G4cout << " FIN Constructeur GateVolumeID" << G4endl;
   }
 
 /*
@@ -80,24 +80,24 @@ GateVolumeID::GateVolumeID(const G4TouchableHistory* touchable)
 
 //   replacement with a GEANT4.6 compatible code:
   for (G4int numVol=0;numVol<touchable->GetHistoryDepth();numVol++){
-     
+
     InsertVolumeLevel( touchable->GetVolume(numVol) );
-    
+
   }
-    
+
   physVol = GateDetectorConstruction::GetGateDetectorConstruction()->GetWorldVolume();
   InsertVolumeLevel( physVol );
-  
+
 }
 //-----------------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------------
 // Recreate a volumeID from data stored in a hit file
 GateVolumeID::GateVolumeID(G4int *daughterID, size_t arraySize)
-{ 	
+{
   G4VPhysicalVolume* physVol = GateDetectorConstruction::GetGateDetectorConstruction()->GetWorldVolume();
   push_back( GateVolumeSelector(physVol) );
-  
+
   for (size_t pos=1; pos<arraySize ; pos++){
     if (daughterID[pos]>=0)  {
       physVol = physVol->GetLogicalVolume()->GetDaughter(daughterID[pos]);
@@ -112,8 +112,8 @@ GateVolumeID::GateVolumeID(G4int *daughterID, size_t arraySize)
 
 
 //-----------------------------------------------------------------------------------
-G4int GateVolumeID::GetCreatorDepth (G4String name) const                
-{     
+G4int GateVolumeID::GetCreatorDepth (G4String name) const
+{
   G4int ctrl = -1;
   size_t depth;
   for (depth = 0 ; depth < size() ; depth ++)
@@ -143,7 +143,7 @@ G4AffineTransform GateVolumeID::ComputeAffineTransform(G4int ancestorDepth) cons
   // Compute the affine tranform as the product of all the affine transforms of the volumes located
   // between the current depth (ancestor's depth) and the bottom volume depth
   G4AffineTransform targetTransform;
-  for ( size_t i=ancestorDepth+1 ; i<size(); i++) 
+  for ( size_t i=ancestorDepth+1 ; i<size(); i++)
       targetTransform = GetVolumeAffineTransform(GetVolume(i)) * targetTransform;
 
   // Return the final product
@@ -154,25 +154,25 @@ G4AffineTransform GateVolumeID::ComputeAffineTransform(G4int ancestorDepth) cons
 
 //-----------------------------------------------------------------------------------
 // Tool function: returns the affine transform linking a volume's reference frame to its mother's reference frame
-G4AffineTransform GateVolumeID::GetVolumeAffineTransform(G4VPhysicalVolume* physicalVolume) 
-{   
+G4AffineTransform GateVolumeID::GetVolumeAffineTransform(G4VPhysicalVolume* physicalVolume)
+{
     if (!physicalVolume) {
       G4cout << "[GateVolumeID::GetVolumeAffineTransform]: volume is null!!!" << G4endl;
       return G4AffineTransform();
     }
-    return G4AffineTransform(physicalVolume->GetRotation(),physicalVolume->GetTranslation()); 
+    return G4AffineTransform(physicalVolume->GetRotation(),physicalVolume->GetTranslation());
 }
 //-----------------------------------------------------------------------------------
 
 
 
 //-----------------------------------------------------------------------------------
- /* Move a position from the reference frame of the bottom-volume into the reference frame of one of its ancestors 
+ /* Move a position from the reference frame of the bottom-volume into the reference frame of one of its ancestors
   Params:
 	position:     the position to be transfered into the ancestor's reference frame
 	ancestorLevel:     The level of an ancestor of the bottom-volume, located somewhere between the top and the bottom.
 	      	      	   If no level is specified, the world-level is selected
-*/    
+*/
 G4ThreeVector GateVolumeID::MoveToAncestorVolumeFrame(G4ThreeVector position,G4int ancestorLevel) const
 {
   G4AffineTransform aTransform = ComputeAffineTransform(ancestorLevel);
@@ -187,7 +187,7 @@ G4ThreeVector GateVolumeID::MoveToAncestorVolumeFrame(G4ThreeVector position,G4i
 	position:     a position to be transfered into another reference frame
 	ancestorLevel:     The level of an ancestor of the bottom-volume, located somewhere between the top and the bottom.
 	      	      	   If no level is specified, the world-level is selected
-*/    
+*/
 G4ThreeVector GateVolumeID::MoveToBottomVolumeFrame(G4ThreeVector position,G4int ancestorLevel) const
 {
   G4AffineTransform transform = ComputeAffineTransform(ancestorLevel);
@@ -197,12 +197,12 @@ G4ThreeVector GateVolumeID::MoveToBottomVolumeFrame(G4ThreeVector position,G4int
 
 
 //-----------------------------------------------------------------------------------
-/* Move a position from one reference frame into another 
+/* Move a position from one reference frame into another
   Params:
 	position:  a position to be transfered into another reference frame
 	transform: the transformation linking the two reference frames
 	flagDirect: if true, apply the transform. If false, apply its inverse.
-*/    
+*/
 G4ThreeVector GateVolumeID::MoveToFrameByTransform(G4ThreeVector position,const G4AffineTransform& transform,G4bool flagDirect) const
 {
   if (flagDirect)
@@ -217,15 +217,13 @@ G4ThreeVector GateVolumeID::MoveToFrameByTransform(G4ThreeVector position,const 
 
 //-----------------------------------------------------------------------------------
 // Friend function: inserts (prints) a GateVolumeID into a stream
-std::ostream& operator<<(std::ostream& flux, const GateVolumeID& volumeID)    
+std::ostream& operator<<(std::ostream& flux, const GateVolumeID& volumeID)
 {
     flux    << "Vol(0" ;
-    for (size_t i=0; i<volumeID.size(); i++) 
+    for (size_t i=0; i<volumeID.size(); i++)
       	    flux << " -> " << volumeID[i] ;
     flux    << ")";
-    
+
     return flux;
 }
 //-----------------------------------------------------------------------------------
-
-

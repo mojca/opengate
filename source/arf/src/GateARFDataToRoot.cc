@@ -93,7 +93,7 @@ OUT_camera = 0;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo...
 
-GateARFDataToRoot::~GateARFDataToRoot() 
+GateARFDataToRoot::~GateARFDataToRoot()
 {
   delete m_rootMessenger;
   if (nVerboseLevel > 0) G4cout << "GateARFDataToRoot deleting..." << G4endl;
@@ -113,7 +113,7 @@ const G4String& GateARFDataToRoot::GiveNameOfFile()
 void GateARFDataToRoot::RecordBeginOfAcquisition()
 {
 
-   
+
 
     m_ARFDatafile = new TFile( m_ARFDatafilename.c_str() ,"RECREATE","ROOT file for ARF purpose");
 
@@ -173,7 +173,7 @@ RecordDigitizer(event);
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
-void GateARFDataToRoot::RecordDigitizer(const G4Event* ) 
+void GateARFDataToRoot::RecordDigitizer(const G4Event* )
 {
    if (nVerboseLevel > 2)
     G4cout << "GateARFDataToRoot::RecordDigitizer -- begin " << G4endl;
@@ -182,24 +182,24 @@ void GateARFDataToRoot::RecordDigitizer(const G4Event* )
 
   G4DigiManager * fDM = G4DigiManager::GetDMpointer();
 
-  G4int m_collectionID = fDM->GetDigiCollectionID(m_SingleDigiCollectionName);      
-  const GateSingleDigiCollection * SDC = 
+  G4int m_collectionID = fDM->GetDigiCollectionID(m_SingleDigiCollectionName);
+  const GateSingleDigiCollection * SDC =
     (GateSingleDigiCollection*) (fDM->GetDigiCollection( m_collectionID ));
 
   if (!SDC)
   {
-    if (nVerboseLevel>0) 
+    if (nVerboseLevel>0)
     G4cout << "[GateARFDataToRoot::SingleOutputChannel::RecordDigitizer]:"<< " digi collection '" << m_SingleDigiCollectionName << "' not found" << G4endl;
-    
+
   } else
    {
     // Digi loop
 
    if (nVerboseLevel>0)
-    G4cout << "[GateARFDataToRoot::SingleOutputChannel::RecordDigitizer]: Total Digits : " 
+    G4cout << "[GateARFDataToRoot::SingleOutputChannel::RecordDigitizer]: Total Digits : "
 				     << SDC->entries() <<" in digi collection '" << m_SingleDigiCollectionName << "' " << G4endl;
       G4int n_digi =  SDC->entries();
-      for (G4int iDigi=0;iDigi<n_digi;iDigi++) StoreARFData( (*SDC)[iDigi] );// we store the ARF data 
+      for (G4int iDigi=0;iDigi<n_digi;iDigi++) StoreARFData( (*SDC)[iDigi] );// we store the ARF data
 
    }
   if (nVerboseLevel > 2)
@@ -220,12 +220,12 @@ m_SingleDigiCollectionName = aCollectionName;
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
 
-void GateARFDataToRoot::IncrementNbOfSourcePhotons() 
+void GateARFDataToRoot::IncrementNbOfSourcePhotons()
 {
  NbOfSourcePhotons++;
 if (nVerboseLevel > 1 && (NbOfSourcePhotons % 1000000) == 0 ) DisplayARFStatistics();
 }
-                                               
+
 void GateARFDataToRoot::SetARFDataRootFileName(G4String aName)
 { m_ARFDatafilename = aName+".root";}
 
@@ -236,13 +236,13 @@ void GateARFDataToRoot::CloseARFDataRootFile()
 
  // G4cout << " GateARFDataToRoot::CloseARFDataRootFile : "<< m_ARFDatafile << "   "<< m_NbOfPhotonsTree->GetCurrentFile()<<G4endl;
 
- 
 
-        if ( m_ARFDatafile->IsOpen() ) 
+
+        if ( m_ARFDatafile->IsOpen() )
                                 {
                                  m_NbOfPhotonsTree->Fill();
-                                 
-                                 m_ARFDatafile->Write(); 
+
+                                 m_ARFDatafile->Write();
                                  m_ARFDatafile->Close();
                                 }
 }
@@ -313,10 +313,3 @@ void  GateARFDataToRoot::RecordStep(const G4Step*){}
 void  GateARFDataToRoot::RecordVoxels(GateVGeometryVoxelStore*){}
 
 #endif
-
-
-
-
-
-
-

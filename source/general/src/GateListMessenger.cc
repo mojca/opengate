@@ -31,15 +31,15 @@ G4String GateListMessenger::mSystemType = "";
 // constructor
 GateListMessenger::GateListMessenger(GateListManager* itsListManager)
 : GateClockDependentMessenger(itsListManager)
-{ 
-  
+{
+
   const G4String& elementTypeName = GetListManager()->GetElementTypeName();
 
   G4String guidance = G4String("Manages a list of ") + elementTypeName + "s.";
   GetDirectory()->SetGuidance(guidance.c_str());
 
   G4String cmdName;
-  
+
   if (GetListManager()->AcceptNewElements()) {
 
     cmdName = GetDirectoryName()+"systemType";
@@ -65,7 +65,7 @@ GateListMessenger::GateListMessenger(GateListManager* itsListManager)
     pListChoicesCmd = new G4UIcmdWithoutParameter(cmdName,this);
     pListChoicesCmd->SetGuidance(guidance);
   }
-      
+
   cmdName = GetDirectoryName()+"list";
   guidance = "List the " + elementTypeName + "'s within '" + GetListManager()->GetObjectName() + "'";
   pListCmd = new G4UIcmdWithoutParameter(cmdName,this);
@@ -97,15 +97,15 @@ void GateListMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
    if( command==pSystemTypeCmd )
    { mSystemType = newValue; }
   else if( command==pDefineNameCmd )
-    {    
-     mNewInsertionBaseName = newValue; }   
+    {
+     mNewInsertionBaseName = newValue; }
   else if( command==pInsertCmd )
-    { DoInsertion(newValue); }   
+    { DoInsertion(newValue); }
   else if( command==pListChoicesCmd )
-    { ListChoices(); }   
+    { ListChoices(); }
   else if( command==pListCmd )
-    //{ GetListManager()->ListElements(); 
-    { GetListManager()->TheListElements(); }   
+    //{ GetListManager()->ListElements();
+    { GetListManager()->TheListElements(); }
   else
     GateClockDependentMessenger::SetNewValue(command,newValue);
 }
@@ -128,23 +128,23 @@ G4bool GateListMessenger::CheckNameConflict(const G4String& newBaseName)
     If such a conflict is found, a new, conflict-free, name is generated
 */
 void GateListMessenger::AvoidNameConflicts()
-{ 
+{
   // Look for a potential name-conflict
   if (!CheckNameConflict( GetNewInsertionBaseName() )) {
     // No name conflict, it's OK
     return;
   }
-  
+
 
   G4int copyNumber = 2;
   char buffer[256];
-  
+
   // Try with 'name2', 'name-3',... until the conflict is solved
   do {
     sprintf(buffer, "%s%i", GetNewInsertionBaseName().c_str(), copyNumber);
     copyNumber++;
-  } while (CheckNameConflict(buffer));  
-    
+  } while (CheckNameConflict(buffer));
+
   G4cout << "Warning: the selected insertion name ('" << GetNewInsertionBaseName() << "') was already in use.\n"
       	    "Name '" << buffer << "' will be used instead.\n";
 
@@ -152,4 +152,3 @@ void GateListMessenger::AvoidNameConflicts()
   SetNewInsertionBaseName(buffer);
 }
 //----------------------------------------------------------------------------
-

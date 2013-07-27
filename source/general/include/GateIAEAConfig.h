@@ -25,7 +25,7 @@ typedef float  IAEA_Float;
 #endif
 
 typedef short IAEA_I16;
-typedef long  IAEA_I32; // RCN changed to long to allow storage of EGS LATCH, Dec. 2006 
+typedef long  IAEA_I32; // RCN changed to long to allow storage of EGS LATCH, Dec. 2006
 #ifdef WIN32
 typedef __int64 IAEA_I64;
 #else
@@ -42,7 +42,7 @@ typedef long long IAEA_I64;
 #define IAEA_EXTERN_C extern
 #endif
 
-#ifdef WIN32 
+#ifdef WIN32
 
 #ifdef BUILD_DLL
 #define IAEA_EXPORT __declspec(dllexport)

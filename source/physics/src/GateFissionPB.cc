@@ -16,7 +16,7 @@ See GATE/LICENSE.txt for further details
 
 //-----------------------------------------------------------------------------
 GateFissionPB::GateFissionPB():GateVProcess("Fission")
-{  
+{
   SetDefaultParticle("neutron");
   SetProcessInfo("Neutron-induced fission");
 
@@ -30,7 +30,7 @@ GateFissionPB::GateFissionPB():GateVProcess("Fission")
   AddToDataSetList("G4NeutronHPFissionData"); //default for this process
   //--------------------------------------------------------------------------------
 
-  pMessenger = new GateHadronicStandardProcessMessenger(this);  
+  pMessenger = new GateHadronicStandardProcessMessenger(this);
 }
 //-----------------------------------------------------------------------------
 
@@ -38,14 +38,14 @@ GateFissionPB::GateFissionPB():GateVProcess("Fission")
 //-----------------------------------------------------------------------------
 G4VProcess* GateFissionPB::CreateProcess(G4ParticleDefinition *)
 {
-  return new G4HadronFissionProcess(GetG4ProcessName()); 
+  return new G4HadronFissionProcess(GetG4ProcessName());
 }
 //-----------------------------------------------------------------------------
 
 
 //-----------------------------------------------------------------------------
 void GateFissionPB::ConstructProcess( G4ProcessManager * manager)
-{  
+{
   manager->AddDiscreteProcess(GetProcess());
 }
 //-----------------------------------------------------------------------------

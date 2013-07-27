@@ -20,17 +20,17 @@
 
 //--------------------------------------------------------------------------------------------
 GateGenericMoveMessenger::GateGenericMoveMessenger(GateGenericMove * itsRepeater)
-  :GateObjectRepeaterMessenger(itsRepeater) { 
+  :GateObjectRepeaterMessenger(itsRepeater) {
   G4String cmdName;
-  
+
   cmdName = GetDirectoryName()+"setPlacementsFilename";
   mFilenameCmd = new G4UIcmdWithAString(cmdName,this);
-  mFilenameCmd->SetGuidance("Set the filename containing the list of repeated placement for each time stamp."); 
+  mFilenameCmd->SetGuidance("Set the filename containing the list of repeated placement for each time stamp.");
 
   /*
     cmdName = GetDirectoryName()+"useRelativeTranslation";
     mRelativeTransCmd = new G4UIcmdWithABool(cmdName,this);
-    mRelativeTransCmd->SetGuidance("If true, translation are relative to the initial translation."); 
+    mRelativeTransCmd->SetGuidance("If true, translation are relative to the initial translation.");
   */
 }
 //--------------------------------------------------------------------------------------------
@@ -45,7 +45,7 @@ GateGenericMoveMessenger::~GateGenericMoveMessenger() {
 
 //--------------------------------------------------------------------------------------------
 void GateGenericMoveMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
   if (command==mFilenameCmd) GetGenericMove()->SetFilename(newValue);
   //else if (command == mRelativeTransCmd) GetGenericMove()->EnableRelativeTranslation(mRelativeTransCmd->GetNewBoolValue(newValue));
   else GateObjectRepeaterMessenger::SetNewValue(command,newValue);

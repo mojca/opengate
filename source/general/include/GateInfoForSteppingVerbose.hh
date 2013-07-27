@@ -20,7 +20,7 @@ See GATE/LICENSE.txt for further details
 #define GATEInfoSteppingVerbose_hh 1
 
 class GateInfoForSteppingVerbose  {
-public:   
+public:
   GateInfoForSteppingVerbose(){mEnergy=0.;mTime=0.;mVolume="";mProcess="";mParticle="";}
   ~GateInfoForSteppingVerbose(){}
 

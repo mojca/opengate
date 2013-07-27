@@ -2,7 +2,7 @@
 
 #include <vector>
 
-void GateOpticalBiolum_GPU(const GateGPUIO_Input * input, 
+void GateOpticalBiolum_GPU(const GateGPUIO_Input * input,
                            GateGPUIO_Output * output) {
 
   // Select a GPU
@@ -19,7 +19,7 @@ void GateOpticalBiolum_GPU(const GateGPUIO_Input * input,
   srand(seed);
 
   DD(E);
-  
+
   // Kernel vars
   dim3 threads, grid;
   int block_size = 512;
@@ -32,12 +32,12 @@ void GateOpticalBiolum_GPU(const GateGPUIO_Input * input,
   stack_device_malloc(photons_d, nb_of_particles);
   StackParticle photons_h;
   stack_host_malloc(photons_h, nb_of_particles);
-  
+
   // Init random
   i=0; while(i < nb_of_particles) {photons_h.seed[i] = rand(); ++i;};
   stack_copy_host2device(photons_h, photons_d);
   kernel_brent_init<<<grid, threads>>>(photons_d);
-    
+
   // Phantoms Mat
   Volume phantom_mat_d;
 
@@ -52,9 +52,9 @@ void GateOpticalBiolum_GPU(const GateGPUIO_Input * input,
 				    input->phantom_size_z);
   phantom_mat_d.nb_voxel_slice = phantom_mat_d.size_in_vox.x * phantom_mat_d.size_in_vox.y;
   phantom_mat_d.nb_voxel_volume = phantom_mat_d.nb_voxel_slice * phantom_mat_d.size_in_vox.z;
-  
+
   phantom_mat_d.mem_data = phantom_mat_d.nb_voxel_volume * sizeof(unsigned short int);
-  volume_device_malloc(phantom_mat_d, phantom_mat_d.nb_voxel_volume); 
+  volume_device_malloc(phantom_mat_d, phantom_mat_d.nb_voxel_volume);
   cudaMemcpy(phantom_mat_d.data, &(input->phantom_material_data[0]), phantom_mat_d.mem_data, cudaMemcpyHostToDevice);
 
   // Phantoms Activities + Indices
@@ -64,14 +64,14 @@ void GateOpticalBiolum_GPU(const GateGPUIO_Input * input,
   unsigned int *phantom_ind_d;
   cudaMalloc((void**) &phantom_ind_d, sizeof(unsigned int)*nb_act);
   cudaMemcpy(phantom_ind_d, &(input->activity_index[0]), sizeof(float)*nb_act, cudaMemcpyHostToDevice);
- 
+
   // Count simulated photons
   int* count_d;
   int count_h = 0;
   cudaMalloc((void**) &count_d, sizeof(int));
   cudaMemcpy(count_d, &count_h, sizeof(int), cudaMemcpyHostToDevice);
 
-  
+
   // Source
   kernel_optical_voxelized_source<<<grid, threads>>>(photons_d, phantom_mat_d,
                                                      phantom_act_d, phantom_ind_d, E);
@@ -109,7 +109,7 @@ void GateOpticalBiolum_GPU(const GateGPUIO_Input * input,
 
     //if (step > 50) {DD("WATCHDOG AT 50 STEP"); break;}
   }
-  
+
   // Copy photons from device to host
   stack_copy_device2host(photons_d, photons_h);
 
@@ -159,7 +159,7 @@ void GateOpticalBiolum_GPU(const GateGPUIO_Input * input,
   f->Close();
 
   i=0; while (i<nb_of_particles) {
-    
+
     // Test if the particle was absorbed -> no output.
     //if (photons_h.active[i]) {
     GateGPUIO_Particle particle;
@@ -175,9 +175,9 @@ void GateOpticalBiolum_GPU(const GateGPUIO_Input * input,
     particle.eventID = photons_h.eventID[i];
     particle.trackID = i; //photons_h.trackID[i];
     particle.initialID = firstInitialID + i;
-    
+
     output->particles.push_back(particle);
-    
+
  //        printf("g %e %e %e %e %e %e %e\n", photons_h.E[i], particle.px, particle.py,
    //                       particle.pz, photons_h.dx[i], photons_h.dy[i], photons_h.dz[i]);
     //}
@@ -186,7 +186,7 @@ void GateOpticalBiolum_GPU(const GateGPUIO_Input * input,
     //}
     ++i;
   }
-  
+
 
   stack_device_free(photons_d);
   stack_host_free(photons_h);
@@ -196,7 +196,3 @@ void GateOpticalBiolum_GPU(const GateGPUIO_Input * input,
 
   cudaThreadExit();
 }
-
-
-
-

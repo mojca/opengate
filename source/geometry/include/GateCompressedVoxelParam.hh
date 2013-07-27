@@ -23,19 +23,19 @@ class G4VPhysicalVolume;
 class GateCompressedVoxelParam : public GateBox
 {
 public:
-  
+
   //! Constructor
   GateCompressedVoxelParam( const G4String& itsName, GateCompressedVoxelParameterized* vpi);
   //! Destructor
   virtual ~GateCompressedVoxelParam();
- 
+
   void ConstructOwnPhysicalVolume(G4bool flagUpdate);
-  
+
   void DestroyGeometry();
 private:
   GateCompressedVoxelParameterized*         itsInserter;
   GateCompressedVoxelParameterization*      m_parameterization;
   G4VPhysicalVolume*                        m_pvParameterized;
-};  
+};
 
 #endif

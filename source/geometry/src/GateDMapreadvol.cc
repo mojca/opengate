@@ -30,16 +30,16 @@ const int MAX_ERRORS = 10;
 
 int Vol::readVolData( FILE *fin ) {
 
-	
+
 	// Read header
-	// Buf for a line 
+	// Buf for a line
 	char buf[128];
 	int linecount = 1;
 	int fieldcount = 0;
-	
+
 	// Read the file line by line until ".\n" is found
 	for (	char *line = fgets( buf, 128, fin );
-			line && strcmp( line, ".\n" ) != 0 ; 
+			line && strcmp( line, ".\n" ) != 0 ;
 			line = fgets( line, 128, fin ), ++linecount
 		) {
 
@@ -55,7 +55,7 @@ int Vol::readVolData( FILE *fin ) {
 			fprintf( debugFile, "LIBVOL : Invalid header read at line %d\n", linecount );
 			return 1;
 		} else {
-		
+
 			if (fieldcount == MAX_HEADERNUMLINES) {
 				fprintf( debugFile, "LIBVOL : Too many lines in HEADER, ignoring\n" );
 				continue;
@@ -69,7 +69,7 @@ int Vol::readVolData( FILE *fin ) {
 
 			// hack : split line in two str ...
 			line[i] = 0;
-			header[ fieldcount++ ] = HeaderField( line, line + i + 2 ); 
+			header[ fieldcount++ ] = HeaderField( line, line + i + 2 );
 												// +2 cause we skip the space
 												// following the colon
 		}
@@ -87,10 +87,10 @@ int Vol::readVolData( FILE *fin ) {
 		}
 	}
 	// Check endian
-	if (getHeaderValue( "Version" ) == NULL && 
-	   	(strcmp( endian.i_endian.ci, getHeaderValue( "Int-Endian" )) != 0 || 
+	if (getHeaderValue( "Version" ) == NULL &&
+	   	(strcmp( endian.i_endian.ci, getHeaderValue( "Int-Endian" )) != 0 ||
 		strcmp( endian.v_endian.cv, getHeaderValue( "Voxel-Endian" )) != 0)) {
-			
+
 		fprintf( debugFile, "LIBVOL : This file has incompatible endianess (%s <-> %s). Convertion to be implemented !\n", endian.i_endian.ci, getHeaderValue( "Int-Endian" ));
 
 		if (strlen( endian.i_endian.ci ) == strlen( getHeaderValue( "Int-Endian" ) ) &&
@@ -99,11 +99,11 @@ int Vol::readVolData( FILE *fin ) {
 		} else {
 			fprintf( debugFile, "LIBVOL: Abort...\n" );
 		}
-			
+
 		return 1;
 
 	}
-	
+
 	getHeaderValueAsInt("X", &sx);
 	getHeaderValueAsInt("Y", &sy);
 	getHeaderValueAsInt("Z", &sz);
@@ -132,9 +132,9 @@ int Vol::readV1RawData( FILE *fin, bool headerInited, voxel defaultAlpha ) {
 	}
 
 	if (headerInited) {
-		
+
 		// The raw header contains the volume size too
-	
+
 		getHeaderValueAsInt("X", &sx);
 		getHeaderValueAsInt("Y", &sy);
 		getHeaderValueAsInt("Z", &sz);
@@ -142,15 +142,15 @@ int Vol::readV1RawData( FILE *fin, bool headerInited, voxel defaultAlpha ) {
 		if (sx != rawsx || sy != rawsy || sz != rawsz) {
 			fprintf( debugFile, "LIBVOL : Warning : Incoherent vol header with raw header !\n" );
 		}
-	
+
 		int voxsize;
 		if (getHeaderValueAsInt( "Voxel-Size", &voxsize ) == 0 && voxsize != sizeof(voxel)) {
 			fprintf( debugFile, "LIBVOL : This file was generated with a voxel-size that we do not support.\n");
 			return 1;
 		}
-	
+
 	}
-	
+
 	// We should have a useless \n in the file at this point
 	char tmp;
 	count = fread( &tmp, sizeof(char), 1, fin );
@@ -164,14 +164,14 @@ int Vol::readV1RawData( FILE *fin, bool headerInited, voxel defaultAlpha ) {
 }
 
 int Vol::readV2RawData( FILE *fin, bool headerInited, int sizeX, int sizeY, int sizeZ, voxel defaultAlpha ) {
-		
+
 	long count = 0;
-		
+
 	// now read the raw data
 	sx = sizeX;
 	sy = sizeY;
 	sz = sizeZ;
-	
+
 	total = sx * sy * sz;
 	try {
 		data = new voxel[ sx * sy * sz ];
@@ -179,15 +179,15 @@ int Vol::readV2RawData( FILE *fin, bool headerInited, int sizeX, int sizeY, int 
 		fprintf( debugFile, "LIBVOL : not enough memory\n" );
 		return 1;
 	}
-	
-	count = fread( data, sizeof(voxel), total, fin );	
+
+	count = fread( data, sizeof(voxel), total, fin );
 
 	if (count != total) {
 		fprintf( debugFile, "LIBVOL : can't read file (raw data) !\n" );
 		return 1;
 	}
 
-	// Now do some initializations 
+	// Now do some initializations
 	// (if a header is not found, the second param is not changed)
 	getHeaderValueAsInt( "Center-X", &cx );
 	getHeaderValueAsInt( "Center-Y", &cy );

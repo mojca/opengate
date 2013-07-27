@@ -89,7 +89,7 @@ protected:
 
   GateApplicationMgr();
   static GateApplicationMgr* instance;
-  
+
   G4double m_timeSlice;
   G4double m_timeStart;
   G4double m_timeStop;
@@ -132,4 +132,3 @@ protected:
 };
 
 #endif
-

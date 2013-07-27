@@ -34,7 +34,7 @@ GateVGeometryVoxelReader::~GateVGeometryVoxelReader()
   }
 }
 
-void GateVGeometryVoxelReader::Describe(G4int level) 
+void GateVGeometryVoxelReader::Describe(G4int level)
 {
   G4cout << "  Geom. voxel reader ----> " << m_type << G4endl
 	 << "  file name              : " << m_fileName << G4endl;

@@ -29,19 +29,19 @@ GateFastI124::~GateFastI124()
 	this->m_particleVector->clear();
 	delete this->m_particleVector;
 	this->m_particleVector = 0;
-	
-	
+
+
 	delete m_simpleDecay;
-	
+
 }
 void GateFastI124::InitializeFastI124()
-{	
+{
 // Forces fixed energy.  Real energy will be set later
 	m_source->SetNumberOfParticles( 1 );
 	m_source->GetEneDist()->SetEnergyDisType( "Mono" );
 	m_source->SetParticleTime( m_source->GetTime() );
 
-	
+
 	// This defines the 13 transitions forming the simplified scheme
   // Entries are:
   //             for gammas :      current state / next state / cumulative probability / particle emitted (gamma)    / energy
@@ -50,22 +50,22 @@ void GateFastI124::InitializeFastI124()
 
 	m_simpleDecay = new GateSimplifiedDecay();
 	m_particleVector = new vector<psd>;
-	
+
   m_simpleDecay->addTransition( new GateSimplifiedDecayTransition(0, 1, 0.0175,  mem_fun( &GateSimplifiedDecayTransition::issueGamma),     1.376   )  );
   m_simpleDecay->addTransition( new GateSimplifiedDecayTransition(0, 1, 0.0488,  mem_fun( &GateSimplifiedDecayTransition::issueGamma),     1.509   )  );
   m_simpleDecay->addTransition( new GateSimplifiedDecayTransition(0, 1, 0.1189,  mem_fun( &GateSimplifiedDecayTransition::issueNone )              )  );
   m_simpleDecay->addTransition( new GateSimplifiedDecayTransition(0, 2, 0.2359,  mem_fun( &GateSimplifiedDecayTransition::issuePositron),  1.534,  1.4,  0.4407471595713562, 53) );
-  
+
   m_simpleDecay->addTransition( new GateSimplifiedDecayTransition(0, 2, 0.3447,  mem_fun( &GateSimplifiedDecayTransition::issueGamma),     1.691   )  );
   m_simpleDecay->addTransition( new GateSimplifiedDecayTransition(0, 2, 0.3515,  mem_fun( &GateSimplifiedDecayTransition::issueGamma),     2.283   )  );
   m_simpleDecay->addTransition( new GateSimplifiedDecayTransition(0, 2, 0.3598,  mem_fun( &GateSimplifiedDecayTransition::issueGamma),     0.645   )  );
   m_simpleDecay->addTransition( new GateSimplifiedDecayTransition(0, 2, 0.6422,  mem_fun( &GateSimplifiedDecayTransition::issueNone )              )  );
-  
+
   m_simpleDecay->addTransition( new GateSimplifiedDecayTransition(0,-1, 0.7502,  mem_fun( &GateSimplifiedDecayTransition::issuePositron),  2.137,  1.0,  0.10072654633851122,53) );
   m_simpleDecay->addTransition( new GateSimplifiedDecayTransition(0,-1, 1.,      mem_fun( &GateSimplifiedDecayTransition::issueNone )              )  );
   m_simpleDecay->addTransition( new GateSimplifiedDecayTransition(1, 2, 0.8690,  mem_fun( &GateSimplifiedDecayTransition::issueGamma),     0.722   )  );
   m_simpleDecay->addTransition( new GateSimplifiedDecayTransition(1,-1, 1.0000,  mem_fun( &GateSimplifiedDecayTransition::issueGamma),     1.325   )  );
-  
+
   m_simpleDecay->addTransition( new GateSimplifiedDecayTransition(2,-1, 1.0000,  mem_fun( &GateSimplifiedDecayTransition::issueGamma),     0.602   )  );
 }
 
@@ -74,7 +74,7 @@ void GateFastI124::GenerateVertex( G4Event* aEvent )
 	// Forces fixed energy.  Real energy will be set later
 	//m_source->SetNumberOfParticles( 1 );
 	//m_source->GetEneDist()->SetEnergyDisType( "Mono" );
-	
+
 	// Generate the vector of pairs particle name - energy
 	m_particleVector->clear();
 	m_simpleDecay->doDecay( m_particleVector );
@@ -86,18 +86,18 @@ void GateFastI124::GenerateVertex( G4Event* aEvent )
 		m_source->GetPosDist()->GenerateOne();
 		G4PrimaryVertex* vertex = new G4PrimaryVertex(
 			m_source->GetParticlePosition(), m_source->GetTime() );
-		
+
 		// From the vector, create particles with own direction, type and energy
-		for( vector<psd>::iterator it = m_particleVector->begin(); 
+		for( vector<psd>::iterator it = m_particleVector->begin();
 				 it != m_particleVector->end(); ++it )
 		{
-			if( m_source->GetVerboseLevel() > 1 ) 
+			if( m_source->GetVerboseLevel() > 1 )
 					 G4cout << "GateVSource::GeneratePrimaries - fastI124 " << (*it).first
 				 					<< ' ' << (*it).second << endl;
-									
-			m_source->SetParticleDefinition( 
+
+			m_source->SetParticleDefinition(
 				G4ParticleTable::GetParticleTable()->FindParticle( (*it).first )  );
-			
+
 			m_source->GetEneDist()->SetMonoEnergy( (*it).second );
 			m_source->GetEneDist()->GenerateOne( m_source->GetParticleDefinition() );
 			m_source->GetAngDist()->GenerateOne();
@@ -116,5 +116,3 @@ void GateFastI124::GenerateVertex( G4Event* aEvent )
 		GenerateVertex( aEvent );
 	}
 }
-
-

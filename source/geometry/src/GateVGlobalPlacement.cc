@@ -17,7 +17,7 @@
 /* Constructor
    itsObjectInserter: the inserter to which the repeater is appended
    itsName:       	  the name chosen for this repeater
-*/    
+*/
 //----------------------------------------------------------------------------------------------------
 GateVGlobalPlacement::GateVGlobalPlacement(GateVVolume* itsObjectInserter,
       	      	      	      	      	   const G4String& itsName)
@@ -29,7 +29,7 @@ GateVGlobalPlacement::GateVGlobalPlacement(GateVVolume* itsObjectInserter,
 
 //----------------------------------------------------------------------------------------------------
 // Destructor
-GateVGlobalPlacement::~GateVGlobalPlacement() 
+GateVGlobalPlacement::~GateVGlobalPlacement()
 {
   // Normally the placement queue should be empty, but we empty it as a security measure
   if (!m_placementQueue.empty()) {
@@ -44,32 +44,32 @@ GateVGlobalPlacement::~GateVGlobalPlacement()
 
 //----------------------------------------------------------------------------------------------------
 /* Public method to be called to repeat a series of placements placed into an input queue
-    
+
    motherQueue:  the input queue to repeat
-      
+
    If the repeater is enabled, it repeats each placement in the input queue using the user-defined
-   virtual method PushMyPlacements. The series thus obtained are all placed into the repeater placement 
-   queue, which is returned to the caller. 
+   virtual method PushMyPlacements. The series thus obtained are all placed into the repeater placement
+   queue, which is returned to the caller.
    If the repeater is disabled, it directly places a copy of each input placement into the
    output queue, so that the output queue is a direct copy of the input queue.
    In both cases (enabled or disabled), the input queue is emptied as it is processed.
 */
 GatePlacementQueue* GateVGlobalPlacement::ComputePlacements(GatePlacementQueue* motherQueue)
 {
- 
+
   // Loop until the input-queue is empty
   while (motherQueue->size()) {
 
     // Extract a placement from the input queue
     GatePlacement placement = motherQueue->pop_front();
-    
+
     // Extract the rotation matrix and translation vector from this placement
     G4RotationMatrix rotationMatrix = placement.first;
     G4ThreeVector position = placement.second ;
 
     // If the repeater is enabled, process the placement through PushMyPlacements
     // If it is disabled, place a copy of the placement into the output queue
-    
+
     if (IsEnabled()) {
       PushMyPlacements(rotationMatrix,position,GetCurrentTime());}
     else {
@@ -93,15 +93,13 @@ GatePlacementQueue* GateVGlobalPlacement::ComputePlacements(GatePlacementQueue* 
 void GateVGlobalPlacement::Describe(size_t indent)
 {
   // Call the base-class Describe() method to print-out the parameters
-  // that are common to all clock-dependant objects 
+  // that are common to all clock-dependant objects
   GateClockDependent::Describe(indent);
-    
-  // Call the pure-virtual method DescribeMyself() to print-out the 
+
+  // Call the pure-virtual method DescribeMyself() to print-out the
   // parameters that are specific to each repeater
   DescribeMyself(indent);
-    
+
   G4cout << G4endl;
 }
 //----------------------------------------------------------------------------------------------------
-
-

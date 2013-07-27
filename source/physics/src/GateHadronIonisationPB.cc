@@ -15,7 +15,7 @@ See GATE/LICENSE.txt for further details
 
 //-----------------------------------------------------------------------------
 GateHadronIonisationPB::GateHadronIonisationPB():GateVProcess("HadronIonisation")
-{  
+{
   SetDefaultParticle("pi+"); SetDefaultParticle("pi-");
   SetDefaultParticle("kaon+"); SetDefaultParticle("kaon-");
   SetDefaultParticle("sigma+"); SetDefaultParticle("sigma-");
@@ -30,7 +30,7 @@ GateHadronIonisationPB::GateHadronIonisationPB():GateVProcess("HadronIonisation"
   SetDefaultParticle("GenericIon");
 
   SetProcessInfo("Ionization and energy loss by charged hadrons");
-  pMessenger = new GateHadronIonIonisationProcessMessenger(this);  
+  pMessenger = new GateHadronIonIonisationProcessMessenger(this);
 }
 //-----------------------------------------------------------------------------
 
@@ -38,7 +38,7 @@ GateHadronIonisationPB::GateHadronIonisationPB():GateVProcess("HadronIonisation"
 //-----------------------------------------------------------------------------
 G4VProcess* GateHadronIonisationPB::CreateProcess(G4ParticleDefinition *)
 {
- return new G4hIonisation(GetG4ProcessName()); 
+ return new G4hIonisation(GetG4ProcessName());
 }
 //-----------------------------------------------------------------------------
 
@@ -46,7 +46,7 @@ G4VProcess* GateHadronIonisationPB::CreateProcess(G4ParticleDefinition *)
 //-----------------------------------------------------------------------------
 void GateHadronIonisationPB::ConstructProcess(G4ProcessManager * manager)
 {
-  manager->AddProcess(GetProcess(),-1, 2, 2);   
+  manager->AddProcess(GetProcess(),-1, 2, 2);
 }
 //-----------------------------------------------------------------------------
 
@@ -81,7 +81,7 @@ void GateHadronIonisationPB::AddUserModel(GateListOfHadronicModels * /*model*/)
 {
   /* if(model->GetModelName() == "CalculationOfNuclearStoppingPower_On"){
       dynamic_cast<G4hIonisation*>(GetUserModelProcess())->ActivateNuclearStopping(true);
-          
+
   }
   else if(model->GetModelName() == "CalculationOfNuclearStoppingPower_Off"){
       dynamic_cast<G4hIonisation*>(GetUserModelProcess())->ActivateNuclearStopping(false);

@@ -20,14 +20,14 @@ See GATE/LICENSE.txt for further details
 #include "GateSurfaceList.hh"
 
 /*! \class GateSurfaceListMessenger
-  
+
   \brief the messenger belonging to a GateSurfaceList
 
-  Does not define any new methods and commands. All of them are inherited 
+  Does not define any new methods and commands. All of them are inherited
   from GateListMessenger.
-  
+
   - GateSurfaceListMessenger - by d.j.vanderlaan@tnw.tudelft.nl
-  
+
   */
 class GateVVolume;
 
@@ -36,7 +36,7 @@ class GateSurfaceListMessenger: public GateListMessenger
   public:
     GateSurfaceListMessenger(GateSurfaceList* itsChildList);
    ~GateSurfaceListMessenger();
-    
+
   private:
     //! returns ""
     virtual const G4String& DumpMap();
@@ -54,7 +54,7 @@ class GateSurfaceListMessenger: public GateListMessenger
     { return GetSurfaceList()->GetCreator();}
 
   private:
-  
+
 };
 
 #endif

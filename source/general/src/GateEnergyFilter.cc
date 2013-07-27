@@ -17,9 +17,9 @@ See GATE/LICENSE.txt for further details
 GateEnergyFilter::GateEnergyFilter(G4String name)
   :GateVFilter(name)
 {
- 
+
    fLowEnergy = 0.;
-   fHighEnergy = 0.;  
+   fHighEnergy = 0.;
    pEneMessenger = new GateEnergyFilterMessenger(this);
 
 }
@@ -27,27 +27,27 @@ GateEnergyFilter::GateEnergyFilter(G4String name)
 
 
 //---------------------------------------------------------------------------
-G4bool GateEnergyFilter::Accept(const G4Step* aStep) 
+G4bool GateEnergyFilter::Accept(const G4Step* aStep)
 {
     G4double kinetic = aStep->GetPreStepPoint()->GetKineticEnergy();
 
 
     if ( fLowEnergy!=0. && kinetic < fLowEnergy  ) return false;
     if ( fHighEnergy!= 0. && kinetic >= fHighEnergy ) return false;
-  
+
     return true;
 }
 //---------------------------------------------------------------------------
 
 //---------------------------------------------------------------------------
-G4bool GateEnergyFilter::Accept(const G4Track* aTrack) 
+G4bool GateEnergyFilter::Accept(const G4Track* aTrack)
 {
     G4double kinetic = aTrack->GetKineticEnergy();
 
 
     if ( fLowEnergy!=0. && kinetic < fLowEnergy  ) return false;
     if ( fHighEnergy!= 0. && kinetic >= fHighEnergy ) return false;
-  
+
     return true;
 }
 //---------------------------------------------------------------------------
@@ -59,10 +59,10 @@ void GateEnergyFilter::show(){
 
 
 
-    G4cout << " LowE  " << G4BestUnit(fLowEnergy,"Energy") 
+    G4cout << " LowE  " << G4BestUnit(fLowEnergy,"Energy")
 	   << " HighE " << G4BestUnit(fHighEnergy,"Energy")
 	   << G4endl;
- 
+
 
   G4cout << "-------------------------------------------"<<G4endl;
 
@@ -81,5 +81,3 @@ void GateEnergyFilter::SetEmax(G4double e){
   fHighEnergy = e;
 }
 //---------------------------------------------------------------------------
-
-

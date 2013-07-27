@@ -9,15 +9,15 @@ See GATE/LICENSE.txt for further details
 ----------------------*/
 
 
-/*! 
-  \brief Handles the basic machine properties (e.g. endianness) and machine-dependent operations. 
+/*!
+  \brief Handles the basic machine properties (e.g. endianness) and machine-dependent operations.
   \brief By laurent.guigues@creatis.insa-lyon.fr
 */
 
 #ifndef __GateMachine_h__
 #define __GateMachine_h__
 
-/// \brief Handles the basic machine properties (e.g. endianness, bus size) and machine-dependent operations. 
+/// \brief Handles the basic machine properties (e.g. endianness, bus size) and machine-dependent operations.
 class GateMachine
 {
 public:
@@ -31,7 +31,7 @@ public:
   inline static bool IsLittleEndians () { return m_Intel ; }
   /// Is the machine a Sun like processor ? (== IsBigEndians)
   inline static bool IsSun () { return !m_Intel ; }
-  /// Is the machine a Sun like processor ? 
+  /// Is the machine a Sun like processor ?
   inline static bool IsBigEndians () { return !m_Intel ; }
   ///
   inline static void ChangeEndians() { m_Intel = ! m_Intel; }
@@ -46,7 +46,7 @@ public:
   inline static bool Is64bits () { return m_64 ; }
   //@}
 
-  ///@Little/big endians swap methods 
+  ///@Little/big endians swap methods
   ///@{
   ///
   inline static void SwapEndians (bool &) {}
@@ -111,26 +111,26 @@ protected:
 //-----------------------------------------------------------------------------
 // Inline methods implementation
 //-----------------------------------------------------------------------------
-void GateMachine::TestEndians () 
+void GateMachine::TestEndians ()
 {
   int n = 1 ;
   char * p = (char *) & n ;
   m_Intel = (*p == (char) 1) ;
 }
 
-void GateMachine::TestBusSize () 
+void GateMachine::TestBusSize ()
 {
-  if (sizeof(void *) == 4) 
+  if (sizeof(void *) == 4)
     {
       m_32 = true ;
       m_64 = false ;
-    } 
-  else if (sizeof(void *) == 8) 
+    }
+  else if (sizeof(void *) == 8)
     {
       m_32 = false ;
       m_64 = true ;
-    } 
-  else 
+    }
+  else
     std::cout << "lgl::GateMachine::testBusSize : neither a 32 bits nor a 64 bits machine... Is it an extraterrestrial device ?" << std::endl ;
 }
 

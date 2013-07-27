@@ -25,10 +25,10 @@ class GateWedgeMessenger: public GateVolumeMessenger
   public:
     GateWedgeMessenger(GateWedge* itsCreator);
    ~GateWedgeMessenger();
-    
+
     void SetNewValue(G4UIcommand*, G4String);
-    
-    virtual inline GateWedge* GetWedgeCreator() 
+
+    virtual inline GateWedge* GetWedgeCreator()
       { return (GateWedge*)GetVolumeCreator(); }
 
   private:
@@ -39,4 +39,3 @@ class GateWedgeMessenger: public GateVolumeMessenger
 };
 
 #endif
-

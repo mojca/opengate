@@ -39,7 +39,7 @@ GateTrap::GateTrap(const G4String& itsName,
 		   G4bool itsFlagAcceptChildren,
 	           G4int depth)
 : GateVVolume(itsName, itsFlagAcceptChildren, depth),
-  m_Trap_solid(0), m_Trap_log(0), m_Messenger(0) 
+  m_Trap_solid(0), m_Trap_log(0), m_Messenger(0)
 {
     m_TrapDz    = 1.0 * cm;
     m_TrapTheta = 90.0 * deg;
@@ -52,8 +52,8 @@ GateTrap::GateTrap(const G4String& itsName,
     m_TrapDx3   = 1.0 * cm;
     m_TrapDx4   = 1.0 * cm;
     m_TrapAlp2  = 30.0*deg;
-     
-  
+
+
      m_Messenger = new GateTrapMessenger(this);
 }
 
@@ -108,4 +108,3 @@ void GateTrap::DestroyOwnSolidAndLogicalVolume()
   m_Trap_solid = 0;
 
 }
-

@@ -104,12 +104,12 @@ void GateARFSD::Initialize(G4HCofThisEvent*HCE)
 
   // Creation of a new hit collection
   ARFCollection = new GateCrystalHitsCollection
-                   (SensitiveDetectorName,theARFCollectionName); 
+                   (SensitiveDetectorName,theARFCollectionName);
 
   // We store the hit collection ID into the static variable HCID
   if(HCID<0)
   { HCID = GetCollectionID(0); }
- 
+
   // Add the hit collection to the G4HCofThisEvent
   HCE->AddHitsCollection(HCID,ARFCollection);
 }
@@ -127,11 +127,11 @@ G4bool GateARFSD::ProcessHits(G4Step*aStep,G4TouchableHistory*)
 G4Track* theTrack = static_cast<G4Track*>( aStep->GetTrack() );
 
 
-    
+
 if ( theTrack->GetParentID() != 0 ) return false;
 theTrack->SetTrackStatus( fKillTrackAndSecondaries );
 G4ThreeVector thePosAtVertex = theTrack->GetVertexPosition();
-     
+
 G4ThreeVector thePosition = theTrack->GetPosition();
 G4double theInEnergy = theTrack->GetTotalEnergy();
 
@@ -140,18 +140,18 @@ G4double theInEnergy = theTrack->GetTotalEnergy();
       	       *newStepPoint = aStep->GetPostStepPoint();
 
   const G4VProcess*process = newStepPoint->GetProcessDefinedStep();
- 
+
    //  For all processes except transportation, we select the PostStepPoint volume
    //  For the transportation, we select the PreStepPoint volume
    const G4TouchableHistory* touchable;
    if ( process->GetProcessType() == fTransportation )
       touchable = (const G4TouchableHistory*)(oldStepPoint->GetTouchable() );
-  else 
+  else
       touchable = (const G4TouchableHistory*)(newStepPoint->GetTouchable() );
   GateVolumeID volumeID(touchable);
 
   headID = volumeID.GetVolume( volumeID.GetCreatorDepth("SPECThead") )->GetCopyNo();
-  
+
 
 if (volumeID.IsInvalid()) //G4Exception("[GateARFSD]: could not get the volume ID! Aborting!\n");
 {
@@ -177,8 +177,8 @@ if (volumeID.IsInvalid()) //G4Exception("[GateARFSD]: could not get the volume I
 return true;
 }
 
-G4int GateARFSD::PrepareCreatorAttachment(GateVVolume* aCreator) 
-{ 
+G4int GateARFSD::PrepareCreatorAttachment(GateVVolume* aCreator)
+{
   GateVSystem* creatorSystem = GateSystemListManager::GetInstance()->FindSystemOfCreator(aCreator);
   if (!creatorSystem) {
     G4cout  << G4endl << G4endl << "[GateARFSD::PrepareCreatorAttachment]:" << G4endl
@@ -199,14 +199,14 @@ G4int GateARFSD::PrepareCreatorAttachment(GateVVolume* aCreator)
   }
   else
       SetSystem(creatorSystem);
-  
+
   return 0;
 }
 
 
 // Set the system to which the SD is attached
 void GateARFSD::SetSystem(GateVSystem* aSystem)
-{ 
+{
   m_system=aSystem;
   GateDigitizer::GetInstance()->SetSystem(aSystem);
 }
@@ -227,7 +227,7 @@ G4cout << "GateARFSD::computeTables() -  Computing ARF Tables for Sensitive Dete
       G4int loaded = m_ARFTableMgr->InitializeTables();
   if ( loaded == 1 ) return;
 
-               std::map<G4String,G4int>::iterator iter; 
+               std::map<G4String,G4int>::iterator iter;
     G4double* NSourcePhotons = new G4double[ m_EnWin.size() ];
     G4int iw = 0;
     for (iter= m_EnWin.begin(); iter != m_EnWin.end(); iter++ )
@@ -247,7 +247,7 @@ G4cout << "GateARFSD::computeTables() -  Computing ARF Tables for Sensitive Dete
                    ULong64_t NbofStoredPhotons_tmp = 0;
                    ULong64_t IN_camera_tmp = 0;
                    ULong64_t OUT_camera_tmp = 0;
-                   
+
                    for( G4int i = 0 ; i < ( iter->second ) ; i++ )
                    {
                     if ( i > 0 ) {
@@ -281,7 +281,7 @@ G4cout << "GateARFSD::computeTables() -  Computing ARF Tables for Sensitive Dete
                     NbofStoredPhotons += NbofStoredPhotons_tmp;
  		    IN_camera += IN_camera_tmp;
  		    OUT_camera += OUT_camera_tmp;
- 		    
+
                     G4cout << " In File " << cfn << G4endl;
                     G4cout << " Total number of Source photons Going Out Crystal  " << NbofGoingOutPhotons_tmp<<G4endl;
                     G4cout << " Total number of Source photons Going In Crystal   " << NbofGoingInPhotons_tmp<<G4endl;
@@ -298,7 +298,7 @@ G4cout << "GateARFSD::computeTables() -  Computing ARF Tables for Sensitive Dete
                      // loop through ARF tables to get the table with the suitable energy window
 
                      if ( theData.m_Edep/keV - m_edepthreshold >= 0. )
-                      {                      	
+                      {
                        m_ARFTableMgr->FillDRFTable(iw , theData.m_Edep,  theData.m_X , theData.m_Y );
                       }
                     }
@@ -317,7 +317,7 @@ G4cout << "GateARFSD::computeTables() -  Computing ARF Tables for Sensitive Dete
                   //G4cout << " --- Of Which : Number of Stored Photons              " << NbofStoredPhotons<< " = " << 100. * double(NbofStoredPhotons)/double(NbOfSourcePhotons) << " %"<<G4endl;
                   iw++; // now for next ARF table
 
-        }   
+        }
 
       //G4cout << " Number of Heads " << NbOfHeads<<G4endl;
 
@@ -388,7 +388,7 @@ G4double theARFvalue = m_ARFTableMgr->ScanTables(  theDirection.z() , theDirecti
 // now store projection with the GateProjectionSet Module thourgh its method GateProjectionSet::Fill
 
 
-if ( theProjectionSet == 0 ) {GateOutputMgr* outputMgr = GateOutputMgr::GetInstance(); 
+if ( theProjectionSet == 0 ) {GateOutputMgr* outputMgr = GateOutputMgr::GetInstance();
                               GateToProjectionSet* PSet = dynamic_cast<GateToProjectionSet*>( outputMgr->GetModule("projection") );
                               if ( PSet == 0 ) { G4Exception( "GateARFSD::ComputeProjectionSet()", "ComputeProjectionSet", FatalException, "ERROR No Projection Set Module has been enabled. Aborting.");}
                               theProjectionSet = PSet->GetProjectionSet();

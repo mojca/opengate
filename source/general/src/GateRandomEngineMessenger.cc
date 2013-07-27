@@ -81,4 +81,3 @@ void GateRandomEngineMessenger::SetNewValue(G4UIcommand* command,G4String newVal
   else if(command == ShowEngineStatus)
     { m_gateRandomEngine->ShowStatus(); }
 }
-

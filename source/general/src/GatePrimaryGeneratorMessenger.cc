@@ -22,7 +22,7 @@ See GATE/LICENSE.txt for further details
 
 //-------------------------------------------------------------------------------------------------
 GatePrimaryGeneratorMessenger::GatePrimaryGeneratorMessenger(GatePrimaryGeneratorAction* primGen)
-{ 
+{
   m_primaryGenerator = primGen;
 
   GateGeneratorDir = new G4UIdirectory("/gate/generator/");
@@ -49,9 +49,8 @@ GatePrimaryGeneratorMessenger::~GatePrimaryGeneratorMessenger()
 
 //-------------------------------------------------------------------------------------------------
 void GatePrimaryGeneratorMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
   if (command == VerboseCmd) m_primaryGenerator->SetVerboseLevel(VerboseCmd->GetNewIntValue(newValue));
   if (command == GPSCmd) m_primaryGenerator->EnableGPS(true);
 }
 //-------------------------------------------------------------------------------------------------
-

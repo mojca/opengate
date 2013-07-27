@@ -45,7 +45,7 @@ GateVFictitiousMap::GateVFictitiousMap ( G4Envelope* env )
 	}
 	else
 		pBox=check;
-#endif 
+#endif
 
 }
 
@@ -79,4 +79,3 @@ void GateVFictitiousMap::RegisterCrossSectionsTable ( const GateCrossSectionsTab
 	pCrossSectionsTable=p;
 	m_nDeleteCrossSectionTable=del;
 }
-

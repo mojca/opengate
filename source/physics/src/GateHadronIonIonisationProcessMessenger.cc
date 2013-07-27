@@ -83,7 +83,7 @@ void GateHadronIonIonisationProcessMessenger::SetNewValue(G4UIcommand* command, 
       pProcess->UnSetModel("CalculationOfNuclearStoppingPower_Off", par1);
       pProcess->UnSetModel("CalculationOfNuclearStoppingPower_On", par1);
       pProcess->SetModel("CalculationOfNuclearStoppingPower_On",par1);
-  } 
+  }
 }
 //-----------------------------------------------------------------------------
 

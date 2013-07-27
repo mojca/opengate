@@ -15,7 +15,7 @@ See GATE/LICENSE.txt for further details
 
 //-----------------------------------------------------------------------------
 GateScintillationPB::GateScintillationPB():GateVProcess("Scintillation")
-{  
+{
   SetDefaultParticle("e+"); SetDefaultParticle("e-");
   SetDefaultParticle("mu+"); SetDefaultParticle("mu-");
   SetDefaultParticle("tau+"); SetDefaultParticle("tau-");
@@ -36,7 +36,7 @@ GateScintillationPB::GateScintillationPB():GateVProcess("Scintillation")
 
   SetProcessInfo("Scintillation process");
 
-  pMessenger = new GateEMStandardProcessMessenger(this) ;  
+  pMessenger = new GateEMStandardProcessMessenger(this) ;
 }
 //-----------------------------------------------------------------------------
 
@@ -57,7 +57,7 @@ G4VProcess* GateScintillationPB::CreateProcess(G4ParticleDefinition *)
 //-----------------------------------------------------------------------------
 void GateScintillationPB::ConstructProcess(G4ProcessManager * manager)
 {
-  manager->AddDiscreteProcess(GetProcess());  
+  manager->AddDiscreteProcess(GetProcess());
   manager->SetProcessOrderingToLast(GetProcess(), idxAtRest);
   manager->SetProcessOrderingToLast(GetProcess(), idxPostStep);
 }

@@ -34,7 +34,7 @@ void showhelp()
 	cout<<"                               This executable is compiled with "<<GC_DEFAULT_PLATFORM<<" as default"<<endl<<endl;
 	cout<<"  -openPBSscript, os         : template for an openPBS script "<<endl;
 	cout<<"                               see the example that comes with the source code (script/openPBS.script)"<<endl;
-	cout<<"                               overrules the environment variable below"<<endl<<endl; 
+	cout<<"                               overrules the environment variable below"<<endl<<endl;
 	cout<<"  -condorscript, cs          : template for a condor submit file"<<endl;
 	cout<<"                               see the example that comes with the source code (script/condor.script)"<<endl;
 	cout<<"  -v                         : verbosity 0 1 2 3 - 1 default "<<endl;
@@ -58,7 +58,7 @@ void showhelp()
 }
 
 int main(int argc,char** argv)
-{ 
+{
 	G4String* aliases=0;
 	G4String platform="";
 	G4String macfile;
@@ -71,7 +71,7 @@ int main(int argc,char** argv)
 	G4int time=0;
 	G4int verb=1;
 	aliases=new G4String[argc];
-	
+
 	int debug=0;
 	if (argc==1) showhelp();
 	// Parse the command line
@@ -87,46 +87,46 @@ int main(int argc,char** argv)
 			nAliases++;
 			aliases[nAliases]=argv[nextArg+2];
 			nAliases++;
-		}  
+		}
 		if ((!strcmp(argv[nextArg],"-numberofsplits") || !strcmp(argv[nextArg],"-n")) && indicator==0)
 		{
 			indicator=1;
 			stringstream ss(argv[nextArg+1]);
 			ss>>nSplits;
 			if(debug)cout<<"found -numberofsplits "<<nSplits<<endl;
-		} 
+		}
 		if (!strcmp(argv[nextArg],"-time") && indicator==0)
 		{
 			indicator=1;
 			time=1;
 			nextArg-=1;
 			if(debug)cout<<"found -time "<<time<<endl;
-		}   
+		}
 		if (!strcmp(argv[nextArg],"-v") && indicator==0)
 		{
 			indicator=1;
 			stringstream ss(argv[nextArg+1]);
 			ss>>verb;
 			if(debug)cout<<"found -v "<<verb<<endl;
-		} 
+		}
 		if ((!strcmp(argv[nextArg],"-clusterplatform") || !strcmp(argv[nextArg],"-c")) && indicator==0)
 		{
 			indicator=1;
 			platform=argv[nextArg+1];
 			if(debug)cout<<"found -clusterplatform "<<platform<<endl;
-		}  
+		}
 		if ((!strcmp(argv[nextArg],"-openPBSscript") || !strcmp(argv[nextArg],"-os")) && indicator==0)
 		{
 			indicator=1;
 			pbsscript=argv[nextArg+1];
 			if(debug)cout<<"found -openPBSscript "<<pbsscript<<endl;
-		}  
+		}
 		if ((!strcmp(argv[nextArg],"-condorscript") || !strcmp(argv[nextArg],"-cs")) && indicator==0)
 		{
 			indicator=1;
 			condorscript=argv[nextArg+1];
 			if(debug)cout<<"found -condorscript "<<condorscript<<endl;
-		}  
+		}
 		if (size>4 && indicator==0)
 		{
 			G4String ss(argv[nextArg]);
@@ -150,16 +150,16 @@ int main(int argc,char** argv)
 		{
 			// The argument was not recognised: exit
 			cout<<"Argument: "<<argv[nextArg]<<" was not recognised as a valid option\n";
-			exit(1);      
-		}  
-		else {
-			if (indicator==2) nextArg+=3; 
-			else nextArg+=2;  
+			exit(1);
 		}
-	} 
-	
+		else {
+			if (indicator==2) nextArg+=3;
+			else nextArg+=2;
+		}
+	}
+
 	if (platform=="" || platform=="openmosix" || platform=="openPBS" || platform=="condor"|| platform=="xgrid")
-	{  
+	{
 		if (platform=="")
 		{
 			platform=GC_DEFAULT_PLATFORM;
@@ -169,7 +169,7 @@ int main(int argc,char** argv)
 			if (getenv("GC_PBS_SCRIPT")){
 				pbsscript=getenv("GC_PBS_SCRIPT");
 				if(verb>1&&pbsscript!="")cout<<"Information : using $GC_PBS_SCRIPT="<<pbsscript<<" as default PBS template script"<<endl;
-			}}  
+			}}
 		if (platform!="openPBS"&&pbsscript!="")
 		{
 			if(verb>0)cout<<"Warning : cluster platform is not openPBS, openPBSscript ignored!"<<endl;
@@ -195,24 +195,22 @@ int main(int argc,char** argv)
 	}
 	else {
 		cout<<"Error : cluster platform not supported or invalid!"<<endl;
-		exit(1);  
+		exit(1);
 	}
-	
+
 	if(debug) cout<<"nSplits "<<nSplits<<endl;
 	if (nSplits<=0)
 	{
 		nSplits=1;
-		if(verb>0)cout<<"Warning : Invalid number of splits, using default=1!"<<endl; 
+		if(verb>0)cout<<"Warning : Invalid number of splits, using default=1!"<<endl;
 	}
-	//create a splitmanager to coordinate it all  
+	//create a splitmanager to coordinate it all
 	GateSplitManager* manager;
 	manager=new GateSplitManager(nAliases,aliases,platform,pbsscript,condorscript,macfile,nSplits,time);
 	manager->SetVerboseLevel(verb);
 	manager->StartSplitting();
-	
-	delete[] aliases;   
+
+	delete[] aliases;
 	delete manager;
 	return 0;
 }
-
-

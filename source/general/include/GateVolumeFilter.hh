@@ -27,7 +27,7 @@ See GATE/LICENSE.txt for further details
 #include "GateVVolume.hh"
 #include "G4LogicalVolume.hh"
 
-class  GateVolumeFilter : 
+class  GateVolumeFilter :
   public GateVFilter
 {
 public:

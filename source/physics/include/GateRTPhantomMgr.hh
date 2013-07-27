@@ -33,7 +33,7 @@ public:
   void SetVerboseLevel(G4int val);
   inline G4int GetVerboseLevel(){return m_verboseLevel;};
 
-  //! Provides a description of the properties of the Mgr and of its output modules 
+  //! Provides a description of the properties of the Mgr and of its output modules
   void Describe();
 
   //! Getter used by the Messenger to construct the commands directory
@@ -42,7 +42,7 @@ public:
   GateRTPhantom* Find( G4String aname);
 private:
 
-  GateRTPhantomMgr(const G4String name); 
+  GateRTPhantomMgr(const G4String name);
   static GateRTPhantomMgr* instance;
 
   //! Verbose level

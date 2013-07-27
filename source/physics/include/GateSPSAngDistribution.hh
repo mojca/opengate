@@ -12,11 +12,11 @@ See GATE/LICENSE.txt for further details
 /* ----------------------------------------------------------------------------- *
  *                                                                         *
  *  Class Description :                                                    *
- *                                                                         *  
+ *                                                                         *
  *  To generate the direction of a primary vertex according to the defined *
  *  distribution                                                           *
- *                                                                         * 
- * ----------------------------------------------------------------------------- */ 
+ *                                                                         *
+ * ----------------------------------------------------------------------------- */
 
 #ifndef GateSPSAngDistribution_h
 #define GateSPSAngDistribution_h 1
@@ -27,9 +27,9 @@ class GateSPSAngDistribution : public G4SPSAngDistribution
 {
 
  public :
- 
+
   GateSPSAngDistribution () ;
-  ~GateSPSAngDistribution () ; 
+  ~GateSPSAngDistribution () ;
 
 } ;
 

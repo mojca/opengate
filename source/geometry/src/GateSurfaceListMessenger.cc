@@ -21,7 +21,7 @@ See GATE/LICENSE.txt for further details
 #include "G4UIcmdWithAString.hh"
 
 GateSurfaceListMessenger::GateSurfaceListMessenger(GateSurfaceList* itsChildList) : GateListMessenger(itsChildList)
-{ 
+{
   pInsertCmd->SetCandidates(DumpMap());
 
   pInsertCmd->AvailableForStates(G4State_Idle,G4State_GeomClosed,G4State_EventProc);
@@ -32,7 +32,7 @@ GateSurfaceListMessenger::~GateSurfaceListMessenger()
 {}
 
 const G4String& GateSurfaceListMessenger::DumpMap()
-{ 
+{
   static G4String thelist = "";
   return thelist;
 }
@@ -40,7 +40,7 @@ const G4String& GateSurfaceListMessenger::DumpMap()
 void GateSurfaceListMessenger::ListChoices()
 {
   GateObjectStore* store = GateObjectStore::GetInstance();
-  G4cout << "The available volumes are: \n"; 
+  G4cout << "The available volumes are: \n";
   for (GateObjectStore::iterator p = store->begin(); p != store->end(); p++)
   { G4cout << "  " << p->second->GetObjectName() << G4endl;}
 }
@@ -49,7 +49,7 @@ void GateSurfaceListMessenger::DoInsertion(const G4String& surfaceName)
 {
   if (GetNewInsertionBaseName().empty()) SetNewInsertionBaseName(surfaceName);
   // check for nameconflicts, modify name when name conflict
-  // the following routinge, defined in GateListMessenger uses CheckNameConflict to 
+  // the following routinge, defined in GateListMessenger uses CheckNameConflict to
   // determine if there is a name conflict
   AvoidNameConflicts();
   // look up the VObjectInserter
@@ -74,7 +74,7 @@ void GateSurfaceListMessenger::DoInsertion(const G4String& surfaceName)
 }
 
 G4bool GateSurfaceListMessenger::CheckNameConflict(const G4String& name)
-{ 
+{
   // look in the surface list for surfaces with the same name
   // when a surface with the same name exists there is a name conflict
   return (GetSurfaceList()->FindSurface(name) != 0);

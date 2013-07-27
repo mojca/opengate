@@ -35,7 +35,7 @@ m_name = aName;
 m_messenger = new GateARFTableMgrMessenger( aName , this );
 m_EThreshHold = 0.;
 m_EUpHold = 0.;
-m_theARFSD = theARFSD; 
+m_theARFSD = theARFSD;
 m_distance = 34.6*cm;
 SaveARFTables = 0;
 LoadARFTables = 0;
@@ -101,12 +101,12 @@ G4String basename = GetName()+"ARFTable_";
     is.clear();
     is.str(buffer);
     G4String thestr = is.str();
-    
 
-    if ( thestr != "" && (thestr.find("#",0) != 0) && (thestr.find("!",0) != 0)  ) 
+
+    if ( thestr != "" && (thestr.find("#",0) != 0) && (thestr.find("!",0) != 0)  )
       {
        is >> Emin >> Emax>> bname >> NFiles ;
-       
+
       GetARFSD()->AddNewEnergyWindow( bname, NFiles);
       std::ostringstream oss;
       oss << m_currentIndex;
@@ -120,7 +120,7 @@ G4String basename = GetName()+"ARFTable_";
       AddaTable( theTable );
       }
  }
- 
+
 m_theARFSD->computeTables();
 
     inFile.close();
@@ -352,7 +352,7 @@ for ( size_t i =0  ; i < size_t(theNbOfTables) ; i++ )
 
     theTable->FillTableFromBuffer( theBuffer );
     AddaTable( theTable );
-   
+
 }
 
 dest.close();
@@ -363,4 +363,3 @@ dest.close();
 }
 
 #endif
-

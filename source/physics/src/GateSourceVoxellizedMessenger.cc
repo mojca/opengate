@@ -26,7 +26,7 @@ See GATE/LICENSE.txt for further details
 GateSourceVoxellizedMessenger::GateSourceVoxellizedMessenger(GateSourceVoxellized* source)
   : GateMessenger(G4String("source/") + source->GetName(), false),
     m_source(source)
-{ 
+{
 
   G4String cmdName;
 
@@ -59,7 +59,7 @@ GateSourceVoxellizedMessenger::~GateSourceVoxellizedMessenger()
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
 void GateSourceVoxellizedMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
   if( command == ReaderInsertCmd ) {
     m_source->ReaderInsert(ReaderInsertCmd->GetNewVectorValue(newValue)[0]);
   } else if( command == ReaderRemoveCmd ) {
@@ -70,6 +70,3 @@ void GateSourceVoxellizedMessenger::SetNewValue(G4UIcommand* command,G4String ne
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
-
-
-

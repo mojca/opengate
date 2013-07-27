@@ -14,15 +14,15 @@ See GATE/LICENSE.txt for further details
 
 //-----------------------------------------------------------------------------
 GateeMultipleScatteringPB::GateeMultipleScatteringPB():GateVProcess("eMultipleScattering")
-{  
-  SetDefaultParticle("e+"); 
+{
+  SetDefaultParticle("e+");
   SetDefaultParticle("e-");
 
   AddToModelList("Urban95Model");
   AddToModelList("Urban93Model");
 
   SetProcessInfo("Multiple Coulomb scattering of charged particles");
-  pMessenger = new GateMultiScatteringMessenger(this);  
+  pMessenger = new GateMultiScatteringMessenger(this);
 }
 //-----------------------------------------------------------------------------
 
@@ -30,7 +30,7 @@ GateeMultipleScatteringPB::GateeMultipleScatteringPB():GateVProcess("eMultipleSc
 //-----------------------------------------------------------------------------
 G4VProcess* GateeMultipleScatteringPB::CreateProcess(G4ParticleDefinition *)
 {
-  return new G4eMultipleScattering(GetG4ProcessName()); 
+  return new G4eMultipleScattering(GetG4ProcessName());
 }
 //-----------------------------------------------------------------------------
 
@@ -38,7 +38,7 @@ G4VProcess* GateeMultipleScatteringPB::CreateProcess(G4ParticleDefinition *)
 //-----------------------------------------------------------------------------
 void GateeMultipleScatteringPB::ConstructProcess(G4ProcessManager * manager)
 {
-  manager->AddProcess(GetProcess(),-1, 1, 1);           
+  manager->AddProcess(GetProcess(),-1, 1, 1);
 }
 //-----------------------------------------------------------------------------
 
@@ -56,8 +56,8 @@ bool GateeMultipleScatteringPB::IsApplicable(G4ParticleDefinition * par)
 //-----------------------------------------------------------------------------
 bool GateeMultipleScatteringPB::IsModelApplicable(G4String ,G4ParticleDefinition * par)
 {
-  for(unsigned int k = 0; k<theListOfParticlesWithSelectedModels.size();k++) 
-    if(par==theListOfParticlesWithSelectedModels[k]) 
+  for(unsigned int k = 0; k<theListOfParticlesWithSelectedModels.size();k++)
+    if(par==theListOfParticlesWithSelectedModels[k])
       GateError("A " << GetG4ProcessName() << " model has been already selected for " << par->GetParticleName());
   if(par == G4Electron::Electron()) return true;
   if(par == G4Positron::Positron()) return true;

@@ -25,17 +25,17 @@ class GateSphereMessenger;
 
 /*! \class  GateSphere
     \brief  The GateSphere creates a solid and a logical volume for a sphere
-    
-    - GateSphere - by Daniel.Strul@iphe.unil.ch 
 
-*/      
+    - GateSphere - by Daniel.Strul@iphe.unil.ch
+
+*/
 class GateSphere  : public GateVVolume
 {
   public:
     //! Constructor
-    
+
     GateSphere(const G4String& itsName,
-		 G4bool acceptsChildren=true, 
+		 G4bool acceptsChildren=true,
 		 G4int depth=0);
 
 
@@ -44,7 +44,7 @@ class GateSphere  : public GateVVolume
 		       G4double itsRmin=0.,
 	               G4double itsSPhi=0., G4double itsDPhi=2*M_PI,
 	               G4double itsSTheta=0., G4double itsDTheta=M_PI,
-		       G4bool acceptsChildren=true, 
+		       G4bool acceptsChildren=true,
 		       G4int depth=0);
     //! Destructor
     virtual ~GateSphere();
@@ -57,8 +57,8 @@ class GateSphere  : public GateVVolume
      //! Implementation of the pure virtual method ConstructOwnSolidAndLogical() declared by the base-class.
      //! Construct a new sphere-solid and its logical volume.
      //! If flagUpdateOnly is set to 1, the sphere is updated rather than rebuilt.
-     virtual G4LogicalVolume*   ConstructOwnSolidAndLogicalVolume(G4Material*, G4bool); 
-//     virtual G4VPhysicalVolume* ConstructOwnPhysicalVolume();   
+     virtual G4LogicalVolume*   ConstructOwnSolidAndLogicalVolume(G4Material*, G4bool);
+//     virtual G4VPhysicalVolume* ConstructOwnPhysicalVolume();
 
      //! Implementation of the pure virtual method DestroyOwnSolidAndVolume() declared by the base-class.
      //! Destroy the solid and logical volume created by ConstructOwnSolidAndLogical()
@@ -68,18 +68,18 @@ class GateSphere  : public GateVVolume
       	\brief a description of the creator
 
 	\param indent: the print-out indentation (cosmetic parameter)
-    */    
+    */
      virtual void DescribeMyself(size_t level);
-     
+
      //! Implementation of the pure virtual method GetHalfDimension() declared by the base-class
      //! Must return the half-size of the sphere along an axis (X=0, Y=1, Z=2)
      //! Returns the radius: accurate only for full spheres
-     inline G4double GetHalfDimension(size_t ) 
+     inline G4double GetHalfDimension(size_t )
       {return m_sphereRmax;};
 
      //! Overload of the dummy virtual method ComputeMyOwnVolume() defined by the base-class
      //! Returns the volume of the solid
-     G4double ComputeMyOwnVolume()  const;	 
+     G4double ComputeMyOwnVolume()  const;
 
     //@}
 
@@ -103,21 +103,21 @@ class GateSphere  : public GateVVolume
      void SetSphereRmin  (G4double val)
       	{  m_sphereRmin = val; /*ComputeParameters();*/ }
      //! Set the external diameter
-     void SetSphereRmax  (G4double val) 
-      	{  m_sphereRmax = val; /*ComputeParameters();*/ } 
+     void SetSphereRmax  (G4double val)
+      	{  m_sphereRmax = val; /*ComputeParameters();*/ }
      //! Set the start phi angle
-     void SetSphereSPhi  (G4double val) 
-      	{  m_sphereSPhi = val; /*ComputeParameters();*/ } 
+     void SetSphereSPhi  (G4double val)
+      	{  m_sphereSPhi = val; /*ComputeParameters();*/ }
      //! Set the angular span for the phi angle
-     void SetSphereDPhi  (G4double val) 
-      	{  m_sphereDPhi = val; /*ComputeParameters();*/ } 
+     void SetSphereDPhi  (G4double val)
+      	{  m_sphereDPhi = val; /*ComputeParameters();*/ }
      //! Set the start theta angle
-     void SetSphereSTheta  (G4double val) 
-      	{ m_sphereSTheta = val; /*ComputeParameters();*/ } 
+     void SetSphereSTheta  (G4double val)
+      	{ m_sphereSTheta = val; /*ComputeParameters();*/ }
      //! Set the angular span for the theta angle
-     void SetSphereDTheta  (G4double val)  
-      	{  m_sphereDTheta = val; /*ComputeParameters();*/ } 
- 
+     void SetSphereDTheta  (G4double val)
+      	{  m_sphereDTheta = val; /*ComputeParameters();*/ }
+
     //@}
 
   private:
@@ -141,13 +141,12 @@ class GateSphere  : public GateVVolume
      //! Object visualisation attribute object.
      //! It is passed to the logical volume each time the logical volume is created
      G4VisAttributes *m_own_visAtt;
-    
+
      //! Messenger
-     GateSphereMessenger* m_Messenger; 
+     GateSphereMessenger* m_Messenger;
 
 };
 
 MAKE_AUTO_CREATOR_VOLUME(sphere,GateSphere)
 
 #endif
-

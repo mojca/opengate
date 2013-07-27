@@ -34,12 +34,12 @@ GateGeometryVoxelImageReader::~GateGeometryVoxelImageReader()
 }
 
 
-void GateGeometryVoxelImageReader::Describe(G4int level) 
+void GateGeometryVoxelImageReader::Describe(G4int level)
 {
   G4cout << " Voxel reader type ---> " << m_name << G4endl;
 
   GateVGeometryVoxelReader::Describe(level);
-  
+
 }
 
 void GateGeometryVoxelImageReader::ReadFile(G4String fileName)
@@ -58,7 +58,7 @@ void GateGeometryVoxelImageReader::ReadFile(G4String fileName)
   G4cout << "GateSourceVoxelImageReader::ReadFile : fileName: " << fileName << G4endl;
   inFile.open(fileName.c_str(),std::ios::in);
 
-  G4String materialName; 
+  G4String materialName;
   G4int    imageValue;
   G4double dx, dy, dz;
   G4int    nx, ny, nz;
@@ -100,7 +100,7 @@ void GateGeometryVoxelImageReader::ReadFile(G4String fileName)
     EmptyStore();
     G4cout << "GateSourceVoxelImageReader::ReadFile: For your information, the voxel store has been emptied." << G4endl;
   }
-  
+
 
 }
 
@@ -113,10 +113,10 @@ void GateGeometryVoxelImageReader::ReadRTFile(G4String , G4String fileName)
 
 GateRTPhantom *Ph = GateRTPhantomMgr::GetInstance()->CheckGeometryAttached( GetCreator()->GetObjectName() );
 
-if ( Ph != 0) 
+if ( Ph != 0)
 {G4cout << " The Object "<< Ph->GetName()
 <<" is attached to the "<<m_name<<" Geometry Voxel Reader"<<G4endl;
-} 
+}
 
 
   if (m_voxelTranslator == NULL) {
@@ -171,5 +171,5 @@ if ( Ph != 0)
     Compress();
     G4cout << "GateGeometryVoxelImageReader::ReadFile: For your information, the voxel store has been emptied." << G4endl;
   }
- 
+
 }

@@ -53,7 +53,7 @@ See GATE/LICENSE.txt for further details
 #include "G4MscStepLimitType.hh"
 
 
-//#include "GatePhysicsList.hh" 
+//#include "GatePhysicsList.hh"
 //class GatePhysicsList;
 
 class GateVProcessMessenger;
@@ -63,7 +63,7 @@ class GateVProcess
 public:
   GateVProcess(G4String name);
   virtual ~GateVProcess();
-  
+
   void ConstructParticle(){;}
   void ConstructProcess();
 
@@ -116,15 +116,15 @@ public:
 
   std::vector<G4String> FindParticleName(G4String name);
   std::vector<G4ParticleDefinition*> GetParticles(G4String param);
-  
+
   void SetModelEnergyMax(G4String model, G4double energy, G4String particle = "All",G4String Option="NoOption");
   void SetModelEnergyMin(G4String model, G4double energy, G4String particle = "All",G4String Option="NoOption");
   void ClearModelEnergyRange(G4String model, G4String particle = "All");
 
   // void MessengerInitialization();
- 
+
   bool IsEnabled(G4ParticleDefinition * par);
-  
+
   G4String GetG4ProcessName() {return mG4ProcessName;}
 
   int GetNumberOfParticles() {return theListOfDefaultParticles.size();}
@@ -132,7 +132,7 @@ public:
   std::vector<G4String> GetTheListOfDefaultParticles() {return theListOfDefaultParticles ;}
   std::vector<G4String> GetTheListOfDataSets() {return theListOfDataSets;}
   std::vector<G4String> GetTheListOfModels() {return theListOfModels  ;}
-  
+
   std::vector<G4ParticleDefinition*> GetTheListOfEnabledParticles() {return theListOfEnabledParticles;}
 
 
@@ -143,8 +143,8 @@ public:
     static std::vector<GateVProcess*> theListOfProcesses;
     return &theListOfProcesses;
   }
-  
-	
+
+
   static void Delete();
 
 
@@ -161,11 +161,11 @@ public:
 
 
 
-protected:  
+protected:
   G4String mG4ProcessName;
   G4VProcess * pProcess;
   G4VProcess * pFinalProcess;
-  //GenericWrapperProcess * wrapper; 
+  //GenericWrapperProcess * wrapper;
 
   G4bool mIsWrapperActive;
   G4bool mKeepSec;
@@ -174,7 +174,7 @@ protected:
   G4String ProcessInfo;
   std::vector<G4String> theListOfDataSets;
   std::vector<G4String> theListOfModels;
-  
+
   std::vector<G4ParticleDefinition*> theListOfEnabledParticles;
 
   std::vector<G4ParticleDefinition*> theListOfParticlesWithSelectedDS;
@@ -182,7 +182,7 @@ protected:
 
   std::vector<G4ParticleDefinition*> theListOfParticlesWithSelectedModels;
   std::vector<GateListOfHadronicModels *> theListOfSelectedModels;
-  
+
   std::map<G4String,G4double> theListOfWrapperFactor;
   std::map<G4String,G4double> theListOfWrapperCSEFactor;
   std::map<G4String,GenericWrapperProcess*> theListOfWrapper;
@@ -191,7 +191,7 @@ protected:
   std::map<G4String,G4double> thelistOfFinalRangeForStepFunction;
 
   std::map<G4String,G4double> thelistOfLinearLossLimit;
-  
+
   std::map<G4String,G4MscStepLimitType> thelistOfMscLimitation;
 
   std::list<G4HadronicInteraction*> theListOfG4HadronicModels;
@@ -205,7 +205,7 @@ protected:
 };
 
 
-// Macro for headers of process with 
+// Macro for headers of process with
 #define MAKE_PROCESS_AUTO_CREATOR(name)			\
 class name:public GateVProcess \
 { \
@@ -239,7 +239,7 @@ private: \
   public:					\
     name##Creator() {  name::GetInstance()->Register();  };  };	\
   static name##Creator name##Creator_var;
-  
+
 // Macro for headers of process with customisable models
 #define MAKE_PROCESS_AUTO_CREATOR_WITH_MODEL(name)			\
 class name:public GateVProcess \
@@ -280,7 +280,7 @@ private: \
   static name##Creator name##Creator_var;
 
 
-#define MAKE_PROCESS_AUTO_CREATOR_CC(name) name *name::singleton_##name = 0; 
+#define MAKE_PROCESS_AUTO_CREATOR_CC(name) name *name::singleton_##name = 0;
 
 //    bool dummy##name =  GatePhysicsList::GetInstance()->Register(name::GetInstance());
 

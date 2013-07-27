@@ -31,10 +31,10 @@ class G4UIcmdWithADouble;
 class GateVPulseProcessor;
 
 /*! \class  GatePulseProcessorChainMessenger
-    \brief  This messenger manages a chain of pulse-processor modules 
+    \brief  This messenger manages a chain of pulse-processor modules
 
     - GatePulseProcessorChainMessenger - by Daniel.Strul@iphe.unil.ch
-*/      
+*/
 //    Last modification in 12/2011 by Abdul-Fattah.Mohamad-Hadi@subatech.in2p3.fr, for the multi-system approach.
 
 class GatePulseProcessorChainMessenger: public GateListMessenger
@@ -44,7 +44,7 @@ class GatePulseProcessorChainMessenger: public GateListMessenger
     GatePulseProcessorChainMessenger(GatePulseProcessorChain* itsProcessorChain);
 
     ~GatePulseProcessorChainMessenger();
-        
+
     //! Standard messenger command interpreter
     void SetNewValue(G4UIcommand*, G4String);
 
@@ -53,18 +53,17 @@ class GatePulseProcessorChainMessenger: public GateListMessenger
   private:
     //! Dumps the list of modules that the user can insert into the chain
     virtual const G4String& DumpMap();
-    
+
     //! Inserts a new module into the pulse-processor chain
     virtual void DoInsertion(const G4String& typeName);
-    
-    //! Returns the pulse-processor chain managed by this messenger 
+
+    //! Returns the pulse-processor chain managed by this messenger
     virtual GatePulseProcessorChain* GetProcessorChain()
       { return (GatePulseProcessorChain*) GetListManager(); }
-    
+
   private:
-  
+
     G4UIcmdWithAString*         SetInputNameCmd;        //!< The UI command "set input name"
 };
 
 #endif
-

@@ -34,12 +34,12 @@ GateGeometryVoxelTestReader::~GateGeometryVoxelTestReader()
 }
 
 
-void GateGeometryVoxelTestReader::Describe(G4int level) 
+void GateGeometryVoxelTestReader::Describe(G4int level)
 {
   G4cout << " Voxel reader type ---> " << m_name << G4endl;
 
   GateVGeometryVoxelReader::Describe(level);
-  
+
 }
 
 void GateGeometryVoxelTestReader::ReadFile(G4String fileName)
@@ -103,4 +103,3 @@ void GateGeometryVoxelTestReader::ReadFile(G4String fileName)
 
 //E  ((GateVoxelReplicaMatrix*)m_creator)->ResizeAll();
 }
-

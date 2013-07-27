@@ -24,7 +24,7 @@ See GATE/LICENSE.txt for further details
 
 GateGeometryVoxelInterfileReaderMessenger::GateGeometryVoxelInterfileReaderMessenger(GateGeometryVoxelInterfileReader* voxelReader)
   : GateVGeometryVoxelReaderMessenger((GateVGeometryVoxelReader*)voxelReader)
-{ 
+{
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
@@ -36,11 +36,8 @@ GateGeometryVoxelInterfileReaderMessenger::~GateGeometryVoxelInterfileReaderMess
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
 void GateGeometryVoxelInterfileReaderMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
   GateVGeometryVoxelReaderMessenger::SetNewValue(command,newValue);
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
-
-
-

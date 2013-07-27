@@ -31,7 +31,7 @@ double time() {
 struct Materials{
     unsigned int nb_materials;              // n
     unsigned int nb_elements_total;         // k
-    
+
     unsigned short int *nb_elements;        // n
     unsigned short int *index;              // n
     unsigned short int *mixture;            // k
@@ -53,15 +53,15 @@ struct Materials{
 
 // Materials device allocation
 void materials_device_malloc(Materials &mat, unsigned int nb_mat, unsigned int nb_elm) {
-	
+
     mat.nb_materials = nb_mat;
     mat.nb_elements_total = nb_elm;
-    
+
     unsigned int mem_mat_usi = nb_mat * sizeof(unsigned short int);
     unsigned int mem_mat_float = nb_mat * sizeof(float);
     unsigned int mem_elm_usi = nb_elm * sizeof(unsigned short int);
     unsigned int mem_elm_float = nb_elm * sizeof(float);
-    
+
     cudaMalloc((void**) &mat.nb_elements, mem_mat_usi);
     cudaMalloc((void**) &mat.index, mem_mat_usi);
     cudaMalloc((void**) &mat.mixture, mem_elm_usi);
@@ -103,10 +103,10 @@ void materials_device_free(Materials &mat) {
 
 // Materials host allocation
 void materials_host_malloc(Materials &mat, unsigned int nb_mat, unsigned int nb_elm) {
-	
+
     mat.nb_materials = nb_mat;
     mat.nb_elements_total = nb_elm;
-    
+
     unsigned int mem_mat_usi = nb_mat * sizeof(unsigned short int);
     unsigned int mem_mat_float = nb_mat * sizeof(float);
     unsigned int mem_elm_usi = nb_elm * sizeof(unsigned short int);
@@ -238,9 +238,9 @@ void stack_device_malloc(StackParticle &stackpart, int stack_size) {
 	cudaMalloc((void**) &stackpart.dz, mem_stackpart_float);
 	cudaMalloc((void**) &stackpart.px, mem_stackpart_float);
 	cudaMalloc((void**) &stackpart.py, mem_stackpart_float);
-	cudaMalloc((void**) &stackpart.pz, mem_stackpart_float);	
-	cudaMalloc((void**) &stackpart.t, mem_stackpart_float);	
-	cudaMalloc((void**) &stackpart.type, mem_stackpart_usint);	
+	cudaMalloc((void**) &stackpart.pz, mem_stackpart_float);
+	cudaMalloc((void**) &stackpart.t, mem_stackpart_float);
+	cudaMalloc((void**) &stackpart.type, mem_stackpart_usint);
 	cudaMalloc((void**) &stackpart.seed, mem_stackpart_uint);
 	cudaMalloc((void**) &stackpart.eventID, mem_stackpart_uint);
 	cudaMalloc((void**) &stackpart.trackID, mem_stackpart_uint);
@@ -320,7 +320,7 @@ void volume_device_free(Volume &vol) {
 struct Dosimetry {
     float *edep;
     float *edep2;
-    
+
     unsigned int mem_data;
     float3 size_in_mm;
     int3 size_in_vox;
@@ -404,12 +404,12 @@ void activities_device_free(Activities &act) {
 void materials_copy_host2device(Materials &host, Materials &device) {
     unsigned int nb_mat = host.nb_materials;
     unsigned int nb_elm = host.nb_elements_total;
-    
+
     unsigned int mem_mat_usi = nb_mat * sizeof(unsigned short int);
     unsigned int mem_mat_float = nb_mat * sizeof(float);
     unsigned int mem_elm_usi = nb_elm * sizeof(unsigned short int);
     unsigned int mem_elm_float = nb_elm * sizeof(float);
-    
+
     cudaMemcpy(device.nb_elements, host.nb_elements, mem_mat_usi, cudaMemcpyHostToDevice);
     cudaMemcpy(device.index, host.index, mem_mat_usi, cudaMemcpyHostToDevice);
     cudaMemcpy(device.mixture, host.mixture, mem_elm_usi, cudaMemcpyHostToDevice);
@@ -427,7 +427,7 @@ void materials_copy_host2device(Materials &host, Materials &device) {
     cudaMemcpy(device.fA, host.fA, mem_mat_float, cudaMemcpyHostToDevice);
     cudaMemcpy(device.fM, host.fM, mem_mat_float, cudaMemcpyHostToDevice);
 }
- 
+
 // Copy stack from device to host
 void stack_copy_device2host(StackParticle &stackpart, StackParticle &phasespace) {
 	int stack_size = stackpart.size;
@@ -435,16 +435,16 @@ void stack_copy_device2host(StackParticle &stackpart, StackParticle &phasespace)
 	unsigned int mem_stackpart_char = stack_size * sizeof(char);
 	unsigned int mem_stackpart_uint = stack_size * sizeof(unsigned int);
 	unsigned int mem_stackpart_usint = stack_size * sizeof(unsigned short int);
-	
+
 	cudaMemcpy(phasespace.E, stackpart.E, mem_stackpart_float, cudaMemcpyDeviceToHost);
 	cudaMemcpy(phasespace.dx, stackpart.dx, mem_stackpart_float, cudaMemcpyDeviceToHost);
 	cudaMemcpy(phasespace.dy, stackpart.dy, mem_stackpart_float, cudaMemcpyDeviceToHost);
 	cudaMemcpy(phasespace.dz, stackpart.dz, mem_stackpart_float, cudaMemcpyDeviceToHost);
 	cudaMemcpy(phasespace.px, stackpart.px, mem_stackpart_float, cudaMemcpyDeviceToHost);
 	cudaMemcpy(phasespace.py, stackpart.py, mem_stackpart_float, cudaMemcpyDeviceToHost);
-	cudaMemcpy(phasespace.pz, stackpart.pz, mem_stackpart_float, cudaMemcpyDeviceToHost);	
-	cudaMemcpy(phasespace.t, stackpart.t, mem_stackpart_float, cudaMemcpyDeviceToHost);	
-	cudaMemcpy(phasespace.type, stackpart.type, mem_stackpart_usint, cudaMemcpyDeviceToHost);	
+	cudaMemcpy(phasespace.pz, stackpart.pz, mem_stackpart_float, cudaMemcpyDeviceToHost);
+	cudaMemcpy(phasespace.t, stackpart.t, mem_stackpart_float, cudaMemcpyDeviceToHost);
+	cudaMemcpy(phasespace.type, stackpart.type, mem_stackpart_usint, cudaMemcpyDeviceToHost);
 	cudaMemcpy(phasespace.endsimu, stackpart.endsimu, mem_stackpart_char, cudaMemcpyDeviceToHost);
 	cudaMemcpy(phasespace.active, stackpart.active, mem_stackpart_char, cudaMemcpyDeviceToHost);
 	cudaMemcpy(phasespace.trackID, stackpart.trackID, mem_stackpart_uint, cudaMemcpyDeviceToHost);
@@ -458,16 +458,16 @@ void stack_copy_host2device(StackParticle &phasespace, StackParticle &stackpart)
 	unsigned int mem_stackpart_char = stack_size * sizeof(char);
 	unsigned int mem_stackpart_uint = stack_size * sizeof(unsigned int);
 	unsigned int mem_stackpart_usint = stack_size * sizeof(unsigned short int);
-	
+
 	cudaMemcpy(stackpart.E, phasespace.E, mem_stackpart_float,   cudaMemcpyHostToDevice);
 	cudaMemcpy(stackpart.dx, phasespace.dx, mem_stackpart_float, cudaMemcpyHostToDevice);
 	cudaMemcpy(stackpart.dy, phasespace.dy, mem_stackpart_float, cudaMemcpyHostToDevice);
 	cudaMemcpy(stackpart.dz, phasespace.dz, mem_stackpart_float, cudaMemcpyHostToDevice);
 	cudaMemcpy(stackpart.px, phasespace.px, mem_stackpart_float, cudaMemcpyHostToDevice);
 	cudaMemcpy(stackpart.py, phasespace.py, mem_stackpart_float, cudaMemcpyHostToDevice);
-	cudaMemcpy(stackpart.pz, phasespace.pz, mem_stackpart_float, cudaMemcpyHostToDevice);	
-	cudaMemcpy(stackpart.t, phasespace.t, mem_stackpart_float, cudaMemcpyHostToDevice);	
-	cudaMemcpy(stackpart.type, phasespace.type, mem_stackpart_usint, cudaMemcpyHostToDevice);	
+	cudaMemcpy(stackpart.pz, phasespace.pz, mem_stackpart_float, cudaMemcpyHostToDevice);
+	cudaMemcpy(stackpart.t, phasespace.t, mem_stackpart_float, cudaMemcpyHostToDevice);
+	cudaMemcpy(stackpart.type, phasespace.type, mem_stackpart_usint, cudaMemcpyHostToDevice);
 	cudaMemcpy(stackpart.endsimu, phasespace.endsimu, mem_stackpart_char, cudaMemcpyHostToDevice);
 	cudaMemcpy(stackpart.active, phasespace.active, mem_stackpart_char, cudaMemcpyHostToDevice);
 	cudaMemcpy(stackpart.trackID, phasespace.trackID, mem_stackpart_uint, cudaMemcpyHostToDevice);
@@ -527,7 +527,7 @@ void dosimetry_copy_host2device(Dosimetry &volhost, Dosimetry &voldevice) {
 void activities_copy_host2device(Activities &acthost, Activities &actdevice) {
     actdevice.nb_activities = acthost.nb_activities;
     actdevice.tot_activity = acthost.tot_activity;
-    cudaMemcpy(actdevice.act_index, acthost.act_index, 
+    cudaMemcpy(actdevice.act_index, acthost.act_index,
                actdevice.nb_activities*sizeof(unsigned int), cudaMemcpyHostToDevice);
     cudaMemcpy(actdevice.act_cdf, acthost.act_cdf,
                actdevice.nb_activities*sizeof(float), cudaMemcpyHostToDevice);
@@ -604,12 +604,12 @@ __device__ float dot_vector(float3 u, float3 v) {
 
 //// Return the next voxel boundary distance, it is used by the standard navigator
 __device__ float get_boundary_voxel_by_raycasting(int4 vox, float3 p, float3 d, float3 res) {
-    
-    
+
+
 	float xmin, xmax, ymin, ymax, zmin, zmax;
     float3 di = inverse_vector(d);
 	float tmin, tmax, tymin, tymax, tzmin, tzmax, buf;
-	
+
     // Define the voxel bounding box
     xmin = vox.x*res.x;
     ymin = vox.y*res.y;
@@ -617,10 +617,10 @@ __device__ float get_boundary_voxel_by_raycasting(int4 vox, float3 p, float3 d, 
     xmax = (d.x<0 && p.x==xmin) ? xmin-res.x : xmin+res.x;
     ymax = (d.y<0 && p.y==ymin) ? ymin-res.y : ymin+res.y;
     zmax = (d.z<0 && p.z==zmin) ? zmin-res.z : zmin+res.z;
-    
+
     tmin = -1e9f;
     tmax = 1e9f;
-    
+
     // on x
     if (d.x != 0.0f) {
         tmin = (xmin - p.x) * di.x;
@@ -670,7 +670,7 @@ __device__ int binary_search(float *val, float key, int n) {
             max = mid;
         }
     }
-    return min; 
+    return min;
 }
 
 void dosimetry_dump(Dosimetry dosemap) {
@@ -681,14 +681,14 @@ void dosimetry_dump(Dosimetry dosemap) {
     fprintf(pfile, "BinaryData = True \n");
     fprintf(pfile, "BinaryDataOrderMDB = False \n");
     fprintf(pfile, "CompressedData = False \n");
-    fprintf(pfile, "ElementSpacing = %f %f %f \n", dosemap.voxel_size.x, 
-                                                   dosemap.voxel_size.y, 
+    fprintf(pfile, "ElementSpacing = %f %f %f \n", dosemap.voxel_size.x,
+                                                   dosemap.voxel_size.y,
                                                    dosemap.voxel_size.z);
-    fprintf(pfile, "DimSize = %i %i %i \n", dosemap.size_in_vox.x, 
-                                            dosemap.size_in_vox.y, 
+    fprintf(pfile, "DimSize = %i %i %i \n", dosemap.size_in_vox.x,
+                                            dosemap.size_in_vox.y,
                                             dosemap.size_in_vox.z);
     fprintf(pfile, "ElementType = MET_FLOAT \n");
-    
+
     fprintf(pfile, "ElementDataFile = dosemap.raw\n");
     fclose(pfile);
 
@@ -708,9 +708,9 @@ __device__ unsigned long weyl;
 __device__ unsigned long brent_int(unsigned int index, unsigned long *device_x_brent, unsigned long seed)
 
 {
-	
+
 #define UINT64 (sizeof(unsigned long)>>3)
-#define UINT32 (1 - UINT64) 
+#define UINT32 (1 - UINT64)
 #define wlen (64*UINT64 +  32*UINT32)
 #define r    (4*UINT64 + 8*UINT32)
 #define s    (3*UINT64 +  3*UINT32)
@@ -718,58 +718,58 @@ __device__ unsigned long brent_int(unsigned int index, unsigned long *device_x_b
 #define b    (27*UINT64 +  13*UINT32)
 #define c    (29*UINT64 +  14*UINT32)
 #define d    (33*UINT64 +  15*UINT32)
-#define ws   (27*UINT64 +  16*UINT32) 
+#define ws   (27*UINT64 +  16*UINT32)
 
-	int z, z_w, z_i_brent;	
+	int z, z_w, z_i_brent;
 	if (r==4){
 		z=6; z_w=4; z_i_brent=5;}
 	else{
 		z=10; z_w=8; z_i_brent=9;}
-	
+
 	unsigned long w = device_x_brent[z*index + z_w];
 	unsigned long i_brent = device_x_brent[z*index + z_i_brent];
 	unsigned long zero = 0;
 	unsigned long t, v;
 	int k;
-	
+
 	if (seed != zero) { // Initialisation necessary
 		// weyl = odd approximation to 2**wlen*(3-sqrt(5))/2.
-		if (UINT32) 
+		if (UINT32)
 			weyl = 0x61c88647;
-		else 
+		else
 			weyl = ((((unsigned long)0x61c88646)<<16)<<16) + (unsigned long)0x80b583eb;
-		
+
 		v = (seed!=zero)? seed:~seed;  // v must be nonzero
-		
+
 		for (k = wlen; k > 0; k--) {   // Avoid correlations for close seeds
 			v ^= v<<10; v ^= v>>15;    // Recurrence has period 2**wlen-1
 			v ^= v<<4;  v ^= v>>13;    // for wlen = 32 or 64
 		}
 		for (w = v, k = 0; k < r; k++) { // Initialise circular array
-			v ^= v<<10; v ^= v>>15; 
+			v ^= v<<10; v ^= v>>15;
 			v ^= v<<4;  v ^= v>>13;
-			device_x_brent[k + z*index] = v + (w+=weyl);              
+			device_x_brent[k + z*index] = v + (w+=weyl);
 		}
 		for (i_brent = r-1, k = 4*r; k > 0; k--) { // Discard first 4*r results
-			t = device_x_brent[(i_brent = (i_brent+1)&(r-1)) + z*index];   t ^= t<<a;  t ^= t>>b;			
-			v = device_x_brent[((i_brent+(r-s))&(r-1)) + z*index];	v ^= v<<c;  v ^= v>>d;       
-			device_x_brent[i_brent + z*index] = t^v;  
+			t = device_x_brent[(i_brent = (i_brent+1)&(r-1)) + z*index];   t ^= t<<a;  t ^= t>>b;
+			v = device_x_brent[((i_brent+(r-s))&(r-1)) + z*index];	v ^= v<<c;  v ^= v>>d;
+			device_x_brent[i_brent + z*index] = t^v;
 		}
     }
-    
+
 	// Apart from initialisation (above), this is the generator
 	t = device_x_brent[(i_brent = (i_brent+1)&(r-1)) + z*index]; // Assumes that r is a power of two
 	v = device_x_brent[((i_brent+(r-s))&(r-1)) + z*index];       // Index is (i-s) mod r
 	t ^= t<<a;  t ^= t>>b;                                       // (I + L^a)(I + R^b)
 	v ^= v<<c;  v ^= v>>d;                                       // (I + L^c)(I + R^d)
-	device_x_brent[i_brent + z*index] = (v ^= t); 				 // Update circular array                 
+	device_x_brent[i_brent + z*index] = (v ^= t); 				 // Update circular array
 	w += weyl;                                                   // Update Weyl generator
-	
+
 	device_x_brent[z*index + z_w] = w;
 	device_x_brent[z*index + z_i_brent] = i_brent;
-	
+
 	return (v + (w^(w>>ws)));  // Return combination
-	
+
 #undef UINT64
 #undef UINT32
 #undef wlen
@@ -779,35 +779,35 @@ __device__ unsigned long brent_int(unsigned int index, unsigned long *device_x_b
 #undef b
 #undef c
 #undef d
-#undef ws 
-}	
+#undef ws
+}
 
 // Brent PRNG real version
 __device__ double Brent_real(int index, unsigned long *device_x_brent, unsigned long seed)
 
 {
-	
+
 #define UINT64 (sizeof(unsigned long)>>3)
-#define UINT32 (1 - UINT64) 
+#define UINT32 (1 - UINT64)
 #define UREAL64 (sizeof(double)>>3)
 #define UREAL32 (1 - UREAL64)
-	
+
 	// sr = number of bits discarded = 11 for double, 40 or 8 for float
-	
+
 #define sr (11*UREAL64 +(40*UINT64 + 8*UINT32)*UREAL32)
-	
+
 	// ss (used for scaling) is 53 or 21 for double, 24 for float
-	
+
 #define ss ((53*UINT64 + 21*UINT32)*UREAL64 + 24*UREAL32)
-	
+
 	// SCALE is 0.5**ss, SC32 is 0.5**32
-	
-#define SCALE ((double)1/(double)((unsigned long)1<<ss)) 
-#define SC32  ((double)1/((double)65536*(double)65536)) 
-	
+
+#define SCALE ((double)1/(double)((unsigned long)1<<ss))
+#define SC32  ((double)1/((double)65536*(double)65536))
+
 	double res;
-	
-	res = (double)0; 
+
+	res = (double)0;
 	while (res == (double)0)  // Loop until nonzero result.
     {   // Usually only one iteration.
 		res = (double)(brent_int(index, device_x_brent, seed)>>sr);     // Discard sr random bits.
@@ -816,7 +816,7 @@ __device__ double Brent_real(int index, unsigned long *device_x_brent, unsigned 
 			res += SC32*(double)brent_int(index, device_x_brent, seed); // Add low-order 32 bits.
     }
 	return (SCALE*res); // Return result in (0.0, 1.0).
-	
+
 #undef UINT64
 #undef UINT32
 #undef UREAL64
@@ -850,10 +850,10 @@ __global__ void kernel_voxelized_source_b2b(StackParticle g1, StackParticle g2, 
 
     float jump = (float)(size_in_vox.x * size_in_vox.y);
     float ind, x, y, z;
-    
+
     float rnd = Brent_real(id, g1.table_x_brent, 0);
     int pos = binary_search(act.act_cdf, rnd, act.nb_activities);
-    
+
     // get the voxel position (x, y, z)
     ind = (float)act.act_index[pos];
     z = floor(ind / jump);
@@ -876,7 +876,7 @@ __global__ void kernel_voxelized_source_b2b(StackParticle g1, StackParticle g2, 
     float theta = Brent_real(id, g1.table_x_brent, 0);
     phi   = gpu_twopi * phi;
     theta = acosf(1.0f - 2.0f*theta);
-    
+
     // convert to cartesian
     float dx = __cosf(phi)*__sinf(theta);
     float dy = __sinf(phi)*__sinf(theta);
@@ -938,7 +938,7 @@ __device__ float Compton_CSPA_Standard(float E, unsigned short int Z) {
 		d5 = __logf(__fdividef(E, T0)); // y
 		CrossSection *= __expf(-d5 * (d3 + d4*d5));
 	}
-	
+
     return CrossSection;
 }
 
@@ -955,7 +955,7 @@ __device__ float Compton_CS_Standard(Materials materials, unsigned int mat, floa
 }
 
 // Compton Scatter (Standard - Klein-Nishina) without secondary
-__device__ float Compton_Effect_Standard_NoSec(StackParticle photons, 
+__device__ float Compton_Effect_Standard_NoSec(StackParticle photons,
                                                unsigned int id,
                                                int* count_d) {
 	float gamE0 = photons.E[id];
@@ -1011,7 +1011,7 @@ __device__ float Compton_Effect_Standard_NoSec(StackParticle photons,
 }
 
 // Compton Scatter (Standard - Klein-Nishina) with secondary (e-)
-__device__ float Compton_Effect_Standard_WiSec(StackParticle photons, 
+__device__ float Compton_Effect_Standard_WiSec(StackParticle photons,
                                                StackParticle electrons,
                                                float cutE,
                                                unsigned int id,
@@ -1066,7 +1066,7 @@ __device__ float Compton_Effect_Standard_WiSec(StackParticle photons,
     }
 
     // kinematic of the scattered electron
-   
+
     float eKinE = gamE0 - gamE1;
     //          DBL_MIN             cut production
     if (eKinE > 1.0e-38f && eKinE > cutE) {
@@ -1085,8 +1085,8 @@ __device__ float Compton_Effect_Standard_WiSec(StackParticle photons,
         electrons.active[id] = 1;
         //printf("Compton => e- cutE %e\n", cutE);
         return 0.0f;
-    } 
-        
+    }
+
     //printf("Compton => / cutE %e\n", cutE);
 
     return eKinE;
@@ -1124,7 +1124,7 @@ __device__ float PhotoElec_CSPA_Standard(float E, unsigned short int Z) {
 	 // from Sandia, the same for all Z
 	float Emin = fmax(PhotoElec_std_IonizationPotentials[Z]*1e-6f, 0.01e-3f);
 	if (E < Emin) {return 0.0f;}
-	
+
 	int start = PhotoElec_std_CumulIntervals[Z-1];
 	int stop = start + PhotoElec_std_NbIntervals[Z];
 	int pos=stop;
@@ -1160,7 +1160,7 @@ __device__ float PhotoElec_Effect_Standard_NoSec(StackParticle photons,
     photons.active[id] = 0;  // this particle is absorbed
     atomicAdd(count_d, 1);   // count simulated primaries
 
-    return 0.0f;      
+    return 0.0f;
 }
 
 // PhotoElectric effect (Standard) with seconday (e-)
@@ -1181,11 +1181,11 @@ __device__ float PhotoElec_Effect_Standard_WiSec(StackParticle photons,
     unsigned int Z = mat.mixture[index+n];
     unsigned int i = 0;
     if (n > 0) {
-        float x = Brent_real(id, photons.table_x_brent, 0) * 
+        float x = Brent_real(id, photons.table_x_brent, 0) *
                   PhotoElec_CS_Standard(mat, matindex, energy);
         float xsec = 0.0f;
         for (i=0; i<n; ++i) {
-            xsec += mat.atom_num_dens[index+i] * 
+            xsec += mat.atom_num_dens[index+i] *
                     PhotoElec_CSPA_Standard(energy, mat.mixture[index+i]);
             if (x <= xsec) {
                 Z = mat.mixture[index+i];
@@ -1205,7 +1205,7 @@ __device__ float PhotoElec_Effect_Standard_WiSec(StackParticle photons,
         ++i;
         bindingEnergy = atom_BindingEnergies[index + i]*1.0e-06f; // in ev
     }
-        
+
     // no shell available
     if (i == nShells) {return 0.0f;}
     float ElecKineEnergy = energy - bindingEnergy;
@@ -1228,17 +1228,17 @@ __device__ float PhotoElec_Effect_Standard_WiSec(StackParticle photons,
         electrons.py[id] = photons.py[id];
         electrons.pz[id] = photons.pz[id];
         electrons.endsimu[id] = 0;
-        // Start to track this electron 
+        // Start to track this electron
         electrons.active[id] = 1;
         //printf("PE => e-\n");
         return bindingEnergy;
     }
-    
+
     // Absorbed the photon
     photons.endsimu[id] = 1; // stop the simulation
     photons.active[id]  = 0;
     atomicAdd(count_d, 1);   // count simulated primaries
-        
+
     // LocalEnergy Deposit
     return bindingEnergy+ElecKineEnergy;
 }
@@ -1248,7 +1248,7 @@ __device__ float PhotoElec_Effect_Standard_WiSec(StackParticle photons,
  ***********************************************************/
 
 // eIonisation Cross Section Per Atom (Möller model)
-__device__ float eIonisation_CSPA_Standard(float E, unsigned short int Z, 
+__device__ float eIonisation_CSPA_Standard(float E, unsigned short int Z,
                                            float cutE, float maxE) {
 	float CS = 0.0f;
 	float xmin = __fdividef(cutE, E);
@@ -1258,7 +1258,7 @@ __device__ float eIonisation_CSPA_Standard(float E, unsigned short int Z,
 	float igam2 = __fdividef(1.0f, gam*gam);
 	float ibeta2 = __fdividef(1.0f, 1.0f - igam2);
 	float g = (2.0f*gam - 1.0f)*igam2;
-	
+
     if (cutE < tmax) {
         // Cross Section per e-
 	    CS = ((xmax-xmin) * (1.0f-g + __fdividef(1.0, (xmin*xmax)) + __fdividef(1.0f, (1.0f-xmin)*(1.0f-xmax))) - g*__logf( __fdividef(xmax*(1.0 - xmin), xmin*(1.0 - xmax)))) * ibeta2;
@@ -1278,7 +1278,7 @@ __device__ float eIonisation_CS_Standard(Materials materials, unsigned int mat, 
     float maxE = materials.electron_max_energy[mat];
 	// Model standard
 	for (i = 0; i < materials.nb_elements[mat]; ++i) {
-        CS += (materials.atom_num_dens[index+i] * 
+        CS += (materials.atom_num_dens[index+i] *
                 eIonisation_CSPA_Standard(E, materials.mixture[index+i], cutE, maxE));
 	}
 
@@ -1309,7 +1309,7 @@ __device__ float eIonisation_dedx_Standard(Materials materials, unsigned int mat
     d = d * 1.9569513367f; // 1/electron_mass_c2
 
     float dedx = __logf(2.0f * __fdividef(tau+2.0f, eexc2)) - 1.0f - beta2 + __logf((tau-d)*d) + __fdividef(tau, tau-d) + __fdividef(0.5f*d*d + (2.0f*tau + 1.0f) * __logf(1.0f - __fdividef(d, tau)), gam2);
-    
+
     // Density correction
     float twoln10 = 2.0f*__logf(10.0f);
     float x = __fdividef(__logf(beta2*gam2), twoln10);
@@ -1325,25 +1325,25 @@ __device__ float eIonisation_dedx_Standard(Materials materials, unsigned int mat
             * __powf(materials.fX1[mat]-x, materials.fM[mat]);
     }
     dedx -= y;
-   
+
     // Total ionization loss
     //                 gpu_twopi_mc2_rcl2
     dedx *= __fdividef(2.549549299e-23f*electronDensity, beta2);
     if (dedx < 0.0f) {dedx = 0.0f;};
-    
+
     // Low energy extrapolation
     if (flag_low_E) {
         //       200 eV
         if (E >= 200.0e-06f) {dedx *= sqrtf( __fdividef(tkin, E));}
-        else {dedx *= __fdividef(sqrtf(tkin*E), 200.0e-06f);} // 200 eV       
-    }    
+        else {dedx *= __fdividef(sqrtf(tkin*E), 200.0e-06f);} // 200 eV
+    }
 
     return dedx;
 }
 
 // Compute the scattering due to the ionization
 __device__ float eIonisation_Effect_Standard_NoSec(StackParticle electrons,
-                                                   StackParticle photons, 
+                                                   StackParticle photons,
                                                    float tmin, float maxE, // tmin=cutE
                                                    unsigned int id, int *count_d) {
     float E = electrons.E[id];
@@ -1381,7 +1381,7 @@ __device__ float eIonisation_Effect_Standard_NoSec(StackParticle electrons,
         y = 1.0f - x;
         z = 1.0f - g*x + x*x*(1.0f - g + __fdividef(1.0f - g*y, y*y));
     } while(grej * Brent_real(id, electrons.table_x_brent, 0) > z);
-    
+
     float deltaKinEnergy = x * E;
     float deltaMomentum = sqrtf(deltaKinEnergy * (deltaKinEnergy + 2.0f*0.510998910f)); // electron_mass_c2
     float cost = deltaKinEnergy * __fdividef(energy + 0.510998910f, deltaMomentum * totalMomentum);
@@ -1391,7 +1391,7 @@ __device__ float eIonisation_Effect_Standard_NoSec(StackParticle electrons,
     float3 deltaDirection = make_float3(sint*__cosf(phi), sint*__sinf(phi), cost);
     deltaDirection = rotateUz(deltaDirection, direction);
     electrons.E[id] = E - deltaKinEnergy;
-    float3 dir = sub_vector(scale_vector(direction, totalMomentum), 
+    float3 dir = sub_vector(scale_vector(direction, totalMomentum),
                             scale_vector(deltaDirection, deltaMomentum));
     dir = unit_vector(dir);
     electrons.dx[id] = dir.x;
@@ -1401,10 +1401,10 @@ __device__ float eIonisation_Effect_Standard_NoSec(StackParticle electrons,
     return deltaKinEnergy;
 }
 
-// Multiple Scattering 
+// Multiple Scattering
 __device__ float MSC_CSPA(float E, unsigned short int Z) {
 
-    float Z23 = __expf( 0.666666666666f*__logf((float)Z) ); 
+    float Z23 = __expf( 0.666666666666f*__logf((float)Z) );
 
     float eTotalEnergy = E + 0.51099891f;
     float beta2 = E * __fdividef(eTotalEnergy+0.51099891f, eTotalEnergy*eTotalEnergy);
@@ -1438,11 +1438,11 @@ __device__ float MSC_CSPA(float E, unsigned short int Z) {
         if (iT == -1)                        iT  = 0 ;
 
         //  calculate betasquare values
-        float T  = Tdat[iT];   
+        float T  = Tdat[iT];
         float EE = T + 0.51099891f;
         float b2small = T * __fdividef(EE + 0.51099891f, EE*EE);
 
-        T = Tdat[iT+1]; 
+        T = Tdat[iT+1];
         EE = T + 0.51099891f;
         float b2big = T * __fdividef(EE + 0.51099891f, EE*EE);
         float ratb2 = __fdividef(beta2-b2small, b2big-b2small);
@@ -1450,7 +1450,7 @@ __device__ float MSC_CSPA(float E, unsigned short int Z) {
         c1 = celectron[iZ][iT];
         c2 = celectron[iZ+1][iT];
         float cc1 = c1 + ratZ*(c2-c1);
-        
+
         c1 = celectron[iZ][iT+1];
         c2 = celectron[iZ+1][iT+1];
         float cc2 = c1 + ratZ*(c2-c1);
@@ -1482,18 +1482,18 @@ __device__ float MSC_CS(Materials materials, unsigned int mat, float E) {
 	int i;
 	int index = materials.index[mat];
 	for (i = 0; i < materials.nb_elements[mat]; ++i) {
-        CS += (materials.atom_num_dens[index+i] * 
+        CS += (materials.atom_num_dens[index+i] *
                 MSC_CSPA(E, materials.mixture[index+i]));
 	}
     return CS;
 }
 
 // Multiple Scattering effect
-__device__ float MSC_Effect(StackParticle electrons, Materials materials, float trueStepLength, 
+__device__ float MSC_Effect(StackParticle electrons, Materials materials, float trueStepLength,
                             unsigned int mat, unsigned int id) {
 
     // double betacp = sqrt(currentKinEnergy*(currentKinEnergy+2.*mass)*KineticEnergy*(KineticEnergy+2.*mass)/((currentKinEnergy+mass)*(KineticEnergy+mass)));
-   
+
     //E = 1.0f;
 
     float E = electrons.E[id];
@@ -1505,7 +1505,7 @@ __device__ float MSC_Effect(StackParticle electrons, Materials materials, float 
     y = __logf(y);
 
     // correction in theta formula
-    float Zeff = __fdividef(materials.nb_electrons_per_vol[mat], 
+    float Zeff = __fdividef(materials.nb_electrons_per_vol[mat],
                             materials.nb_atoms_per_vol[mat]);
     float lnZ = __logf(Zeff);
     float coeffth1 = (1.0f - __fdividef(8.7780e-2f, Zeff)) * (0.87f + 0.03f*lnZ);
@@ -1514,7 +1514,7 @@ __device__ float MSC_Effect(StackParticle electrons, Materials materials, float 
     theta *= corr ;
 
     float phi = gpu_twopi * Brent_real(id, electrons.table_x_brent, 0);
-    
+
     float3 direction = make_float3(electrons.dx[id], electrons.dy[id], electrons.dz[id]);
     float3 deltaDirection = make_float3(__cosf(phi)*__sinf(theta),
                                         __sinf(phi)*__sinf(theta),
@@ -1563,9 +1563,9 @@ __global__ void kernel_NavRegularPhan_Photon_NoSec(StackParticle photons,
 
     /*
     if (index_phantom.w >= phantom.nb_voxel_volume) {
-        printf("  pos %0.2f %0.2f %0.2f ispc %0.2f %0.2f %0.2f ind %i %i %i = %i max %i\n", 
+        printf("  pos %0.2f %0.2f %0.2f ispc %0.2f %0.2f %0.2f ind %i %i %i = %i max %i\n",
                 position.x, position.y, position.z, ivoxsize.x, ivoxsize.y, ivoxsize.z,
-                index_phantom.x, index_phantom.y, index_phantom.z, 
+                index_phantom.x, index_phantom.y, index_phantom.z,
                 index_phantom.w, phantom.nb_voxel_volume);
     }
     */
@@ -1586,7 +1586,7 @@ __global__ void kernel_NavRegularPhan_Photon_NoSec(StackParticle photons,
 
     // Find next discrete interaction, total_dedx and next discrete intraction distance
     float next_interaction_distance =  FLT_MAX;
-    unsigned char next_discrete_process = 0; 
+    unsigned char next_discrete_process = 0;
     float interaction_distance;
     float cross_section;
 
@@ -1609,7 +1609,7 @@ __global__ void kernel_NavRegularPhan_Photon_NoSec(StackParticle photons,
     }
 
     // Distance to the next voxel boundary (raycasting)
-    interaction_distance = get_boundary_voxel_by_raycasting(index_phantom, position, 
+    interaction_distance = get_boundary_voxel_by_raycasting(index_phantom, position,
                                                             direction, phantom.voxel_size);
     if (interaction_distance < next_interaction_distance) {
         // overshoot the distance of 1 um to be inside the next voxel
@@ -1629,7 +1629,7 @@ __global__ void kernel_NavRegularPhan_Photon_NoSec(StackParticle photons,
 
     // Stop simulation if out of phantom or no more energy
     if (   position.x <= 0 || position.x >= phantom.size_in_mm.x
-        || position.y <= 0 || position.y >= phantom.size_in_mm.y 
+        || position.y <= 0 || position.y >= phantom.size_in_mm.y
         || position.z <= 0 || position.z >= phantom.size_in_mm.z ) {
         photons.endsimu[id] = 1;                     // stop the simulation
         atomicAdd(count_d, 1);                       // count simulated primaries
@@ -1656,9 +1656,9 @@ __global__ void kernel_NavRegularPhan_Photon_WiSec(StackParticle photons,
                                                    Dosimetry dosemap,
                                                    int* count_d, float step_limiter) {
     unsigned int id = __umul24(blockIdx.x, blockDim.x) + threadIdx.x;
-    
+
     if (id >= photons.size) return;
-    //printf("ID %i Nav gamma endsimu %i active %i\n", 
+    //printf("ID %i Nav gamma endsimu %i active %i\n",
     //          id, photons.endsimu[id], photons.active[id]);
     if (photons.endsimu[id]) return;
     if (!photons.active[id]) return;
@@ -1680,7 +1680,7 @@ __global__ void kernel_NavRegularPhan_Photon_WiSec(StackParticle photons,
     index_phantom.w = index_phantom.z*phantom.nb_voxel_slice
                        + index_phantom.y*phantom.size_in_vox.x
                        + index_phantom.x; // linear index
-    
+
     // Read direction
     float3 direction;
     direction.x = photons.dx[id];
@@ -1700,7 +1700,7 @@ __global__ void kernel_NavRegularPhan_Photon_WiSec(StackParticle photons,
 
     // Find next discrete interaction, total_dedx and next discrete intraction distance
     float next_interaction_distance =  FLT_MAX;
-    unsigned char next_discrete_process = 0; 
+    unsigned char next_discrete_process = 0;
     float interaction_distance;
     float cross_section;
 
@@ -1725,7 +1725,7 @@ __global__ void kernel_NavRegularPhan_Photon_WiSec(StackParticle photons,
     }
 
     // Distance to the next voxel boundary (raycasting)
-    interaction_distance = get_boundary_voxel_by_raycasting(index_phantom, position, 
+    interaction_distance = get_boundary_voxel_by_raycasting(index_phantom, position,
                                                             direction, phantom.voxel_size);
     //printf("Boundary PIL %e\n", interaction_distance);
     if (interaction_distance < next_interaction_distance) {
@@ -1733,13 +1733,13 @@ __global__ void kernel_NavRegularPhan_Photon_WiSec(StackParticle photons,
         next_interaction_distance = interaction_distance+1.0e-03f;
         next_discrete_process = PHOTON_BOUNDARY_VOXEL;
     }
-    
+
     // step limiter
     if (step_limiter < next_interaction_distance) {
         next_interaction_distance = step_limiter;
         next_discrete_process = PHOTON_STEP_LIMITER;
     }
-    
+
     //// Move particle //////////////////////////////////////////////////////
 
     position.x += direction.x * next_interaction_distance;
@@ -1752,7 +1752,7 @@ __global__ void kernel_NavRegularPhan_Photon_WiSec(StackParticle photons,
 
     // Stop simulation if out of phantom
     if (   position.x <= 0 || position.x >= phantom.size_in_mm.x
-        || position.y <= 0 || position.y >= phantom.size_in_mm.y 
+        || position.y <= 0 || position.y >= phantom.size_in_mm.y
         || position.z <= 0 || position.z >= phantom.size_in_mm.z ) {
         photons.endsimu[id] = 1;                     // stop the simulation
         atomicAdd(count_d, 1);                       // count simulated primaries
@@ -1763,18 +1763,18 @@ __global__ void kernel_NavRegularPhan_Photon_WiSec(StackParticle photons,
 
     float discrete_loss = 0.0f;
     if (next_discrete_process == PHOTON_BOUNDARY_VOXEL ||
-        next_discrete_process == PHOTON_STEP_LIMITER) { 
+        next_discrete_process == PHOTON_STEP_LIMITER) {
         //printf("boundary || step limiter\n");
         return;
     }
-    
+
     if (next_discrete_process == PHOTON_PHOTOELECTRIC) {
         //printf("PE\n");
         discrete_loss = PhotoElec_Effect_Standard_WiSec(photons, electrons, materials,
-                                                        materials.electron_cut_energy[mat], 
+                                                        materials.electron_cut_energy[mat],
                                                         mat,  id, count_d);
     }
-    
+
     if (next_discrete_process == PHOTON_COMPTON) {
         //printf("Compton\n");
         discrete_loss = Compton_Effect_Standard_WiSec(photons, electrons,
@@ -1782,7 +1782,7 @@ __global__ void kernel_NavRegularPhan_Photon_WiSec(StackParticle photons,
                                                       id, count_d);
         //printf("energy deposit %e\n", discrete_loss);
     }
-  
+
     // Dosemap scoring
     ivoxsize = inverse_vector(dosemap.voxel_size);
     index_phantom.x = int(position.x * ivoxsize.x);
@@ -1826,7 +1826,7 @@ __global__ void kernel_NavRegularPhan_Electron_BdPhoton(StackParticle electrons,
     index_phantom.w = index_phantom.z*phantom.nb_voxel_slice
                      + index_phantom.y*phantom.size_in_vox.x
                      + index_phantom.x; // linear index
-    
+
     // Read direction
     float3 direction;
     direction.x = electrons.dx[id];
@@ -1838,7 +1838,7 @@ __global__ void kernel_NavRegularPhan_Electron_BdPhoton(StackParticle electrons,
 
     // Get material
     unsigned short int mat = phantom.data[index_phantom.w];
-    
+
     /// Debug ///
     //printf("e- %i E %e pos %.2f %.2f %.2f\n", id, energy, position.x, position.y, position.z);
 
@@ -1847,7 +1847,7 @@ __global__ void kernel_NavRegularPhan_Electron_BdPhoton(StackParticle electrons,
     // Find next discrete interaction, total_dedx and next discrete intraction distance
     float next_interaction_distance =  FLT_MAX;
     float total_dedx = 0.0f;
-    unsigned char next_discrete_process = 0; 
+    unsigned char next_discrete_process = 0;
     float interaction_distance;
     float cross_section;
     float probe = 0.0f; // DEBUG
@@ -1861,7 +1861,7 @@ __global__ void kernel_NavRegularPhan_Electron_BdPhoton(StackParticle electrons,
         next_interaction_distance = interaction_distance;
         next_discrete_process = ELECTRON_EIONISATION;
     }
-    
+
     // Multiple Scattering
     cross_section = MSC_CS(materials, mat, energy);
     interaction_distance = __fdividef(-__logf(Brent_real(id, electrons.table_x_brent, 0)),
@@ -1873,7 +1873,7 @@ __global__ void kernel_NavRegularPhan_Electron_BdPhoton(StackParticle electrons,
     }
 
     // Distance to the next voxel boundary (raycasting)
-    interaction_distance = get_boundary_voxel_by_raycasting(index_phantom, position, 
+    interaction_distance = get_boundary_voxel_by_raycasting(index_phantom, position,
                                                             direction, phantom.voxel_size);
     //printf("Boundary PIL %e\n", interaction_distance);
     if (interaction_distance < next_interaction_distance) {
@@ -1881,7 +1881,7 @@ __global__ void kernel_NavRegularPhan_Electron_BdPhoton(StackParticle electrons,
         next_interaction_distance = interaction_distance+1.0e-03f;
         next_discrete_process = ELECTRON_BOUNDARY_VOXEL;
     }
-   
+
     // FIXME STEP LIMITER was not valided yet!
     // step limiter
     if (step_limiter < next_interaction_distance) {
@@ -1906,7 +1906,7 @@ __global__ void kernel_NavRegularPhan_Electron_BdPhoton(StackParticle electrons,
         if (energy < 0.0f) energy = 0.0f;
         electrons.E[id] = energy;
     }
-    
+
     // continuous loss should be at random point along step
     float rnd_dist = next_interaction_distance * Brent_real(id, electrons.table_x_brent, 0);
     float3 rnd_pos;
@@ -1914,7 +1914,7 @@ __global__ void kernel_NavRegularPhan_Electron_BdPhoton(StackParticle electrons,
     rnd_pos.y = position.y - direction.y * rnd_dist;
     rnd_pos.z = position.z - direction.z * rnd_dist;
     if (   rnd_pos.x <= 0 || rnd_pos.x >= dosemap.size_in_mm.x
-        || rnd_pos.y <= 0 || rnd_pos.y >= dosemap.size_in_mm.y 
+        || rnd_pos.y <= 0 || rnd_pos.y >= dosemap.size_in_mm.y
         || rnd_pos.z <= 0 || rnd_pos.z >= dosemap.size_in_mm.z ) {
         rnd_pos = position;
     }
@@ -1930,7 +1930,7 @@ __global__ void kernel_NavRegularPhan_Electron_BdPhoton(StackParticle electrons,
     //// Move particle //////////////////////////////////////////////////////
 
     //printf("E %e dist %e\n", energy, next_interaction_distance);
-    
+
     position.x += direction.x * next_interaction_distance;
     position.y += direction.y * next_interaction_distance;
     position.z += direction.z * next_interaction_distance;
@@ -1939,9 +1939,9 @@ __global__ void kernel_NavRegularPhan_Electron_BdPhoton(StackParticle electrons,
     electrons.py[id] = position.y;
     electrons.pz[id] = position.z;
 
-    // Stop simulation if out of phantom 
+    // Stop simulation if out of phantom
     if (   position.x <= 0 || position.x >= phantom.size_in_mm.x
-        || position.y <= 0 || position.y >= phantom.size_in_mm.y 
+        || position.y <= 0 || position.y >= phantom.size_in_mm.y
         || position.z <= 0 || position.z >= phantom.size_in_mm.z ) {
         electrons.endsimu[id] = 1;   // stop the simulation
         electrons.active[id]  = 0;
@@ -1968,23 +1968,23 @@ __global__ void kernel_NavRegularPhan_Electron_BdPhoton(StackParticle electrons,
         photons.active[id]    = 1;   // unfreeze the photon tracking
 
         atomicAdd(count_d, 1);       // count simulated secondaries
-        return; 
+        return;
     }
 
     if (next_discrete_process == ELECTRON_EIONISATION) {
         //printf("eIonisation\n");
-        discrete_loss = eIonisation_Effect_Standard_NoSec(electrons, photons, 
-                                          materials.electron_cut_energy[mat], 
+        discrete_loss = eIonisation_Effect_Standard_NoSec(electrons, photons,
+                                          materials.electron_cut_energy[mat],
                                           materials.electron_max_energy[mat],
                                           id, count_d);
     }
-    
+
     if (next_discrete_process == ELECTRON_MSC) {
         //printf("MSC\n");
         // FIXME trueStepLength = next_interaction_distance?!
         discrete_loss = MSC_Effect(electrons, materials, next_interaction_distance, mat, id);
     }
-    
+
     // Dosemap scoring
     ivoxsize = inverse_vector(dosemap.voxel_size);
     index_phantom.x = int(position.x * ivoxsize.x);

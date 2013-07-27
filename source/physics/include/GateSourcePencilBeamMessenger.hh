@@ -71,4 +71,3 @@ class GateSourcePencilBeamMessenger: public GateVSourceMessenger
 #endif
 
 #endif
-

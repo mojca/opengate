@@ -30,23 +30,23 @@ class GateSystemComponent;
 
 /*! \class GateSystemComponentMessenger
     \brief Base class for GateSystemComponent messengers
-    
-    - GateSystemComponentMessenger - by Daniel.Strul@iphe.unil.ch 
-    
+
+    - GateSystemComponentMessenger - by Daniel.Strul@iphe.unil.ch
+
     - The GateSystemComponentMessenger inherits from the abilities/responsabilities
       of the GateClockDependentMessenger base-class, i.e. the creation and management
       of a Gate UI directory for a Gate object
-      
+
     - In addition, it proposes and manages UI commands that are specific
       to system components: 'attach', and 'describe'
 
     - Note: from July to Oct. 2002, a system was a vector of system-levels, each level managing a
-      	    vector of components. On Oct. 2002, the whole system (which was too complex) was redesigned, 
+      	    vector of components. On Oct. 2002, the whole system (which was too complex) was redesigned,
       	    and the current mechanism (tree of system-components) replaced the previous one (vector of
       	    system-levels). The system-component messengers are now connected to these new system-components
 	    rather than to the old ones.
 
-*/      
+*/
 //    Last modification in 12/2011 by Abdul-Fattah.Mohamad-Hadi@subatech.in2p3.fr, for the multi-system approach.
 
 class GateSystemComponentMessenger: public GateClockDependentMessenger
@@ -54,14 +54,14 @@ class GateSystemComponentMessenger: public GateClockDependentMessenger
   public:
     GateSystemComponentMessenger(GateSystemComponent* itsSystemComponent);  //!< constructor
     ~GateSystemComponentMessenger();  	      	      	      	      	    //!< destructor
-    
+
     //! UI command interpreter method
     void SetNewValue(G4UIcommand*, G4String);
 
     //! Get the system component
-    inline GateSystemComponent* GetSystemComponent() 
+    inline GateSystemComponent* GetSystemComponent()
       { return (GateSystemComponent*) GetClockDependent(); }
-      
+
   protected:
     //! Method to apply the UI command 'attach'
     //! Finds an creator from its name and attaches this creator to the system component
@@ -69,7 +69,7 @@ class GateSystemComponentMessenger: public GateClockDependentMessenger
     G4String FabricateDirName(const GateSystemComponent* component);// Fabricate the directory name (multi-system approach)
 
   private:
-    
+
     G4UIcmdWithAString	      	*AttachCmd;         //!< The UI command "attach"
 
 		G4UIcmdWithAnInteger*          minSectorDiffCmd ;
@@ -79,4 +79,3 @@ class GateSystemComponentMessenger: public GateClockDependentMessenger
 };
 
 #endif
-

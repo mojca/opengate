@@ -29,9 +29,9 @@ See GATE/LICENSE.txt for further details
 //----------------------------------------------------------------------------------------
 GateSourcePhaseSpaceMessenger::GateSourcePhaseSpaceMessenger(GateSourcePhaseSpace* source)
   : GateVSourceMessenger(source),pSource(source)
-{ 
+{
   G4String cmdName;
-  
+
   cmdName = GetDirectoryName()+"addPhaseSpaceFile";
   AddFileCmd = new G4UIcmdWithAString(cmdName,this);
   AddFileCmd->SetGuidance("Add a phase space file");
@@ -53,7 +53,7 @@ GateSourcePhaseSpaceMessenger::GateSourcePhaseSpaceMessenger(GateSourcePhaseSpac
   setParticleTypeCmd = new G4UIcmdWithAString(cmdName,this);
   setParticleTypeCmd->SetGuidance("set the particle type (if not given in the PhS)");
   setParticleTypeCmd->SetParameterName("Particle Type",false);
-  
+
   cmdName = GetDirectoryName()+"useNbOfParticleAsIntensity";
   setUseNbParticleAsIntensityCmd = new G4UIcmdWithABool(cmdName,this);
   setUseNbParticleAsIntensityCmd->SetGuidance("use the nb of particle in the PhS as source intensity");
@@ -82,14 +82,14 @@ GateSourcePhaseSpaceMessenger::~GateSourcePhaseSpaceMessenger()
 
 //----------------------------------------------------------------------------------------
 void GateSourcePhaseSpaceMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
-{ 
+{
   GateVSourceMessenger::SetNewValue(command,newValue);
   if (command == AddFileCmd ) pSource->AddFile(newValue);// {dynamic_cast<GateSourcePhaseSpace*>(m_source)->AddFile(newValue);}
   if (command == RelativeVolumeCmd) pSource->SetPositionInWorldFrame(true);// {dynamic_cast<GateSourcePhaseSpace*>(m_source)->SetPositionInWorldFrame(true);}
   if (command == RegularSymmetryCmd) pSource->SetUseRegularSymmetry();
   if (command == RandomSymmetryCmd) pSource->SetUseRandomSymmetry();
   if (command == setParticleTypeCmd) pSource->SetParticleType(newValue);
-  if (command == setUseNbParticleAsIntensityCmd) 
+  if (command == setUseNbParticleAsIntensityCmd)
     pSource->SetUseNbOfParticleAsIntensity(setUseNbParticleAsIntensityCmd->GetNewBoolValue(newValue));
   if(command == setRmaxCmd) pSource->SetRmax(setRmaxCmd->GetNewDoubleValue(newValue));
 }

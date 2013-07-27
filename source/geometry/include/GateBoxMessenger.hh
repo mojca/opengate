@@ -24,7 +24,7 @@ class GateBoxMessenger: public GateVolumeMessenger
 public:
   GateBoxMessenger(GateBox*);
   ~GateBoxMessenger();
-    
+
   void SetNewValue(G4UIcommand*, G4String);
   virtual inline GateBox* GetBoxCreator() { return (GateBox*)GetVolumeCreator(); }
 

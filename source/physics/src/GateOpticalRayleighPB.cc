@@ -15,10 +15,10 @@ See GATE/LICENSE.txt for further details
 
 //-----------------------------------------------------------------------------
 GateOpticalRayleighPB::GateOpticalRayleighPB():GateVProcess("OpticalRayleigh")
-{  
+{
   SetDefaultParticle("opticalphoton");
   SetProcessInfo("Rayleigh process for optical photons");
-  pMessenger = new GateEMStandardProcessMessenger(this) ;  
+  pMessenger = new GateEMStandardProcessMessenger(this) ;
 }
 //-----------------------------------------------------------------------------
 
@@ -34,7 +34,7 @@ G4VProcess* GateOpticalRayleighPB::CreateProcess(G4ParticleDefinition *)
 //-----------------------------------------------------------------------------
 void GateOpticalRayleighPB::ConstructProcess(G4ProcessManager * manager)
 {
-  manager->AddDiscreteProcess(GetProcess());           
+  manager->AddDiscreteProcess(GetProcess());
 }
 //-----------------------------------------------------------------------------
 

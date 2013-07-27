@@ -28,7 +28,7 @@ class G4String;
 #include "G4Gamma.hh"
 #include "G4PhysicsTable.hh"
 #include "GateCrossSectionsTable.hh"
-#include "CLHEP/Random/RandFlat.h" 
+#include "CLHEP/Random/RandFlat.h"
 #include <iostream>
 #include "Randomize.hh"
 #include <cassert>
@@ -93,7 +93,7 @@ inline G4double 	GateTotalDiscreteProcess::PostStepGetPhysicalInteractionLength 
 	m_nProcessWithSmallestPIL=0;
 	for (size_t i=1;i<m_oProcessVec.size();i++)
 	{
-		
+
 		const G4double a=m_oProcessVec[i]->PostStepGetPhysicalInteractionLength (track, previousStepSize, condition);
 		if (a<b)
 		{

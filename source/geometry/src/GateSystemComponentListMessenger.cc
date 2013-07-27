@@ -32,7 +32,7 @@ See GATE/LICENSE.txt for further details
 // Constructor
 GateSystemComponentListMessenger::GateSystemComponentListMessenger(GateSystemComponentList* itsSystemComponentList)
 : GateListMessenger( itsSystemComponentList)
-{ 
+{
   pInsertCmd->SetCandidates(DumpMap());
 }
 //------------------------------------------------------------------------------------------------------------------
@@ -49,7 +49,7 @@ GateSystemComponentListMessenger::~GateSystemComponentListMessenger()
 //------------------------------------------------------------------------------------------------------------------
 // UI command interpreter method
 void GateSystemComponentListMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
     GateListMessenger::SetNewValue(command,newValue);
 }
 //------------------------------------------------------------------------------------------------------------------
@@ -69,7 +69,7 @@ void GateSystemComponentListMessenger::DoInsertion(const G4String& childTypeName
 {
   if (GetNewInsertionBaseName().empty())
     SetNewInsertionBaseName(childTypeName);
-    
+
   AvoidNameConflicts();
 
   //GateSystemComponent* newComponent=0;
@@ -86,7 +86,7 @@ void GateSystemComponentListMessenger::DoInsertion(const G4String& childTypeName
     G4cout << "System-component type name '" << childTypeName << "' was not recognised --> insertion request must be ignored!\n";
     return;
   }
-  
+
   SetNewInsertionBaseName("");
 }
 //------------------------------------------------------------------------------------------------------------------
@@ -96,7 +96,7 @@ void GateSystemComponentListMessenger::DoInsertion(const G4String& childTypeName
 /*  Check whether there may be a name conflict between a new
     system component and an already existing one
 
-    name: the name of the attachment to create 
+    name: the name of the attachment to create
 */
 G4bool GateSystemComponentListMessenger::CheckNameConflict(const G4String& name)
 {

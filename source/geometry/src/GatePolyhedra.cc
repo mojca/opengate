@@ -11,7 +11,7 @@ See GATE/LICENSE.txt for further details
 
 #include "GatePolyhedra.hh"
 
-G4double GatePolyhedra::DistanceToOut( const G4ThreeVector &p, 
+G4double GatePolyhedra::DistanceToOut( const G4ThreeVector &p,
                                        const G4ThreeVector &v,
                                        const G4bool calcNorm,
                                              G4bool *validNorm,
@@ -20,7 +20,7 @@ G4double GatePolyhedra::DistanceToOut( const G4ThreeVector &p,
   G4double distance;
   G4ThreeVector v2(v);
   G4int i=0;
- 
+
   while ( ( distance = G4Polyhedra::DistanceToOut(p,v2,calcNorm,validNorm,n) ) == kInfinity )
   {
   	v2.rotateZ(0.001*degree);

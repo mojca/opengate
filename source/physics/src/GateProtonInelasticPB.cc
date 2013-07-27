@@ -21,14 +21,14 @@ See GATE/LICENSE.txt for further details
 
 //-----------------------------------------------------------------------------
 GateProtonInelasticPB::GateProtonInelasticPB():GateVProcess("ProtonInelastic")
-{  
+{
   SetDefaultParticle("proton");
   SetProcessInfo("Inelastic scattering of protons");
 
   AddToModelList("G4LEProtonInelastic");
   AddToModelList("G4BertiniCascade");
   AddToModelList("G4BinaryCascade");
-  AddToModelList("GateBinaryCascade"); 
+  AddToModelList("GateBinaryCascade");
   AddToModelList("PreCompound");
   AddToModelList("LeadingParticleBias");
   AddToModelList("G4QMDReaction");
@@ -37,7 +37,7 @@ GateProtonInelasticPB::GateProtonInelasticPB():GateVProcess("ProtonInelastic")
   AddToDataSetList("G4ProtonInelasticCrossSection");
 
 
-  pMessenger = new GateHadronicStandardProcessMessenger(this);  
+  pMessenger = new GateHadronicStandardProcessMessenger(this);
 }
 //-----------------------------------------------------------------------------
 
@@ -46,7 +46,7 @@ GateProtonInelasticPB::GateProtonInelasticPB():GateVProcess("ProtonInelastic")
 G4VProcess* GateProtonInelasticPB::CreateProcess(G4ParticleDefinition *)
 {
   return new G4ProtonInelasticProcess(GetG4ProcessName());
-  
+
 }
 //-----------------------------------------------------------------------------
 

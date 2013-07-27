@@ -18,21 +18,21 @@ See GATE/LICENSE.txt for further details
 
 /*! \class  GatePVReplica
     \brief  Base-class for replicas used in the GATE geometry
-    
+
     - GatePVReplica - by Daniel.Strul@iphe.unil.ch
-    
+
     - This class is an extension of the regular class G4PVReplica.
-    
+
     - Its major feature is that it provides a public method Update()
       so that the replica can be updated rather than rebuilt.
-      
-    - Only replication along the cartesian axes is allowed    
-*/      
+
+    - Only replication along the cartesian axes is allowed
+*/
 class GatePVReplica : public G4PVReplica
-{ 
+{
   public:
-  
-    //! Constructor. 
+
+    //! Constructor.
     GatePVReplica(const G4String& pName,
 		  G4LogicalVolume* pLogical,
 		  G4LogicalVolume* pMother,
@@ -51,5 +51,3 @@ class GatePVReplica : public G4PVReplica
 };
 
 #endif
-
-

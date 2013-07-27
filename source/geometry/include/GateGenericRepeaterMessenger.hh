@@ -22,26 +22,25 @@ class G4UIcmdWithABool;
 class GateGenericRepeater;
 
 //-------------------------------------------------------------------------------------------------
-/*! 
+/*!
   \class GateGenericRepeaterMessenger
   \brief Messenger for a GateGenericRepeater
-*/      
+*/
 class GateGenericRepeaterMessenger: public GateObjectRepeaterMessenger
 {
 public:
   GateGenericRepeaterMessenger(GateGenericRepeater* itsRepeater);
   ~GateGenericRepeaterMessenger();
-  
+
   void SetNewValue(G4UIcommand*, G4String);
-  
+
 public:
   virtual inline GateGenericRepeater* GetGenericRepeater() { return (GateGenericRepeater*)GetObjectRepeater(); }
-    
+
 protected:
   G4UIcmdWithAString * mFileCmd;
-  G4UIcmdWithABool   * mRelativeTransCmd; 
+  G4UIcmdWithABool   * mRelativeTransCmd;
 };
 //-------------------------------------------------------------------------------------------------
 
 #endif
-

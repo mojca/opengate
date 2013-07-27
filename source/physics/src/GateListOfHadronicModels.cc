@@ -44,7 +44,7 @@ void GateListOfHadronicModels::SetEmin(double val, G4String opt)
   }
 
   bool set = false;
-  
+
   for(unsigned int j=0; j<theListOfOptions.size(); j++)
     if(theListOfOptions[j]==opt)
     {
@@ -75,7 +75,7 @@ void GateListOfHadronicModels::SetEmax(double val, G4String opt)
   }
 
   bool set = false;
-  
+
   for(unsigned int j=0; j<theListOfOptions.size(); j++)
     if(theListOfOptions[j]==opt)
     {
@@ -98,7 +98,7 @@ G4double GateListOfHadronicModels::GetEmin( G4String opt)
 {
   for(unsigned int j=0; j<theListOfOptions.size(); j++)
     if(opt == theListOfOptions[j]) return theListOfEmin[j];
-  
+
   return -1.;
 }
 //-----------------------------------------------------------------------------
@@ -109,7 +109,7 @@ G4double GateListOfHadronicModels::GetEmax( G4String opt)
 {
   for(unsigned int j=0; j<theListOfOptions.size(); j++)
     if(opt == theListOfOptions[j]) return theListOfEmax[j];
-  
+
   return -1.;
 }
 //-----------------------------------------------------------------------------
@@ -128,9 +128,9 @@ void GateListOfHadronicModels::ClearERange()
 //-----------------------------------------------------------------------------
 G4Material * GateListOfHadronicModels::GetMaterial(G4String materialName)
 {
-   
+
   const G4MaterialTable* matTbl = G4Material::GetMaterialTable();
-  
+
   for(size_t i=0;i<G4Material::GetNumberOfMaterials();i++)
   {
     if((*matTbl)[i]->GetName() == materialName) return (*matTbl)[i];
@@ -143,9 +143,9 @@ G4Material * GateListOfHadronicModels::GetMaterial(G4String materialName)
 //-----------------------------------------------------------------------------
 G4Element * GateListOfHadronicModels::GetElement(G4String elementName)
 {
-   
+
   const G4ElementTable * elemTbl  = G4Element::GetElementTable();
-  
+
   for(size_t i=0;i<elemTbl->size();i++)
   {
     if((*elemTbl)[i]->GetName() == elementName) return (*elemTbl)[i];
@@ -195,7 +195,7 @@ void GateListOfHadronicModels::Print(G4int level, G4String symbol, G4String symb
 
       std::cout<<" ("<<theListOfOptions[j]<<")"<<G4endl;
     }
-  }     
+  }
 
 }
 //-----------------------------------------------------------------------------
@@ -244,7 +244,7 @@ void GateListOfHadronicModels::Print(G4String file,G4int level, G4String symbol,
 
       os<<" ("<<theListOfOptions[j].data()<<")"<<G4endl;
     }
-  }     
+  }
   os.close();
 }
 //-----------------------------------------------------------------------------

@@ -33,7 +33,7 @@ public: // with description
   //  Constructor. The command string with full path directory
   // and the pointer to the messenger must be given.
 
-//    G4int DoIt(G4String parameterList) {  
+//    G4int DoIt(G4String parameterList) {
 //      messenger->SetNewValue( this, parameterList );
 //      return 0;
 //    };
@@ -89,16 +89,16 @@ std::vector<vContentType> GateUIcmdWithAVector<vContentType>::GetNewVectorValue(
 
   for (size_t iw=0; iw<inputVec.size(); iw++) {
     aToken = inputVec[iw] + G4String(" dummy ") ;
-    const char* charToken = aToken; 
+    const char* charToken = aToken;
     //LF 21/12/2005
-    //std::istrstream istrToken(charToken); 
-    std::istringstream istrToken(charToken); 
+    //std::istrstream istrToken(charToken);
+    std::istringstream istrToken(charToken);
     //LF
     istrToken >> value;
 //      G4cout << "GateUIcmdWithAVector::GetNewVectorValue : aToken : " << aToken << " value : " << value << G4endl;
-//      G4cout << " is.eof() "         << istrToken.eof() 
-//  	   << " istrToken.fail() " << istrToken.fail() 
-//  	   << " istrToken.good() " << istrToken.good() 
+//      G4cout << " is.eof() "         << istrToken.eof()
+//  	   << " istrToken.fail() " << istrToken.fail()
+//  	   << " istrToken.good() " << istrToken.good()
 //  	   << " istrToken.bad() "  << istrToken.bad() << G4endl;
     if (istrToken.good() == 0) {
       ;//isGood = false;
@@ -119,7 +119,7 @@ G4String GateUIcmdWithAVector<vContentType>::ConvertToString
 (std::vector<vContentType> vec)
 {
   std::ostringstream os;
-  for (G4int i=0; i<vec.size(); i++) os << vec[i] << " "; 
+  for (G4int i=0; i<vec.size(); i++) os << vec[i] << " ";
   os << '\0';
   G4String vl = os.str();
   G4cout << "GateUIcmdWithAVector::ConvertToString : " << vl << G4endl;
@@ -127,8 +127,3 @@ G4String GateUIcmdWithAVector<vContentType>::ConvertToString
 }
 
 #endif
-
-
-
-
-

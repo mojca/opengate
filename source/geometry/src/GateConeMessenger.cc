@@ -24,10 +24,10 @@ See GATE/LICENSE.txt for further details
 
 GateConeMessenger::GateConeMessenger(GateCone *itsCreator)
   :GateVolumeMessenger(itsCreator)
-{ 
+{
 
   G4String dir = GetDirectoryName() + "geometry/";
-  
+
   G4String cmdName;
 
   cmdName = dir+"setRmin1";
@@ -95,7 +95,7 @@ GateConeMessenger::~GateConeMessenger()
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
 void GateConeMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
   if( command == ConeRmin1Cmd )
     { GetConeCreator()->SetConeRmin1(ConeRmin1Cmd->GetNewDoubleValue(newValue));}
   else if( command == ConeRmax1Cmd )
@@ -105,7 +105,7 @@ void GateConeMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
   else if( command == ConeRmax2Cmd )
     { GetConeCreator()->SetConeRmax2(ConeRmax2Cmd->GetNewDoubleValue(newValue));}
   else if( command==ConeHeightCmd )
-    { GetConeCreator()->SetConeHeight(ConeHeightCmd->GetNewDoubleValue(newValue));}   
+    { GetConeCreator()->SetConeHeight(ConeHeightCmd->GetNewDoubleValue(newValue));}
   else if( command == ConeSPhiCmd )
     { GetConeCreator()->SetConeSPhi(ConeSPhiCmd->GetNewDoubleValue(newValue));}
   else if( command == ConeDPhiCmd )

@@ -17,7 +17,7 @@ See GATE/LICENSE.txt for further details
     itsName:       	  the name chosen for this system-component
     itsMotherComponent:   the mother of the component (0 if top of a tree)
     itsSystem:            the system to which the component belongs
-*/    
+*/
 GateCylinderComponent::GateCylinderComponent(const G4String& itsName,
       	      	      	      	      	      	 GateSystemComponent* itsMotherComponent,
 		      	      	      	      	 GateVSystem* itsSystem)
@@ -29,7 +29,7 @@ GateCylinderComponent::GateCylinderComponent(const G4String& itsName,
 
 
 // Destructor
-GateCylinderComponent::~GateCylinderComponent() 
+GateCylinderComponent::~GateCylinderComponent()
 {
 }
 
@@ -53,7 +53,7 @@ G4bool GateCylinderComponent::IsValidAttachmentRequest(GateVVolume* anCreator) c
   // OK, everything's fine
   return true;
 }
-   
+
 
 G4double GateCylinderComponent::GetCylinderHeight() const
 {
@@ -78,8 +78,6 @@ G4double GateCylinderComponent::GetCylinderDPhi() const
 
 // Tool method: try to cast a creator into a box creator
 GateCylinder* GateCylinderComponent::CastToCylinderCreator(GateVVolume* creator)
-{ 
-  return dynamic_cast<GateCylinder*>(creator); 
+{
+  return dynamic_cast<GateCylinder*>(creator);
 }
-
-

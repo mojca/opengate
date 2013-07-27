@@ -32,10 +32,10 @@ GateNamedObjectMessenger::GateNamedObjectMessenger(GateNamedObject* itsNamedVolu
     			                           const G4String& itsDirectoryName)
 : GateMessenger(itsDirectoryName.empty() ? itsNamedVolume->GetObjectName() : itsDirectoryName ),
   pNamedVolume(itsNamedVolume)
-{ 
+{
   G4String guidance;
   G4String cmdName;
- 
+
   cmdName = GetDirectoryName()+"describe";
   pDescribeCmd = new G4UIcmdWithoutParameter(cmdName,this);
   guidance = G4String("Print-out a description of the object.");
@@ -66,18 +66,18 @@ GateNamedObjectMessenger::~GateNamedObjectMessenger()
 //-------------------------------------------------------------------------------------------
 // UI command interpreter method
 void GateNamedObjectMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
 
   if ( command == pDescribeCmd )
-  { 
-     pNamedVolume->Describe(); 
-  }   
+  {
+     pNamedVolume->Describe();
+  }
   else if ( command == pVerbosityCmd)
-  {    
+  {
       pNamedVolume->SetVerbosity(pVerbosityCmd->GetNewIntValue(newValue));
   }
   else
     GateMessenger::SetNewValue(command,newValue);
-  
+
 }
 //-------------------------------------------------------------------------------------------

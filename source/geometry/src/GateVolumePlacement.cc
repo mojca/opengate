@@ -34,7 +34,7 @@ GateVolumePlacement::GateVolumePlacement(GateVVolume* itsObjectInserter,
 
 //-----------------------------------------------------------------------------------------------
 GateVolumePlacement::~GateVolumePlacement()
-{  
+{
   if (m_Messenger) delete m_Messenger;
 }
 //-----------------------------------------------------------------------------------------------
@@ -46,9 +46,9 @@ void GateVolumePlacement::PushMyPlacements(const G4RotationMatrix& currentRotati
                                            G4double )
 {
     G4RotationMatrix newRotationMatrix = currentRotationMatrix;
-    newRotationMatrix.rotate(-m_rotationAngle, m_rotationAxis);    
-    G4ThreeVector newPosition = currentPosition + m_translation;    
-    PushBackPlacement(GatePlacement(newRotationMatrix,newPosition));    
+    newRotationMatrix.rotate(-m_rotationAngle, m_rotationAxis);
+    G4ThreeVector newPosition = currentPosition + m_translation;
+    PushBackPlacement(GatePlacement(newRotationMatrix,newPosition));
     //    return GatePlacement(newRotationMatrix,newPosition);
 }
 //-----------------------------------------------------------------------------------------------

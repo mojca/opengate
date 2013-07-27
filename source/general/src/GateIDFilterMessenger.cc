@@ -41,7 +41,7 @@ void GateIDFilterMessenger::BuildCommands(G4String base)
 {
   G4String guidance;
   G4String bb;
-  
+
   bb = base+"/selectID";
   pAddIDCmd = new G4UIcmdWithAnInteger(bb,this);
   guidance = "Select ID";

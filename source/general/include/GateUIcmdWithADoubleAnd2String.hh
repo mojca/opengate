@@ -34,8 +34,8 @@ class GateUIcmdWithADoubleAnd2String : public G4UIcommand
     // the value when he/she applies the command. If "omittable" is false,
     // the user must supply the parameter string.
     //  "currentAsDefault" flag is valid only if "omittable" is true. If this
-    // flag is true, the current value is used as the default value when the 
-    // user ommit the parameter. If this flag is false, the value given by the 
+    // flag is true, the current value is used as the default value when the
+    // user ommit the parameter. If this flag is false, the value given by the
     // next SetDefaultValue() method is used.
   void SetCandidates(const char * candidateList1, const char * candidateList2,
                           const char * candidateList3);

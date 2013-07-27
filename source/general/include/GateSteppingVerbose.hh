@@ -28,9 +28,9 @@ See GATE/LICENSE.txt for further details
 
 class G4SliceTimer;
 
-class GateSteppingVerbose : public G4SteppingVerbose 
+class GateSteppingVerbose : public G4SteppingVerbose
 {
-public:   
+public:
 
   GateSteppingVerbose();
   virtual ~GateSteppingVerbose();
@@ -38,7 +38,7 @@ public:
   void NewStep();   //beginning of the step
   void StepInfo();  //end of step, before sending informations to Hit/Dig if the volume is sensitive
 
-  void TrackingStarted(); 
+  void TrackingStarted();
 
   /*void AtRestDoItInvoked(){}
   void AlongStepDoItAllDone(){}
@@ -81,31 +81,30 @@ protected:
   G4int currentID;
 
   bool mIsTrackingStep;
-  G4int mNumberOfInit; 
-  //std::vector<GateInfoForSteppingVerbose *> theListOfStep; 
- 
+  G4int mNumberOfInit;
+  //std::vector<GateInfoForSteppingVerbose *> theListOfStep;
+
   G4int currentTrack;
 
-  std::vector<G4String> theListOfVolume; 
-  std::vector<G4String> theListOfProcess; 
-  std::vector<G4String> theListOfParticle; 
-  std::vector<G4double> theListOfTime; 
-  //std::vector<G4SliceTimer*> theListOfTimer; 
-  std::vector<G4double> theListOfTimer; 
-  std::vector<G4int> theListOfEnergy; 
+  std::vector<G4String> theListOfVolume;
+  std::vector<G4String> theListOfProcess;
+  std::vector<G4String> theListOfParticle;
+  std::vector<G4double> theListOfTime;
+  //std::vector<G4SliceTimer*> theListOfTimer;
+  std::vector<G4double> theListOfTimer;
+  std::vector<G4int> theListOfEnergy;
 
 
-  std::vector<GateInfoForSteppingVerbose *> theListOfTrack; 
+  std::vector<GateInfoForSteppingVerbose *> theListOfTrack;
 
-  std::vector<G4String> theListOfVolumeAtTrackLevel; 
-  std::vector<G4String> theListOfProcessAtTrackLevel; 
-  std::vector<G4String> theListOfParticleAtTrackLevel; 
-  std::vector<G4SliceTimer*> theListOfTimerAtTrackLevel; 
-  std::vector<G4int> theListOfEnergyAtTrackLevel; 
+  std::vector<G4String> theListOfVolumeAtTrackLevel;
+  std::vector<G4String> theListOfProcessAtTrackLevel;
+  std::vector<G4String> theListOfParticleAtTrackLevel;
+  std::vector<G4SliceTimer*> theListOfTimerAtTrackLevel;
+  std::vector<G4int> theListOfEnergyAtTrackLevel;
 
   //run, event?
 
 };
 
 #endif
-

@@ -9,12 +9,12 @@ See GATE/LICENSE.txt for further details
 ----------------------*/
 
 
-/*! 
+/*!
   \class  GateHounsfieldMaterialProperties.hh
-  \brief  
+  \brief
   \author david.sarrut@creatis.insa-lyon.fr
 */
- 
+
 #ifndef __GateHounsfieldMaterialProperties__hh__
 #define __GateHounsfieldMaterialProperties__hh__
 

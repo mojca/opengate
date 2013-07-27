@@ -16,7 +16,7 @@ See GATE/LICENSE.txt for further details
 
 //-----------------------------------------------------------------------------
 GateHadronCapturePB::GateHadronCapturePB():GateVProcess("NeutronCapture")
-{  
+{
   SetDefaultParticle("neutron");
   SetProcessInfo("Neutron capture");
 
@@ -25,12 +25,12 @@ GateHadronCapturePB::GateHadronCapturePB():GateVProcess("NeutronCapture")
 
   // User must first download high precision neutron data files from Geant4 web page
   // For details, see the chapter on the High Precision Neutron Models in the Geant4 Physics Reference Manual.
-  AddToModelList("G4NeutronHPCapture"); 
+  AddToModelList("G4NeutronHPCapture");
   AddToModelList("G4NeutronHPorLCapture");
   AddToDataSetList("G4NeutronHPCaptureData");
   //--------------------------------------------------------------------------------
 
-  pMessenger = new GateHadronicStandardProcessMessenger(this);  
+  pMessenger = new GateHadronicStandardProcessMessenger(this);
 }
 //-----------------------------------------------------------------------------
 
@@ -38,14 +38,14 @@ GateHadronCapturePB::GateHadronCapturePB():GateVProcess("NeutronCapture")
 //-----------------------------------------------------------------------------
 G4VProcess* GateHadronCapturePB::CreateProcess(G4ParticleDefinition *)
 {
-  return new G4HadronCaptureProcess(GetG4ProcessName()); 
+  return new G4HadronCaptureProcess(GetG4ProcessName());
 }
 //-----------------------------------------------------------------------------
 
 
 //-----------------------------------------------------------------------------
 void GateHadronCapturePB::ConstructProcess( G4ProcessManager * manager)
-{  
+{
   manager->AddDiscreteProcess(GetProcess());
 }
 //-----------------------------------------------------------------------------

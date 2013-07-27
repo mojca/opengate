@@ -39,14 +39,9 @@ class GateUIcmdWithTwoDouble : public G4UIcommand
 	G4double GetNewDoubleValue(G4int num,G4String paramString);
     //  Convert string which represents a double to a double.
     G4String ConvertToString(G4int intValue,G4double dblValue);
-    //  Convert an integer value to a string. This method must be used by 
+    //  Convert an integer value to a string. This method must be used by
     // the messenger for its GetCurrentValues() method.
 
 };
 
 #endif
-
-
-
-
-

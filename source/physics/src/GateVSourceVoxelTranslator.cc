@@ -13,4 +13,3 @@ See GATE/LICENSE.txt for further details
 GateVSourceVoxelTranslator::GateVSourceVoxelTranslator(GateVSourceVoxelReader* voxelReader)
   : m_voxelReader(voxelReader)
 {}
-

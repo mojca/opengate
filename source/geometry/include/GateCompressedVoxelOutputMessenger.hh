@@ -25,15 +25,14 @@ class GateCompressedVoxelOutputMessenger: public GateOutputModuleMessenger
   public:
     GateCompressedVoxelOutputMessenger(GateCompressedVoxelOutput* g);
    ~GateCompressedVoxelOutputMessenger();
-    
+
     virtual void SetNewValue(G4UIcommand*, G4String);
-    
+
   protected:
     GateCompressedVoxelOutput*          m_gateVoxelOutput;
     G4UIcmdWithAString*       SetFileNameCmd;
     G4UIcmdWithABool*         saveUncertaintyCmd;
-   
+
 };
 
 #endif
-

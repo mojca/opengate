@@ -7,7 +7,7 @@
 #Department of Radiation Oncology
 #Medical University of Vienna
 #
-#and 
+#and
 #
 #Pierre Gueth
 #CREATIS
@@ -61,4 +61,3 @@ void GateCerenkovMessenger::SetNewValue(G4UIcommand* command, G4String param)
 	if (command == pSetTrackSecondariesFirst) { trackSecondariesFirst = pSetTrackSecondariesFirst->GetNewBoolValue(param); }
 	if (command == pSetMaxBetaChangePerStep) { maxBetaChangePerStep = pSetMaxBetaChangePerStep->GetNewDoubleValue(param); }
 }
-

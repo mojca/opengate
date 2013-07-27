@@ -19,28 +19,28 @@ class GateSourceVoxelInterfileReader : public GateVSourceVoxelReader
 {
 public:
   GateSourceVoxelInterfileReader(GateVSource* source);
-  
+
   virtual ~GateSourceVoxelInterfileReader();
 
   void ReadFile(G4String fileName);
 
   void ReadKey(FILE* fp);
-  
+
   /* PY Descourt 08/09/2009 */
   void ReadRTFile(G4String, G4String);
   void ReadKeyFrames(FILE*) ;
   /* PY Descourt 08/09/2009 */
-  
+
 protected:
-  
+
   typedef unsigned short G4short;
-  
+
   inline void SwapBytes(G4short* buffer, G4int size) {
   	for (G4int i = 0; i < size; ++i) {
   		buffer[i] = ((buffer[i]>> 8) | (buffer[i] << 8));
   	}
   }
-  
+
   G4String m_dataFileName;
   G4int m_numPlanes;
   G4float m_planeThickness;

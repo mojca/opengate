@@ -76,7 +76,7 @@ void GateSourceLinacBeam::SetSourceFromPhaseSpaceFilename(G4String f) {
   for (int i=0; i<mNumberOfVolume; i++) {
     mHistoPhiDirection[i].resize(mNbOfRadiusBinsForAngle);
     mHistoThetaDirection[i].resize(mNbOfRadiusBinsForAngle);
-    
+
     for (int j=0; j<mNbOfRadiusBinsForAngle; j++) {
       mHistoPhiDirection[i][j].resize(mNbOfEnergyBinsForAngle);
       mHistoThetaDirection[i][j].resize(mNbOfEnergyBinsForAngle);
@@ -90,7 +90,7 @@ void GateSourceLinacBeam::SetSourceFromPhaseSpaceFilename(G4String f) {
   //   DD(mHistoVolume->GetBinContent(1));
   //   DD(mHistoVolume->GetBinContent(2));
   //   DD(mHistoVolume->GetBinContent(3));
-  
+
   // Read histo radius for each starting volume
   for (int i=0; i<mNumberOfVolume; i++) {
     // DD(mVolumeNames[i]);
@@ -152,7 +152,7 @@ void GateSourceLinacBeam::SetSourceFromPhaseSpaceFilename(G4String f) {
 //   if (mSourceFromPhaseSpaceFilename == "bidon") {
 //     GateError("Error you should provide a root file with 'setSourceFromPhaseSpaceFilename'");
 //   }
-  
+
 //   // Update current activity according to time
 //   GateMessage("Acquisition", 0, "TODO ********** Source <" << m_name << "> update ACTIVITY" << G4endl);
 //   GateMessage("Acquisition", 0, "TODO ********** Source <" << m_name << "> update RMAX" << G4endl);
@@ -173,7 +173,7 @@ double GateSourceLinacBeam::GetRmaxFromTime(double time) {
 //-------------------------------------------------------------------------------------------------
 int GateSourceLinacBeam::GetIndexFromTime(double aTime) {
   // Search for current "time"
-  int i=0; 
+  int i=0;
   while ((i < (int)mTimeList.size()) && (aTime >= mTimeList[i])) {
     i++;
   }
@@ -200,7 +200,7 @@ void GateSourceLinacBeam::GeneratePrimaryVertex(G4Event* evt) {
   double posXabs = Rmax+1, posYabs=Rmax+1;
 
   // ========================================================
-  // Particle POSITION 
+  // Particle POSITION
   // ========================================================
 
   // Select a random position until it is in the Rmax
@@ -214,19 +214,19 @@ void GateSourceLinacBeam::GeneratePrimaryVertex(G4Event* evt) {
     //DD(volumeNumber);
     assert(volumeNumber >= 0);
     assert(volumeNumber < mNumberOfVolume);
-    
+
     // Set Rmax according to StartingVolume  ****** TODO *********
 
     Rmax = GetRmaxFromTime(GetTime()); // for cible not filtre/colli YET
 
     //Rmax = 50.;                      // filtre et colli1
     //Rmax = 100.;                     // filtre et colli1
-    //if (volumeNumber==0) Rmax=25.;   // cible  
+    //if (volumeNumber==0) Rmax=25.;   // cible
 
     // Get angle from (flat random)
     angle = CLHEP::RandFlat::shoot(2*TMath::Pi());
-      
-    // Get distance from center 
+
+    // Get distance from center
     r = mHistoRadius[volumeNumber]->GetRandom();
     posX = r*cos(angle);
     posY = r*sin(angle);
@@ -236,7 +236,7 @@ void GateSourceLinacBeam::GeneratePrimaryVertex(G4Event* evt) {
   posZ = 0.0;
 
   // ========================================================
-  // Particle ENERGY 
+  // Particle ENERGY
   // ========================================================
 
   // Get the correct bin according to r (distance from center)
@@ -248,13 +248,13 @@ void GateSourceLinacBeam::GeneratePrimaryVertex(G4Event* evt) {
   mEnergy = mHistoEnergy[volumeNumber][bin]->GetRandom();
 
   // ========================================================
-  // Particle DIRECTION 
+  // Particle DIRECTION
   // ========================================================
 
   // Get the theta direction (TODO)
   angle=angle*180./TMath::Pi();
-  bin1=(int)mNbOfRadiusBinsForAngle*r/100; 
-  bin2=(int)mNbOfEnergyBinsForAngle*mEnergy/8; 
+  bin1=(int)mNbOfRadiusBinsForAngle*r/100;
+  bin2=(int)mNbOfEnergyBinsForAngle*mEnergy/8;
   // DD(bin1);
   // DD(bin2);
   double ThetaDirection = mHistoThetaDirection[volumeNumber][bin1][bin2]->GetRandom()+angle;
@@ -309,7 +309,7 @@ void GateSourceLinacBeam::GeneratePrimaryVertex(G4Event* evt) {
   G4String particleName;
   G4ParticleDefinition* particle_definition
     = particleTable->FindParticle(particleName="gamma");
-  
+
   if (particle_definition==0) return;
   // create a new vertex
   G4ThreeVector position = G4ThreeVector(posX*mm,posY*mm,posZ*mm);
@@ -341,9 +341,8 @@ void GateSourceLinacBeam::GeneratePrimaryVertex(G4Event* evt) {
   particle->SetPolarization(GetParticlePolarization().x(),
                             GetParticlePolarization().y(),
                             GetParticlePolarization().z() );
-  vertex->SetPrimary( particle );  
+  vertex->SetPrimary( particle );
   evt->AddPrimaryVertex( vertex );
   //G4cout<<"AddPrimaryvertex()"<<G4endl;
 }
 //-------------------------------------------------------------------------------------------------
-

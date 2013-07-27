@@ -25,7 +25,7 @@ See GATE/LICENSE.txt for further details
 #include "GateIDFilterMessenger.hh"
 
 
-class  GateIDFilter : 
+class  GateIDFilter :
   public GateVFilter
 {
 public:

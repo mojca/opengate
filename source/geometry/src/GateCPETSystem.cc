@@ -26,11 +26,11 @@ GateCPETSystem::GateCPETSystem(const G4String& itsName)
 {
   // Changer la profondeur pour le secteur:
   // m_mainComponentDepth = ...;
-  
+
   // Set up a messenger
   m_messenger = new GateClockDependentMessenger(this);
   m_messenger->SetDirectoryGuidance(G4String("Controls the system '") + GetObjectName() + "'" );
-  
+
   // Define the scanner components
   GateCylinderComponent* rSectorComponent =  new GateCylinderComponent("sector",GetBaseComponent(),this);
   GateCylinderComponent* rCassetteComponent =  new GateCylinderComponent("cassette",rSectorComponent,this);
@@ -46,7 +46,7 @@ GateCPETSystem::GateCPETSystem(const G4String& itsName)
   GateDigitizer* digitizer = GateDigitizer::GetInstance();
   GateCoincidenceSorter* coincidenceSorter = new GateCoincidenceSorter(digitizer,"Coincidences",coincidenceWindow);
   digitizer->StoreNewCoincidenceSorter(coincidenceSorter);
-  
+
   SetOutputIDName((char *)"gantryID",0);
   SetOutputIDName((char *)"sectorID",1);
   SetOutputIDName((char *)"cassetteID",2);
@@ -59,7 +59,7 @@ GateCPETSystem::GateCPETSystem(const G4String& itsName)
 
 
 // Destructor
-GateCPETSystem::~GateCPETSystem() 
+GateCPETSystem::~GateCPETSystem()
 {
   delete m_messenger;
 }
@@ -71,7 +71,7 @@ GateCPETSystem::~GateCPETSystem()
     optimised for creating LMF header files
 
 	indent: the print-out indentation (cosmetic parameter)
-*/    
+*/
 void GateCPETSystem::Describe(size_t indent)
 {
   GateVSystem::Describe(indent);
@@ -86,7 +86,7 @@ void GateCPETSystem::Describe(size_t indent)
 
 	aStream: the output stream
 	doPrintNumbers: tells whether we print-out the volume numbers in addition to their dimensions
-*/    
+*/
 void GateCPETSystem::PrintToStream(std::ostream& aStream,G4bool)
 {
   aStream << "geometrical design type: " << "CPET"     	      	      	      	  << G4endl;
@@ -110,7 +110,3 @@ G4double GateCPETSystem::ComputeInternalRadius()
 {
   return FindCylinderCreatorComponent("crystal")->GetCylinderRmin();
 }
-
-
-
-

@@ -29,7 +29,7 @@ public:
 	enum EnvelopeType {Box,Cylinder} m_nEnvelopeType;
     //! Constructor
     GateFictitiousVoxelMapParameterized(const G4String& name,
-    				     G4bool acceptsChildren=true, 
+    				     G4bool acceptsChildren=true,
 		 		     G4int depth=0);
     GateFictitiousVoxelMapParameterized(const G4String& name);
 
@@ -79,7 +79,7 @@ private:
 
 	void Init(const G4String& name, EnvelopeType type);
 
-	
+
     G4String m_name;
     G4int verboseLevel;
     G4int skipEqualMaterials;

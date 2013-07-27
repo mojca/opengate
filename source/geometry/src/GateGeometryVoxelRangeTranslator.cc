@@ -22,17 +22,17 @@ See GATE/LICENSE.txt for further details
 #include "G4Colour.hh"
 
 
-GateGeometryVoxelRangeTranslator::GateGeometryVoxelRangeTranslator(GateVGeometryVoxelReader* voxelReader) 
+GateGeometryVoxelRangeTranslator::GateGeometryVoxelRangeTranslator(GateVGeometryVoxelReader* voxelReader)
   : GateVGeometryVoxelTranslator(voxelReader)
 {
 //  G4cout << " Constructor GateGeometryVoxelRangeTranslator" << G4endl;
   m_name = G4String("rangeTranslator");
   m_messenger = new GateGeometryVoxelRangeTranslatorMessenger(this);
-  
+
 //  G4cout << " FIN Constructor GateGeometryVoxelRangeTranslator" << G4endl;
 }
 
-GateGeometryVoxelRangeTranslator::~GateGeometryVoxelRangeTranslator() 
+GateGeometryVoxelRangeTranslator::~GateGeometryVoxelRangeTranslator()
 {
   delete m_messenger;
 }
@@ -63,11 +63,11 @@ void GateGeometryVoxelRangeTranslator::ReadTranslationTable(G4String fileName)
   m_voxelMaterialTranslation.clear();
 
   std::ifstream inFile;
-  
+
 //  G4cout << "GateGeometryVoxelRangeTranslator::ReadFile : fileName: " << fileName << G4endl;
-  
+
   inFile.open(fileName.c_str(),std::ios::in);
-   
+
   if (inFile.is_open()){
   G4String material;
   G4double xmin;
@@ -101,7 +101,7 @@ void GateGeometryVoxelRangeTranslator::ReadTranslationTable(G4String fileName)
       is >> std::boolalpha >> visible >> red >> green >> blue >> alpha;
     }
 
-    //   G4cout << " min max " << xmin << " " << xmax << "  material: " << material 
+    //   G4cout << " min max " << xmin << " " << xmax << "  material: " << material
     //   << std::boolalpha << ", visible " << visible << ", rgba(" << red<<',' << green << ',' << blue << ')' << G4endl;
 
     std::pair<G4double,G4double> minmax(xmin, xmax);
@@ -115,35 +115,35 @@ void GateGeometryVoxelRangeTranslator::ReadTranslationTable(G4String fileName)
 /*old class GateMaterialDatabase
     m_voxelAttributesTranslation[  GateMaterialDatabase::GetInstance()->GetMaterial(material) ] =
       new G4VisAttributes(visible, G4Colour(red, green, blue, alpha));
-*/    
+*/
     m_voxelAttributesTranslation[GateDetectorConstruction::GetGateDetectorConstruction()->mMaterialDatabase.GetMaterial(material) ] =
       new G4VisAttributes(visible, G4Colour(red, green, blue, alpha));
   }
 
   }
   else {G4cout << "Error opening file." << G4endl;}
-  
+
   inFile.close();
 
 }
 
-void GateGeometryVoxelRangeTranslator::Describe(G4int) 
+void GateGeometryVoxelRangeTranslator::Describe(G4int)
 {
   G4cout << " Range Translator" << G4endl;
   for (G4int iRange = 0; iRange< (G4int)m_voxelMaterialTranslation.size(); iRange++) {
     G4double    xmin      = (m_voxelMaterialTranslation[iRange].first).first;
     G4double    xmax      = (m_voxelMaterialTranslation[iRange].first).second;
     G4String material = (m_voxelMaterialTranslation[iRange].second);
-    G4cout << "\tRange "  << std::setw(3) << iRange 
-	   << " : imageValue in [ " 
-	   << std::resetiosflags(std::ios::floatfield) 
-	   << std::setiosflags(std::ios::scientific) 
-	   << std::setprecision(3) 
-	   << std::setw(12) 
-	   << xmin 
-	   << " , "   
-	   << xmax 
-	   << " ]  ---> material " << material 
+    G4cout << "\tRange "  << std::setw(3) << iRange
+	   << " : imageValue in [ "
+	   << std::resetiosflags(std::ios::floatfield)
+	   << std::setiosflags(std::ios::scientific)
+	   << std::setprecision(3)
+	   << std::setw(12)
+	   << xmin
+	   << " , "
+	   << xmax
+	   << " ]  ---> material " << material
 	   << ", visibility " << GetMaterialAttributes(   GateDetectorConstruction::GetGateDetectorConstruction()->mMaterialDatabase.GetMaterial(material)  )->IsVisible()
 	   << ", coulour "    << GetMaterialAttributes(   GateDetectorConstruction::GetGateDetectorConstruction()->mMaterialDatabase.GetMaterial(material)  )->GetColour()
 	   << G4endl;
@@ -156,14 +156,14 @@ void GateGeometryVoxelRangeTranslator::Describe(G4int)
 G4String GateGeometryVoxelRangeTranslator::GetNextMaterial(G4bool doReset)
 {
   static GateVoxelMaterialTranslationRangeVector::iterator anIterator = m_voxelMaterialTranslation.begin();
-  
+
   if (doReset)
     anIterator = m_voxelMaterialTranslation.begin();
-    
+
   G4String aMaterial = ( anIterator!=m_voxelMaterialTranslation.end() ) ? anIterator->second : G4String("") ;
   if (aMaterial!="")
     anIterator++;
-    
+
   return aMaterial;
 }
 

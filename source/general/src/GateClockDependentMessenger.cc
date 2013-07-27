@@ -32,7 +32,7 @@ See GATE/LICENSE.txt for further details
 GateClockDependentMessenger::GateClockDependentMessenger(GateClockDependent* itsClockDependent,
     			     				 const G4String& itsDirectoryName)
 : GateNamedObjectMessenger(itsClockDependent,itsDirectoryName)
-{ 
+{
   G4String guidance;
   G4String cmdName;
 
@@ -89,13 +89,13 @@ G4cout << " created command " << cmdName <<G4endl;
 //----------------------------------------------------------------------------------------------------------
 // UI command interpreter method
 void GateClockDependentMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
   if ( command==pEnableCmd )
-    { GetClockDependent()->Enable(pEnableCmd->GetNewBoolValue(newValue));}   
+    { GetClockDependent()->Enable(pEnableCmd->GetNewBoolValue(newValue));}
   else if ( command==pDisableCmd )
-    { GetClockDependent()->Enable( !(pDisableCmd->GetNewBoolValue(newValue)) );}     
+    { GetClockDependent()->Enable( !(pDisableCmd->GetNewBoolValue(newValue)) );}
   else if ( command == ARFcmd )
-   { 
+   {
    	GateSPECTHeadSystem* theS = dynamic_cast<GateSPECTHeadSystem*>( GetClockDependent() );
     theS->setARFStage( newValue );return;
    }
@@ -110,6 +110,6 @@ void GateClockDependentMessenger::SetNewValue(G4UIcommand* command,G4String newV
      return;
     }
 	else GateNamedObjectMessenger::SetNewValue(command,newValue);
-	
+
 }
 //----------------------------------------------------------------------------------------------------------

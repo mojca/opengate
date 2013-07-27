@@ -30,14 +30,14 @@ GateUIcmdWithADoubleAnd2String::GateUIcmdWithADoubleAnd2String(const char * theC
 
 //---------------------------------------------------------------------------
 void GateUIcmdWithADoubleAnd2String::SetParameterName
-(const char * theName1, const char * theName2, const char * theName3, 
+(const char * theName1, const char * theName2, const char * theName3,
  G4bool omittable1, G4bool omittable2, G4bool omittable3, G4bool currentAsDefault)
 {
   G4UIparameter * theParam = GetParameter(0);
   theParam->SetParameterName(theName1);
   theParam->SetOmittable(omittable1);
   theParam->SetCurrentAsDefault(currentAsDefault);
-  
+
   theParam = GetParameter(1);
   theParam->SetParameterName(theName2);
   theParam->SetOmittable(omittable2);
@@ -90,4 +90,3 @@ void GateUIcmdWithADoubleAnd2String::SetDefaultValue(const char * defVal1, const
 //---------------------------------------------------------------------------
 
 #endif
-

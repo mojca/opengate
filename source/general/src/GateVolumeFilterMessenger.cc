@@ -41,7 +41,7 @@ void GateVolumeFilterMessenger::BuildCommands(G4String base)
 {
   G4String guidance;
   G4String bb;
-  
+
   bb = base+"/addVolume";
   pAddVolumeCmd = new G4UIcmdWithAString(bb,this);
   guidance = "Add volume";

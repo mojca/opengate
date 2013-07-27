@@ -62,36 +62,36 @@ G4cout << "GateSourceVoxelImageReader::ReadFile : fileName: " << fileName << G4e
     G4cerr << G4endl << "Error: Could not open header file '" << fileName << "'!" << G4endl;
     return;
   }
-  
 
-  
+
+
   while ( (!feof(fp)) && (!ferror(fp)))
     ReadKey(fp);
   fclose(fp);
-  
 
-  
+
+
   for (G4int i=0; i<2; i++)
     m_matrixSize[i] = m_dim[i] * m_pixelSize[i];
 
   G4cout << " Header read from       '" << fileName << "'" << G4endl;
   G4cout << " Data file name         '" << m_dataFileName << "'" << G4endl;
-  G4cout << " Nb of planes:           " << m_numPlanes << G4endl; 
-  G4cout << " Nb of pixels per plane: " << m_dim[0] << " " << m_dim[1] << G4endl; 
-  G4cout << " Pixel size:             " << m_pixelSize[0] << " " << m_pixelSize[1] << G4endl; 
+  G4cout << " Nb of planes:           " << m_numPlanes << G4endl;
+  G4cout << " Nb of pixels per plane: " << m_dim[0] << " " << m_dim[1] << G4endl;
+  G4cout << " Pixel size:             " << m_pixelSize[0] << " " << m_pixelSize[1] << G4endl;
   G4cout << " Slice thickness:        " << m_planeThickness << G4endl;
-  G4cout << " Matrix size:            " << m_matrixSize[0] << " " << m_matrixSize[1] << G4endl; 
-  G4cout << " Data type:              " << m_dataTypeName << G4endl; 
+  G4cout << " Matrix size:            " << m_matrixSize[0] << " " << m_matrixSize[1] << G4endl;
+  G4cout << " Data type:              " << m_dataTypeName << G4endl;
   G4cout << " Data byte order:	 " << m_dataByteOrder << G4endl;
   G4cout << G4endl;
 
   if ( ( m_dim[0]==0) || ( m_dim[1]==0) || ( m_numPlanes==0) ) {
     G4cerr << G4endl <<"Error: one of the matrix dimensions is zero!" << G4endl;
   return;
-  }  
+  }
   G4int pixelNumber = m_dim[0]*m_dim[1]*m_numPlanes ;
   /*Set ( pixelNumber );*/
-  
+
   FILE* fpp=fopen(m_dataFileName.c_str(),"r");
   if (!fpp) {
     G4cerr << G4endl << "Error: Could not open header file '" << m_dataFileName << "'!" << G4endl;
@@ -103,7 +103,7 @@ G4cout << "GateSourceVoxelImageReader::ReadFile : fileName: " << fileName << G4e
     G4cerr << G4endl << "Error: Could not allocate the buffer!" << G4endl;
     return;
   }
-  
+
   G4int NbData = fread( buffer, sizeof(G4short), pixelNumber, fpp);
   fclose(fpp);
   if ( NbData != pixelNumber ) {
@@ -130,9 +130,9 @@ G4cout << "GateSourceVoxelImageReader::ReadFile : fileName: " << fileName << G4e
   dx = m_pixelSize[0];
   dy = m_pixelSize[1];
   dz = m_planeThickness;
- 
+
   SetVoxelSize( G4ThreeVector(dx, dy, dz) * mm );
-  
+
   for (G4int iz=0; iz<nz; iz++) {
     for (G4int iy=0; iy<ny; iy++) {
       for (G4int ix=0; ix<nx; ix++) {
@@ -151,7 +151,7 @@ G4cout << "GateSourceVoxelImageReader::ReadFile : fileName: " << fileName << G4e
 
 }
 
-void GateSourceVoxelInterfileReader::ReadKey(FILE* fp) 
+void GateSourceVoxelInterfileReader::ReadKey(FILE* fp)
 {
   if ( (feof(fp)) && (ferror(fp)))
     return ;
@@ -203,11 +203,11 @@ void GateSourceVoxelInterfileReader::ReadKey(FILE* fp)
     else
       G4cout << "Unrecognised type name '" << value << "'" << G4endl;
   } else if (key == "imagedata byte order") {
-  	if ( strcmp(value,"BIGENDIAN") == 0 ) 
+  	if ( strcmp(value,"BIGENDIAN") == 0 )
   		m_dataByteOrder = "BIGENDIAN";
   	else if ( strcmp(value,"LITTLEENDIAN") == 0)
   		m_dataByteOrder = "LITTLEENDIAN";
-  	else 
+  	else
   		G4cerr << "Unrecognized data byte order '" + G4String(value) + "', assuming default BIGENDIAN\n" << G4endl;
   } else {
     // G4cout << "Key not processed: '" << key << "'" << G4endl;
@@ -225,13 +225,13 @@ Initialize();
 
 m_dataFileName = dataFileName;
 
-// Check there is a GatePhantom attached 
+// Check there is a GatePhantom attached
 
 GateRTPhantom *Ph = GateRTPhantomMgr::GetInstance()->CheckSourceAttached( m_name );
 
 
 
-if ( Ph != 0) 
+if ( Ph != 0)
 {G4cout << " The Object "<< Ph->GetName()
 <<" is attached to the "<<m_name<<" Source Voxel Reader." << G4endl;
 }  else { G4cout << " GateSourceVoxelInterfileReader::ReadFile   WARNING The Object "<< Ph->GetName()
@@ -258,28 +258,28 @@ if (!m_voxelTranslator) {
 
  }
 
-  
+
   for (G4int i=0; i<2; i++)
     m_matrixSize[i] = m_dim[i] * m_pixelSize[i];
 
   G4cout << " Header read from       '" << header_fileName << "'" << G4endl;
   G4cout << " Data file name         '" << m_dataFileName << "'" << G4endl;
-  G4cout << " Nb of planes:           " << m_numPlanes << G4endl; 
-  G4cout << " Nb of pixels per plane: " << m_dim[0] << " " << m_dim[1] << G4endl; 
-  G4cout << " Pixel size:             " << m_pixelSize[0] << " " << m_pixelSize[1] << G4endl; 
+  G4cout << " Nb of planes:           " << m_numPlanes << G4endl;
+  G4cout << " Nb of pixels per plane: " << m_dim[0] << " " << m_dim[1] << G4endl;
+  G4cout << " Pixel size:             " << m_pixelSize[0] << " " << m_pixelSize[1] << G4endl;
   G4cout << " Slice thickness:        " << m_planeThickness << G4endl;
-  G4cout << " Matrix size:            " << m_matrixSize[0] << " " << m_matrixSize[1] << G4endl; 
-  G4cout << " Data type:              " << m_dataTypeName << G4endl; 
+  G4cout << " Matrix size:            " << m_matrixSize[0] << " " << m_matrixSize[1] << G4endl;
+  G4cout << " Data type:              " << m_dataTypeName << G4endl;
   G4cout << " Data byte order:	 " << m_dataByteOrder << G4endl;
   G4cout << G4endl;
 
   if ( ( m_dim[0]==0) || ( m_dim[1]==0) || ( m_numPlanes==0) ) {
     G4cerr << G4endl <<"Error: one of the matrix dimensions is zero!" << G4endl;
   return;
-  }  
+  }
   G4int pixelNumber = m_dim[0]*m_dim[1]*m_numPlanes ;
   /*Set ( pixelNumber );*/
-  
+
   FILE* fpp=fopen(m_dataFileName.c_str(),"r");
   if (!fpp) {
     G4cerr << G4endl << "Error: Could not open header file '" << m_dataFileName << "'!" << G4endl;
@@ -293,7 +293,7 @@ if (!m_voxelTranslator) {
     G4cerr << G4endl << "Error: Could not allocate the buffer!" << G4endl;
     return;
   }
-  
+
   G4int NbData = fread( buffer, sizeof(G4short), pixelNumber, fpp);
   fclose(fpp);
   if ( NbData != pixelNumber ) {
@@ -322,7 +322,7 @@ if (!m_voxelTranslator) {
   dx = m_pixelSize[0];
   dy = m_pixelSize[1];
   dz = m_planeThickness;
- 
+
   SetVoxelSize( G4ThreeVector(dx, dy, dz) * mm );
 
   for (G4int iz=0; iz<nz; iz++) {
@@ -343,7 +343,7 @@ delete [] buffer;
 
 }
 
-void GateSourceVoxelInterfileReader::ReadKeyFrames(FILE* fp) 
+void GateSourceVoxelInterfileReader::ReadKeyFrames(FILE* fp)
 {
   if ( (feof(fp)) && (ferror(fp)))
     return ;
@@ -393,21 +393,14 @@ void GateSourceVoxelInterfileReader::ReadKeyFrames(FILE* fp)
     else
       G4cout << "Unrecognised type name '" << value << "'" << G4endl;
   } else if (key == "imagedata byte order") {
-  	if ( strcmp(value,"BIGENDIAN") == 0 ) 
+  	if ( strcmp(value,"BIGENDIAN") == 0 )
   		m_dataByteOrder = "BIGENDIAN";
   	else if ( strcmp(value,"LITTLEENDIAN") == 0)
   		m_dataByteOrder = "LITTLEENDIAN";
-  	else 
+  	else
   		G4cerr << "Unrecognized data byte order '" + G4String(value) + "', assuming default BIGENDIAN\n" << G4endl;
   } else {
     // G4cout << "Key not processed: '" << key << "'" << G4endl;
   }
 }
 /* PY Descourt 08/09/2009 */
-
-
-
-
-
-
-  

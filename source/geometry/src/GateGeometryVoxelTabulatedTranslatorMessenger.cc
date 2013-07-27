@@ -25,14 +25,14 @@ See GATE/LICENSE.txt for further details
 
 //-----------------------------------------------------------------------------------------------------------
 GateGeometryVoxelTabulatedTranslatorMessenger::GateGeometryVoxelTabulatedTranslatorMessenger(GateGeometryVoxelTabulatedTranslator* voxelTranslator)
-  : GateMessenger(voxelTranslator->GetReader()->GetCreator()->GetObjectName() + 
+  : GateMessenger(voxelTranslator->GetReader()->GetCreator()->GetObjectName() +
 		  G4String("/") +
-		  voxelTranslator->GetReader()->GetName() + 
+		  voxelTranslator->GetReader()->GetName() +
 		  G4String("/") +
-		  voxelTranslator->GetName(), 
+		  voxelTranslator->GetName(),
 		  true),
   m_voxelTranslator(voxelTranslator)
-{ 
+{
 
   G4String cmdName;
 
@@ -62,14 +62,12 @@ GateGeometryVoxelTabulatedTranslatorMessenger::~GateGeometryVoxelTabulatedTransl
 
 //-----------------------------------------------------------------------------------------------------------
 void GateGeometryVoxelTabulatedTranslatorMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
   if( command == ReadTableCmd ) {
     G4cout << " Call ReadTableCmd command" << G4endl;
     m_voxelTranslator->ReadTranslationTable(newValue);
   } else if ( command == DescribeCmd ) {
     m_voxelTranslator->Describe(DescribeCmd->GetNewIntValue(newValue));
-  } 
+  }
 }
 //-----------------------------------------------------------------------------------------------------------
-
-

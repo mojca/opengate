@@ -23,15 +23,15 @@ See GATE/LICENSE.txt for further details
 //-------------------------------------------------------------------------------------
 GateSphereMessenger::GateSphereMessenger(GateSphere *itsCreator)
 : GateVolumeMessenger(itsCreator)
-{ 
+{
 
   G4String dir = GetDirectoryName() + "geometry/";
-  
+
   G4String cmdName = dir+"setRmin";
   SphereRminCmd = new G4UIcmdWithADoubleAndUnit(cmdName.c_str(),this);
-  
+
   G4cout << " Rmin" << cmdName.c_str() << G4endl;
-  
+
   SphereRminCmd->SetGuidance("Set internal radius of the sphere (0 for full sphere).");
   SphereRminCmd->SetParameterName("Rmin",false);
   SphereRminCmd->SetRange("Rmin>=0.");
@@ -87,9 +87,9 @@ GateSphereMessenger::~GateSphereMessenger()
 
 //-------------------------------------------------------------------------------------
 void GateSphereMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
-{ 
+{
   if( command == SphereRminCmd )
-    { 
+    {
     GetSphereCreator()->SetSphereRmin(SphereRminCmd->GetNewDoubleValue(newValue)); /*TellGeometryToUpdate();*/}
   else if( command == SphereRmaxCmd )
     { GetSphereCreator()->SetSphereRmax(SphereRmaxCmd->GetNewDoubleValue(newValue)); /*TellGeometryToUpdate();*/}

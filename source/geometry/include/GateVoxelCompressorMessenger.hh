@@ -18,20 +18,19 @@ See GATE/LICENSE.txt for further details
 
 class GateVoxelCompressor;
 
-class GateVoxelCompressorMessenger: public GateMessenger 
+class GateVoxelCompressorMessenger: public GateMessenger
 {
   public:
     GateVoxelCompressorMessenger(GateVoxelCompressor* itsInserter);
    ~GateVoxelCompressorMessenger();
-    
+
     void SetNewValue(G4UIcommand*, G4String);
 
   private:
 
     G4UIcmdWithAString*             MakeExclusionListCmd;
     GateVoxelCompressor*            m_inserter;
-  
+
 };
 
 #endif
-

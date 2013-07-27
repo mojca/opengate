@@ -21,18 +21,18 @@ class GateVGlobalPlacement;
 
 /*! \class GateObjectMoveMessenger
     \brief Base class for all object-move messengers
-    
-    - GateObjectMoveMessenger - by Daniel.Strul@iphe.unil.ch 
-    
+
+    - GateObjectMoveMessenger - by Daniel.Strul@iphe.unil.ch
+
     - The GateObjectMoveMessenger inherits from the abilities/responsabilities
       of the GateObjectRepeaterMessenger base-class: creation and management
-      of a Gate UI directory for a Gate movement object; creation of the UI commands 
+      of a Gate UI directory for a Gate movement object; creation of the UI commands
       "describe", "enable" and "disable"
-      
+
     - In addition, it defines the method GetMove() that can return the
       object-move controled by the messenger
 
-*/      
+*/
 class GateObjectMoveMessenger: public GateObjectRepeaterMessenger
 {
   public:
@@ -40,12 +40,11 @@ class GateObjectMoveMessenger: public GateObjectRepeaterMessenger
     GateObjectMoveMessenger(GateVGlobalPlacement* itsMove);
     //! destructor
    ~GateObjectMoveMessenger() {}
-    
+
     //! Returns the move controled by the messenger
-    virtual inline GateVGlobalPlacement* GetMove() 
+    virtual inline GateVGlobalPlacement* GetMove()
       { return (GateVGlobalPlacement*) GetObjectRepeater(); }
-    
+
 };
 
 #endif
-

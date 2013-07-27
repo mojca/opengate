@@ -34,7 +34,7 @@ See GATE/LICENSE.txt for further details
 //-------------------------------------------------------------------------------------------------------
 GateObjectRepeaterListMessenger::GateObjectRepeaterListMessenger(GateObjectRepeaterList* itsRepeaterList)
 :GateListMessenger(itsRepeaterList)
-{ 
+{
   pInsertCmd->SetCandidates(DumpMap());
   //InsertCmd->AvailableForStates(PreInit);
 }
@@ -50,7 +50,7 @@ GateObjectRepeaterListMessenger::~GateObjectRepeaterListMessenger()
 
 //-------------------------------------------------------------------------------------------------------
 void GateObjectRepeaterListMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
   GateListMessenger::SetNewValue(command,newValue);
 }
 //-------------------------------------------------------------------------------------------------------
@@ -67,7 +67,7 @@ const G4String& GateObjectRepeaterListMessenger::DumpMap() {
 //-------------------------------------------------------------------------------------------------------
 void GateObjectRepeaterListMessenger::ListChoices()
 {
-  G4cout << "The available types of object repeater are: \n"; 
+  G4cout << "The available types of object repeater are: \n";
   G4cout << "  linear:\n"
             "    Repeats n times the object at the positions P[0], P[1], P[2], ...\n"
 	    "    with P[i] = P0 + i* dP\n";
@@ -89,14 +89,14 @@ void GateObjectRepeaterListMessenger::ListChoices()
 //-------------------------------------------------------------------------------------------------------
 void GateObjectRepeaterListMessenger::DoInsertion(const G4String& objectRepeaterTypeName)
 {
- 
+
   if (GetNewInsertionBaseName().empty())
     SetNewInsertionBaseName(objectRepeaterTypeName);
 
   AvoidNameConflicts();
 
   GateVGlobalPlacement* newObjectRepeater=0;
-  
+
   G4String insertionName = GetRepeaterList()->MakeElementName(GetNewInsertionBaseName());
 
   if (objectRepeaterTypeName=="linear")
@@ -114,9 +114,8 @@ void GateObjectRepeaterListMessenger::DoInsertion(const G4String& objectRepeater
   else {
     GateError("Repeater type name '" << objectRepeaterTypeName << "' was not recognised --> insertion request is ignored!\n");
   }
-  
+
   GetRepeaterList()->AppendObjectRepeater(newObjectRepeater);
   SetNewInsertionBaseName("");
 }
 //-------------------------------------------------------------------------------------------------------
-

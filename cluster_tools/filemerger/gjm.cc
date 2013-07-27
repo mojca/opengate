@@ -62,7 +62,7 @@ int main(int argc,char** argv)
   // Parse the command line
   if (argc==1) showhelp();
   int nextArg=1;
-  while (nextArg<argc) { 
+  while (nextArg<argc) {
     if (!strcmp(argv[nextArg],"-v") && (nextArg+1)<argc){
        nextArg++;
        if(!isdigit(argv[nextArg][0]) ) {

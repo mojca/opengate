@@ -26,19 +26,19 @@ class G4Material;
 class G4LogicalVolume;
 
 class GateFakeDetectorConstruction : public G4VUserDetectorConstruction {
-  
-public: 
+
+public:
   // Constructor
   GateFakeDetectorConstruction():G4VUserDetectorConstruction() {}
-  
+
   // Destructor
   virtual ~GateFakeDetectorConstruction() {}
-  
+
   // Construct
   virtual G4VPhysicalVolume* Construct();
 
 }; // end class
-  
+
 #endif /* end #define GATEFAKEDETECTORCONSTRUCTION_HH */
 
 //-----------------------------------------------------------------------------

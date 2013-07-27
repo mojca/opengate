@@ -15,7 +15,7 @@ See GATE/LICENSE.txt for further details
 
 //-----------------------------------------------------------------------------
 GateGammaConversionPB::GateGammaConversionPB():GateVProcess("GammaConversion")
-{  
+{
   SetDefaultParticle("gamma");
   SetProcessInfo("Pair production by gammas");
 
@@ -24,7 +24,7 @@ GateGammaConversionPB::GateGammaConversionPB():GateVProcess("GammaConversion")
   AddToModelList("LivermorePolarizedModel");
   AddToModelList("PenelopeModel");
 
-  pMessenger = new GateEMStandardProcessMessenger(this);  
+  pMessenger = new GateEMStandardProcessMessenger(this);
 }
 //-----------------------------------------------------------------------------
 
@@ -40,7 +40,7 @@ G4VProcess* GateGammaConversionPB::CreateProcess(G4ParticleDefinition *)
 //-----------------------------------------------------------------------------
 void GateGammaConversionPB::ConstructProcess(G4ProcessManager * manager)
 {
-  manager->AddDiscreteProcess(GetProcess());           
+  manager->AddDiscreteProcess(GetProcess());
 }
 //-----------------------------------------------------------------------------
 
@@ -57,7 +57,7 @@ bool GateGammaConversionPB::IsApplicable(G4ParticleDefinition * par)
 //-----------------------------------------------------------------------------
 bool GateGammaConversionPB::IsModelApplicable(G4String ,G4ParticleDefinition * par)
 {
-  for(unsigned int k = 0; k<theListOfParticlesWithSelectedModels.size();k++) 
+  for(unsigned int k = 0; k<theListOfParticlesWithSelectedModels.size();k++)
     if(par==theListOfParticlesWithSelectedModels[k]) GateError("A "<< GetG4ProcessName()<<" model has been already selected for "<< par->GetParticleName());
   if(par == G4Gamma::Gamma()) return true;
   return false;

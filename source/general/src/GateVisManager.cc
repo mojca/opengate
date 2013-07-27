@@ -7,7 +7,7 @@
   of the GNU Lesser General  Public Licence (LGPL)
   See GATE/LICENSE.txt for further details
   ----------------------*/
-  
+
 #ifdef G4VIS_USE
 
 #include "GateVisManager.hh"

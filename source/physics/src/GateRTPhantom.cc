@@ -59,11 +59,11 @@ GateVSource *Source = GateSourceMgr::GetInstance()->GetSourceByName(aname);
 if ( Source !=0 && IsVoxellized == 1 )
    { GateSourceVoxellized * SourceVoxl = (GateSourceVoxellized *) Source;
 
-     if ( SourceVoxl  != 0 ) 
-     {itsSReader = SourceVoxl->GetReader();}  
-     else 
+     if ( SourceVoxl  != 0 )
+     {itsSReader = SourceVoxl->GetReader();}
+     else
            {G4cout << " GateRTPhantom::AttachToSource WARNING : The Source " << Source->GetName() << " is NOT Voxellized. IGNORED."<<G4endl;}
-     
+
    }
 else
 {  G4cout <<   " GateRTPhantom::AttachToSource WARNING : The Source " << Source->GetName() << " does NOT exist. IGNORED." << G4endl;
@@ -100,7 +100,7 @@ GateVVolume * aInserter = GateObjectStore::GetInstance()->FindCreator(aname);
 
 if ( aInserter != 0 )
    {
-    m_inserter  =  aInserter;  
+    m_inserter  =  aInserter;
 GateVoxelBoxParameterized *VBParamIns = dynamic_cast<GateVoxelBoxParameterized *> (aInserter);
 GateCompressedVoxelParameterized* CVParamIns = dynamic_cast<GateCompressedVoxelParameterized*> (aInserter);
 GateRegularParameterized* CRParamIns = dynamic_cast<GateRegularParameterized*> (aInserter);
@@ -114,7 +114,7 @@ itsGReader = GReader;
 if ( GReader ==0 )G4cout << " GateRTPhantom::AttachTo ERROR : No Geometry Reader is associated to parameterized Object "<< aname<<G4endl;
 
    }
-    
+
 else { G4cout << " GateRTPhantom::AttachToGeometry ERROR : Inserter Object "<< aname <<" does not exist ! IGNORED !!!!" << G4endl;}
 
 if( m_inserter != 0 )
@@ -141,5 +141,3 @@ answer = "No";
 if (IsEnabled == 1) answer="Yes";
 G4cout << "             is Enabled                                    " << answer<<G4endl;
 }
-
-

@@ -20,14 +20,14 @@ class GateOscTranslationMoveMessenger;
 
 /*! \class  GateOscTranslationMove
     \brief  The GateOscTranslationMove models an oscillating translation movement
-    
+
     - GateOscTranslationMove - by Daniel.Strul@iphe.unil.ch (Aug. 10, 2002)
-    
-    - The movement equation modeled by this class is dM(t) = A x sin (2 PI f t + phi) 
+
+    - The movement equation modeled by this class is dM(t) = A x sin (2 PI f t + phi)
       where dM(t) is the translation vector at time t, A is the maximum displacement vector,
       f is the movement frequency, phi is the phase a t=0, and t is the time
-      
-*/      
+
+*/
 class GateOscTranslationMove  : public GateVGlobalPlacement
 {
   public:
@@ -47,10 +47,10 @@ class GateOscTranslationMove  : public GateVGlobalPlacement
 	\param currentRotationMatrix: the rotation matrix that defines the current orientation of the volume
 	\param currentPosition:       the vector that defines the current position of the volume
 	\param aTime:                 the current time
-	
+
 	\return an object GatePlacement combining the new position and the new orientation of the volume
 	        computed by the movement equation
-    */    
+    */
     virtual void PushMyPlacements(const G4RotationMatrix& currentRotationMatrix,
 	        	      	      	      const G4ThreeVector& currentPosition,
 			      	      	      G4double aTime);
@@ -59,9 +59,9 @@ class GateOscTranslationMove  : public GateVGlobalPlacement
       	\brief a description of the movement
 
 	\param indent: the print-out indentation (cosmetic parameter)
-    */    
+    */
     virtual void DescribeMyself(size_t indent);
-     
+
   public:
     //! \name getters and setters
     //@{
@@ -99,11 +99,10 @@ class GateOscTranslationMove  : public GateVGlobalPlacement
 
     //! Translation vector that was last computed by PushMyPlacement()
     G4ThreeVector m_currentTranslation;
-    
+
     //! Messenger
-    GateOscTranslationMoveMessenger* m_Messenger; 
+    GateOscTranslationMoveMessenger* m_Messenger;
 
 };
 
 #endif
-

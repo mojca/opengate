@@ -23,7 +23,7 @@ See GATE/LICENSE.txt for further details
 //----------------------------------------------------------------------------------------
 GateSourceLinacBeamMessenger::GateSourceLinacBeamMessenger(GateSourceLinacBeam * source)
   :GateVSourceMessenger(source), mSource(source)
-{ 
+{
   G4String cmdName;
   cmdName = GetDirectoryName()+"setReferencePosition";
   mRefPosCmd = new G4UIcmdWith3VectorAndUnit(cmdName,this);
@@ -50,7 +50,7 @@ GateSourceLinacBeamMessenger::~GateSourceLinacBeamMessenger() {
 
 
 //----------------------------------------------------------------------------------------
-void GateSourceLinacBeamMessenger::SetNewValue(G4UIcommand* command,G4String newValue) { 
+void GateSourceLinacBeamMessenger::SetNewValue(G4UIcommand* command,G4String newValue) {
   if( command == mRefPosCmd ) {
    mSource->SetReferencePosition(mRefPosCmd->GetNew3VectorValue(newValue));
   }
@@ -63,5 +63,3 @@ void GateSourceLinacBeamMessenger::SetNewValue(G4UIcommand* command,G4String new
   GateVSourceMessenger::SetNewValue(command,newValue);
 }
 //----------------------------------------------------------------------------------------
-
-

@@ -29,11 +29,10 @@ See GATE/LICENSE.txt for further details
 //:GateObjectRepeaterMessenger(itsMove)
 GateObjectMoveMessenger::GateObjectMoveMessenger(GateVGlobalPlacement* itsMove)
 :GateObjectRepeaterMessenger(itsMove)
-{ 
+{
   G4String guidance = G4String("Control for the movement '") + GetMove()->GetObjectName() + "'";
   GetDirectory()->SetGuidance(guidance.c_str());
 
   G4String cmdName;
 
 }
-

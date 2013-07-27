@@ -23,7 +23,7 @@ class GateGenericRepeaterMoveMessenger;
 class GateGenericRepeaterMove  : public GateVGlobalPlacement
 {
 public:
-  
+
   GateGenericRepeaterMove(GateVVolume* itsObjectInserter, const G4String& itsName);
   virtual ~GateGenericRepeaterMove();
   virtual void PushMyPlacements(const G4RotationMatrix& currentRotationMatrix,
@@ -31,7 +31,7 @@ public:
   virtual void DescribeMyself(size_t indent);
   void SetFilename(G4String filename);
   void EnableRelativeTranslation(bool b) { mUseRelativeTranslation = b; mGenericRepeater->EnableRelativeTranslation(b); }
-  
+
 public:
   GateGenericRepeater * mGenericRepeater;
   GateGenericRepeaterMoveMessenger* mMessenger;
@@ -46,4 +46,3 @@ public:
 //-------------------------------------------------------------------------------------------------
 
 #endif
-

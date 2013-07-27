@@ -21,10 +21,10 @@ See GATE/LICENSE.txt for further details
 #include "G4VisAttributes.hh"
 #include "G4PVPlacement.hh"
 #include "GatePlacementQueue.hh"
- 
+
 void GateVoxelBoxParameterized::InsertReader(G4String readerType ){
   //G4cout << "GateVoxelBoxParameterized::InsertReader - Entered" << G4endl;
-  
+
   if (m_voxelReader) {
     G4cout << "GateVoxelBoxParameterized::InsertReader: voxel reader already defined" << G4endl;
     return;
@@ -36,14 +36,14 @@ void GateVoxelBoxParameterized::InsertReader(G4String readerType ){
     m_voxelReader = new GateGeometryVoxelInterfileReader(this);
   } else
     G4cout << "GateVoxelBoxParameterized::InsertReader: unknown reader type" << G4endl;
-	
-   // initialize voxel sizes with fake values  
+
+   // initialize voxel sizes with fake values
 
        m_voxelReader->SetVoxelNx(1);
        m_voxelReader->SetVoxelNy(1);
-       m_voxelReader->SetVoxelNz(1);  
+       m_voxelReader->SetVoxelNz(1);
 
-  
+
 }
 
 void GateVoxelBoxParameterized::RemoveReader(){
@@ -62,9 +62,9 @@ void GateVoxelBoxParameterized::AddOutput(G4String name){
 
 
 void GateVoxelBoxParameterized::ConstructGeometry(G4LogicalVolume* mother_log, G4bool flagUpdateOnly){
-  // G4cout << "GateVoxelBoxParameterized::ConstructGeometry - Entered for " << GetCreator()->GetObjectName() 
+  // G4cout << "GateVoxelBoxParameterized::ConstructGeometry - Entered for " << GetCreator()->GetObjectName()
   //  	 <<", flag "<< std::boolalpha << flagUpdateOnly << G4endl;
-    
+
   if (m_voxelReader){
     //  Get the voxel number and size from the reader
     voxelNumber = G4ThreeVector(m_voxelReader->GetVoxelNx(), m_voxelReader->GetVoxelNy(), m_voxelReader->GetVoxelNz());
@@ -73,7 +73,7 @@ void GateVoxelBoxParameterized::ConstructGeometry(G4LogicalVolume* mother_log, G
     G4cout << "GateVoxelBoxParameterized::ConstructGeometry - Warning ! ConstructGeometry called without a reader" << G4endl;
     return;
   }
-    
+
   //  G4cout << "GateVoxelBoxParameterized::ConstructGeometry - voxel number/size " << voxelNumber << " . " << voxelSize << G4endl << std::flush;
   GateBox* m_boxCreator;
 
@@ -96,4 +96,3 @@ void GateVoxelBoxParameterized::ConstructGeometry(G4LogicalVolume* mother_log, G
   G4VisAttributes* creatorVis= const_cast<G4VisAttributes*>(GetCreator()->GetLogicalVolume()->GetVisAttributes());
   creatorVis->SetForceWireframe(true);
 }
-

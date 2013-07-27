@@ -11,11 +11,11 @@ See GATE/LICENSE.txt for further details
 /* ----------------------------------------------------------------------------- *
  *                                                                         *
  *  Class Description :                                                    *
- *                                                                         *  
+ *                                                                         *
  *  To generate the energy of a primary vertex according to the defined    *
  *  distribution                                                           *
- *                                                                         * 
- * ----------------------------------------------------------------------------- */ 
+ *                                                                         *
+ * ----------------------------------------------------------------------------- */
 
 #ifndef GateSPSEneDistribution_h
 #define GateSPSEneDistribution_h 1
@@ -31,23 +31,23 @@ class GateSPSEneDistribution : public G4SPSEneDistribution
 {
 
  public :
- 
+
   GateSPSEneDistribution () ;
-  ~GateSPSEneDistribution () ; 
-  
+  ~GateSPSEneDistribution () ;
+
   void GenerateFluor18() ;
   void GenerateOxygen15() ;
-  void GenerateCarbon11() ; 
+  void GenerateCarbon11() ;
   void GenerateRangeEnergy();
   G4double GenerateOne( G4ParticleDefinition* ) ;
   inline void SetMinEnergy( G4double E ){ m_Emin = E;};
   inline void SetEnergyRange( G4double r ){ m_EnergyRange = r; };
  private :
- 
+
   G4double particle_energy ;
   G4double      m_Emin;
   G4double      m_EnergyRange;
-  
+
 } ;
 
 #endif

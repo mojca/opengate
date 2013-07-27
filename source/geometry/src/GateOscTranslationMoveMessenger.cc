@@ -24,7 +24,7 @@ See GATE/LICENSE.txt for further details
 
 GateOscTranslationMoveMessenger::GateOscTranslationMoveMessenger(GateOscTranslationMove* itsTranslationMove)
   :GateObjectRepeaterMessenger(itsTranslationMove)
-{ 
+{
     G4String cmdName;
 
     cmdName = GetDirectoryName()+"setAmplitude";
@@ -66,17 +66,17 @@ GateOscTranslationMoveMessenger::~GateOscTranslationMoveMessenger()
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
 void GateOscTranslationMoveMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
   if( command==AmplitudeCmd )
-    { GetTranslationMove()->SetAmplitude(AmplitudeCmd->GetNew3VectorValue(newValue));}      
+    { GetTranslationMove()->SetAmplitude(AmplitudeCmd->GetNew3VectorValue(newValue));}
   else if( command==PeriodCmd )
-    { GetTranslationMove()->SetPeriod(PeriodCmd->GetNewDoubleValue(newValue));}      
+    { GetTranslationMove()->SetPeriod(PeriodCmd->GetNewDoubleValue(newValue));}
   else if( command==FrequencyCmd )
-    { GetTranslationMove()->SetFrequency(FrequencyCmd->GetNewDoubleValue(newValue));}      
+    { GetTranslationMove()->SetFrequency(FrequencyCmd->GetNewDoubleValue(newValue));}
   else if( command==PhaseCmd )
-    { GetTranslationMove()->SetPhase(PhaseCmd->GetNewDoubleValue(newValue));}      
-  
-  else 
+    { GetTranslationMove()->SetPhase(PhaseCmd->GetNewDoubleValue(newValue));}
+
+  else
     GateObjectRepeaterMessenger::SetNewValue(command,newValue);
 }
 

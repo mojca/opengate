@@ -15,7 +15,7 @@ See GATE/LICENSE.txt for further details
 
 //-----------------------------------------------------------------------------
 GateSingleScatteringPB::GateSingleScatteringPB():GateVProcess("SingleScattering")
-{  
+{
   SetDefaultParticle("e+"); SetDefaultParticle("e-");
   SetDefaultParticle("mu+"); SetDefaultParticle("mu-");
   SetDefaultParticle("tau+"); SetDefaultParticle("tau-");
@@ -32,7 +32,7 @@ GateSingleScatteringPB::GateSingleScatteringPB():GateVProcess("SingleScattering"
   SetDefaultParticle("alpha");
   SetDefaultParticle("GenericIon");
   SetProcessInfo("Single Coulomb scattering of charged particles");
-  pMessenger = new GateEMStandardProcessMessenger(this);  
+  pMessenger = new GateEMStandardProcessMessenger(this);
 }
 //-----------------------------------------------------------------------------
 
@@ -40,7 +40,7 @@ GateSingleScatteringPB::GateSingleScatteringPB():GateVProcess("SingleScattering"
 //-----------------------------------------------------------------------------
 G4VProcess* GateSingleScatteringPB::CreateProcess(G4ParticleDefinition *)
 {
-  return new G4CoulombScattering(GetG4ProcessName()); 
+  return new G4CoulombScattering(GetG4ProcessName());
 }
 //-----------------------------------------------------------------------------
 
@@ -48,7 +48,7 @@ G4VProcess* GateSingleScatteringPB::CreateProcess(G4ParticleDefinition *)
 //-----------------------------------------------------------------------------
 void GateSingleScatteringPB::ConstructProcess(G4ProcessManager * manager)
 {
-  //manager->AddProcess(GetProcess(),-1, 1, 1);   
+  //manager->AddProcess(GetProcess(),-1, 1, 1);
   manager->AddDiscreteProcess(GetProcess());
 }
 //-----------------------------------------------------------------------------

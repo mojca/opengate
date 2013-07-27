@@ -38,7 +38,7 @@ GateEccentRotMove::GateEccentRotMove(GateVVolume* itsObjectInserter,
 
 //------------------------------------------------------------------------------------------------
 GateEccentRotMove::~GateEccentRotMove()
-{  
+{
   delete m_Messenger;
 }
 //------------------------------------------------------------------------------------------------
@@ -58,14 +58,14 @@ void GateEccentRotMove::PushMyPlacements(const G4RotationMatrix& currentRotation
     m_currentAngle = m_velocity * aTime;
     //    newPosition = G4RotateZ3D(m_currentAngle,m_point1,m_point2) * newPosition;
     newPosition = G4RotateZ3D(m_currentAngle) * newPosition;
-    
+
     //    G4Point3D m_point1(0.,0.,0.), m_point2(0.,0.,1.);
     // G4ThreeVector axis = m_point2 - m_point1;
 
     G4ThreeVector axis(0.,0.,1.);
     newRotationMatrix.rotate(-m_currentAngle, axis);    // Autorotate the object around OZ
 
-    PushBackPlacement(GatePlacement(newRotationMatrix,newPosition));  
+    PushBackPlacement(GatePlacement(newRotationMatrix,newPosition));
 //    return GatePlacement(newRotationMatrix,newPosition);
 }
 //------------------------------------------------------------------------------------------------
@@ -80,7 +80,3 @@ void GateEccentRotMove::DescribeMyself(size_t indent)
     G4cout << GateTools::Indent(indent) << "Current orbiting angle: " << m_currentAngle / degree << " deg\n";
 }
 //------------------------------------------------------------------------------------------------
-
-
-
-

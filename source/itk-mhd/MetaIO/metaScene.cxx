@@ -113,13 +113,13 @@ NObjects(int nobjects)
   m_NObjects = nobjects;
 }
 
-int MetaScene:: 
+int MetaScene::
 NObjects(void) const
 {
   return m_NObjects;
 }
 
-void MetaScene:: 
+void MetaScene::
 AddObject(MetaObject* object)
 {
   m_ObjectList.push_back(object);
@@ -159,7 +159,7 @@ Read(const char *_headerName)
 #ifdef __sgi
   m_ReadStream->open(m_FileName, METAIO_STREAM::ios::in);
 #else
-  m_ReadStream->open(m_FileName, METAIO_STREAM::ios::binary 
+  m_ReadStream->open(m_FileName, METAIO_STREAM::ios::binary
                                  | METAIO_STREAM::ios::in);
 #endif
 
@@ -189,9 +189,9 @@ Read(const char *_headerName)
   /** Objects should be added here */
   for(i=0;i<m_NObjects;i++)
     {
-    if(META_DEBUG) 
+    if(META_DEBUG)
       {
-      METAIO_STREAM::cout << MET_ReadType(*m_ReadStream).c_str() 
+      METAIO_STREAM::cout << MET_ReadType(*m_ReadStream).c_str()
         << METAIO_STREAM::endl;
       }
 
@@ -200,7 +200,7 @@ Read(const char *_headerName)
       m_Event->SetCurrentIteration(i+1);
       }
 
-    if(!strncmp(MET_ReadType(*m_ReadStream).c_str(),"Tube",4) || 
+    if(!strncmp(MET_ReadType(*m_ReadStream).c_str(),"Tube",4) ||
       ((MET_ReadType(*m_ReadStream).size()==0) && !strcmp(suf, "tre")))
       {
       char* subtype = MET_ReadSubType(*m_ReadStream);
@@ -280,7 +280,7 @@ Read(const char *_headerName)
       }
 
     else if(!strncmp(MET_ReadType(*m_ReadStream).c_str(),"Image",5) ||
-      ((MET_ReadType(*m_ReadStream).size()==0) && 
+      ((MET_ReadType(*m_ReadStream).size()==0) &&
        (!strcmp(suf, "mhd") || !strcmp(suf, "mha"))))
       {
       MetaImage* image = new MetaImage();
@@ -329,7 +329,7 @@ Read(const char *_headerName)
     else if(!strncmp(MET_ReadType(*m_ReadStream).c_str(),"Group",5) ||
       ((MET_ReadType(*m_ReadStream).size()==0) && !strcmp(suf, "grp")))
       {
-      MetaGroup* group = new MetaGroup();      
+      MetaGroup* group = new MetaGroup();
       group->SetEvent(m_Event);
       group->ReadStream(m_NDims,m_ReadStream);
       m_ObjectList.push_back(group);
@@ -387,7 +387,7 @@ Write(const char *_headName)
   M_SetupWriteFields();
 
   if(!m_WriteStream)
-    { 
+    {
     m_WriteStream = new METAIO_STREAM::ofstream;
     }
 
@@ -395,11 +395,11 @@ Write(const char *_headName)
   // Create the file. This is required on some older sgi's
     {
     METAIO_STREAM::ofstream tFile(m_FileName, METAIO_STREAM::ios::out);
-    tFile.close();                    
+    tFile.close();
     }
   m_WriteStream->open(m_FileName, METAIO_STREAM::ios::out);
 #else
-  m_WriteStream->open(m_FileName, METAIO_STREAM::ios::binary 
+  m_WriteStream->open(m_FileName, METAIO_STREAM::ios::binary
     | METAIO_STREAM::ios::out);
 #endif
 
@@ -562,4 +562,3 @@ M_Write(void)
 #if (METAIO_USE_NAMESPACE)
 };
 #endif
-

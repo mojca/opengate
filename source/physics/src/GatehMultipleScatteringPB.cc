@@ -15,7 +15,7 @@ See GATE/LICENSE.txt for further details
 
 //-----------------------------------------------------------------------------
 GatehMultipleScatteringPB::GatehMultipleScatteringPB():GateVProcess("hMultipleScattering")
-{  
+{
 
   SetDefaultParticle("mu+"); SetDefaultParticle("mu-");
   SetDefaultParticle("tau+"); SetDefaultParticle("tau-");
@@ -32,7 +32,7 @@ GatehMultipleScatteringPB::GatehMultipleScatteringPB():GateVProcess("hMultipleSc
   SetDefaultParticle("alpha");
   SetDefaultParticle("GenericIon");
   SetProcessInfo("Multiple Coulomb scattering of charged particles");
-  pMessenger = new GateMultiScatteringMessenger(this);  
+  pMessenger = new GateMultiScatteringMessenger(this);
 }
 //-----------------------------------------------------------------------------
 
@@ -40,7 +40,7 @@ GatehMultipleScatteringPB::GatehMultipleScatteringPB():GateVProcess("hMultipleSc
 //-----------------------------------------------------------------------------
 G4VProcess* GatehMultipleScatteringPB::CreateProcess(G4ParticleDefinition *)
 {
-  return new G4hMultipleScattering(GetG4ProcessName()); 
+  return new G4hMultipleScattering(GetG4ProcessName());
 }
 //-----------------------------------------------------------------------------
 
@@ -48,7 +48,7 @@ G4VProcess* GatehMultipleScatteringPB::CreateProcess(G4ParticleDefinition *)
 //-----------------------------------------------------------------------------
 void GatehMultipleScatteringPB::ConstructProcess(G4ProcessManager * manager)
 {
-  manager->AddProcess(GetProcess(),-1, 1, 1);           
+  manager->AddProcess(GetProcess(),-1, 1, 1);
 }
 //-----------------------------------------------------------------------------
 

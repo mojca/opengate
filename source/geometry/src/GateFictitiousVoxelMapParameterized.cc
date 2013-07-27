@@ -38,7 +38,7 @@ typedef G4Region G4Envelope;
 ///////////////////
 
 GateFictitiousVoxelMapParameterized::GateFictitiousVoxelMapParameterized ( const G4String& name,
-						   				G4bool acceptsChildren, 
+						   				G4bool acceptsChildren,
 		 			   	   				G4int  depth) :
 		GateBox ( name,"Vacuum",1,1,1,acceptsChildren,depth )
 {
@@ -271,13 +271,13 @@ void GateFictitiousVoxelMapParameterized::ConstructGeometry ( G4LogicalVolume* m
 
 void GateFictitiousVoxelMapParameterized::ConstructOwnPhysicalVolume ( G4bool flagUpdateOnly )
 {
-  // Store the volume default position into a placement queue 
+  // Store the volume default position into a placement queue
   GatePlacementQueue motherQueue;
   motherQueue.push_back(GatePlacement(G4RotationMatrix(),G4ThreeVector()));
-    
+
   GatePlacementQueue *pQueue = &motherQueue;
-        
-  // Have the start-up position processed by the move list 
+
+  // Have the start-up position processed by the move list
   if (m_moveList){
     pQueue = m_moveList->ComputePlacements(pQueue);
   }
@@ -286,12 +286,12 @@ void GateFictitiousVoxelMapParameterized::ConstructOwnPhysicalVolume ( G4bool fl
 //    G4cout << " *** repeaterList exists, repeaterList->ComputePlacements(pQueue)" << G4endl;
     pQueue = m_repeaterList->ComputePlacements(pQueue);}
 
-  
+
   // Do consistency checks
   if (flagUpdateOnly && theListOfOwnPhysVolume.size()) {
     if (pQueue->size()!=theListOfOwnPhysVolume.size()) {
       G4cout  << "[GateVVolume('" << GetObjectName() << "')::ConstructOwnPhysicalVolume]:" << G4endl
-      	      << "The size of the placement queue (" << pQueue->size() << ") is different from " << G4endl 
+      	      << "The size of the placement queue (" << pQueue->size() << ") is different from " << G4endl
 	      << "the number of physical volumes to update (" << theListOfOwnPhysVolume.size() << ")!!!" << G4endl;
       G4Exception( "GateFictitiousVoxelMapParameterized::ConstructOwnPhysicalVolume", "ConstructOwnPhysicalVolume", FatalException,  "Can not complete placement update.");
     }
@@ -303,54 +303,54 @@ void GateFictitiousVoxelMapParameterized::ConstructOwnPhysicalVolume ( G4bool fl
       G4Exception( "GateFictitiousVoxelMapParameterized::ConstructOwnPhysicalVolume", "ConstructOwnPhysicalVolume", FatalException, "Can not complete placement creation.");
     }
   }
- 
+
   // We now have a queue of placements: create new volumes or update the positions of existing volumes
   // based on the content of this queue
 
   size_t QueueSize = pQueue->size();
 
   for (size_t copyNumber=0; copyNumber<QueueSize ; copyNumber++) {
-     
+
       // Extract a combination of a rotation matrix and of a translation vector from the queue
       GatePlacement placement = pQueue->pop_front();
       G4RotationMatrix rotationMatrix = placement.first;
       G4ThreeVector position = placement.second;
-     
+
 
       // If the rotation is not null, derive a dynamic rotation matrix
       G4RotationMatrix *newRotationMatrix = (rotationMatrix.isIdentity()) ? 0 : new G4RotationMatrix(rotationMatrix);
-          
+
       pOwnPhys = GetPhysicalVolume(copyNumber);
 
       // Check if the physical volume exist when the geometry
       // is updating
-      if (flagUpdateOnly && !pOwnPhys){ 
-        G4cout << " Physical volume " << GetPhysicalVolumeName() << " does not exist!" << G4endl; 
+      if (flagUpdateOnly && !pOwnPhys){
+        G4cout << " Physical volume " << GetPhysicalVolumeName() << " does not exist!" << G4endl;
         G4Exception( "GateFictitiousVoxelMapParameterized::ConstructOwnPhysicalVolume", "ConstructOwnPhysicalVolume", FatalException, "Failed to construct the volume!");
       }
 
       if (flagUpdateOnly)
       {
         // Update physical volume
-        //----------------------------------------------------------------  
+        //----------------------------------------------------------------
         pOwnPhys = GetPhysicalVolume(copyNumber);
-   
+
         // Set the translation vector for this physical volume
         pOwnPhys->SetTranslation(position);
-     
+
         // Set the rotation matrix for this physical volume
         if (pOwnPhys->GetRotation())
           delete pOwnPhys->GetRotation();
-      
+
         pOwnPhys->SetRotation(newRotationMatrix);
-    
+
         GateMessage("Geometry", 3,"@  " << GetPhysicalVolumeName() << " has been updated." << G4endl;);
-    
+
       }
       else
       {
         // Place new physical volume
-        // Mofifs Seb JAN 23/03/2009 
+        // Mofifs Seb JAN 23/03/2009
         G4VPhysicalVolume* thePhysicalVolume = m_voxelInserter->GetParameterization()->GetPhysicalContainer();
         //PushPhysicalVolume(pOwnPhys);
         PushPhysicalVolume(thePhysicalVolume);

@@ -58,7 +58,7 @@ bool GateTotalDiscreteProcess::AddDiscreteProcess ( G4VDiscreteProcess* p )
 		G4Exception ( "GateTotalDiscreteProcess::AddDiscreteProcess (const G4VDiscreteProcess*)", "InvalidSetup", FatalException, G4String ( "Added DiscreteProcess that is not compatible to " + pParticleType->GetParticleName() +"!" ).c_str() );
 		return false;
 	}
-	
+
 
 	if ( static_cast<G4int> ( m_oProcessVec.size() ) <=m_nMaxNumProcesses )
 	{
@@ -159,7 +159,3 @@ void GateTotalDiscreteProcess::CreateTotalMaxCrossSectionTable ( const std::vect
 #endif
 	m_pTotalCrossSectionsTable->BuildMaxCrossSection ( vec );
 }
-
-
-
-

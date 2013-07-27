@@ -36,28 +36,28 @@ GateVisAttributesMessenger::GateColorPair GateVisAttributesMessenger::theColorTa
     GateColorPair ("cyan",       G4Colour(0.0, 1.0, 1.0)),
     GateColorPair ("magenta",    G4Colour(1.0, 0.0, 1.0)),
     GateColorPair ("yellow",     G4Colour(1.0, 1.0, 0.0))
-  };  
-GateVisAttributesMessenger::GateColorMap GateVisAttributesMessenger::theColorMap = 
+  };
+GateVisAttributesMessenger::GateColorMap GateVisAttributesMessenger::theColorMap =
       GateColorMap(N_COLORCODES,theColorTable);
 //------------------------------------------------------------------------------------------------------------------------------
 
-      
+
 //------------------------------------------------------------------------------------------------------------------------------
 #define N_LINESTYLES 3
 GateVisAttributesMessenger::GateLineStylePair GateVisAttributesMessenger::theLineStyleTable[N_LINESTYLES] = {
     GateLineStylePair ("unbroken",   G4VisAttributes::unbroken),
     GateLineStylePair ("dashed",     G4VisAttributes::dashed),
     GateLineStylePair ("dotted",     G4VisAttributes::dotted)
-  };  
-GateVisAttributesMessenger::GateLineStyleMap GateVisAttributesMessenger::theLineStyleMap = 
+  };
+GateVisAttributesMessenger::GateLineStyleMap GateVisAttributesMessenger::theLineStyleMap =
       GateLineStyleMap(N_LINESTYLES,theLineStyleTable);
 //------------------------------------------------------------------------------------------------------------------------------
 
-    
-//------------------------------------------------------------------------------------------------------------------------------  
+
+//------------------------------------------------------------------------------------------------------------------------------
 GateVisAttributesMessenger::GateVisAttributesMessenger(G4VisAttributes* itsVisAttributes,const G4String& itsName)
 : GateMessenger(itsName),pVisAttributes(itsVisAttributes)
-{ 
+{
   G4String guidance = G4String("Control of visualisation attributes for a GATE volume");
   GetDirectory()->SetGuidance(guidance.c_str());
 
@@ -126,31 +126,31 @@ GateVisAttributesMessenger::~GateVisAttributesMessenger()
 
 //------------------------------------------------------------------------------------------------------------------------------
 void GateVisAttributesMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
   if( command==pSetColorCmd )
-    { SetColor(newValue); TelVisManagerToUpdate(); }   
-  
+    { SetColor(newValue); TelVisManagerToUpdate(); }
+
   else if( command==pSetVisibilityCmd )
-    { pVisAttributes->SetVisibility(pSetVisibilityCmd->GetNewBoolValue(newValue)); TelVisManagerToUpdate(); }   
-  
+    { pVisAttributes->SetVisibility(pSetVisibilityCmd->GetNewBoolValue(newValue)); TelVisManagerToUpdate(); }
+
   else if( command==pSetDaughtersInvisibleCmd )
-    { pVisAttributes->SetDaughtersInvisible(pSetDaughtersInvisibleCmd->GetNewBoolValue(newValue)); TelVisManagerToUpdate();  }   
-  
+    { pVisAttributes->SetDaughtersInvisible(pSetDaughtersInvisibleCmd->GetNewBoolValue(newValue)); TelVisManagerToUpdate();  }
+
   else if( command==pSetLineStyleCmd )
-    { SetLineStyle(newValue); TelVisManagerToUpdate(); }   
-  
+    { SetLineStyle(newValue); TelVisManagerToUpdate(); }
+
   else if( command==pSetLineWidthCmd )
-    { pVisAttributes->SetLineWidth(pSetLineWidthCmd->GetNewDoubleValue(newValue)); TelVisManagerToUpdate();  }   
-  
+    { pVisAttributes->SetLineWidth(pSetLineWidthCmd->GetNewDoubleValue(newValue)); TelVisManagerToUpdate();  }
+
   else if( command==pForceSolidCmd )
-    { pVisAttributes->SetForceSolid(pForceSolidCmd->GetNewBoolValue(newValue)); TelVisManagerToUpdate();  }   
-  
+    { pVisAttributes->SetForceSolid(pForceSolidCmd->GetNewBoolValue(newValue)); TelVisManagerToUpdate();  }
+
   else if( command==pForceWireframeCmd )
-    { pVisAttributes->SetForceWireframe(pForceWireframeCmd->GetNewBoolValue(newValue)); TelVisManagerToUpdate();  }   
-  
+    { pVisAttributes->SetForceWireframe(pForceWireframeCmd->GetNewBoolValue(newValue)); TelVisManagerToUpdate();  }
+
   else
     GateMessenger::SetNewValue(command,newValue);
-  
+
 }
 //------------------------------------------------------------------------------------------------------------------------------
 

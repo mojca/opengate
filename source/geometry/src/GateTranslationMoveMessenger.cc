@@ -24,7 +24,7 @@ See GATE/LICENSE.txt for further details
 
 GateTranslationMoveMessenger::GateTranslationMoveMessenger(GateTranslationMove* itsTranslationMove)
   :GateObjectRepeaterMessenger(itsTranslationMove)
-{ 
+{
     G4String cmdName;
 
     cmdName = GetDirectoryName()+"setSpeed";
@@ -45,13 +45,13 @@ GateTranslationMoveMessenger::~GateTranslationMoveMessenger()
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
 void GateTranslationMoveMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
   if( command==TranslationVelocityCmd )
-    { 
+    {
      G4cout << "Translation speed = " << newValue << G4endl;
-     GetTranslationMove()->SetVelocity(TranslationVelocityCmd->GetNew3VectorValue(newValue));}      
-  
-  else 
+     GetTranslationMove()->SetVelocity(TranslationVelocityCmd->GetNew3VectorValue(newValue));}
+
+  else
     GateObjectRepeaterMessenger::SetNewValue(command,newValue);
 }
 

@@ -53,7 +53,7 @@ __constant__ float mat_Rindex [15] = {
 // Mie scattering lengths:
 // {Energy, scattering_length, Energy, scattering_length, Energy, scattering_length}
 __constant__ float Mie_scatteringlength_Table[15][6] =
-{ 
+{
 { 5.0000E-06,  5.3000E+00, 6.0000E-06,  6.2000E+00, 7.0000E-06,  6.7000E+00  } ,
 { 5.0000E-06,  1.3000E+00, 6.0000E-06,  1.2000E+00, 7.0000E-06,  1.7000E+00  } ,
 { 5.0000E-06,  6.3000E+00, 6.0000E-06,  7.2000E+00, 7.0000E-06,  7.7000E+00  } ,
@@ -70,5 +70,3 @@ __constant__ float Mie_scatteringlength_Table[15][6] =
 { 5.0000E-06,  9.3000E+00, 6.0000E-06,  1.2000E+00, 7.0000E-06,  6.5000E+00  } ,
 { 5.0000E-06,  3.3000E+00, 6.0000E-06,  2.2000E+00, 7.0000E-06,  8.7000E+00  }
 };
-
-

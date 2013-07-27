@@ -25,10 +25,10 @@ class GateConeMessenger: public GateVolumeMessenger
   public:
     GateConeMessenger(GateCone* itsCreator);
    ~GateConeMessenger();
-    
+
     void SetNewValue(G4UIcommand*, G4String);
-    
-    virtual inline GateCone* GetConeCreator() 
+
+    virtual inline GateCone* GetConeCreator()
       { return (GateCone*)GetVolumeCreator(); }
 
   private:
@@ -42,4 +42,3 @@ class GateConeMessenger: public GateVolumeMessenger
 };
 
 #endif
-

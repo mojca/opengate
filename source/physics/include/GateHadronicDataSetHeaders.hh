@@ -38,4 +38,3 @@ See GATE/LICENSE.txt for further details
 
 // Photo-Nuclear
 //#include "G4PhotoNuclearCrossSection.hh"
-

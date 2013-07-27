@@ -41,19 +41,18 @@ public:
   {return (GateVGlobalPlacement*) GetElement(i);}
   inline GateVVolume* GetCreator()
   { return (GateVVolume*) GetMotherObject() ;}
-	  
+
   virtual void ComputeParameters();
 
   virtual inline G4String MakeElementName(const G4String& newBaseName)
   { return GetCreator()->GetObjectName() + "/" + newBaseName; }
 
 
-   
+
 protected:
   GateListMessenger*   m_messenger;
-    
+
   G4String m_typeName;
 };
 
 #endif
-

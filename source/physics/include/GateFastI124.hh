@@ -21,19 +21,19 @@ class GateFastI124
 public:
 	GateFastI124( GateVSource* );
 	~GateFastI124();
-	
+
 	void InitializeFastI124();
-	
+
 	inline GateSimplifiedDecay* GetSimplifiedDecay()
 	{ return m_simpleDecay; }
-	
+
 	void GenerateVertex( G4Event* );
-	
+
 private:
 	GateVSource* m_source;
 	GateSimplifiedDecay* m_simpleDecay;
 	vector<psd>* m_particleVector;
-	
+
 };
 
 #endif

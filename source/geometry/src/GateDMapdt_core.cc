@@ -118,4 +118,3 @@ void upperEnveloppeComputation(long int *sdt_temp, const unsigned int SIZE, cons
     }
 
 }
-

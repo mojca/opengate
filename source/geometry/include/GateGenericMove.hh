@@ -22,11 +22,11 @@ class GateGenericMoveMessenger;
 /*! \class  GateGenericMove
     \brief The GateGenericMove models a motion described with
     several rotations.
-*/      
+*/
 class GateGenericMove  : public GateVGlobalPlacement
 {
 public:
-  
+
   GateGenericMove(GateVVolume* itsObjectInserter, const G4String& itsName);
   virtual ~GateGenericMove();
   virtual void PushMyPlacements(const G4RotationMatrix& currentRotationMatrix,
@@ -34,7 +34,7 @@ public:
   virtual void DescribeMyself(size_t indent);
   void SetFilename(G4String filename);
   // void EnableRelativeTranslation(bool b) { mUseRelativeTranslation = b; }
-  
+
 public:
   GateGenericMoveMessenger* mMessenger;
   std::vector<GatePlacement> mPlacementsList;
@@ -46,4 +46,3 @@ public:
 //-------------------------------------------------------------------------------------------------
 
 #endif
-

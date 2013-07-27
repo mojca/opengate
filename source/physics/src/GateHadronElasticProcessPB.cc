@@ -16,7 +16,7 @@ See GATE/LICENSE.txt for further details
 
 //-----------------------------------------------------------------------------
 GateHadronElasticPB::GateHadronElasticPB():GateVProcess("HadronElastic")
-{   
+{
   SetDefaultParticle("sigma0");  SetDefaultParticle("anti_sigma0");
   SetDefaultParticle("pi+"); SetDefaultParticle("pi-");SetDefaultParticle("pi0");
   SetDefaultParticle("kaon+"); SetDefaultParticle("kaon-");
@@ -46,8 +46,8 @@ GateHadronElasticPB::GateHadronElasticPB():GateVProcess("HadronElastic")
 
   AddToDataSetList("G4HadronElasticDataSet");
   AddToDataSetList("G4NeutronHPElasticData");
-  
-  pMessenger = new GateHadronicStandardProcessMessenger(this);  
+
+  pMessenger = new GateHadronicStandardProcessMessenger(this);
 }
 //-----------------------------------------------------------------------------
 
@@ -63,7 +63,7 @@ G4VProcess* GateHadronElasticPB::CreateProcess(G4ParticleDefinition *)
 //-----------------------------------------------------------------------------
 void GateHadronElasticPB::ConstructProcess( G4ProcessManager * manager)
 {
-  manager->AddDiscreteProcess(GetProcess());        
+  manager->AddDiscreteProcess(GetProcess());
 }
 //-----------------------------------------------------------------------------
 
@@ -132,7 +132,7 @@ bool GateHadronElasticPB::IsModelApplicable(G4String /*model*/,G4ParticleDefinit
        par == G4AntiXiMinus::AntiXiMinus() ||
        par == G4OmegaMinus::OmegaMinus() ||
        par == G4AntiOmegaMinus::AntiOmegaMinus()) &&
-       model == "G4NeutronHPElastic") || 
+       model == "G4NeutronHPElastic") ||
       (model == "G4NeutronHPorLElastic" && par == G4Neutron::Neutron()) ||
       (( model == "G4LEpp" || model == "G4LEnp") && (par == G4Neutron::Neutron() || par == G4Proton::Proton())))
       return true;

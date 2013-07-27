@@ -18,15 +18,15 @@ See GATE/LICENSE.txt for further details
 
 class GateVoxelBoxParameterized;
 
-class GateVoxelBoxParameterizedMessenger: public GateMessenger 
+class GateVoxelBoxParameterizedMessenger: public GateMessenger
 {
   public:
     GateVoxelBoxParameterizedMessenger(GateVoxelBoxParameterized* itsInserter);
    ~GateVoxelBoxParameterizedMessenger();
-    
+
     void SetNewValue(G4UIcommand*, G4String);
-    
-    virtual inline GateVoxelBoxParameterized* GetVoxelParameterizedInserter() 
+
+    virtual inline GateVoxelBoxParameterized* GetVoxelParameterizedInserter()
       { return m_inserter; }
 
   private:
@@ -37,8 +37,7 @@ class GateVoxelBoxParameterizedMessenger: public GateMessenger
     G4UIcmdWithAString*             AddOutputCmd;
 
     GateVoxelBoxParameterized*  m_inserter;
-  
+
 };
 
 #endif
-

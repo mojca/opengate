@@ -14,7 +14,7 @@
 #include "GateGeometryVoxelImageReader.hh"
 #include "G4PVParameterised.hh"
 #include "GateBox.hh"
- 
+
 ///////////////////
 //  Constructor  //
 ///////////////////
@@ -42,7 +42,7 @@ void GateRegularParam::ConstructOwnPhysicalVolume(G4bool flagUpdate)
   if (itsInserter->GetVerbosity()>=1) {
     G4cout << "---- Exiting GateRegularParam::ConstructOwnPhysicalVolumes ..."
              << G4endl
-             << "     --> without flagUpdate"        
+             << "     --> without flagUpdate"
 	     << G4endl << std::flush;
   }
 
@@ -59,7 +59,7 @@ void GateRegularParam::ConstructOwnPhysicalVolume(G4bool flagUpdate)
 
 //  DestroyOwnPhysicalVolumes();
    //DestroyGeometry();
-   
+
   // Build the parameterization
   GateVGeometryVoxelReader* itsReader ( itsInserter->GetReader() );
   G4ThreeVector voxelNumber(itsReader->GetVoxelNx(),itsReader->GetVoxelNy(),itsReader->GetVoxelNz());

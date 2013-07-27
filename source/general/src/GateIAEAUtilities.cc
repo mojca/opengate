@@ -2,18 +2,18 @@
    Copyright 2000-2003 Virginia Commonwealth University
 
    Advisory:
-1. The authors make no claim of accuracy of the information in these files or the 
+1. The authors make no claim of accuracy of the information in these files or the
    results derived from use of these files.
 2. You are not allowed to re-distribute these files or the information contained within.
-3. This methods and information contained in these files was interpreted by the authors 
-   from various sources.  It is the users sole responsibility to verify the accuracy 
-   of these files. 
-4. If you find a error within these files, we ask that you to contact the authors 
+3. This methods and information contained in these files was interpreted by the authors
+   from various sources.  It is the users sole responsibility to verify the accuracy
+   of these files.
+4. If you find a error within these files, we ask that you to contact the authors
    and the distributor of these files.
 5. We ask that you acknowledge the source of these files in publications that use results
-   derived from the input 
+   derived from the input
 
-   Please contact us if you have any questions 
+   Please contact us if you have any questions
 */
 /*  General Utilities for CPP programs
 	File Created:
@@ -67,7 +67,7 @@ int reverse_int_byte_order(int xold)
    pn[1] = po[2];
    pn[2] = po[1];
    pn[3] = po[0];
-   return(xnew);   
+   return(xnew);
 }
 /* *************************************************************************** */
 float reverse_float_byte_order(float xold)
@@ -98,15 +98,15 @@ int check_byte_order()
   float ftest=1.0f; /* assign a float to 1.0 */
   char *pf = (char *) &ftest;
   // printf("\n \t %x %x %x %x", pf[0],pf[1],pf[2],pf[3]);
-  if(pf[0] == 0 && pf[3] != 0) 
-  { 
+  if(pf[0] == 0 && pf[3] != 0)
+  {
 	printf("\n\n Byte order: INTEL / ALPHA,LINUX -> LITLE_ENDIAN \n");
     return(LITTLE_ENDIAN);
-  }else if(pf[0] != 0 && pf[3] == 0) 
-  { 
+  }else if(pf[0] != 0 && pf[3] == 0)
+  {
     printf("\n\n Byte order: OTHER (SGI,SUN-SOLARIS) -> BIG_ENDIAN \n ");
     return(BIG_ENDIAN);
-  } 
+  }
   else
   {
         printf("\n\n ERROR: indeterminate byte order");
@@ -179,13 +179,13 @@ int clean_name(char *tmp_path, char *opath)
    for(int i=0; i<len; i++)
    {
       if( isspace(tmp_path[i] ) )
-      {  
+      {
           if( o_index &&              // add a _ if not first char
               opath[o_index-1] != '_' ) // and if previous char not a _
          opath[o_index++] = '_';
       }
       else
-      if( my_isascii( tmp_path[i] ) && 
+      if( my_isascii( tmp_path[i] ) &&
           tmp_path[i] != '&'   &&
           tmp_path[i] != ','   &&
           tmp_path[i] != '*'   &&
@@ -194,7 +194,7 @@ int clean_name(char *tmp_path, char *opath)
           opath[o_index++] = tmp_path[i];
    }
    opath[o_index] = '\0'; /* terminate the string */
- 
+
    return(OK);
 }
 /* *********************************************************************** */
@@ -217,7 +217,7 @@ FILE *open_file(char *filename,char*extension, char *access)
       printf("\n ERROR: String Length  of %s.%s Exceeds Maximum",
               filename, extension);
       return(NULL);
-   } 
+   }
    char *filename1 = new char[len+strlen(extension)+1];
    strcpy(filename1,filename); // temp filename for appending extension
 
@@ -272,7 +272,7 @@ int pprintf(char *fmt, ... )
 }
 /* *********************************************************************** */
 /* eprintf: for buffering error reports, writes error messages to a buffer,
-   and, also can echo them to the screen (if set at compile time) 
+   and, also can echo them to the screen (if set at compile time)
    at first instance, allocates memory for the error buffer              */
 static char *ebuffer = NULL;
 int eprintf(char *fmt, ... )
@@ -286,7 +286,7 @@ int eprintf(char *fmt, ... )
 
   if(eprintf_mode==ON)
      fprintf(stdout,"%s", str);   /* Send  to screen */
- 
+
   // allocate memory for the error message
   int ilen = 0;
   if(ebuffer != NULL)
@@ -385,7 +385,7 @@ int array_read(char *in_string, float *array, int max_array)
          }
       }while(p!=NULL && i < max_array);
    }
-  
+
 #ifdef DEBUG_ARRAY
    printf("\n atof %d", i);
    for(int j=0; j<i; j++) {
@@ -420,7 +420,7 @@ int array_read(FILE *istrm, float *array, int max_array)
       return(0); // skip blank and non-numerical lines
    }
    int nread = array_read(in_string,array,max_array);
-   
+
    return(nread);  // return the number of elements read
 }
 /* ********************************************************************** */
@@ -431,13 +431,13 @@ int copy(char *SourceFile, char *DestinationFile)
   if(sStream == NULL)
   {
      perror("\n ERROR: copy: ");
-     printf("\n ERROR: copy: Opening Source File %s",SourceFile);return(FAIL); 
+     printf("\n ERROR: copy: Opening Source File %s",SourceFile);return(FAIL);
   }
   FILE *dStream = fopen(DestinationFile,"wb");
   if(dStream == NULL)
   {
      perror("\n ERROR: copy:");
-     printf("\n ERROR: copy: Opening Destination File %s",DestinationFile);return(FAIL); 
+     printf("\n ERROR: copy: Opening Destination File %s",DestinationFile);return(FAIL);
   }
   char buffer[1000];
   int nRead;
@@ -449,7 +449,7 @@ int copy(char *SourceFile, char *DestinationFile)
   if(ferror(sStream) || ferror(dStream) )
   {
      perror("ERROR: Copy: ");
-     printf("\n ERROR: source %s, destination %s", SourceFile, DestinationFile); 
+     printf("\n ERROR: source %s, destination %s", SourceFile, DestinationFile);
      return(FAIL);
   }
   fclose(sStream);
@@ -474,7 +474,7 @@ int readBinaryDataFromFile(FILE *iStream, int nItemsToRead, float **arrayToRead,
    }
    *arrayToRead = inputArray;
    return(OK);
-} 
+}
 /* ************************************************************************************ */
 int readBinaryDataFromFile(FILE *iStream, int nItemsToRead, float *inputArray, int swab_flag)
 {
@@ -482,10 +482,10 @@ int readBinaryDataFromFile(FILE *iStream, int nItemsToRead, float *inputArray, i
   // Swab if needed...Put swabbed results in different array so no need to "unswab" when done
   // Allocate memory to read array into
    // Read in the array....
-   int nRead=fread(inputArray,sizeof(float),nItemsToRead, iStream); 
+   int nRead=fread(inputArray,sizeof(float),nItemsToRead, iStream);
    if(nRead != nItemsToRead) {
      eprintf((char*)"\n ERROR: Wrong number read from file (%d %d)\n",
-	     nRead, nItemsToRead); return(FAIL); 
+	     nRead, nItemsToRead); return(FAIL);
    }
    // Check if need to swab the data
    if(swab_flag) // swab if swab_flag != 0
@@ -494,15 +494,15 @@ int readBinaryDataFromFile(FILE *iStream, int nItemsToRead, float *inputArray, i
       {
          inputArray[index] = reverse_float_byte_order( inputArray[index] );
       }
-   } 
+   }
    return(OK);
-} 
+}
 /* ***************************************************************************************** */
 int writeBinaryFile(char *binaryFileName, int nItemsToWrite, float *arrayToWrite, int swab_flag)
 {
    FILE *outputStream= fopen(binaryFileName,"wb");
    if (outputStream == NULL) {
-     eprintf((char*)"\n ERROR: Cannot open file %s for writing\n",binaryFileName); return(FAIL); 
+     eprintf((char*)"\n ERROR: Cannot open file %s for writing\n",binaryFileName); return(FAIL);
    }
    if(OK != writeBinaryDataToFile(outputStream, nItemsToWrite, arrayToWrite, swab_flag) )
    {
@@ -519,7 +519,7 @@ int writeBinaryDataToFile(FILE *outputStream, int nItemsToWrite, float *arrayToW
    float *swabbedArray;
    if(swab_flag) // swab if swab_flag != 0
    {
-      // 
+      //
       swabbedArray = (float *) calloc(nItemsToWrite,sizeof(float));
       if(swabbedArray == NULL) {
 	eprintf((char*)"\n ERROR: Allocating memory for swabbedArray in writeBinaryFile");
@@ -538,17 +538,17 @@ int writeBinaryDataToFile(FILE *outputStream, int nItemsToWrite, float *arrayToW
      eprintf((char*)"\n ERROR: writeBinaryDataToFile: nItemsToWrite= %d < 0", nItemsToWrite); return(FAIL);
    }
    // Write the dose distribution
-   int nWrite=fwrite(swabbedArray,sizeof(float),nItemsToWrite, outputStream); 
+   int nWrite=fwrite(swabbedArray,sizeof(float),nItemsToWrite, outputStream);
    if(nWrite != nItemsToWrite) {
      eprintf((char*)"\n ERROR: Wrong number written to file (%d %d)\n",
-	     nWrite, nItemsToWrite); return(FAIL); 
+	     nWrite, nItemsToWrite); return(FAIL);
    }
    // free swabbedArray if it was allocated here
    if(swab_flag) {
      free(swabbedArray);
    }
    return(OK);
-} 
+}
 /* ***************************************************************************************************** */
 
 int writeBigEndianBinaryFile(char *binaryFileName,  int nItemsToWrite, float *arrayToWrite)
@@ -571,7 +571,7 @@ int writeBigEndianBinaryFile(char *binaryFileName,  int nItemsToWrite, float *ar
      printf("\n ERROR: Writing dose file %s", binaryFileName); return(FAIL);
    }
    return(OK);
-} 
+}
 /* ***************************************************************************************************** */
 int writeLittleEndianBinaryFile(char *binaryFileName,  int nItemsToWrite, float *arrayToWrite)
 {
@@ -605,7 +605,7 @@ char *strnset(char *s, int ch, size_t n)
    return(s);
 }
 int get_string(FILE *fspec, char *string)
-{				
+{
 #ifdef DEBUG
   int rvalue=fget_c_string(string, MAX_STR_LEN, fspec);
   printf("\n fget_c_string returns %s", string);
@@ -663,7 +663,7 @@ int fget_c_string(char *string, int Max_Str_Len, FILE *fspec)
 #endif
    {
 #ifdef DEBUG
-           //  printf ("\n***End of Input File in get_string, closing"); 
+           //  printf ("\n***End of Input File in get_string, closing");
 #endif
            //  printf ("\nERROR: Reading File : End of File On Read ");
            // fclose(fspec);
@@ -674,7 +674,7 @@ int fget_c_string(char *string, int Max_Str_Len, FILE *fspec)
         n_pass++;      /* increment the number of times through the file */
         rewind(fspec); /* rewind to the beginning of the file */
         free(istring);
-        return(REWIND_STREAM); 
+        return(REWIND_STREAM);
 #endif
       }
 #ifdef DEBUG

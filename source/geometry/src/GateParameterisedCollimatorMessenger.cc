@@ -80,7 +80,7 @@ GateParameterisedCollimatorMessenger::GateParameterisedCollimatorMessenger(GateP
   CollimatorInnerRadiusCmd->SetParameterName("InnerRadius",false);
   CollimatorInnerRadiusCmd->SetRange("InnerRadius>0.");
   CollimatorInnerRadiusCmd->SetUnitCategory("Length");
-  
+
   visAttributesMessenger = new GateVisAttributesMessenger(GetVolumeCreator()->GetCreator()->GetVisAttributes(),
                            GetVolumeCreator()->GetObjectName()+"/vis");
 }
@@ -96,7 +96,7 @@ GateParameterisedCollimatorMessenger::~GateParameterisedCollimatorMessenger()
   delete CollimatorHeightCmd;
   delete CollimatorSeptalThicknessCmd;
   delete CollimatorInnerRadiusCmd;
-  
+
   delete visAttributesMessenger;
 }
 
@@ -127,5 +127,3 @@ void GateParameterisedCollimatorMessenger::SetNewValue(G4UIcommand* command, G4S
   else
     GateVolumeMessenger::SetNewValue(command,newValue);
 }
-
-

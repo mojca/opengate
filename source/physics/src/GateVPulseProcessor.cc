@@ -18,14 +18,14 @@ See GATE/LICENSE.txt for further details
 
 // Constructs a new pulse-processor attached to a GateDigitizer
 GateVPulseProcessor::GateVPulseProcessor(GatePulseProcessorChain* itsChain,
-      	      	      	   const G4String& itsName) 
+      	      	      	   const G4String& itsName)
     : GateClockDependent(itsName),
       m_chain(itsChain)
 {
   GateDigitizer* digitizer = GateDigitizer::GetInstance();
 
   digitizer->InsertDigiMakerModule( new GateSingleDigiMaker(digitizer, itsName,false) );
-}  
+}
 
 
 GatePulseList* GateVPulseProcessor::ProcessPulseList(const GatePulseList* inputPulseList)
@@ -44,7 +44,7 @@ GatePulseList* GateVPulseProcessor::ProcessPulseList(const GatePulseList* inputP
   GatePulseConstIterator iter;
   for (iter = inputPulseList->begin() ; iter != inputPulseList->end() ; ++iter)
       	ProcessOnePulse( *iter, *outputPulseList);
-  
+
   if (nVerboseLevel==1) {
       G4cout << "[" << GetObjectName() << "::ProcessPulseList]: returning output pulse-list with " << outputPulseList->size() << " entries\n";
       for (iter = outputPulseList->begin() ; iter != outputPulseList->end() ; ++iter)
@@ -60,11 +60,10 @@ GatePulseList* GateVPulseProcessor::ProcessPulseList(const GatePulseList* inputP
 // Method overloading GateClockDependent::Describe()
 // Print-out a description of the component
 // Calls the pure virtual method DecribeMyself()
-void GateVPulseProcessor::Describe(size_t indent) 
+void GateVPulseProcessor::Describe(size_t indent)
 {
   GateClockDependent::Describe(indent);
   G4cout << GateTools::Indent(indent) << "Attached to:        '" << GetChain()->GetObjectName() << "'" << G4endl;
   G4cout << GateTools::Indent(indent) << "Output:             '" << GetObjectName() << "'" << G4endl;
   DescribeMyself(indent);
 }
-     

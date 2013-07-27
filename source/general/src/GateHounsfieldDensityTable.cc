@@ -9,12 +9,12 @@ See GATE/LICENSE.txt for further details
 ----------------------*/
 
 
-/*! 
+/*!
   \class  GateHounsfieldDensityTable.cc
-  \brief  
+  \brief
   \author david.sarrut@creatis.insa-lyon.fr
 */
- 
+
 #include "GateHounsfieldDensityTable.hh"
 #include "GateMiscFunctions.hh"
 
@@ -60,7 +60,7 @@ double GateHounsfieldDensityTable::FindMaxDensityDifference(double HMin, double 
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
-void GateHounsfieldDensityTable::Read(G4String filename) 
+void GateHounsfieldDensityTable::Read(G4String filename)
 {
   std::ifstream is;
   OpenFileInput(filename, is);
@@ -75,7 +75,7 @@ void GateHounsfieldDensityTable::Read(G4String filename)
       if (mH.size() > 1) {
 	if (h <= mH[mH.size()-2]) {
 	  GateError("Error Hounsfield must be in strict ascending order, while I read h="
-		    << mH[mH.size()-2] << " and then h=" << h 
+		    << mH[mH.size()-2] << " and then h=" << h
 		    << " (in file " << filename << ")" << G4endl);
 	}
       }

@@ -11,16 +11,16 @@ See GATE/LICENSE.txt for further details
 
 /*----------------------
 
-   GATE - Geant4 Application for Tomographic Emission 
-   OpenGATE Collaboration 
-     
-   Daniel Strul <daniel.strul@iphe.unil.ch> 
-     
-   Copyright (C) 2002,2003 UNIL/IPHE, CH-1015 Lausanne 
+   GATE - Geant4 Application for Tomographic Emission
+   OpenGATE Collaboration
 
-This software is distributed under the terms 
-of the GNU Lesser General  Public Licence (LGPL) 
-See GATE/LICENSE.txt for further details 
+   Daniel Strul <daniel.strul@iphe.unil.ch>
+
+   Copyright (C) 2002,2003 UNIL/IPHE, CH-1015 Lausanne
+
+This software is distributed under the terms
+of the GNU Lesser General  Public Licence (LGPL)
+See GATE/LICENSE.txt for further details
 ----------------------*/
 
 #ifndef GateUIcontrolMessenger_h
@@ -41,17 +41,17 @@ class G4UIcmdWith3VectorAndUnit;
 
 /*! \class GateUIcontrolMessenger
     \brief Provides new control commands
-    
-    - GateUIcontrolMessenger - by Daniel.Strul@iphe.unil.ch 
-    
+
+    - GateUIcontrolMessenger - by Daniel.Strul@iphe.unil.ch
+
     - The GateUIcontrolMessenger inherits from the abilities/responsabilities
       of the GateMessenger base-class, i.e. the creation and management
       of a Gate UI directory
-      
-    - In addition, it provides the new command "/gate/control/execute", 
-      which can find and execute a macro file either in the current 
+
+    - In addition, it provides the new command "/gate/control/execute",
+      which can find and execute a macro file either in the current
       directory or in $GATEHOME
-*/      
+*/
 class GateUIcontrolMessenger: public GateMessenger
 {
   public:
@@ -60,7 +60,7 @@ class GateUIcontrolMessenger: public GateMessenger
 
     //! Destructor
     virtual ~GateUIcontrolMessenger();
-    
+
     //! UI command interpreter method
     void SetNewValue(G4UIcommand*, G4String);
 
@@ -73,4 +73,3 @@ class GateUIcontrolMessenger: public GateMessenger
 };
 
 #endif
-

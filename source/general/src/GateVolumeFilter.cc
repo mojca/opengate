@@ -27,7 +27,7 @@ GateVolumeFilter::GateVolumeFilter(G4String name)
 
 
 //---------------------------------------------------------------------------
-G4bool GateVolumeFilter::Accept(const G4Step* aStep) 
+G4bool GateVolumeFilter::Accept(const G4Step* aStep)
 {
    if(!IsInitialized) Initialize();
 
@@ -36,7 +36,7 @@ G4bool GateVolumeFilter::Accept(const G4Step* aStep)
 
    for(unsigned int k =0 ; k<theListOfLogicalVolume.size();k++)
             if(theListOfLogicalVolume[k]== currentVol ) return true;
-   
+
    return false;
 }
 //---------------------------------------------------------------------------
@@ -52,7 +52,7 @@ G4bool GateVolumeFilter::Accept(const G4Track* t)
 
    for(unsigned int k =0 ; k<theListOfLogicalVolume.size();k++)
             if(theListOfLogicalVolume[k]== currentVol ) return true;
-   
+
    return false;
 }
 
@@ -68,7 +68,7 @@ void GateVolumeFilter::addVolume(G4String volName)
 void GateVolumeFilter::Initialize()
 {
   IsInitialized=true;
-  
+
   for(unsigned int k =0 ; k<theTempoListOfVolumeName.size();k++)
   {
     GateVVolume * mGateVolume = GateObjectStore::GetInstance()->FindVolumeCreator(theTempoListOfVolumeName[k]);
@@ -92,19 +92,19 @@ void GateVolumeFilter::Initialize()
            for(unsigned int i =0;i<child->size();i++)
            {
               theListOfTempoGateVVolume.push_back(child->GetVolume(i));
-           }   
+           }
 	   it++;
 	   if(it>=(int)theListOfTempoGateVVolume.size()) mGateVolume=0;
-	   else mGateVolume = theListOfTempoGateVVolume[it];  
+	   else mGateVolume = theListOfTempoGateVVolume[it];
          }
-       } 
+       }
     }
     else GateError("In GateVolumeFilter: "<<GetObjectName()<<" -> Volume "<<theTempoListOfVolumeName[k]<<" does not exist!");
   }
-    
+
   for(unsigned int k =0 ; k<theListOfVolume.size();k++)
-  {    
-    theListOfLogicalVolume.push_back(theListOfVolume[k]->GetLogicalVolume());   
+  {
+    theListOfLogicalVolume.push_back(theListOfVolume[k]->GetLogicalVolume());
   }
 }
 //---------------------------------------------------------------------------

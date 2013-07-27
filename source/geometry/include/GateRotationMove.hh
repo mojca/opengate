@@ -17,12 +17,12 @@ See GATE/LICENSE.txt for further details
 class GateRotationMoveMessenger;
 
 /*! \class  GateRotationMove
-    \brief  The GateRotationMove models a rotation movement    
-    - GateRotationMove - by Daniel.Strul@iphe.unil.ch     
-    - The movement equation modeled by this class is theta(t) = V x t 
+    \brief  The GateRotationMove models a rotation movement
+    - GateRotationMove - by Daniel.Strul@iphe.unil.ch
+    - The movement equation modeled by this class is theta(t) = V x t
       where theta(t) is the rotation angle around an axis at time t, and
-      V is the angular rotation speed.      
-*/      
+      V is the angular rotation speed.
+*/
 class GateRotationMove  : public GateVGlobalPlacement
 {
   public:
@@ -42,10 +42,10 @@ class GateRotationMove  : public GateVGlobalPlacement
 	\param currentRotationMatrix: the rotation matrix that defines the current orientation of the volume
 	\param currentPosition:       the vector that defines the current position of the volume
 	\param aTime:                 the current time
-	
+
 	\return an object GatePlacement combining the new position and the new orientation of the volume
 	        computed by the movement equation
-    */    
+    */
      virtual void PushMyPlacements(const G4RotationMatrix& currentRotationMatrix,
                                    const G4ThreeVector& currentPosition,
                                    G4double aTime);
@@ -53,28 +53,28 @@ class GateRotationMove  : public GateVGlobalPlacement
       	\brief a description of the movement
 
 	\param indent: the print-out indentation (cosmetic parameter)
-    */    
+    */
      virtual void DescribeMyself(size_t indent);
-     
+
   public:
     //! \name getters and setters
     //@{
     //! Get the rotation axis
-    virtual inline const G4ThreeVector& GetRotationAxis() 
+    virtual inline const G4ThreeVector& GetRotationAxis()
       	  { return m_rotationAxis;}
     //! Get the rotation speed
-    virtual inline G4double GetVelocity() 
+    virtual inline G4double GetVelocity()
       	  { return m_velocity;}
 
     //! Set the rotation axis
-    virtual inline void SetRotationAxis(const G4ThreeVector& val) 
+    virtual inline void SetRotationAxis(const G4ThreeVector& val)
       	  { m_rotationAxis = val;  }
     //! Set the rotation speed
-    virtual inline void SetVelocity(double val) 
+    virtual inline void SetVelocity(double val)
       	  { m_velocity = val;  }
 
     //! Get the value of the rotation angle that was last computed by PushMyPlacement()
-    virtual inline G4double GetCurrentAngle() 
+    virtual inline G4double GetCurrentAngle()
       	  { return m_currentAngle;}
     //@}
 
@@ -85,14 +85,13 @@ class GateRotationMove  : public GateVGlobalPlacement
     G4ThreeVector m_rotationAxis;	  //!< Rotation axis (dimensionless vector)
     G4double m_velocity;      	      	  //!< Rotation velocity (angular speed)
     //@}
-    
+
     //! Rotation angle that was last computed by PushMyPlacement()
     G4double m_currentAngle;
 
     //! Messenger
-    GateRotationMoveMessenger* m_Messenger; 
+    GateRotationMoveMessenger* m_Messenger;
 
 };
 
 #endif
-

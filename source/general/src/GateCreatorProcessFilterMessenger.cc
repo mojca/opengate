@@ -42,4 +42,3 @@ void GateCreatorProcessFilterMessenger::SetNewValue(G4UIcommand* command, G4Stri
   if(command==pAddCreatorProcessCmd) pFilter->AddCreatorProcess(param);
 }
 //-----------------------------------------------------------------------------
-

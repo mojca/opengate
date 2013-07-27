@@ -23,7 +23,7 @@ class GateGeometryVoxelTabulatedTranslator : public GateVGeometryVoxelTranslator
 public:
   GateGeometryVoxelTabulatedTranslator(GateVGeometryVoxelReader* voxelReader);
   virtual ~GateGeometryVoxelTabulatedTranslator();
-  
+
   void     ReadTranslationTable(G4String fileName);
 
   void     Describe(G4int level);
@@ -47,11 +47,11 @@ protected:
 
   typedef std::map<G4int,G4String> GateVoxelMaterialTranslationMap;
   GateVoxelMaterialTranslationMap    m_voxelMaterialTranslation;
- 
+
  typedef std::map<G4Material*, G4VisAttributes*> GateVoxelAttributesTranslationMap;
   GateVoxelAttributesTranslationMap m_voxelAttributesTranslation;
 
-  GateGeometryVoxelTabulatedTranslatorMessenger* m_messenger; 
+  GateGeometryVoxelTabulatedTranslatorMessenger* m_messenger;
 
 };
 

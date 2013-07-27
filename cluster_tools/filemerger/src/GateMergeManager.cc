@@ -127,10 +127,10 @@ void GateMergeManager::FastMergeRoot()
    for(int i=0;i<nfiles;i++) {
       filearr[i] = TFile::Open(m_vRootFileNames[i].c_str(),"OLD");
       if(filearr[i]==NULL){
-         cout<<"Not a readable file "<<m_vRootFileNames[i]<<" - exit!"<<endl;   
+         cout<<"Not a readable file "<<m_vRootFileNames[i]<<" - exit!"<<endl;
          exit(0);
       }
-   }  
+   }
    m_lastEvents.resize(nfiles+1);
    m_lastEvents[0]=0;
    bool flgLstEvntID(false);
@@ -178,9 +178,9 @@ void GateMergeManager::FastMergeRoot()
      }
    }
    //take care of all trees
-   for(unsigned int i=0;i<treeNames.size();i++) 
+   for(unsigned int i=0;i<treeNames.size();i++)
    {
-     if(!MergeTree(treeNames[i])) if(m_verboseLevel>1) cout<<"Problem with merging "<<treeNames[i]<<endl; 
+     if(!MergeTree(treeNames[i])) if(m_verboseLevel>1) cout<<"Problem with merging "<<treeNames[i]<<endl;
    }
 }
 /************************************************************************************/
@@ -215,12 +215,12 @@ void GateMergeManager::MergeRoot(){
    for(int i=1;i<nfiles;i++) {
       filearr[i] = TFile::Open(m_vRootFileNames[i].c_str(),"OLD");
       if(filearr[i]==NULL){
-         cout<<"Not a readable file "<<m_vRootFileNames[i]<<" - exit!"<<endl;   
+         cout<<"Not a readable file "<<m_vRootFileNames[i]<<" - exit!"<<endl;
          exit(0);
       }
    }
 
-// first we copy all histos (only top directory) 
+// first we copy all histos (only top directory)
 // and look for the latestEventID
 // and find out which  trees/ntuples  exist
    m_lastEvents.resize(nfiles+1);
@@ -237,7 +237,7 @@ void GateMergeManager::MergeRoot(){
    vector<string> treeNames;
    TFile* node = TFile::Open(m_vRootFileNames[0].c_str(),"OLD");
    if(node==NULL){
-       cout<<"Not a readable file "<<m_vRootFileNames[0]<<" - exit!"<<endl;   
+       cout<<"Not a readable file "<<m_vRootFileNames[0]<<" - exit!"<<endl;
        exit(0);
    }
         TIter nextkey(node->GetListOfKeys());
@@ -252,7 +252,7 @@ void GateMergeManager::MergeRoot(){
                      //any other histogram
                      for(int i=1;i<nfiles;i++){
                           TH1 *h2 = (TH1*)filearr[i]->Get( h1->GetName() );
-                          h1->Add( h2 ); 
+                          h1->Add( h2 );
                      }
                      h1->Write();
              } else {
@@ -273,7 +273,7 @@ void GateMergeManager::MergeRoot(){
            TH2 *h1 = (TH2 *)obj->Clone();
                         for(int i=1;i<nfiles;i++){
                                 TH2 *h2 = (TH2*)filearr[i]->Get( h1->GetName() );
-                                h1->Add( h2 ); 
+                                h1->Add( h2 );
                         }
                         h1->Write();
                 }
@@ -295,8 +295,8 @@ void GateMergeManager::MergeRoot(){
    }
 
    //now we take care of the trees
-   for(unsigned int i=0;i<treeNames.size();i++) 
-     if(!MergeTree(treeNames[i])) if(m_verboseLevel>1) cout<<"Problem with merging "<<treeNames[i]<<endl; 
+   for(unsigned int i=0;i<treeNames.size();i++)
+     if(!MergeTree(treeNames[i])) if(m_verboseLevel>1) cout<<"Problem with merging "<<treeNames[i]<<endl;
 
    // everything is done
 };
@@ -310,7 +310,7 @@ void GateMergeManager::StartCleaning(string splitfileName,bool test){
 
   string dir=splitfileName.substr(0,splitfileName.rfind("/"));
 
-  // test for the mark: ready_for_delete 
+  // test for the mark: ready_for_delete
   string touched=dir+"/ready_for_delete";
   ifstream ready;
   ready.open(touched.c_str());
@@ -372,7 +372,7 @@ if (m_fastMerge==false)
 
    if(chain->FindBranch("eventID1")!=NULL) {
      if(  (chain->FindBranch("runID")==NULL)
-        ||(chain->FindBranch("time1")==NULL) 
+        ||(chain->FindBranch("time1")==NULL)
         ||(chain->FindBranch("time2")==NULL) ) {
         cout<<"Cannot find one of:  runID, time1, time2 in "<<chain->GetName()<<endl;
         return false;
@@ -432,7 +432,7 @@ for(int j=0;j<m_Nfiles;j++)
          lastEvent=event;
          event+=offset;
          newBranch->Fill();
-        } 
+        }
        else
         {
          if((i==nentries-1) && (j==m_Nfiles-1))
@@ -440,8 +440,8 @@ for(int j=0;j<m_Nfiles;j++)
            event+=offset;
            newBranch->Fill();
           }
-         else if (i!=nentries-1) 
-              { 
+         else if (i!=nentries-1)
+              {
                branch->GetEvent(i);
                event+=offset;
                newBranch->Fill();
@@ -459,11 +459,11 @@ for(int j=0;j<m_Nfiles;j++)
 bool GateMergeManager::FastMergeSing(string name)
 {
 int eventID = 0;
-int runID = 0; 
+int runID = 0;
 int offset      = 0;
 int currentfile = 0;
 float lastRun =-1;
-string clusterName=name+"_cluster"; 
+string clusterName=name+"_cluster";
 
 for(int j=0;j<m_Nfiles;j++)
  {
@@ -535,10 +535,10 @@ cout<<"working on file..."<<j<<endl;
        branch1->GetEvent(i);
        branch2->GetEvent(i);
        branch3->GetEvent(i);
-       if(lastRun!=runID) 
+       if(lastRun!=runID)
         {
          lastRun=runID;
-         offset=0; 
+         offset=0;
         }
        eventID1+=offset;
        eventID2+=offset;
@@ -554,7 +554,7 @@ cout<<"working on file..."<<j<<endl;
 // Gate tree merger
 bool GateMergeManager::MergeGate(TChain* chainG) {
 
-   int nentries=chainG->GetEntries();   
+   int nentries=chainG->GetEntries();
 
    float   event   = 0;
    chainG->SetBranchAddress("event",&event);
@@ -587,7 +587,7 @@ bool GateMergeManager::MergeGate(TChain* chainG) {
            // check for overlaping time intervalls between different files
            // (not within the same file i.e. no time order assumed)
            if(iontime<maxtime)
-              if(m_verboseLevel>0) 
+              if(m_verboseLevel>0)
                  cout<<"Warning - overlapping Gate iontime ("
                      <<iontime<<") in file: "<<m_vRootFileNames[currentTree].c_str()<<endl;
        }
@@ -606,8 +606,8 @@ bool GateMergeManager::MergeGate(TChain* chainG) {
              maxtime   =-999999999;
            }
         } else {
-           // run end 
-           if(chainG->GetEntry(i+1) <= 0)  {              //chain end fill the double event 
+           // run end
+           if(chainG->GetEntry(i+1) <= 0)  {              //chain end fill the double event
               event+=offset;
               newTree->Fill();
            } else if(chainG->GetTreeNumber()==currentTree             //no new file or
@@ -663,14 +663,14 @@ bool GateMergeManager::MergeSing(TChain* chainS){
             offset+=m_lastEvents[currentTree];
            // check for overlaping time intervalls between different files
            // (not within the same file i.e. no time order assumed)
-           if(time<maxtime) 
-               if(m_verboseLevel>0) 
+           if(time<maxtime)
+               if(m_verboseLevel>0)
                   cout<<"Warning - overlapping Singles time ("
                       <<time<<") in file: "<<m_vRootFileNames[currentTree].c_str()<<endl;
          }
          // the offset to get a unique event numbering
          if(lastRun!=runID) {
-            // run end 
+            // run end
             lastRun=runID;
             offset=0;     //new run in file we must not change the eventID anymore
          }
@@ -722,11 +722,11 @@ bool GateMergeManager::MergeCoin(TChain* chainC){
          offset+=m_lastEvents[currentTree];
          // check for overlaping time intervalls between different files
          // (not within the same file i.e. no time order assumed)
-         if(time1<maxtime) 
+         if(time1<maxtime)
            if(m_verboseLevel>0)
                cout<<"Warning - overlapping Coincidences time1 ("
                    <<time1<<") in file: "<<m_vRootFileNames[currentTree].c_str()<<endl;
-         if(time2<maxtime) 
+         if(time2<maxtime)
            if(m_verboseLevel>0)
                cout<<"Warning - overlapping Coincidences time2 ("
                    <<time2<<") in file: "<<m_vRootFileNames[currentTree].c_str()<<endl;

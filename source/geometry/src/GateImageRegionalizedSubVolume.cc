@@ -9,10 +9,10 @@ See GATE/LICENSE.txt for further details
 ----------------------*/
 
 
-/*! \file 
+/*! \file
   \brief Implementation of GateImageRegionalizedSubVolume
  */
- 
+
 #include "GateImageRegionalizedSubVolume.hh"
 #include "GateImageRegionalizedSubVolumeMessenger.hh"
 #include "GateImageRegionalizedSubVolumeSolid.hh"
@@ -40,16 +40,16 @@ GateImageRegionalizedSubVolume::GateImageRegionalizedSubVolume(const G4String& n
   //  mHalfSize = G4ThreeVector(0,0,0);
 
   // messenger
-  pMessenger = new GateImageRegionalizedSubVolumeMessenger(this);  
+  pMessenger = new GateImageRegionalizedSubVolumeMessenger(this);
 
- // EnableSmartVoxelOptimisation(false);  
+ // EnableSmartVoxelOptimisation(false);
 
   GateMessageDec("Volume",5,"GateImageRegionalizedSubVolume() - end"<<G4endl);
 }
 //====================================================================
 
 //====================================================================
-/// Destructor 
+/// Destructor
 GateImageRegionalizedSubVolume::~GateImageRegionalizedSubVolume()
 {
   GateMessageInc("Volume",5,"~GateImageRegionalizedSubVolume - begin"<<G4endl);
@@ -60,14 +60,14 @@ GateImageRegionalizedSubVolume::~GateImageRegionalizedSubVolume()
 
 //====================================================================
 // Construct
-G4LogicalVolume* GateImageRegionalizedSubVolume::ConstructOwnSolidAndLogicalVolume(G4Material* mater, 
+G4LogicalVolume* GateImageRegionalizedSubVolume::ConstructOwnSolidAndLogicalVolume(G4Material* mater,
 										      G4bool /*flagUpdateOnly*/)
 {
   G4String boxname = GetObjectName() + "_solid";
   pBoxSolid = new GateImageRegionalizedSubVolumeSolid(boxname,this);
-  pBoxLog = new G4LogicalVolume(pBoxSolid, mater, GetLogicalVolumeName()); 
+  pBoxLog = new G4LogicalVolume(pBoxSolid, mater, GetLogicalVolumeName());
   //LoadDistanceMap();
-  
+
   // AddPhysVolToOptimizedNavigator(GetPhysicalVolume());
   return pBoxLog;
 }
@@ -86,7 +86,7 @@ G4LogicalVolume* GateImageRegionalizedSubVolume::ConstructOwnSolidAndLogicalVolu
   ////GateMessage("Volume",3," * solid : <"<<solName<<">"<<G4endl);
   //=============================
 
-  ////GateMessage("Volume",1,"END OF GateImageRegionalizedSubVolume::Construct()" << G4endl);  
+  ////GateMessage("Volume",1,"END OF GateImageRegionalizedSubVolume::Construct()" << G4endl);
 //}
 //====================================================================
 

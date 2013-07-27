@@ -25,9 +25,9 @@ class GateTrapMessenger: public GateVolumeMessenger
   public:
     GateTrapMessenger(GateTrap* itsCreator);
    ~GateTrapMessenger();
-    
+
     void SetNewValue(G4UIcommand*, G4String);
-    
+
     virtual inline GateTrap* GetTrapCreator()
       { return (GateTrap*) GetVolumeCreator(); }
 
@@ -46,4 +46,3 @@ class GateTrapMessenger: public GateVolumeMessenger
 };
 
 #endif
-

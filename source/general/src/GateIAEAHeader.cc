@@ -34,7 +34,7 @@
  *   Iwan Kawrakow, PhD
  *   e-mail iwan@irs.phy.nrc.ca
  *   Ionizing Radiation Standards
- *   Institute for National Measurement Standards 
+ *   Institute for National Measurement Standards
  *   National Research Council of Canada Ottawa, ON, K1A 0R6 Canada
  *   Phone: +1-613-993 2197, ext.241; Fax: +1-613-952 9865
  *
@@ -59,11 +59,11 @@
 
 int iaea_header_type::read_header ()
 {
-    char line[MAX_STR_LEN]; 
-    
+    char line[MAX_STR_LEN];
+
     if(fheader==NULL)
     {
-      printf("\n ERROR: Unable to open header file \n"); 
+      printf("\n ERROR: Unable to open header file \n");
         return(FAIL);
     }
 
@@ -71,42 +71,42 @@ int iaea_header_type::read_header ()
   // 1. PHSP format
 
       /*********************************************/
-      if ( read_block(line,(char *)"FILE_TYPE") == FAIL ) 
+      if ( read_block(line,(char *)"FILE_TYPE") == FAIL )
       {
             printf("\nMandatory keyword FILE_TYPE is not defined in input\n");
             return FAIL;
       }
-      else file_type = atoi(line); 
+      else file_type = atoi(line);
 
       /*********************************************/
-      if ( read_block(line,(char*)"CHECKSUM") == FAIL ) 
+      if ( read_block(line,(char*)"CHECKSUM") == FAIL )
       {
             printf("\nMandatory keyword CHECKSUM is not defined in input\n");
             return FAIL;
       }
-      else checksum = atol(line); 
+      else checksum = atol(line);
 
       /*********************************************/
-      if ( read_block(line,(char*)"RECORD_LENGTH") == FAIL ) 
+      if ( read_block(line,(char*)"RECORD_LENGTH") == FAIL )
       {
             printf("\nMandatory keyword RECORD_LENGTH is not defined in input\n");
             return FAIL;
       }
-      else record_length = atoi(line); 
+      else record_length = atoi(line);
 
       /*********************************************/
-      if ( read_block(line,(char*)"BYTE_ORDER") == FAIL ) 
+      if ( read_block(line,(char*)"BYTE_ORDER") == FAIL )
       {
             printf("\nMandatory keyword BYTE_ORDER is not defined in input\n");
             return FAIL;
       }
-      else byte_order = atoi(line); 
+      else byte_order = atoi(line);
 
       /*********************************************/
-    if( get_blockname(line,(char*)"RECORD_CONTENTS") == FAIL) 
+    if( get_blockname(line,(char*)"RECORD_CONTENTS") == FAIL)
     {
        printf("\nMandatory keyword RECORD_CONTENTS is not defined in input\n");
-         return FAIL; 
+         return FAIL;
     }
 
     int i;
@@ -115,29 +115,29 @@ int iaea_header_type::read_header ()
     for (i=0;i<9;i++)
     {
       if( get_string(fheader,line) == FAIL ) return FAIL;
-      if( *line == SEGMENT_BEG_TOKEN ) break; 
-      record_contents[i] = atoi(line); 
+      if( *line == SEGMENT_BEG_TOKEN ) break;
+      record_contents[i] = atoi(line);
     };
 
-    for(i=0;i<record_contents[7];i++) 
+    for(i=0;i<record_contents[7];i++)
     {
       if( get_string(fheader,line) == FAIL ) return FAIL;
-      if( *line == SEGMENT_BEG_TOKEN ) break; 
-      extrafloat_contents[i] = atoi(line); 
+      if( *line == SEGMENT_BEG_TOKEN ) break;
+      extrafloat_contents[i] = atoi(line);
     }
-    
-    for(i=0;i<record_contents[8];i++) 
+
+    for(i=0;i<record_contents[8];i++)
     {
       if( get_string(fheader,line) == FAIL ) return FAIL;
-      if( *line == SEGMENT_BEG_TOKEN ) break; 
-      extralong_contents[i] = atoi(line); 
+      if( *line == SEGMENT_BEG_TOKEN ) break;
+      extralong_contents[i] = atoi(line);
     }
 
     /*********************************************/
-    if( get_blockname(line,(char*)"RECORD_CONSTANT") == FAIL) 
+    if( get_blockname(line,(char*)"RECORD_CONSTANT") == FAIL)
     {
        printf("\nMandatory keyword RECORD_CONSTANT is not defined in input\n");
-         return FAIL; 
+         return FAIL;
     }
 
     for (i=0;i<7;i++)
@@ -145,14 +145,14 @@ int iaea_header_type::read_header ()
         record_constant[i] = 32000.f;
         if(record_contents[i] > 0) continue;
         if( get_string(fheader,line) == FAIL ) return FAIL;
-        if( *line == SEGMENT_BEG_TOKEN ) break; 
-        record_constant[i] = (float)atof(line); 
+        if( *line == SEGMENT_BEG_TOKEN ) break;
+        record_constant[i] = (float)atof(line);
     };
 
 // ******************************************************************************
 // 2. Mandatory description of the phsp
 
-    if ( read_block(coordinate_system_description,(char*)"COORDINATE_SYSTEM_DESCRIPTION") == FAIL)   
+    if ( read_block(coordinate_system_description,(char*)"COORDINATE_SYSTEM_DESCRIPTION") == FAIL)
       {
             printf("\nMandatory keyword COORDINATE_SYSTEM_DESCRIPTION is not defined in input\n");
             return FAIL;
@@ -161,7 +161,7 @@ int iaea_header_type::read_header ()
   if(file_type == 1) // For event generators
   {
     /*********************************************/
-      if ( read_block(line,(char*)"INPUT_FILE_FOR_EVENT_GENERATOR") == FAIL ) 
+      if ( read_block(line,(char*)"INPUT_FILE_FOR_EVENT_GENERATOR") == FAIL )
       {
             printf("\nMandatory keyword INPUT_FILE_FOR_EVENT_GENERATOR is not defined in input\n");
             return FAIL;
@@ -171,87 +171,87 @@ int iaea_header_type::read_header ()
   if(file_type == 0) // for phsp files
   {
       /*********************************************/
-      if ( read_block(line,(char*)"ORIG_HISTORIES") == FAIL ) 
+      if ( read_block(line,(char*)"ORIG_HISTORIES") == FAIL )
       {
             printf("\nMandatory keyword ORIG_HISTORIES is not defined in input\n");
             return FAIL;
       }
       else {
-          orig_histories = atol(line);  
+          orig_histories = atol(line);
           if( orig_histories == 0) printf(
            "\n The number of primary particles (ORIG_HISTORIES) is zero in the HEADER !\n");
       }
 
       /*********************************************/
-      if ( read_block(line,(char*)"PARTICLES") == FAIL ) 
+      if ( read_block(line,(char*)"PARTICLES") == FAIL )
       {
             printf("\nMandatory keyword PARTICLES is not defined in input\n");
             return FAIL;
       }
-      else nParticles = atol(line); 
+      else nParticles = atol(line);
 
       /*********************************************/
       for(int itmp=0;itmp<MAX_NUM_PARTICLES;itmp++) particle_number[itmp]=0;
       IAEA_I64 npart;
-      if ( read_block(line,(char*)"PHOTONS") == OK )  
+      if ( read_block(line,(char*)"PHOTONS") == OK )
             {npart = atol(line); particle_number[0] = npart;}
-      if ( read_block(line,(char*)"ELECTRONS") == OK ) 
+      if ( read_block(line,(char*)"ELECTRONS") == OK )
             {npart = atol(line); particle_number[1] = npart;}
-      if ( read_block(line,(char*)"POSITRONS") == OK ) 
+      if ( read_block(line,(char*)"POSITRONS") == OK )
             {npart = atol(line); particle_number[2] = npart;}
-      if ( read_block(line,(char*)"NEUTRONS") == OK )  
+      if ( read_block(line,(char*)"NEUTRONS") == OK )
             {npart = atol(line); particle_number[3] = npart;}
-      if ( read_block(line,(char*)"PROTONS") == OK )   
+      if ( read_block(line,(char*)"PROTONS") == OK )
             {npart = atol(line); particle_number[4] = npart;}
   }
 // ******************************************************************************
 // 3. Mandatory additional information
-      if ( read_block(line,(char*)"IAEA_INDEX") == FAIL ) 
+      if ( read_block(line,(char*)"IAEA_INDEX") == FAIL )
       {
             printf("\nMandatory keyword IAEA_INDEX is not defined in input\n");
             return FAIL;
       }
-      else iaea_index = atoi(line); 
+      else iaea_index = atoi(line);
 
       /*********************************************/
-      if ( read_block(title,(char*)"TITLE") == FAIL ) 
+      if ( read_block(title,(char*)"TITLE") == FAIL )
       {
             printf("\nMandatory keyword TITLE is not defined in input\n");
             return FAIL;
       }
 
       /*********************************************/
-      if ( read_block(machine_type,(char*)"MACHINE_TYPE") == FAIL) 
+      if ( read_block(machine_type,(char*)"MACHINE_TYPE") == FAIL)
       {
             printf("\nMandatory keyword MACHINE_TYPE is not defined in input\n");
             return FAIL;
       }
- 
+
       /*********************************************/
-      if ( read_block(MC_code_and_version,(char*)"MONTE_CARLO_CODE_VERSION") == FAIL ) 
+      if ( read_block(MC_code_and_version,(char*)"MONTE_CARLO_CODE_VERSION") == FAIL )
       {
             printf("\nMandatory keyword MONTE_CARLO_CODE_VERSION is not defined in input\n");
             return FAIL;
       }
 
       /*********************************************/
-      if ( read_block(line,(char*)"GLOBAL_PHOTON_ENERGY_CUTOFF") == FAIL ) 
+      if ( read_block(line,(char*)"GLOBAL_PHOTON_ENERGY_CUTOFF") == FAIL )
       {
             printf("\nMandatory keyword GLOBAL_PHOTON_ENERGY_CUTOFF is not defined in input\n");
             return FAIL;
       }
-      else global_photon_energy_cutoff = (float)atof(line); 
+      else global_photon_energy_cutoff = (float)atof(line);
 
       /*********************************************/
-      if ( read_block(line,(char*)"GLOBAL_PARTICLE_ENERGY_CUTOFF") == FAIL ) 
+      if ( read_block(line,(char*)"GLOBAL_PARTICLE_ENERGY_CUTOFF") == FAIL )
       {
             printf("\nMandatory keyword GLOBAL_PARTICLE_ENERGY_CUTOFF is not defined in input\n");
             return FAIL;
       }
-      else global_particle_energy_cutoff = (float)atof(line); 
+      else global_particle_energy_cutoff = (float)atof(line);
 
       /*********************************************/
-      if ( read_block(transport_parameters,(char*)"TRANSPORT_PARAMETERS") == FAIL ) 
+      if ( read_block(transport_parameters,(char*)"TRANSPORT_PARAMETERS") == FAIL )
       {
             printf("\nMandatory keyword TRANSPORT_PARAMETERS is not defined in input\n");
             return FAIL;
@@ -260,37 +260,37 @@ int iaea_header_type::read_header ()
 // ******************************************************************************
 // 4. Optional description
 
-      if ( read_block(beam_name,(char*)"BEAM_NAME") == FAIL ) 
+      if ( read_block(beam_name,(char*)"BEAM_NAME") == FAIL )
             printf("ERROR reading BEAM_NAME\n");
-      if ( read_block(field_size,(char*)"FIELD_SIZE") == FAIL ) 
+      if ( read_block(field_size,(char*)"FIELD_SIZE") == FAIL )
             printf("ERROR reading FIELD_SIZE\n");
-      if ( read_block(nominal_SSD,(char*)"NOMINAL_SSD") == FAIL ) 
+      if ( read_block(nominal_SSD,(char*)"NOMINAL_SSD") == FAIL )
             printf("ERROR reading NOMINAL_SSD\n");
       if ( read_block(variance_reduction_techniques,
-                        (char*)"VARIANCE_REDUCTION_TECHNIQUES") == FAIL ) 
+                        (char*)"VARIANCE_REDUCTION_TECHNIQUES") == FAIL )
             printf("VARIANCE_REDUCTION_TECHNIQUES\n");
-      if ( read_block(initial_source_description,(char*)"INITIAL_SOURCE_DESCRIPTION") == FAIL ) 
+      if ( read_block(initial_source_description,(char*)"INITIAL_SOURCE_DESCRIPTION") == FAIL )
             printf("INITIAL_SOURCE_DESCRIPTION:\n");
-  
+
       // Documentation sub-section
       /*********************************************/
-      if ( read_block(MC_input_filename,(char*)"MC_INPUT_FILENAME") == FAIL ) 
+      if ( read_block(MC_input_filename,(char*)"MC_INPUT_FILENAME") == FAIL )
             printf("MC_INPUT_FILENAME\n");
-      if ( read_block(published_reference,(char*)"PUBLISHED_REFERENCE") == FAIL ) 
+      if ( read_block(published_reference,(char*)"PUBLISHED_REFERENCE") == FAIL )
             printf("PUBLISHED_REFERENCE\n");
       if ( read_block(authors,(char*)"AUTHORS") == FAIL ) printf("AUTHORS\n");
       if ( read_block(institution,(char*)"INSTITUTION") == FAIL ) printf("INSTITUTION\n");
-      if ( read_block(link_validation,(char*)"LINK_VALIDATION") == FAIL ) 
+      if ( read_block(link_validation,(char*)"LINK_VALIDATION") == FAIL )
             printf("LINK_VALIDATION\n");
-      if ( read_block(additional_notes,(char*)"ADDITIONAL_NOTES") == FAIL ) 
+      if ( read_block(additional_notes,(char*)"ADDITIONAL_NOTES") == FAIL )
             printf("ADDITIONAL_NOTES\n");
 
 // ******************************************************************************
 // 5. Statistical information
       /*********************************************/
-    if( get_blockname(line,(char*)"STATISTICAL_INFORMATION_PARTICLES") == OK) 
+    if( get_blockname(line,(char*)"STATISTICAL_INFORMATION_PARTICLES") == OK)
     {
-        for(i=0;i<MAX_NUM_PARTICLES;i++) 
+        for(i=0;i<MAX_NUM_PARTICLES;i++)
         {
               if( get_string(fheader,line) == FAIL ) return FAIL;
               if( *line == SEGMENT_BEG_TOKEN ) break;
@@ -300,7 +300,7 @@ int iaea_header_type::read_header ()
               // The fragment below replaces buggy sscanf() function
               int index0 =0, index1 =0, len = strlen(line), icnt =0;
               float fbuff[6];
-              do 
+              do
               {   if(advance(line, &index1, len) != OK) break; // Finding first number
                     fbuff[icnt++] = (float)atof(line+index1);
               if(advance(line, &index0, len) != OK) break; // Skipping spaces
@@ -313,16 +313,16 @@ int iaea_header_type::read_header ()
               minimumKineticEnergy[i] = fbuff[4];
               maximumKineticEnergy[i] = fbuff[5];
         }
-    }              
+    }
 
-    if( get_blockname(line,(char*)"STATISTICAL_INFORMATION_GEOMETRY") == OK) 
+    if( get_blockname(line,(char*)"STATISTICAL_INFORMATION_GEOMETRY") == OK)
       {
         minimumX = minimumY = minimumZ = 32000.f;
         maximumX = maximumY = maximumZ = 0.f;
 
-        for(i=0;i<3;i++) 
+        for(i=0;i<3;i++)
         {
-            if(record_contents[i] == 1) 
+            if(record_contents[i] == 1)
             {
                   if( get_string(fheader,line) == FAIL ) return FAIL;
                   if( *line == SEGMENT_BEG_TOKEN ) break;
@@ -331,7 +331,7 @@ int iaea_header_type::read_header ()
                 // The fragment below replaces buggy sscanf() function
                 int index0 =0, index1 =0, len = strlen(line), icnt =0;
                 float fbuff[2];
-                do 
+                do
                 {   if(advance(line, &index1, len) != OK) break; // Finding first number
                       fbuff[icnt++] = (float)atof(line+index1);
                 if(advance(line, &index0, len) != OK) break; // Skipping spaces
@@ -345,7 +345,7 @@ int iaea_header_type::read_header ()
         }
       }
 
-    return(OK);  
+    return(OK);
 }
 
 int iaea_header_type::write_blockname(char *blockname)
@@ -367,8 +367,8 @@ int iaea_header_type::get_blockname(char *line, char *blockname)
   rewind(fheader) ;
 
   while( get_string(fheader,line) == OK )
-  {   
-    if( *line == SEGMENT_BEG_TOKEN ) 
+  {
+    if( *line == SEGMENT_BEG_TOKEN )
       {
          begptr = line + 1 ;
              // printf("                       Read line %s ...\n",line);
@@ -387,12 +387,12 @@ int iaea_header_type::get_block(char *lineread)
 {
       int read = FAIL, count = 0;
 
-      char line[MAX_STR_LEN]; 
+      char line[MAX_STR_LEN];
 
       strcpy (lineread,""); // Deleting lineread contents
       while( get_string(fheader,line) == OK )
     {
-        if( *line == SEGMENT_BEG_TOKEN ) break; 
+        if( *line == SEGMENT_BEG_TOKEN ) break;
         strcat(lineread+count*MAX_NUMB_LINES,line); count++;
         read = OK;
     };
@@ -401,44 +401,44 @@ int iaea_header_type::get_block(char *lineread)
 
 int iaea_header_type::read_block(char *lineread,char *blockname)
 {
-    char line[MAX_STR_LEN]; 
-    if( get_blockname(line,blockname) != OK) return FAIL; 
-      if( get_block(lineread) != OK) return FAIL; 
-      return OK;  
+    char line[MAX_STR_LEN];
+    if( get_blockname(line,blockname) != OK) return FAIL;
+      if( get_block(lineread) != OK) return FAIL;
+      return OK;
 }
 
 int iaea_header_type::set_record_contents(iaea_record_type *p_iaea_record)
 {
    int i;
-   for(i=0;i<9;i++) record_contents[i] = 0;          
-   for(i=0;i<7;i++) record_constant[i] = 32000.f;          
+   for(i=0;i<9;i++) record_contents[i] = 0;
+   for(i=0;i<7;i++) record_constant[i] = 32000.f;
 
-   if(p_iaea_record->ix > 0) record_contents[0] = 1;         
+   if(p_iaea_record->ix > 0) record_contents[0] = 1;
    else record_constant[0] = p_iaea_record->x;
 
-   if(p_iaea_record->iy > 0) record_contents[1] = 1;         
+   if(p_iaea_record->iy > 0) record_contents[1] = 1;
    else record_constant[1] = p_iaea_record->y;
 
-   if(p_iaea_record->iz > 0) record_contents[2] = 1;         
+   if(p_iaea_record->iz > 0) record_contents[2] = 1;
    else record_constant[2] = p_iaea_record->z;
 
-   if(p_iaea_record->iu > 0) record_contents[3] = 1;         
+   if(p_iaea_record->iu > 0) record_contents[3] = 1;
    else record_constant[3] = p_iaea_record->u;
 
-   if(p_iaea_record->iv > 0) record_contents[4] = 1;    
+   if(p_iaea_record->iv > 0) record_contents[4] = 1;
    else record_constant[4] = p_iaea_record->v;
 
-   if(p_iaea_record->iw > 0) record_contents[5] = 1; 
+   if(p_iaea_record->iw > 0) record_contents[5] = 1;
    else record_constant[5] = p_iaea_record->w;
 
-   if(p_iaea_record->iweight > 0) record_contents[6] = 1;         
+   if(p_iaea_record->iweight > 0) record_contents[6] = 1;
    else record_constant[6] = p_iaea_record->weight;
 
    if(p_iaea_record->iextrafloat>0) record_contents[7] = p_iaea_record->iextrafloat;
    if(p_iaea_record->iextralong>0) record_contents[8] = p_iaea_record->iextralong;
 
    record_length = 5; // To consider for particle type (1 byte) and energy (4 bytes)
-   for(i=0;i<8;i++) record_length += record_contents[i]*sizeof(float);          
+   for(i=0;i<8;i++) record_length += record_contents[i]*sizeof(float);
    record_length -= 4; // 4 bytes substracted as w is not stored, just his sign
    record_length += record_contents[8]*sizeof(IAEA_I32);
    if(record_length > 0) return OK;
@@ -454,38 +454,38 @@ int iaea_header_type::get_record_contents(iaea_record_type *p_iaea_record)
    int i;
 
    p_iaea_record->ix = 0;
-   if(record_contents[0] == 1) p_iaea_record->ix = 1;         
+   if(record_contents[0] == 1) p_iaea_record->ix = 1;
    else p_iaea_record->x = record_constant[0];
 
    p_iaea_record->iy = 0;
-   if(record_contents[1] == 1) p_iaea_record->iy = 1;         
+   if(record_contents[1] == 1) p_iaea_record->iy = 1;
    else p_iaea_record->y = record_constant[1];
 
    p_iaea_record->iz = 0;
-   if(record_contents[2] == 1) p_iaea_record->iz = 1;         
+   if(record_contents[2] == 1) p_iaea_record->iz = 1;
    else p_iaea_record->z = record_constant[2];
 
    p_iaea_record->iu = 0;
-   if(record_contents[3] == 1) p_iaea_record->iu = 1;         
+   if(record_contents[3] == 1) p_iaea_record->iu = 1;
    else p_iaea_record->u = record_constant[3];
 
    p_iaea_record->iv = 0;
-   if(record_contents[4] == 1) p_iaea_record->iv = 1;         
+   if(record_contents[4] == 1) p_iaea_record->iv = 1;
    else p_iaea_record->v = record_constant[4];
 
    p_iaea_record->iw = 0;
-   if(record_contents[5] == 1) p_iaea_record->iw = 1;         
+   if(record_contents[5] == 1) p_iaea_record->iw = 1;
    else p_iaea_record->w = record_constant[5];
 
    p_iaea_record->iweight = 0;
-   if(record_contents[6] == 1) p_iaea_record->iweight = 1;         
+   if(record_contents[6] == 1) p_iaea_record->iweight = 1;
    else p_iaea_record->weight = record_constant[6];
 
    p_iaea_record->iextrafloat = 0;
-   if(record_contents[7] > 0) p_iaea_record->iextrafloat = record_contents[7];         
-   
+   if(record_contents[7] > 0) p_iaea_record->iextrafloat = record_contents[7];
+
    p_iaea_record->iextralong = 0;
-   if(record_contents[8] > 0) p_iaea_record->iextralong = record_contents[8];         
+   if(record_contents[8] > 0) p_iaea_record->iextralong = record_contents[8];
 
    record_length = 5; // To consider for particle type (1 bytes) and energy (4 bytes)
    for(i=0;i<8;i++) record_length += record_contents[i]*sizeof(float);
@@ -503,7 +503,7 @@ void iaea_header_type::initialize_counters()
 {
   nParticles = read_indep_histories = 0;
 
-  for(int i=0;i<MAX_NUM_PARTICLES;i++) 
+  for(int i=0;i<MAX_NUM_PARTICLES;i++)
   {
         particle_number[i] = 0;
         sumParticleWeight[i] = 0.;
@@ -529,10 +529,10 @@ void iaea_header_type::update_counters(iaea_record_type *p_iaea_record)
   if (p_iaea_record->z > maximumZ )  maximumZ = p_iaea_record->z;
   if (p_iaea_record->z < minimumZ )  minimumZ = p_iaea_record->z;
 
-      
+
   nParticles++;
 
-  if ( p_iaea_record->IsNewHistory > 0 ) 
+  if ( p_iaea_record->IsNewHistory > 0 )
       read_indep_histories += p_iaea_record->IsNewHistory;
 
   int i = p_iaea_record->particle-1;
@@ -541,14 +541,14 @@ void iaea_header_type::update_counters(iaea_record_type *p_iaea_record)
       sumParticleWeight[i] +=  p_iaea_record->weight;
       averageKineticEnergy[i] += p_iaea_record->weight*
                                  fabs(p_iaea_record->energy);
-      if (p_iaea_record->weight > maximumWeight[i] )  
+      if (p_iaea_record->weight > maximumWeight[i] )
             maximumWeight[i] = p_iaea_record->weight;
-      if (p_iaea_record->weight < minimumWeight[i] )  
+      if (p_iaea_record->weight < minimumWeight[i] )
             minimumWeight[i] = p_iaea_record->weight;
 
-      if (fabs(p_iaea_record->energy) > maximumKineticEnergy[i] )  
+      if (fabs(p_iaea_record->energy) > maximumKineticEnergy[i] )
          maximumKineticEnergy[i] = fabs(p_iaea_record->energy);
-      if (fabs(p_iaea_record->energy) < minimumKineticEnergy[i] )  
+      if (fabs(p_iaea_record->energy) < minimumKineticEnergy[i] )
          minimumKineticEnergy[i] = fabs(p_iaea_record->energy);
   }
 
@@ -559,13 +559,13 @@ void iaea_header_type::print_statistics()
    printf("\n *************************************** \n");
    printf("           IAEA PHSP STATISTICS          \n");
    printf(" *************************************** \n");
-   
+
 
    printf("\n Number of primary particles: %lld\n",orig_histories);
    printf(" Number of statistically independent histories read so far %lld\n",read_indep_histories);
    printf(" Total number of particles: %lld\n\n",nParticles);
 
-   if(particle_number[0]>0) 
+   if(particle_number[0]>0)
    {
          printf(" PHOTONS: %lld,",particle_number[0]);
          if(sumParticleWeight[0]>0) printf(" <E> = %10.4G,",
@@ -574,16 +574,16 @@ void iaea_header_type::print_statistics()
 
          printf("  Min.KE = %10.4G, Max.KE = %10.4G\n",
 
-             minimumKineticEnergy[0],maximumKineticEnergy[0]); 
+             minimumKineticEnergy[0],maximumKineticEnergy[0]);
 
          printf("  Total Weight = %15.6G \n",sumParticleWeight[0]);
 
          printf("  Min.Weight = %12.6G, Max.Weight = %12.6G\n\n",
 
-             minimumWeight[0],maximumWeight[0]); 
+             minimumWeight[0],maximumWeight[0]);
 
    }
-   if(particle_number[1]>0) 
+   if(particle_number[1]>0)
    {
          printf(" ELECTRONS: %lld,",particle_number[1]);
          if(sumParticleWeight[1]>0) printf(" <E> = %10.4G,",
@@ -592,16 +592,16 @@ void iaea_header_type::print_statistics()
 
          printf("  Min.KE = %10.4G, Max.KE = %10.4G\n",
 
-             minimumKineticEnergy[1],maximumKineticEnergy[1]); 
+             minimumKineticEnergy[1],maximumKineticEnergy[1]);
 
          printf("  Total Weight = %15.6G \n",sumParticleWeight[1]);
 
          printf("  Min.Weight = %12.6G, Max.Weight = %12.6G\n\n",
 
-             minimumWeight[1],maximumWeight[1]); 
+             minimumWeight[1],maximumWeight[1]);
 
    }
-   if(particle_number[2]>0) 
+   if(particle_number[2]>0)
    {
          printf(" POSITRONS: %lld,",particle_number[2]);
          if(sumParticleWeight[2]>0) printf(" <E> = %10.4G,",
@@ -610,16 +610,16 @@ void iaea_header_type::print_statistics()
 
          printf("  Min.KE = %10.4G, Max.KE = %10.4G\n",
 
-             minimumKineticEnergy[2],maximumKineticEnergy[2]); 
+             minimumKineticEnergy[2],maximumKineticEnergy[2]);
 
          printf("  Total Weight = %15.6G \n",sumParticleWeight[2]);
 
          printf("  Min.Weight = %12.6G, Max.Weight = %12.6G\n\n",
 
-             minimumWeight[2],maximumWeight[2]); 
+             minimumWeight[2],maximumWeight[2]);
 
    }
-   if(particle_number[3]>0) 
+   if(particle_number[3]>0)
    {
          printf(" NEUTRONS: %lld,",particle_number[3]);
          if(sumParticleWeight[3]>0) printf(" <E> = %10.4G,",
@@ -628,16 +628,16 @@ void iaea_header_type::print_statistics()
 
          printf("  Min.KE = %10.4G, Max.KE = %10.4G\n",
 
-             minimumKineticEnergy[3],maximumKineticEnergy[3]); 
+             minimumKineticEnergy[3],maximumKineticEnergy[3]);
 
          printf("  Total Weight = %15.6G \n",sumParticleWeight[3]);
 
          printf("  Min.Weight = %12.6G, Max.Weight = %12.6G\n\n",
 
-             minimumWeight[3],maximumWeight[3]); 
+             minimumWeight[3],maximumWeight[3]);
 
    }
-   if(particle_number[4]>0) 
+   if(particle_number[4]>0)
    {
          printf(" PROTONS: %lld,",particle_number[4]);
          if(sumParticleWeight[4]>0) printf(" <E> = %10.4G,",
@@ -646,23 +646,23 @@ void iaea_header_type::print_statistics()
 
          printf("  Min.KE = %10.4G, Max.KE = %10.4G\n",
 
-             minimumKineticEnergy[4],maximumKineticEnergy[4]); 
+             minimumKineticEnergy[4],maximumKineticEnergy[4]);
 
          printf("  Total Weight = %15.6G \n",sumParticleWeight[4]);
 
          printf("  Min.Weight = %12.6G, Max.Weight = %12.6G\n\n",
 
-             minimumWeight[4],maximumWeight[4]); 
+             minimumWeight[4],maximumWeight[4]);
 
    }
    printf(" GEOMETRY STATISTICS\n");
-   if(record_contents[0] == 1) 
+   if(record_contents[0] == 1)
          printf("  %7.3f < X coordinate < %7.3f\n",minimumX,maximumX);
    else printf("  X (constant) = %7.3f",record_constant[0]);
-   if(record_contents[1] == 1) 
+   if(record_contents[1] == 1)
          printf("  %7.3f < Y coordinate < %7.3f\n",minimumY,maximumY);
    else printf("  Y (constant) = %7.3f",record_constant[1]);
-   if(record_contents[2] == 1) 
+   if(record_contents[2] == 1)
          printf("  %7.3f < Z coordinate < %7.3f\n",minimumZ,maximumZ);
    else printf("  Z (constant) = %7.3f",record_constant[2]);
    printf("\n *************************************** \n\n");
@@ -674,15 +674,15 @@ int iaea_header_type::check_byte_order()
   float ftest=1.0f; /* assign a float to 1.0 */
   char *pf = (char *) &ftest;
   // printf("\n \t %x %x %x %x", pf[0],pf[1],pf[2],pf[3]);
-  if(pf[0] == 0 && pf[3] != 0) 
-  { 
+  if(pf[0] == 0 && pf[3] != 0)
+  {
     // printf("\nByte order: INTEL / ALPHA,LINUX -> LITLE_ENDIAN \n");
     return(LITTLE_ENDIAN);
-  }else if(pf[0] != 0 && pf[3] == 0) 
-  { 
+  }else if(pf[0] != 0 && pf[3] == 0)
+  {
     // printf("\nByte order: OTHER (SGI,SUN-SOLARIS) -> BIG_ENDIAN \n ");
     return(BIG_ENDIAN);
-  } 
+  }
   else
   {
     printf("\nERROR: indeterminate byte order");
@@ -700,18 +700,18 @@ int iaea_header_type::write_header()
 
   rewind(fheader);
 
-  if( write_blockname((char*)"IAEA_INDEX") == FAIL ) return(FAIL); 
+  if( write_blockname((char*)"IAEA_INDEX") == FAIL ) return(FAIL);
 
   fprintf(fheader,"%i   // Test header\n\n",iaea_index);
- 
+
   write_blockname((char*)"TITLE");fprintf(fheader,"%s \n\n",title);
- 
+
   write_blockname((char*)"FILE_TYPE");fprintf(fheader,"0\n\n"); // phasespace is assumed
 
   checksum = record_length * nParticles;
 
-  write_blockname((char*)"CHECKSUM");fprintf(fheader,"%lld \n\n",checksum); 
-  
+  write_blockname((char*)"CHECKSUM");fprintf(fheader,"%lld \n\n",checksum);
+
   write_blockname((char*)"RECORD_CONTENTS");
   fprintf(fheader,"   %2i     // X is stored ?\n",record_contents[0]);
   fprintf(fheader,"   %2i     // Y is stored ?\n",record_contents[1]);
@@ -725,7 +725,7 @@ int iaea_header_type::write_header()
   fprintf(fheader,"   %2i     // Extra floats stored ?\n",record_contents[7]);
   fprintf(fheader,"   %2i     // Extra longs stored ?\n",record_contents[8]);
 
-  int i; 
+  int i;
   for(i=0;i<record_contents[7];i++) {
       if(extrafloat_contents[i] == 0) fprintf(fheader,
         "   %2i     // Generic float variable stored in the extrafloat array [%2i] \n",
@@ -761,7 +761,7 @@ int iaea_header_type::write_header()
   }
 
   fprintf(fheader,"\n");
-  
+
   write_blockname((char*)"RECORD_CONSTANT");
   if(record_contents[0]==0)
     fprintf(fheader,"   %8.4f     // Constant X\n",record_constant[0]);
@@ -779,7 +779,7 @@ int iaea_header_type::write_header()
     fprintf(fheader,"   %8.4f     // Constant Weight\n",record_constant[6]);
 
   fprintf(fheader,"\n");
-  
+
   write_blockname((char*)"RECORD_LENGTH");fprintf(fheader,"%i\n\n",record_length);
 
   int byte_order = check_byte_order();
@@ -793,7 +793,7 @@ int iaea_header_type::write_header()
 
   write_blockname((char*)"PARTICLES");fprintf(fheader,"%lld\n\n",nParticles);
 
-  if(particle_number[0]>0) { 
+  if(particle_number[0]>0) {
         write_blockname((char*)"PHOTONS");fprintf(fheader,"%lld\n\n",particle_number[0]);}
   if(particle_number[1]>0) {
         write_blockname((char*)"ELECTRONS");fprintf(fheader,"%lld\n\n",particle_number[1]);}
@@ -811,14 +811,14 @@ int iaea_header_type::write_header()
 
   write_blockname((char*)"MONTE_CARLO_CODE_VERSION"); fprintf(fheader,"\n");
 
-  write_blockname((char*)"GLOBAL_PHOTON_ENERGY_CUTOFF"); 
+  write_blockname((char*)"GLOBAL_PHOTON_ENERGY_CUTOFF");
   fprintf(fheader," %8.5f \n",global_photon_energy_cutoff);
 
-  write_blockname((char*)"GLOBAL_PARTICLE_ENERGY_CUTOFF"); 
+  write_blockname((char*)"GLOBAL_PARTICLE_ENERGY_CUTOFF");
   fprintf(fheader," %8.5f \n",global_particle_energy_cutoff);
 
   write_blockname((char*)"COORDINATE_SYSTEM_DESCRIPTION"); fprintf(fheader,"\n");
-  
+
   // 4. Optional information
   fprintf(fheader,"//  OPTIONAL INFORMATION\n\n");
 
@@ -843,21 +843,21 @@ int iaea_header_type::write_header()
   write_blockname((char*)"LINK_VALIDATION"); fprintf(fheader,"\n");
 
   write_blockname((char*)"ADDITIONAL_NOTES");
-  fprintf(fheader,"%s\n","This is IAEA header as defined in the technical ");       
-  fprintf(fheader,"%s\n","report IAEA(NDS)-0484, Vienna, 2006");  
+  fprintf(fheader,"%s\n","This is IAEA header as defined in the technical ");
+  fprintf(fheader,"%s\n","report IAEA(NDS)-0484, Vienna, 2006");
 
   fprintf(fheader,"\n");
   // 5. Statistical information
   write_blockname((char*)"STATISTICAL_INFORMATION_PARTICLES");
   fprintf(fheader,
 
-  "//        Weight        Wmin       Wmax       <E>         Emin         Emax    Particle\n"); 
+  "//        Weight        Wmin       Wmax       <E>         Emin         Emax    Particle\n");
   double eaver; char buffer[15];
-  for(i=0;i<MAX_NUM_PARTICLES;i++) 
-  { 
+  for(i=0;i<MAX_NUM_PARTICLES;i++)
+  {
         if( particle_number[i] == 0 ) continue;
 
-        switch (i) 
+        switch (i)
         {
               case 0:
                     strcpy(buffer," PHOTONS");
@@ -877,7 +877,7 @@ int iaea_header_type::write_header()
         }
 
         eaver = 0.;
-        if(sumParticleWeight[i]>0) 
+        if(sumParticleWeight[i]>0)
             eaver = averageKineticEnergy[i]/sumParticleWeight[i];
         fprintf(fheader,"  %15.6G %10.4G %10.4G %10.4G    %10.4G  %10.4G  %s\n",
         sumParticleWeight[i],minimumWeight[i],maximumWeight[i],
@@ -896,10 +896,10 @@ int iaea_header_type::write_header()
 
 int iaea_header_type::print_header ()
 {
-    
+
     if(checksum == 0) printf("\n NEW PHASE SPACE FILE WILL BE CREATED\n");
-      
-      printf("\n\nIAEA_INDEX: %i\n",iaea_index); 
+
+      printf("\n\nIAEA_INDEX: %i\n",iaea_index);
     printf("TITLE: %s \n",title);
 
   // ******************************************************************************
@@ -922,14 +922,14 @@ int iaea_header_type::print_header ()
             if(record_contents[i] == 0)
             printf(" // Variable %1i is constant\n",i+1);
     }
-  
+
     if(record_contents[7] > 0)
         printf(" // %1i extra FLOAT variable(s) defined\n",record_contents[7]);
 
-    for(i=0;i<record_contents[7];i++) 
+    for(i=0;i<record_contents[7];i++)
     {
-      if(extrafloat_contents[i] == 0) printf(    
-        " // Generic float variable stored in the extrafloat array [%2i] \n",i);    
+      if(extrafloat_contents[i] == 0) printf(
+        " // Generic float variable stored in the extrafloat array [%2i] \n",i);
       if(extrafloat_contents[i] == 1) printf(
         " // XLAST variable stored in the extrafloat array [%2i] \n",i);
       if(extrafloat_contents[i] == 2) printf(
@@ -941,7 +941,7 @@ int iaea_header_type::print_header ()
     if(record_contents[8] > 0)
         printf(" // %1i extra LONG variable(s) defined\n",record_contents[8]);
 
-    for(i=0;i<record_contents[8];i++) 
+    for(i=0;i<record_contents[8];i++)
     {
       if(extralong_contents[i] == 0) printf(
         " // Generic integer variable stored in the extralong array [%2i] \n",i);
@@ -964,11 +964,11 @@ int iaea_header_type::print_header ()
 // ******************************************************************************
 // 2. Mandatory description of the phsp
 
-      if( strncmp(coordinate_system_description,"                ",15) > 0 ) 
+      if( strncmp(coordinate_system_description,"                ",15) > 0 )
           printf("\nCOORDINATE_SYSTEM_DESCRIPTION: \n%s\n",
             coordinate_system_description);
 
-      if(file_type == 1) 
+      if(file_type == 1)
       {
             // For event generators
           printf("INPUT FILE for event generator: %s \n",input_file_for_event_generator);
@@ -976,60 +976,60 @@ int iaea_header_type::print_header ()
       }
       printf("\n");
       printf("NUMBER OF PRIMARY PARTICLES: %lld \n",orig_histories);
-        
+
       printf("PARTICLES: %lld \n",nParticles);
-            
+
       if(particle_number[0] > 0) printf("PHOTONS: %lld \n",particle_number[0]);
       if(particle_number[1] > 0) printf("ELECTRONS: %lld \n",particle_number[1]);
       if(particle_number[2] > 0) printf("POSITRONS: %lld \n",particle_number[2]);
       if(particle_number[3] > 0) printf("NEUTRONS: %lld \n",particle_number[3]);
       if(particle_number[4] > 0) printf("PROTONS: %lld \n",particle_number[4]);
-      printf("\n"); 
+      printf("\n");
 
 // ******************************************************************************
 // 3. Mandatory additional information
       /*********************************************/
-      if( strncmp(machine_type,"                ",15) > 0 ) 
+      if( strncmp(machine_type,"                ",15) > 0 )
         printf("MACHINE_TYPE: %s\n",machine_type);
 
-      if( strncmp(MC_code_and_version,"                ",15) > 0 ) 
+      if( strncmp(MC_code_and_version,"                ",15) > 0 )
         printf("MONTE_CARLO_CODE_VERSION: %s \n",MC_code_and_version);
 
       printf("GLOBAL_PHOTON_ENERGY_CUTOFF: %8.5f \n",global_photon_energy_cutoff);
       printf("GLOBAL_PARTICLE_ENERGY_CUTOFF: %8.5f \n",global_particle_energy_cutoff);
       printf("\n");
 
-      if( strncmp(transport_parameters,"                ",15) > 0 ) 
+      if( strncmp(transport_parameters,"                ",15) > 0 )
         printf("\nTRANSPORT_PARAMETERS:\n%s\n",transport_parameters);
 
 // ******************************************************************************
 // 4. Optional description
-      if( strncmp(beam_name,"                ",15) > 0 )    
+      if( strncmp(beam_name,"                ",15) > 0 )
         printf("BEAM_NAME: %s\n",beam_name);
-      if( strncmp(field_size,"                ",15) > 0 )   
+      if( strncmp(field_size,"                ",15) > 0 )
         printf("FIELD_SIZE: %s\n",field_size);
-      if( strncmp(nominal_SSD,"                ",15) > 0 )  
+      if( strncmp(nominal_SSD,"                ",15) > 0 )
         printf("NOMINAL_SSD: %s\n",nominal_SSD);
-      if( strncmp(variance_reduction_techniques,"                ",15) > 0 )  
+      if( strncmp(variance_reduction_techniques,"                ",15) > 0 )
         printf("VARIANCE_REDUCTION_TECHNIQUES:\n%s\n",
         variance_reduction_techniques);
-      if( strncmp(initial_source_description,"                ",15) > 0 )     
+      if( strncmp(initial_source_description,"                ",15) > 0 )
         printf("INITIAL_SOURCE_DESCRIPTION: \n%s\n",
         initial_source_description);
-  
+
       // Documentation sub-section
       /*********************************************/
-      if( strncmp(MC_input_filename,"                ",15) > 0 )  
+      if( strncmp(MC_input_filename,"                ",15) > 0 )
         printf("MC_INPUT_FILENAME: %s\n",MC_input_filename);
-      if( strncmp(published_reference,"                ",15) > 0 )      
+      if( strncmp(published_reference,"                ",15) > 0 )
         printf("PUBLISHED_REFERENCE: \n%s\n",published_reference);
-      if( strncmp(authors,"                ",15) > 0 )      
+      if( strncmp(authors,"                ",15) > 0 )
         printf("AUTHORS: \n%s\n",authors);
-      if( strncmp(institution,"                ",15) > 0 )  
+      if( strncmp(institution,"                ",15) > 0 )
         printf("INSTITUTION: \n%s\n",institution);
-      if( strncmp(link_validation,"                ",15) > 0 )    
+      if( strncmp(link_validation,"                ",15) > 0 )
         printf("LINK_VALIDATION: \n%s\n",link_validation);
-      if( strncmp(additional_notes,"                ",15) > 0 )   
+      if( strncmp(additional_notes,"                ",15) > 0 )
         printf("ADDITIONAL_NOTES: \n%s\n",additional_notes);
 
 // ******************************************************************************
@@ -1037,5 +1037,5 @@ int iaea_header_type::print_header ()
 
       print_statistics();
 
-    return(OK);  
+    return(OK);
 }

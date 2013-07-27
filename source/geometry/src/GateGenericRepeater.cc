@@ -32,7 +32,7 @@ GateGenericRepeater::GateGenericRepeater(GateVVolume* itsObjectInserter,
 
 
 //--------------------------------------------------------------------------------------------
-GateGenericRepeater::~GateGenericRepeater() {  
+GateGenericRepeater::~GateGenericRepeater() {
   delete mMessenger;
 }
 //--------------------------------------------------------------------------------------------
@@ -49,8 +49,8 @@ void GateGenericRepeater::SetPlacementList(std::vector<GatePlacement> list) {
 
 
 //--------------------------------------------------------------------------------------------
-// void GateGenericRepeater::ReadPlacementsFromFile(std::string filename, 
-//                                                  std::vector<GatePlacement> & placementsList// , 
+// void GateGenericRepeater::ReadPlacementsFromFile(std::string filename,
+//                                                  std::vector<GatePlacement> & placementsList// ,
 // //                                                  bool & mUseTranslation,
 // //                                                  bool & mUseRotation
 //                                                  ) {
@@ -65,10 +65,10 @@ void GateGenericRepeater::SetPlacementList(std::vector<GatePlacement> list) {
 
 
 //--------------------------------------------------------------------------------------------
-// void GateGenericRepeater::ReadPlacementsFromFile(std::string filename, 
-//                                                  std::vector<GatePlacement> & placementsList, 
-//                                                  std::vector<double> & timesList, 
-//                                                  bool readTimeList, 
+// void GateGenericRepeater::ReadPlacementsFromFile(std::string filename,
+//                                                  std::vector<GatePlacement> & placementsList,
+//                                                  std::vector<double> & timesList,
+//                                                  bool readTimeList,
 //                                                  bool & mUseTranslation,
 //                                                  bool & mUseRotation) {
 //   // Reset list
@@ -98,17 +98,17 @@ void GateGenericRepeater::SetPlacementList(std::vector<GatePlacement> list) {
 //     // Insert
 //     if (readTimeList) timesList.push_back(time);
 //     placementsList.push_back(p);
-//   } 
+//   }
 //   is.close();
-// }           
+// }
 
 //--------------------------------------------------------------------------------------------
 
 
 //--------------------------------------------------------------------------------------------
-// void GateGenericRepeater::ReadPlacement(std::istream & is, 
-//                                         GatePlacement & p, 
-//                                         bool mUseRotation, bool mUseTranslation, 
+// void GateGenericRepeater::ReadPlacement(std::istream & is,
+//                                         GatePlacement & p,
+//                                         bool mUseRotation, bool mUseTranslation,
 //                                         double angleUnit, double translationUnit) {
 //   double angle=0, x=0,y=0,z=0, tx=0,ty=0,tz=0;
 //   std::string s;
@@ -138,11 +138,11 @@ void GateGenericRepeater::SetPlacementList(std::vector<GatePlacement> list) {
 //     r.rotate(0, G4ThreeVector(0,0,0));
 //     p.first = r;
 //   }
-//   if (mUseTranslation) 
+//   if (mUseTranslation)
 //     p.second = G4ThreeVector(tx,ty,tz);
-//   else 
+//   else
 //     p.second = G4ThreeVector(0,0,0);
-//   GateMessage("Geometry", 8, "I read placement " << tx << " " << ty << " " << tz 
+//   GateMessage("Geometry", 8, "I read placement " << tx << " " << ty << " " << tz
 //               << " \t rot=" << angle << " \t axis=" << x << " " << y << " " << z << G4endl);
 // }
 //--------------------------------------------------------------------------------------------
@@ -164,15 +164,15 @@ void GateGenericRepeater::PushMyPlacements(const G4RotationMatrix& currentRotati
   if (mPlacementsList.size() ==0) {
     GateError("Please provide a placement file with 'setPlacementsFilename'\n.");
   }
-  
+
   GateDebugMessage("Repeater", 3, "GateGenericRepeater " << GetObjectName() << G4endl);
   GateDebugMessage("Repeater", 3, "\t current position " << currentPosition << G4endl);
   GateDebugMessage("Repeater", 3, "\t current rotation " << currentRotationMatrix << G4endl);
-  
+
   for(unsigned int i=0; i<mPlacementsList.size(); i++) {
     GateDebugMessage("Repeater", 3, "\t translation " << i << " = " << mPlacementsList[i].second << G4endl);
     GateDebugMessage("Repeater", 3, "\t final " << i << " = " << currentPosition+mPlacementsList[i].second << G4endl);
-    
+
     // New position
     G4ThreeVector newPosition;
     if (mUseTranslation) {
@@ -182,7 +182,7 @@ void GateGenericRepeater::PushMyPlacements(const G4RotationMatrix& currentRotati
       else newPosition = mPlacementsList[i].second;
      }
     else newPosition = currentPosition;
-    
+
     // New rotation
     G4RotationMatrix newRotationMatrix;
     if (mUseRotation) {

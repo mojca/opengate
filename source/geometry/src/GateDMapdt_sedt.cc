@@ -179,9 +179,9 @@ void phaseSaitoX_blockZ(const Vol &V, Longvol &sdt_x, const bool isMultiregion, 
 **************************************************/
 //First step of  the saito  algorithm
 // (Warning   : we  store the  EDT instead of the SDT)
-void phaseSaitoX(const Vol &V, Longvol &sdt_x, 
-                 const bool isMultiregion, 
-                 const bool isToric, 
+void phaseSaitoX(const Vol &V, Longvol &sdt_x,
+                 const bool isMultiregion,
+                 const bool isToric,
                  const int /*NbThreads=1*/)
 {
 #ifndef _MULTITHREAD    //Call to the block version
@@ -244,8 +244,8 @@ void phaseSaitoX(const Vol &V, Longvol &sdt_x,
 /***************************************************************************************************************/
 
 //--------------------------------------------------------------------
-inline void phaseSaitoY_1D(const Vol &V, Longvol &sdt_x, Longvol &sdt_xy, 
-			   const bool isMultiregion, const bool isToric, 
+inline void phaseSaitoY_1D(const Vol &V, Longvol &sdt_x, Longvol &sdt_xy,
+			   const bool isMultiregion, const bool isToric,
 			   int x,int z, long int *sdt_temp, unsigned int *s,unsigned int *t)
 {
   long int min_value;  //sdt_x min value (used for the toric reencoding
@@ -350,8 +350,8 @@ void *phaseSaitoY_block_multithread(void *threadarg)
 #endif
 
 //--------------------------------------------------------------------
-void phaseSaitoY_block(const Vol &V, Longvol &sdt_x, Longvol &sdt_xy, 
-		       const bool isMultiregion, const bool isToric, 
+void phaseSaitoY_block(const Vol &V, Longvol &sdt_x, Longvol &sdt_xy,
+		       const bool isMultiregion, const bool isToric,
 		       int minZ,int maxZ)
 {
   long int *sdt_temp;  //Row copy for the toric domain mode
@@ -371,7 +371,7 @@ void phaseSaitoY_block(const Vol &V, Longvol &sdt_x, Longvol &sdt_xy,
       phaseSaitoY_1D(V, sdt_x, sdt_xy, isMultiregion, isToric, x, z, sdt_temp, s, t);
     }
   }
-  
+
   free(s);
   free(t);
   free(sdt_temp);
@@ -387,8 +387,8 @@ void phaseSaitoY_block(const Vol &V, Longvol &sdt_x, Longvol &sdt_xy,
 **************************************************/
 //Second      Step   of    the       saito   algorithm    using    the
 //[Meijster/Roerdnik/Hesselink] optimization
-void phaseSaitoY(const Vol &V, Longvol &sdt_x, Longvol &sdt_xy, 
-		 const bool isMultiregion, const bool isToric, 
+void phaseSaitoY(const Vol &V, Longvol &sdt_x, Longvol &sdt_xy,
+		 const bool isMultiregion, const bool isToric,
 		 const int /*NbThreads*/)
 {
 
@@ -587,8 +587,8 @@ void phaseSaitoZ_block(const Vol &V, Longvol &sdt_xy, Longvol &sdt_xyz, const bo
 **************************************************/
 //Third   Step      of     the    saito   algorithm     using      the
 //[Meijster/Roerdnik/Hesselink] optimization
-void phaseSaitoZ(const Vol &V, Longvol &sdt_xy, Longvol &sdt_xyz, 
-                 const bool isMultiregion, const bool isToric, 
+void phaseSaitoZ(const Vol &V, Longvol &sdt_xy, Longvol &sdt_xyz,
+                 const bool isMultiregion, const bool isToric,
                  const int /*NbThreads*/)
 {
 
@@ -659,7 +659,7 @@ void phaseSaitoZ(const Vol &V, Longvol &sdt_xy, Longvol &sdt_xyz,
 /// @param  nbThreads the number of threads alloted in the computation
 /// @return true in case of success
 ///
-bool computeSEDT(const Vol &input, Longvol &output, const bool isMultiregion, 
+bool computeSEDT(const Vol &input, Longvol &output, const bool isMultiregion,
 		 const bool isToric, const unsigned int NbThreads)
 {
   if (!output.isOK())
@@ -676,10 +676,10 @@ bool computeSEDT(const Vol &input, Longvol &output, const bool isMultiregion,
       return false;
     }
 
-  //  std::cout << "Scan X..." << std::flush; 
+  //  std::cout << "Scan X..." << std::flush;
   phaseSaitoX(input, output, isMultiregion, isToric, NbThreads);
   // std::cout << " Ok" << std::endl;
-  
+
   // std::cout <<"Scan Y..." << std::flush;
   phaseSaitoY(input, output, sdt_x, isMultiregion, isToric, NbThreads);
   // std::cout << " Ok" << std::endl;

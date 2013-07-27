@@ -18,7 +18,7 @@ See GATE/LICENSE.txt for further details
 
 //-----------------------------------------------------------------------------
 GatePionMinusInelasticPB::GatePionMinusInelasticPB():GateVProcess("PionMinusInelastic")
-{  
+{
   SetDefaultParticle("pi-");
   SetProcessInfo("Inelastic scattering of pi+");
 
@@ -31,7 +31,7 @@ GatePionMinusInelasticPB::GatePionMinusInelasticPB():GateVProcess("PionMinusInel
   AddToDataSetList("G4PiNuclearCrossSection");
 
 
-  pMessenger = new GateHadronicStandardProcessMessenger(this);  
+  pMessenger = new GateHadronicStandardProcessMessenger(this);
 }
 //-----------------------------------------------------------------------------
 
@@ -39,7 +39,7 @@ GatePionMinusInelasticPB::GatePionMinusInelasticPB():GateVProcess("PionMinusInel
 //-----------------------------------------------------------------------------
 G4VProcess* GatePionMinusInelasticPB::CreateProcess(G4ParticleDefinition *)
 {
-  return new G4PionMinusInelasticProcess(GetG4ProcessName()); 
+  return new G4PionMinusInelasticProcess(GetG4ProcessName());
 }
 //-----------------------------------------------------------------------------
 

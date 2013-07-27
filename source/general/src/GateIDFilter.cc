@@ -17,7 +17,7 @@ GateIDFilter::GateIDFilter(G4String name)
   :GateVFilter(name)
 {
   mID = 0;
-  mParentID = 0; 
+  mParentID = 0;
 
   pIDMessenger = new GateIDFilterMessenger(this);
 }
@@ -27,7 +27,7 @@ GateIDFilter::GateIDFilter(G4String name)
 
 
 //---------------------------------------------------------------------------
-G4bool GateIDFilter::Accept(const G4Track* aTrack) 
+G4bool GateIDFilter::Accept(const G4Track* aTrack)
 {
 
   if(mID!=0) if(aTrack->GetTrackID()!=mID) return false;

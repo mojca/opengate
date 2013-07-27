@@ -32,12 +32,12 @@ void GateUIcmdWith2String::SetParameterName
   theParam->SetParameterName(theName1);
   theParam->SetOmittable(omittable1);
   theParam->SetCurrentAsDefault(currentAsDefault);
-  
+
   theParam = GetParameter(1);
   theParam->SetParameterName(theName2);
   theParam->SetOmittable(omittable2);
   theParam->SetCurrentAsDefault(currentAsDefault);
-  
+
 }
 //---------------------------------------------------------------------------
 
@@ -66,4 +66,3 @@ void GateUIcmdWith2String::SetDefaultValue(const char * defVal1, const char * de
   theParam->SetDefaultValue(defVal2);
 }
 //---------------------------------------------------------------------------
-

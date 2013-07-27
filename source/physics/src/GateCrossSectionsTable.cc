@@ -145,7 +145,7 @@ size_t GateCrossSectionsTable::AddMaterial ( const G4MaterialCutsCouple* couple 
 
 					{
 						//c=polray->DumpMeanFreePath ( trackTmp,0.,&forc );
-						c=polray->ComputeMeanFreePath(pParticleDefinition, energy, couple->GetMaterial());						
+						c=polray->ComputeMeanFreePath(pParticleDefinition, energy, couple->GetMaterial());
 						assert ( c>0 );
 						b+=1./c;
 					}

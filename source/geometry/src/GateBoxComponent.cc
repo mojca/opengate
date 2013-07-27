@@ -17,7 +17,7 @@ See GATE/LICENSE.txt for further details
     itsName:       	  the name chosen for this system-component
     itsMotherComponent:   the mother of the component (0 if top of a tree)
     itsSystem:            the system to which the component belongs
-*/    
+*/
 GateBoxComponent::GateBoxComponent(const G4String& itsName,
       	      	      	      	      	      	 GateSystemComponent* itsMotherComponent,
 		      	      	      	      	 GateVSystem* itsSystem)
@@ -29,7 +29,7 @@ GateBoxComponent::GateBoxComponent(const G4String& itsName,
 
 
 // Destructor
-GateBoxComponent::~GateBoxComponent() 
+GateBoxComponent::~GateBoxComponent()
 {
 }
 
@@ -57,7 +57,7 @@ G4bool GateBoxComponent::IsValidAttachmentRequest(GateVVolume* anCreator) const
   // OK, everything's fine
   return true;
 }
-   
+
 
 
 // Return the length along an axis of the box-creator attached to our inserter
@@ -70,8 +70,6 @@ G4double GateBoxComponent::GetBoxLength(size_t axis) const
 
 // Tool method: try to cast a creator into a box creator
 GateBox* GateBoxComponent::CastToBoxCreator(GateVVolume* creator)
-{ 
-  return dynamic_cast<GateBox*>(creator); 
+{
+  return dynamic_cast<GateBox*>(creator);
 }
-
-

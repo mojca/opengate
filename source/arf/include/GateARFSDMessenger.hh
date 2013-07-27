@@ -32,7 +32,7 @@ class GateARFSDMessenger: public GateMessenger
 
     GateARFSDMessenger(GateARFSD* ARFSD);
     virtual ~GateARFSDMessenger();
-    
+
     //! UI command interpreter method
     void SetNewValue(G4UIcommand*, G4String);
 
@@ -42,9 +42,8 @@ class GateARFSDMessenger: public GateMessenger
 
  GateARFSD* m_ARFSD;
 
- G4UIcmdWithADoubleAndUnit* setDepth; 
+ G4UIcmdWithADoubleAndUnit* setDepth;
  G4UIcmdWithADoubleAndUnit* setEThreshHoldcmd;
  };
 
 #endif
-

@@ -19,11 +19,11 @@
 class GateGenericRepeaterMessenger;
 
 //-------------------------------------------------------------------------------------------------
-/*! 
+/*!
   \class  GateGenericRepeater
-  \brief  The GateGenericRepeater create a repetition of an object 
-  \brief  according to a given list of translation    
-*/      
+  \brief  The GateGenericRepeater create a repetition of an object
+  \brief  according to a given list of translation
+*/
 class GateGenericRepeater : public GateVGlobalPlacement
 {
 public:
@@ -39,7 +39,7 @@ public:
   void SetPlacementList(std::vector<GatePlacement> l);
 
 protected:
-  GateGenericRepeaterMessenger* mMessenger; 
+  GateGenericRepeaterMessenger* mMessenger;
   std::vector<GatePlacement> mPlacementsList;
   bool mUseRotation;
   bool mUseTranslation;
@@ -48,4 +48,3 @@ protected:
 //-------------------------------------------------------------------------------------------------
 
 #endif
-

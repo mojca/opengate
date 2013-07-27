@@ -7,7 +7,7 @@
   of the GNU Lesser General  Public Licence (LGPL)
   See GATE/LICENSE.txt for further details
   ----------------------*/
-  
+
 #include "GateWedge.hh"
 #include "GateWedgeMessenger.hh"
 
@@ -23,9 +23,9 @@
 GateWedge::GateWedge(const G4String& itsName, const G4String& itsMaterialName,
       	      	              	 G4double itsXLength, G4double itsNarrowerXLength, G4double itsYLength, G4double itsZLength)
   : GateVVolume(itsName,true,0),
-    m_Wedge_solid(0), m_Wedge_log(0), 
+    m_Wedge_solid(0), m_Wedge_log(0),
     m_Messenger(0)
-{  
+{
 
   SetMaterialName(itsMaterialName);
   m_Messenger = new GateWedgeMessenger(this);
@@ -39,7 +39,7 @@ GateWedge::GateWedge(const G4String& itsName,
 		   G4bool itsFlagAcceptChildren,
 	           G4int depth)
 : GateVVolume(itsName, itsFlagAcceptChildren, depth),
-  m_Wedge_solid(0), m_Wedge_log(0), m_Messenger(0) 
+  m_Wedge_solid(0), m_Wedge_log(0), m_Messenger(0)
 {
  SetMaterialName("Vacuum");
  m_WedgeLength[0] = 1.0*cm;
@@ -50,7 +50,7 @@ GateWedge::GateWedge(const G4String& itsName,
 }
 
 GateWedge::~GateWedge()
-{  
+{
   if (m_Messenger)
     delete m_Messenger;
 }
@@ -91,4 +91,3 @@ void GateWedge::DestroyOwnSolidAndLogicalVolume()
   m_Wedge_solid = 0;
 
 }
-

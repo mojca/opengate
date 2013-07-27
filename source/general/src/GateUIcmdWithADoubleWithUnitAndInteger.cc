@@ -24,7 +24,7 @@ GateUIcmdWithADoubleWithUnitAndInteger::GateUIcmdWithADoubleWithUnitAndInteger(c
   SetParameter(strParam2);
   G4UIparameter * strParam3 = new G4UIparameter('i');
   SetParameter(strParam3);
- 
+
 }
 //---------------------------------------------------------------------------
 
@@ -37,7 +37,7 @@ void GateUIcmdWithADoubleWithUnitAndInteger::SetParameterName
   theParam->SetParameterName(theName1);
   theParam->SetOmittable(omittable1);
   theParam->SetCurrentAsDefault(currentAsDefault);
-  
+
   theParam = GetParameter(1);
   theParam->SetParameterName(theName2);
   theParam->SetOmittable(omittable2);
@@ -86,4 +86,3 @@ void GateUIcmdWithADoubleWithUnitAndInteger::SetDefaultValue(const char * defVal
 //---------------------------------------------------------------------------
 
 #endif
-

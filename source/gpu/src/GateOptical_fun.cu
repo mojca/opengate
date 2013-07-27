@@ -37,7 +37,7 @@ __device__ float lin_interpolation(float x, float x0, float y0, float x1, float 
 __device__ float Mie_CS(int mat, float E) {
 
 	int start = 0;
-	int stop  = start +5; 
+	int stop  = start +5;
 	int pos;
 
 	for (pos=start; pos<stop; pos+=2) {
@@ -48,9 +48,9 @@ __device__ float Mie_CS(int mat, float E) {
       return __fdividef(1.0f, Mie_scatteringlength_Table[mat][pos+1]);
       }
       else{
-		return __fdividef(1.0f, loglog_interpolation(E, Mie_scatteringlength_Table[mat][pos-2], 
-                                                    Mie_scatteringlength_Table[mat][pos-1], 
-                                                    Mie_scatteringlength_Table[mat][pos], 
+		return __fdividef(1.0f, loglog_interpolation(E, Mie_scatteringlength_Table[mat][pos-2],
+                                                    Mie_scatteringlength_Table[mat][pos-1],
+                                                    Mie_scatteringlength_Table[mat][pos],
                                                     Mie_scatteringlength_Table[mat][pos+1]));
     }
 
@@ -58,38 +58,38 @@ __device__ float Mie_CS(int mat, float E) {
 
 
 // Mie Scatter (Henyey-Greenstein approximation)
-__device__ float3 Mie_scatter(StackParticle stack, unsigned int id, int mat) { 
+__device__ float3 Mie_scatter(StackParticle stack, unsigned int id, int mat) {
 
       float forward_g = mat_anisotropy[mat];
       float backward_g = mat_anisotropy[mat];
       float ForwardRatio = 1.0f;
-      unsigned char direction=0; 
+      unsigned char direction=0;
       float g;
-      
+
       if (Brent_real(id, stack.table_x_brent, 0)<= ForwardRatio) {
       	g = forward_g;
       }
       else {
       	g = backward_g;
-      	direction = 1; 
+      	direction = 1;
       }
 
-	float r = Brent_real(id, stack.table_x_brent, 0);	
+	float r = Brent_real(id, stack.table_x_brent, 0);
       	float theta;
-      	if(g == 0.0f) {	
-		theta = acosf(2.0f * r - 1.0f); 
+      	if(g == 0.0f) {
+		theta = acosf(2.0f * r - 1.0f);
 		}else {
-        float val_in_acos = __fdividef(2.0f*r*(1.0f + g)*(1.0f + g)*(1.0f - g + g * r),(1.0f - g + 2.0f*g*r)*(1.0f - g + 2.0f*g*r))- 1.0f; 
-        val_in_acos = fmin(val_in_acos, 1.0f); 
-		theta = acosf(val_in_acos); 
+        float val_in_acos = __fdividef(2.0f*r*(1.0f + g)*(1.0f + g)*(1.0f - g + g * r),(1.0f - g + 2.0f*g*r)*(1.0f - g + 2.0f*g*r))- 1.0f;
+        val_in_acos = fmin(val_in_acos, 1.0f);
+		theta = acosf(val_in_acos);
 		}
-		
-	float costheta, sintheta, phi;	
-		
-	costheta = cosf(theta);	
+
+	float costheta, sintheta, phi;
+
+	costheta = cosf(theta);
 	sintheta = sqrt(1.0f - costheta*costheta);
 	phi = Brent_real(id, stack.table_x_brent, 0) * gpu_twopi;
-	
+
 	if (direction) theta = gpu_pi - theta;
 
     float3 Dir1 = make_float3(sintheta*__cosf(phi), sintheta*__sinf(phi), costheta);
@@ -109,7 +109,7 @@ __device__ float2 RFresnel(float n_incident, /* incident refractive index.*/
 {
   float r;
   float c_transmission_angle;
-  
+
   if(n_incident==n_transmit) {			/** matched boundary. **/
     c_transmission_angle = c_incident_angle;
     r = 0.0f;
@@ -129,7 +129,7 @@ __device__ float2 RFresnel(float n_incident, /* incident refractive index.*/
   else  {		/** general. **/
     float sa1, sa2;	/* sine of the incident and transmission angles. */
     float ca2;
-    
+
     sa1 = sqrtf(1.0f-c_incident_angle*c_incident_angle);
     sa2 = __fdividef(n_incident*sa1, n_transmit);
     if(sa2 >= 1.0f) { 	/* double check for total internal reflection. */
@@ -148,7 +148,7 @@ __device__ float2 RFresnel(float n_incident, /* incident refractive index.*/
       cam = c_incident_angle*ca2 + sa1*sa2; /* c- = cc + ss. */
       sap = sa1*ca2 + c_incident_angle*sa2; /* s+ = sc + cs. */
       sam = sa1*ca2 - c_incident_angle*sa2; /* s- = sc - cs. */
-      r = __fdividef(0.5f*sam*sam*(cam*cam+cap*cap), sap*sap*cam*cam); 
+      r = __fdividef(0.5f*sam*sam*(cam*cam+cap*cap), sap*sap*cam*cam);
     // printf("case (general case): reflectance= %f and c_transmission_angle= %f \n", r, c_transmission_angle);
     }
   }
@@ -161,8 +161,8 @@ __device__ float2 RFresnel(float n_incident, /* incident refractive index.*/
 
 // Fresnel Processes
 // !!! This code works when the surface Normal is the y-axis !!!
-__device__ float3 Fresnel_process(StackParticle photon, unsigned int id, 
-                                  unsigned short int mat_i, unsigned short int mat_t) { 
+__device__ float3 Fresnel_process(StackParticle photon, unsigned int id,
+                                  unsigned short int mat_i, unsigned short int mat_t) {
 
   float uy = photon.dy[id]; /* !!!! y !!!! directional cosine. */
 
@@ -174,7 +174,7 @@ __device__ float3 Fresnel_process(StackParticle photon, unsigned int id,
 
   /* Get reflectance */
   if (uy>0.0) {
-  res = RFresnel(ni, nt, uy); // res.x=reflectance  res.y= y-directional cosine of transmission angle 
+  res = RFresnel(ni, nt, uy); // res.x=reflectance  res.y= y-directional cosine of transmission angle
    }
    else {
   res = RFresnel(ni, nt, -uy);
@@ -208,7 +208,7 @@ __device__ float3 Fresnel_process(StackParticle photon, unsigned int id,
  * Source
  ***********************************************************/
 
-__global__ void kernel_optical_voxelized_source(StackParticle photons, 
+__global__ void kernel_optical_voxelized_source(StackParticle photons,
                                                 Volume phantom_mat,
                                                 float *phantom_act,
                                                 unsigned int *phantom_ind, float E) {
@@ -216,17 +216,17 @@ __global__ void kernel_optical_voxelized_source(StackParticle photons,
     unsigned int id = __umul24(blockIdx.x, blockDim.x) + threadIdx.x;
 
     if (id >= photons.size) return;
-		
+
     float ind, x, y, z;
-    
+
     float rnd = Brent_real(id, photons.table_x_brent, 0);
     int pos = 0;
     while (phantom_act[pos] < rnd) {++pos;};
-    
+
     // get the voxel position (x, y, z)
     ind = (float)(phantom_ind[pos]);
     //float debug = phantom_act.data[10];
-    
+
     z = floor(ind / (float)phantom_mat.nb_voxel_slice);
     ind -= (z * (float)phantom_mat.nb_voxel_slice);
     y = floor(ind / (float)(phantom_mat.size_in_vox.x));
@@ -248,7 +248,7 @@ __global__ void kernel_optical_voxelized_source(StackParticle photons,
     float theta = Brent_real(id, photons.table_x_brent, 0);
     phi   = gpu_twopi * phi;
     theta = acosf(1.0f - 2.0f*theta);
-    
+
     // convert to cartesian
     float dx = __cosf(phi)*__sinf(theta);
     float dy = __sinf(phi)*__sinf(theta);
@@ -327,12 +327,12 @@ __global__ void kernel_optical_navigation_regular(StackParticle photons, Volume 
 
     // Find next discrete interaction, total_dedx and next discrete intraction distance
     float next_interaction_distance =  FLT_MAX;
-    unsigned char next_discrete_process = 0; 
+    unsigned char next_discrete_process = 0;
     float interaction_distance;
     float cross_section;
 
-    // Mie scattering 
-    cross_section = Mie_CS(mat, energy); 
+    // Mie scattering
+    cross_section = Mie_CS(mat, energy);
     interaction_distance = __fdividef(-__logf(Brent_real(id, photons.table_x_brent, 0)),
                                      cross_section);
     if (interaction_distance < next_interaction_distance) {
@@ -341,7 +341,7 @@ __global__ void kernel_optical_navigation_regular(StackParticle photons, Volume 
     }
 
     // Distance to the next voxel boundary (raycasting)
-    interaction_distance = get_boundary_voxel_by_raycasting(index_phantom, position, 
+    interaction_distance = get_boundary_voxel_by_raycasting(index_phantom, position,
                                                             direction, phantom.voxel_size);
   // printf("step3 of Navigator Distance to next boundary =  %f\n", interaction_distance);
 
@@ -363,7 +363,7 @@ __global__ void kernel_optical_navigation_regular(StackParticle photons, Volume 
     position.z += direction.z * next_interaction_distance;
 
     // Dirty part FIXME
-    //   apply "magnetic grid" on the particle position due to aproximation 
+    //   apply "magnetic grid" on the particle position due to aproximation
     //   from the GPU (on the next_interaction_distance).
     /*
     float eps = 1.0e-6f; // 1 um
@@ -371,7 +371,7 @@ __global__ void kernel_optical_navigation_regular(StackParticle photons, Volume 
     index_phantom.x = int(position.x * ivoxsize.x);
     index_phantom.y = int(position.y * ivoxsize.y);
     index_phantom.z = int(position.z * ivoxsize.z);
-    // on x 
+    // on x
     grid_pos_min = index_phantom.x * phantom.voxel_size.x;
     grid_pos_max = (index_phantom.x+1) * phantom.voxel_size.x;
     res_min = position.x - grid_pos_min;
@@ -402,7 +402,7 @@ __global__ void kernel_optical_navigation_regular(StackParticle photons, Volume 
 
     // Stop simulation if out of phantom or no more energy
     if ( position.x <= 0 || position.x >= phantom.size_in_mm.x
-     || position.y <= 0 || position.y >= phantom.size_in_mm.y 
+     || position.y <= 0 || position.y >= phantom.size_in_mm.y
      || position.z <= 0 || position.z >= phantom.size_in_mm.z ) {
        photons.endsimu[id] = 1;                     // stop the simulation
        atomicAdd(count_d, 1);                       // count simulated primaries
@@ -421,17 +421,17 @@ __global__ void kernel_optical_navigation_regular(StackParticle photons, Volume 
 
         T1 old_mat = mat;
         mat = phantom.data[index_phantom.w];
-   
+
     // printf("%i %f %f %f next %i %f - %i %i %i - %i %i %i - %i %i\n", id,
-            position.x, position.y, position.z, 
+            position.x, position.y, position.z,
             next_discrete_process, next_interaction_distance,
             old_ind.x, old_ind.y, old_ind.z,
             index_phantom.x, index_phantom.y, index_phantom.z,
             old_mat, mat);
     */
-    
+
     if (next_discrete_process == OPTICALPHOTON_BOUNDARY_VOXEL) {
-        
+
         // Check the change of material for Fresnel
         index_phantom.x = int(position.x * ivoxsize.x);
         index_phantom.y = int(position.y * ivoxsize.y);
@@ -455,7 +455,7 @@ __global__ void kernel_optical_navigation_regular(StackParticle photons, Volume 
     } // endif next_discrete_process == OPTICALPHOTON_BOUNDARY_VOXEL
 
     if (next_discrete_process == OPTICALPHOTON_MIE) {
- 
+
         Mie_scatter(photons, id, mat);
     }
 
@@ -464,7 +464,7 @@ __global__ void kernel_optical_navigation_regular(StackParticle photons, Volume 
 
 // Ray casting: mapping particles on the phantom
 
-float3 back_raytrace_particle(float xi1, float yi1, float zi1, 
+float3 back_raytrace_particle(float xi1, float yi1, float zi1,
                               float xd, float yd, float zd) {
 
 
@@ -489,7 +489,7 @@ float3 back_raytrace_particle(float xi1, float yi1, float zi1,
 
     tmin = -1e9f;
     tmax = 1e9f;
-    
+
     // on x
     if (xd != 0.0f) {
         xdi = 1.0f / xd;
@@ -531,5 +531,3 @@ float3 back_raytrace_particle(float xi1, float yi1, float zi1,
     return make_float3(xi1+xd*tmin, yi1+yd*tmin, zi1+zd*tmin);
 
 }
-
-

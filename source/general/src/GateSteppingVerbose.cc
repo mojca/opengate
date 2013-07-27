@@ -59,7 +59,7 @@ GateSteppingVerbose::GateSteppingVerbose():G4SteppingVerbose()
   //mNewTrack = true;
   //mTrackTimeTempo = 0.;
   // Set verbosity for timing
-                
+
 }
 //==================================================
 
@@ -72,9 +72,9 @@ GateSteppingVerbose::~GateSteppingVerbose()
   if(pTempTime) delete pTempTime;
   //theListOfStep.clear();
 
-  theListOfVolume.clear(); 
-  theListOfProcess.clear(); 
-  theListOfParticle.clear(); 
+  theListOfVolume.clear();
+  theListOfProcess.clear();
+  theListOfParticle.clear();
   theListOfTime.clear();
 
   theListOfTrack.clear();
@@ -97,7 +97,7 @@ void GateSteppingVerbose::NewStep()
   CopyState();
 
   if(mTempoVolume != fTrack->GetVolume()->GetName())
-  { 
+  {
     theListOfTimerAtTrackLevel[currentTrack]->Stop();
     mTempoVolume = fTrack->GetVolume()->GetName();
 
@@ -120,7 +120,7 @@ void GateSteppingVerbose::NewStep()
     if(!knownState)
     {
       theListOfProcessAtTrackLevel.push_back(mTempoProcess);
-      theListOfParticleAtTrackLevel.push_back(mTempoParticle); 
+      theListOfParticleAtTrackLevel.push_back(mTempoParticle);
       theListOfVolumeAtTrackLevel.push_back(mTempoVolume);
       theListOfEnergyAtTrackLevel.push_back(GetEnergyRange(mTempoEnergy));
       theListOfTimerAtTrackLevel.push_back(new G4SliceTimer);
@@ -128,15 +128,15 @@ void GateSteppingVerbose::NewStep()
       theListOfTimerAtTrackLevel[currentTrack]->Start();
     }
 
-    
-  } 
+
+  }
 
   if(pTempTime) delete pTempTime;
   pTempTime = 0;
   pTempTime = new G4SliceTimer();
 
-  pStepTime->Start(); 
-  pTempTime->Start(); 
+  pStepTime->Start();
+  pTempTime->Start();
 }
 //==================================================
 
@@ -188,7 +188,7 @@ void GateSteppingVerbose::StepInfo()
   {
       //G4cout<<mTempoParticle<<"  "<<mTempoProcess<<"  "<<theListOfProcess.size()<<"  "<<theListOfParticle.size()<<G4endl;
       theListOfProcess.push_back(processName);
-      theListOfParticle.push_back(particleName); 
+      theListOfParticle.push_back(particleName);
       theListOfTimer.push_back(pTempTime->GetUserElapsed());
       //theListOfTimer.push_back(new G4SliceTimer());
       //theListOfTimer[theListOfTimer.size()-1]->Clear();
@@ -249,7 +249,7 @@ void GateSteppingVerbose::TrackingStarted()
   if(!knownState)
   {
     theListOfProcessAtTrackLevel.push_back(mTempoProcess);
-    theListOfParticleAtTrackLevel.push_back(mTempoParticle); 
+    theListOfParticleAtTrackLevel.push_back(mTempoParticle);
     theListOfVolumeAtTrackLevel.push_back(mTempoVolume);
     theListOfEnergyAtTrackLevel.push_back(GetEnergyRange(mTempoEnergy));
     theListOfTimerAtTrackLevel.push_back(new G4SliceTimer);
@@ -276,7 +276,7 @@ G4int GateSteppingVerbose::GetEnergyRange(G4double energy)
 {
   //G4int ref = 6; // Energy is in MeV ie 10^6 eV
   G4int min = 3; // 1 keV (10^3)
-  
+
   G4int range = min;
   G4double tempoEnergy = energy/keV;
   while(tempoEnergy>=10)
@@ -293,7 +293,7 @@ G4int GateSteppingVerbose::GetEnergyRange(G4double energy)
 //==================================================
 void GateSteppingVerbose::RecordTrack()
 {
-   if(!pTrackTime->IsValid()) pTrackTime->Stop();    
+   if(!pTrackTime->IsValid()) pTrackTime->Stop();
   theListOfTimerAtTrackLevel[currentTrack]->Stop();
 
   /*GateInfoForSteppingVerbose * info = new GateInfoForSteppingVerbose();
@@ -304,7 +304,7 @@ void GateSteppingVerbose::RecordTrack()
   info->SetTime(pTrackTime->GetUserElapsed());
   theListOfTrack.push_back(info);*/
 
-  
+
 
 
 }
@@ -330,13 +330,13 @@ void GateSteppingVerbose::EndOfRun()
 //G4BestUnit(theListOfUsedTime[i] , "Time");
   }*/
 
-  std::vector<G4String> theListOfUsedParticle; 
+  std::vector<G4String> theListOfUsedParticle;
   std::vector<G4double> theListOfUsedTime;
 
-//  std::vector<G4String> theListOfUsedVolume; 
-//  std::vector<G4double> theListOfUsedVolumeTime; 
-//  std::vector<G4String> theListOfUsedProcess; 
-//  std::vector<G4double> theListOfUsedProcessTime; 
+//  std::vector<G4String> theListOfUsedVolume;
+//  std::vector<G4double> theListOfUsedVolumeTime;
+//  std::vector<G4String> theListOfUsedProcess;
+//  std::vector<G4double> theListOfUsedProcessTime;
 //  std::vector<G4int> theListOfUsedEnergy;
 
 
@@ -347,13 +347,13 @@ void GateSteppingVerbose::EndOfRun()
      alreadyUsed = false;
      for(unsigned int j = 0; j<theListOfUsedParticle.size();j++)
      {
-        if(theListOfParticleAtTrackLevel[i]==theListOfUsedParticle[j]) 
+        if(theListOfParticleAtTrackLevel[i]==theListOfUsedParticle[j])
         {
           theListOfUsedTime[j] +=  theListOfTimerAtTrackLevel[i]->GetUserElapsed();
           alreadyUsed = true;
         }
      }
-     if(!alreadyUsed) 
+     if(!alreadyUsed)
      {
        theListOfUsedParticle.push_back(theListOfParticleAtTrackLevel[i]);
        theListOfUsedTime.push_back(theListOfTimerAtTrackLevel[i]->GetUserElapsed());
@@ -382,7 +382,7 @@ void GateSteppingVerbose::EndOfRun()
 
   alreadyUsed = false;
 
-  theListOfUsedParticle.clear(); 
+  theListOfUsedParticle.clear();
   theListOfUsedTime.clear();
 
   for(unsigned int i = 0; i<theListOfParticle.size();i++)
@@ -391,14 +391,14 @@ void GateSteppingVerbose::EndOfRun()
      alreadyUsed = false;
      for(unsigned int j = 0; j<theListOfUsedParticle.size();j++)
      {
-        if(theListOfParticle[i]==theListOfUsedParticle[j]) 
+        if(theListOfParticle[i]==theListOfUsedParticle[j])
         {
           theListOfUsedTime[j] +=  theListOfTimer[i];
           //theListOfUsedTime[j] +=  theListOfTimer[i]->GetUserElapsed();
           alreadyUsed = true;
         }
      }
-     if(!alreadyUsed) 
+     if(!alreadyUsed)
      {
        theListOfUsedParticle.push_back(theListOfParticle[i]);
        theListOfUsedTime.push_back(theListOfTimer[i]);
@@ -406,7 +406,7 @@ void GateSteppingVerbose::EndOfRun()
      }
   }
 
- 
+
   os<<G4endl;
   if(mIsTrackingStep) {
     os<<G4endl;
@@ -448,14 +448,14 @@ void GateSteppingVerbose::DisplayTrack(G4String particle,std::ofstream &os)
 {
 
 
-  std::map<G4String,G4double> theListOfUsedVolume; 
-  std::map<G4String,G4double> theListOfUsedProcess; 
+  std::map<G4String,G4double> theListOfUsedVolume;
+  std::map<G4String,G4double> theListOfUsedProcess;
 
-  std::map<G4String,G4double> theListOfTotalPerVolume; 
-  std::map<G4String,G4double> theListOfTotalPerProcess; 
-  //std::vector<G4double> theListOfUsedVolumeTime; 
-  //std::map<G4int,G4String> theListOfUsedProcess; 
-  //std::map<G4int,G4double> theListOfUsedProcessTime; 
+  std::map<G4String,G4double> theListOfTotalPerVolume;
+  std::map<G4String,G4double> theListOfTotalPerProcess;
+  //std::vector<G4double> theListOfUsedVolumeTime;
+  //std::map<G4int,G4String> theListOfUsedProcess;
+  //std::map<G4int,G4double> theListOfUsedProcessTime;
   //std::vector<G4int> theListOfUsedEnergy;
 
   G4int energyMax = 0;
@@ -479,14 +479,14 @@ void GateSteppingVerbose::DisplayTrack(G4String particle,std::ofstream &os)
     os<<"\t"<<it->first;
   }
   os<<G4endl;
- 
+
 
   for(int j = 3; j<=energyMax;j++)
   {
     for(unsigned int i = 0; i<theListOfVolumeAtTrackLevel.size();i++)
     {
       theListOfUsedVolume[theListOfVolumeAtTrackLevel[i]] = 0.;
-    }  
+    }
     for(unsigned int i = 0; i<theListOfParticleAtTrackLevel.size();i++)
     {
       if(theListOfParticleAtTrackLevel[i] == particle)
@@ -515,7 +515,7 @@ void GateSteppingVerbose::DisplayTrack(G4String particle,std::ofstream &os)
     os<<G4endl;
 
 
-    os<<G4endl;    
+    os<<G4endl;
 
 //Process
   for(unsigned int i = 0; i<theListOfProcessAtTrackLevel.size();i++)
@@ -531,15 +531,15 @@ void GateSteppingVerbose::DisplayTrack(G4String particle,std::ofstream &os)
   {
     os<<"\t"<<it->first;
   }
-  os<<G4endl;    
- 
+  os<<G4endl;
+
 
   for(int j = 3; j<=energyMax;j++)
   {
     for(unsigned int i = 0; i<theListOfProcessAtTrackLevel.size();i++)
     {
       if(theListOfParticleAtTrackLevel[i] == particle) theListOfUsedProcess[theListOfProcessAtTrackLevel[i]] = 0.;
-    }  
+    }
     for(unsigned int i = 0; i<theListOfParticleAtTrackLevel.size();i++)
     {
       if(theListOfParticleAtTrackLevel[i] == particle)
@@ -557,7 +557,7 @@ void GateSteppingVerbose::DisplayTrack(G4String particle,std::ofstream &os)
     {
       os<<"\t"<<it->second;
     }
-    os<<G4endl;   
+    os<<G4endl;
   }
 
   os<<"Total";
@@ -576,14 +576,14 @@ void GateSteppingVerbose::DisplayTrack(G4String particle,std::ofstream &os)
 void GateSteppingVerbose::DisplayStep(G4String particle,  std::ofstream &os)
 {
 
-  std::map<G4String,G4double> theListOfUsedVolume; 
-  std::map<G4String,G4double> theListOfUsedProcess; 
+  std::map<G4String,G4double> theListOfUsedVolume;
+  std::map<G4String,G4double> theListOfUsedProcess;
 
-  std::map<G4String,G4double> theListOfTotalPerVolume; 
-  std::map<G4String,G4double> theListOfTotalPerProcess; 
-  //std::vector<G4double> theListOfUsedVolumeTime; 
-  //std::map<G4int,G4String> theListOfUsedProcess; 
-  //std::map<G4int,G4double> theListOfUsedProcessTime; 
+  std::map<G4String,G4double> theListOfTotalPerVolume;
+  std::map<G4String,G4double> theListOfTotalPerProcess;
+  //std::vector<G4double> theListOfUsedVolumeTime;
+  //std::map<G4int,G4String> theListOfUsedProcess;
+  //std::map<G4int,G4double> theListOfUsedProcessTime;
   //std::vector<G4int> theListOfUsedEnergy;
 
   G4int energyMax = 0;
@@ -607,14 +607,14 @@ void GateSteppingVerbose::DisplayStep(G4String particle,  std::ofstream &os)
     os<<"\t"<<it->first;
   }
   os<<G4endl;
- 
+
 
   for(int j = 3; j<=energyMax;j++)
   {
     for(unsigned int i = 0; i<theListOfVolume.size();i++)
     {
       theListOfUsedVolume[theListOfVolume[i]] = 0.;
-    }  
+    }
     for(unsigned int i = 0; i<theListOfParticle.size();i++)
     {
       if(theListOfParticle[i] == particle)
@@ -633,7 +633,7 @@ void GateSteppingVerbose::DisplayStep(G4String particle,  std::ofstream &os)
     {
       os<<"\t"<<it->second;
     }
-    os<<G4endl;    
+    os<<G4endl;
   }
 
   os<<"Total";
@@ -643,7 +643,7 @@ void GateSteppingVerbose::DisplayStep(G4String particle,  std::ofstream &os)
   }
     os<<G4endl;
 
-    os<<G4endl;    
+    os<<G4endl;
 
 //Process
   for(unsigned int i = 0; i<theListOfProcess.size();i++)
@@ -660,15 +660,15 @@ void GateSteppingVerbose::DisplayStep(G4String particle,  std::ofstream &os)
   {
     os<<"\t"<<it->first;
   }
-  os<<G4endl;    
- 
+  os<<G4endl;
+
 
   for(int j = 3; j<=energyMax;j++)
   {
     for(unsigned int i = 0; i<theListOfProcess.size();i++)
     {
       if(theListOfParticle[i] == particle) theListOfUsedProcess[theListOfProcess[i]] = 0.;
-    }  
+    }
     for(unsigned int i = 0; i<theListOfParticle.size();i++)
     {
       if(theListOfParticle[i] == particle)
@@ -687,7 +687,7 @@ void GateSteppingVerbose::DisplayStep(G4String particle,  std::ofstream &os)
     {
       os<<"\t"<<it->second;
     }
-    os<<G4endl;   
+    os<<G4endl;
   }
 
   os<<"Total";

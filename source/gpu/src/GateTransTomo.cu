@@ -28,7 +28,7 @@ void GPU_GateTransTomo(const GateGPUIO_Input * input, GateGPUIO_Output * output)
     stack_host_malloc(photons_h, nb_of_particles);
     printf(" :: Stack init\n");
 
-    // Materials def, alloc & loading  
+    // Materials def, alloc & loading
     Materials materials_h;
     materials_host_malloc(materials_h, input->nb_materials, input->nb_elements_total);
 
@@ -52,7 +52,7 @@ void GPU_GateTransTomo(const GateGPUIO_Input * input, GateGPUIO_Output * output)
     materials_device_malloc(materials_d, input->nb_materials, input->nb_elements_total);
     materials_copy_host2device(materials_h, materials_d);
     printf(" :: Materials init\n");
-    
+
     // Phantoms
     Volume phantom_d;
     phantom_d.size_in_mm = make_float3(input->phantom_size_x*input->phantom_spacing_x,
@@ -67,7 +67,7 @@ void GPU_GateTransTomo(const GateGPUIO_Input * input, GateGPUIO_Output * output)
     phantom_d.nb_voxel_slice = phantom_d.size_in_vox.x * phantom_d.size_in_vox.y;
     phantom_d.nb_voxel_volume = phantom_d.nb_voxel_slice * phantom_d.size_in_vox.z;
     phantom_d.mem_data = phantom_d.nb_voxel_volume * sizeof(unsigned short int);
-    volume_device_malloc(phantom_d, phantom_d.nb_voxel_volume); 
+    volume_device_malloc(phantom_d, phantom_d.nb_voxel_volume);
     cudaMemcpy(phantom_d.data, &(input->phantom_material_data[0]), phantom_d.mem_data, cudaMemcpyHostToDevice);
 
     // TIMING
@@ -142,7 +142,7 @@ void GPU_GateTransTomo(const GateGPUIO_Input * input, GateGPUIO_Output * output)
     while (count_h < nb_of_particles) {
         ++step;
         // Regular navigator
-        kernel_NavRegularPhan_Photon_NoSec<<<grid, threads>>>(photons_d, phantom_d, 
+        kernel_NavRegularPhan_Photon_NoSec<<<grid, threads>>>(photons_d, phantom_d,
                                                               materials_d, count_d);
 
         // get back the number of simulated photons
@@ -191,13 +191,10 @@ void GPU_GateTransTomo(const GateGPUIO_Input * input, GateGPUIO_Output * output)
     cudaFree(count_d);
 
     t_g = time() - t_g;
-    printf(">> GPU: init %e input %e track %e output %e tot %e\n", t_init+t_init_2, 
+    printf(">> GPU: init %e input %e track %e output %e tot %e\n", t_init+t_init_2,
           t_in, t_track, t_out, t_g);
 
     cudaThreadExit();
     printf("====> GPU STOP\n");
 }
 #undef EPS
-
-
-

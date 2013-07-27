@@ -29,7 +29,7 @@ public:
   void SetNewValue(G4UIcommand*, G4String);
 
   virtual inline GateGenericMove* GetGenericMove() { return (GateGenericMove*)GetObjectRepeater(); }
-  
+
 protected:
   G4UIcmdWithAString * mFilenameCmd;
   G4UIcmdWithABool   * mRelativeTransCmd;

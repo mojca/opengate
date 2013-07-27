@@ -25,9 +25,9 @@ GateHoleParameterisation::GateHoleParameterisation(G4double itsFDx,G4double itsF
 }
 
 void GateHoleParameterisation::ComputeDimensions(G4Trap& Coll_Trap, const G4int copyNo, const G4VPhysicalVolume* ) const
-{                                    
+{
   G4int    tmp = ( ( copyNo / m_Nx ) + ( copyNo % m_Nx ) ) % 2;
-  
+
   G4double m_Theta = 0.0;
   G4double m_Phi = 0.0;
 
@@ -35,7 +35,7 @@ void GateHoleParameterisation::ComputeDimensions(G4Trap& Coll_Trap, const G4int 
   G4double tmp2 = m_Dx2 - tmp * (m_Dx2 - m_Dx1);
   G4double tmp3 = m_Dx3 + tmp * (m_Dx4 - m_Dx3);
   G4double tmp4 = m_Dx4 - tmp * (m_Dx4 - m_Dx3);
-  
+
   if (m_FDx != 0.0)
     {
      m_Theta = atan ( ( m_OffsetX + ( copyNo % m_Nx ) * m_Dx ) / m_FDx );
@@ -92,6 +92,3 @@ void GateHoleParameterisation::Update(G4double fdX,G4double fdY,G4double dX,G4do
 
   PreComputeConsts ();
 }
-
-
-

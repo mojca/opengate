@@ -21,7 +21,7 @@ See GATE/LICENSE.txt for further details
 
 GateRotationMoveMessenger::GateRotationMoveMessenger(GateRotationMove* itsRotationMove)
   :GateObjectRepeaterMessenger(itsRotationMove)
-{ 
+{
     G4String cmdName;
 
     cmdName = GetDirectoryName()+"setAxis";
@@ -49,14 +49,14 @@ GateRotationMoveMessenger::~GateRotationMoveMessenger()
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
 void GateRotationMoveMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
   if( command==RotationAxisCmd )
-    { GetRotationMove()->SetRotationAxis(RotationAxisCmd->GetNew3VectorValue(newValue));}   
-  
+    { GetRotationMove()->SetRotationAxis(RotationAxisCmd->GetNew3VectorValue(newValue));}
+
   else if( command==VelocityCmd )
-    { GetRotationMove()->SetVelocity(VelocityCmd->GetNewDoubleValue(newValue));}   
-  
-  else 
+    { GetRotationMove()->SetVelocity(VelocityCmd->GetNewDoubleValue(newValue));}
+
+  else
     GateObjectRepeaterMessenger::SetNewValue(command,newValue);
 }
 

@@ -35,7 +35,7 @@ class G4Step;
 class GateFictitiousFastSimulationModel : public G4VFastSimulationModel
 {
 	public:
-	
+
 		GateFictitiousFastSimulationModel ( G4double absoluteMinEnergy, G4double absoluteMaxEnergy );
 		~GateFictitiousFastSimulationModel();
 
@@ -142,4 +142,3 @@ inline void GateFictitiousFastSimulationModel::DiscardPhoton()
   				pCurrentFastStep->ProposeTotalEnergyDeposited(m_nCurrentEnergy);
 }
 #endif
-

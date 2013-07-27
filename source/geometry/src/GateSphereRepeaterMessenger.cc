@@ -25,7 +25,7 @@ See GATE/LICENSE.txt for further details
 
 GateSphereRepeaterMessenger::GateSphereRepeaterMessenger(GateSphereRepeater* itsSphereRepeater)
   :GateObjectRepeaterMessenger(itsSphereRepeater)
-{ 
+{
     G4String cmdName;
 
     cmdName = GetDirectoryName()+"setRepeatNumberWithTheta";
@@ -70,7 +70,7 @@ GateSphereRepeaterMessenger::GateSphereRepeaterMessenger(GateSphereRepeater* its
     PhiAngleCmd->SetParameterName("Dphi",false);
     PhiAngleCmd->SetUnitCategory("Angle");
 
-    
+
     cmdName = GetDirectoryName()+"setRadius";
     RadiusCmd  = new G4UIcmdWithADoubleAndUnit(cmdName,this);
     RadiusCmd->SetGuidance("Set the radius of the sphere along which the volume will be replicated");
@@ -95,24 +95,24 @@ GateSphereRepeaterMessenger::~GateSphereRepeaterMessenger()
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
 void GateSphereRepeaterMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
   if( command==SetRepeatNumberWithPhiCmd )
-    { GetSphereRepeater()->SetRepeatNumberWithPhi(SetRepeatNumberWithPhiCmd->GetNewIntValue(newValue));}   
+    { GetSphereRepeater()->SetRepeatNumberWithPhi(SetRepeatNumberWithPhiCmd->GetNewIntValue(newValue));}
   else if( command==SetRepeatNumberWithThetaCmd )
-    { GetSphereRepeater()->SetRepeatNumberWithTheta(SetRepeatNumberWithThetaCmd->GetNewIntValue(newValue));}   
+    { GetSphereRepeater()->SetRepeatNumberWithTheta(SetRepeatNumberWithThetaCmd->GetNewIntValue(newValue));}
   else if( command==AutoCenterCmd )
-    { GetSphereRepeater()->SetAutoCenterFlag(AutoCenterCmd->GetNewBoolValue(newValue));} 
+    { GetSphereRepeater()->SetAutoCenterFlag(AutoCenterCmd->GetNewBoolValue(newValue));}
   else if ( command==EnableAutoRotationCmd )
-     { GetSphereRepeater()->SetAutoRotation(EnableAutoRotationCmd->GetNewBoolValue(newValue));}   
+     { GetSphereRepeater()->SetAutoRotation(EnableAutoRotationCmd->GetNewBoolValue(newValue));}
   else if ( command==DisableAutoRotationCmd )
-     { GetSphereRepeater()->SetAutoRotation(!(DisableAutoRotationCmd->GetNewBoolValue(newValue)));} 
+     { GetSphereRepeater()->SetAutoRotation(!(DisableAutoRotationCmd->GetNewBoolValue(newValue)));}
   else if( command==ThetaAngleCmd )
     { GetSphereRepeater()->SetThetaAngle(ThetaAngleCmd->GetNewDoubleValue(newValue)) ;}
   else if( command==PhiAngleCmd )
     { GetSphereRepeater()->SetPhiAngle(PhiAngleCmd->GetNewDoubleValue(newValue)) ;}
   else if( command==RadiusCmd )
     { GetSphereRepeater()->SetRadius(RadiusCmd->GetNewDoubleValue(newValue)) ;}
-  else 
+  else
     GateObjectRepeaterMessenger::SetNewValue(command,newValue);
 }
 

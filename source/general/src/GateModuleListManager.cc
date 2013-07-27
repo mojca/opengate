@@ -27,7 +27,7 @@ GateModuleListManager::GateModuleListManager(GateNamedObject* itsMotherObject,
 
 //--------------------------------------------------------------------------------------------
 GateModuleListManager::~GateModuleListManager()
-{  
+{
 }
 //--------------------------------------------------------------------------------------------
 

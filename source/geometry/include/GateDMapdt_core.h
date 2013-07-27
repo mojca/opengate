@@ -40,4 +40,3 @@
 
 void lowerEnveloppeComputation(long int *sdt_temp, const unsigned int SIZE, const unsigned int TORIC_SHIFT,unsigned int *s,unsigned int *t, int &q);
 void upperEnveloppeComputation(long int *sdt_temp, const unsigned int SIZE, const unsigned int TORIC_SHIFT,unsigned int *s,unsigned int *t, int &q);
-

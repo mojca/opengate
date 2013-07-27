@@ -12,7 +12,7 @@ See GATE/LICENSE.txt for further details
 #include "GateSourceVoxelLinearTranslator.hh"
 #include "GateSourceVoxelLinearTranslatorMessenger.hh"
 
-GateSourceVoxelLinearTranslator::GateSourceVoxelLinearTranslator(GateVSourceVoxelReader* voxelReader) 
+GateSourceVoxelLinearTranslator::GateSourceVoxelLinearTranslator(GateVSourceVoxelReader* voxelReader)
   : GateVSourceVoxelTranslator(voxelReader)
 {
   m_name = G4String("linearTranslator");
@@ -20,7 +20,7 @@ GateSourceVoxelLinearTranslator::GateSourceVoxelLinearTranslator(GateVSourceVoxe
   m_messenger = new GateSourceVoxelLinearTranslatorMessenger(this);
 }
 
-GateSourceVoxelLinearTranslator::~GateSourceVoxelLinearTranslator() 
+GateSourceVoxelLinearTranslator::~GateSourceVoxelLinearTranslator()
 {
   delete m_messenger;
 }

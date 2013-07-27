@@ -23,9 +23,9 @@ class G4Material;
 
 //---------------------------------------------------------------------------
 class GateCompressedVoxelParameterization : public GatePVParameterisation
-{ 
+{
 public:
-  
+
   //! Constructor.
   GateCompressedVoxelParameterization( GateVGeometryVoxelReader* voxR, const G4ThreeVector& voxN, const G4ThreeVector& voxS);
 
@@ -33,21 +33,21 @@ public:
 
 
   virtual G4Material* ComputeMaterial      (const G4int copyNo, G4VPhysicalVolume * aVolume, const G4VTouchable*);
-    
-  
+
+
   using G4VPVParameterisation::ComputeDimensions;
    void ComputeDimensions(G4Box &,
 				 const G4int,
 				 const G4VPhysicalVolume *) const;
    void ComputeTransformation(const G4int copyNo,  G4VPhysicalVolume *aVolume) const;
-    
+
   //! Implementation of the pure virtual method declared by the base class GatePVParameterization
-  int GetNbOfCopies(); 
+  int GetNbOfCopies();
 
 
 private:
 
-  
+
 private:
   const G4ThreeVector           voxelNumber;
   const G4ThreeVector           voxelSize;
@@ -58,9 +58,7 @@ private:
 
   const int nxy;
   const int nx;
-  
+
 };
 
 #endif
-
-

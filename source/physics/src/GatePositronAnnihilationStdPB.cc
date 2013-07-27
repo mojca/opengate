@@ -15,14 +15,14 @@ See GATE/LICENSE.txt for further details
 
 //-----------------------------------------------------------------------------
 GatePositronAnnihilationStdPB::GatePositronAnnihilationStdPB():GateVProcess("G4PositronAnnihilation")
-{  
+{
   SetDefaultParticle("e+");
   SetProcessInfo("Standard G4 positron annihilation process");
 
   AddToModelList("StandardModel");
   AddToModelList("PenelopeModel");
 
-  pMessenger = new GateEMStandardProcessMessenger(this);  
+  pMessenger = new GateEMStandardProcessMessenger(this);
 }
 //-----------------------------------------------------------------------------
 
@@ -38,7 +38,7 @@ G4VProcess* GatePositronAnnihilationStdPB::CreateProcess(G4ParticleDefinition *)
 //-----------------------------------------------------------------------------
 void GatePositronAnnihilationStdPB::ConstructProcess(G4ProcessManager * manager)
 {
-  manager->AddProcess(GetProcess(),0, -1, 4); 
+  manager->AddProcess(GetProcess(),0, -1, 4);
 }
 //-----------------------------------------------------------------------------
 
@@ -55,7 +55,7 @@ bool GatePositronAnnihilationStdPB::IsApplicable(G4ParticleDefinition * par)
 //-----------------------------------------------------------------------------
 bool GatePositronAnnihilationStdPB::IsModelApplicable(G4String ,G4ParticleDefinition * par)
 {
-  for(unsigned int k = 0; k<theListOfParticlesWithSelectedModels.size();k++) 
+  for(unsigned int k = 0; k<theListOfParticlesWithSelectedModels.size();k++)
     if(par==theListOfParticlesWithSelectedModels[k]) GateError("A "<< GetG4ProcessName()<<" model has been already selected for "<< par->GetParticleName());
   if(par == G4Positron::Positron()) return true;
   return false;
@@ -93,4 +93,3 @@ void GatePositronAnnihilationStdPB::AddUserModel(GateListOfHadronicModels *model
 
 
 MAKE_PROCESS_AUTO_CREATOR_CC(GatePositronAnnihilationStdPB)
-

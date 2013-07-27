@@ -28,12 +28,12 @@ class G4Material;
 class GateTrap  : public GateVVolume
 {
   public:
-  
+
     GateTrap(const G4String& itsName,
-		 G4bool acceptsChildren=true, 
-		 G4int depth=0); 
-		 
-		 
+		 G4bool acceptsChildren=true,
+		 G4int depth=0);
+
+
     GateTrap(const G4String& itsName,const G4String& itsMaterialName,
     			G4double itsDz,G4double itsTheta, G4double itsPhi,
 			G4double itsDy1,G4double itsDx1,G4double itsDx2,G4double itsAlp1,
@@ -41,13 +41,13 @@ class GateTrap  : public GateVVolume
     virtual ~GateTrap();
 
     FCT_FOR_AUTO_CREATOR_VOLUME(GateTrap)
-    
+
   public:
-     virtual G4LogicalVolume* ConstructOwnSolidAndLogicalVolume(G4Material*, G4bool flagUpdateOnly);     
+     virtual G4LogicalVolume* ConstructOwnSolidAndLogicalVolume(G4Material*, G4bool flagUpdateOnly);
      virtual void DestroyOwnSolidAndLogicalVolume();
      virtual void DescribeMyself(size_t indent);
-     
-     inline G4double GetHalfDimension(size_t axis) 
+
+     inline G4double GetHalfDimension(size_t axis)
      { if (axis==2)
       	  return m_TrapDz;
        else
@@ -96,4 +96,3 @@ class GateTrap  : public GateVVolume
 
 MAKE_AUTO_CREATOR_VOLUME(trap,GateTrap)
 #endif
-

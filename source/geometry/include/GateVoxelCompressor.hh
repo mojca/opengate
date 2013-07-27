@@ -23,14 +23,14 @@ class GateGeometryVoxelArrayStore;
 bool operator == (const std::valarray<unsigned short int>& lhs, const std::valarray<unsigned short int>& rhs);
 
 class GateVoxelCompressor{
-  
+
 public:
-  
+
   GateVoxelCompressor(GateGeometryVoxelArrayStore* s);
   ~GateVoxelCompressor();
-  
-    void Initialize();/* PY Descourt 08/09/2009 */  
-	
+
+    void Initialize();/* PY Descourt 08/09/2009 */
+
   void      Compress();
   void      runLength(int x1, int x2, voxelSet& vs);
   voxelSet& runLength2nd(voxelSet& vs, const std::valarray<unsigned short int>& chk, int fusion);
@@ -41,7 +41,7 @@ public:
   double GetCompressionRatio() const;
 
   void   MakeExclusionList(G4String s);
-  
+
   G4String GetObjectName() const;
 
   void Print(){
@@ -54,12 +54,12 @@ private:
   bool isNotExcluded(unsigned short int n) const { return  m_exclusionList->find( n )==m_exclusionList->end();}
 
 private:
-  
+
   GateGeometryVoxelArrayStore*   m_array;
   voxelSet*                      m_voxelSet;
   std::set<unsigned short int>*  m_exclusionList;
   GateVoxelCompressorMessenger*  m_messenger;
-  
+
 };
 
 #endif

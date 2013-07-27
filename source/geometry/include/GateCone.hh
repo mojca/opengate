@@ -27,37 +27,37 @@ class GateConeMessenger;
 
 /*! \class  GateCone
     \brief  The GateCone creates a solid and a logical volume for a cone
-    
-    - GateCone - by Daniel.Strul@iphe.unil.ch 
 
-*/      
+    - GateCone - by Daniel.Strul@iphe.unil.ch
+
+*/
 class GateCone  : public GateVVolume
 {
   public:
-  
+
   GateCone(const G4String& itsName,
-		 G4bool acceptsChildren=true, 
+		 G4bool acceptsChildren=true,
 		 G4int depth=0);
-		 
+
     //! Constructor
     GateCone(const G4String& itsName,const G4String& itsMaterialName,
       	      	         G4double itsRmax1, G4double itsRmax2,
 			 G4double itsHeight,
 		         G4double itsRmin1=0.,G4double itsRmin2=0.,
-	                 G4double itsSPhi=0., G4double itsDPhi=2*M_PI, 
-			 G4bool acceptsChildren=true, 
+	                 G4double itsSPhi=0., G4double itsDPhi=2*M_PI,
+			 G4bool acceptsChildren=true,
 		         G4int depth=0);
     //! Destructor
     virtual ~GateCone();
 
     FCT_FOR_AUTO_CREATOR_VOLUME(GateCone)
-    
+
     //! \name Implementations of pure virtual methods declared by the base-class
     //@{
 
-     virtual G4LogicalVolume*   ConstructOwnSolidAndLogicalVolume(G4Material*, G4bool); 
+     virtual G4LogicalVolume*   ConstructOwnSolidAndLogicalVolume(G4Material*, G4bool);
 //     virtual G4VPhysicalVolume* ConstructOwnPhysicalVolume();
-  
+
      //! Implementation of the pure virtual method DestroyOwnSolidAndVolume() declared by the base-class.
      //! Destroy the solid and logical volume created by ConstructOwnSolidAndLogical()
      virtual void DestroyOwnSolidAndLogicalVolume();
@@ -66,13 +66,13 @@ class GateCone  : public GateVVolume
       	\brief a description of the creator
 
 	\param indent: the print-out indentation (cosmetic parameter)
-    */    
+    */
      virtual void DescribeMyself(size_t indent);
-     
+
      //! Implementation of the pure virtual method GetHalfDimension() declared by the base-class
      //! Must return the half-size of the cone along an axis (X=0, Y=1, Z=2)
      //! Accurate only for full cones
-     inline G4double GetHalfDimension(size_t axis)	  
+     inline G4double GetHalfDimension(size_t axis)
      { if (axis==2)
       	  return GetConeHalfHeight();
        else
@@ -102,27 +102,27 @@ class GateCone  : public GateVVolume
      inline G4double GetConeDPhi()     {return m_coneDPhi;};
 
      //! Set the height
-     void SetConeHeight   (G4double val) 
+     void SetConeHeight   (G4double val)
       	{  m_coneHeight = val; /*ComputeParameters();*/ }
      //! Set the internal diameter at end 1
-     void SetConeRmin1  (G4double val) 
-      	{  m_coneRmin1 = val; /*ComputeParameters();*/ } 
+     void SetConeRmin1  (G4double val)
+      	{  m_coneRmin1 = val; /*ComputeParameters();*/ }
      //! Set the external diameter at end 1
      void SetConeRmax1  (G4double val)
-      	 { m_coneRmax1 = val; /*ComputeParameters();*/ } 
+      	 { m_coneRmax1 = val; /*ComputeParameters();*/ }
      //! Set the internal diameter at end 2
-     void SetConeRmin2  (G4double val)  
-      	{ m_coneRmin2 = val; /*ComputeParameters();*/ } 
+     void SetConeRmin2  (G4double val)
+      	{ m_coneRmin2 = val; /*ComputeParameters();*/ }
      //! Set the external diameter at end 2
-     void SetConeRmax2  (G4double val)  
-      	 { m_coneRmax2 = val; /*ComputeParameters();*/ } 
+     void SetConeRmax2  (G4double val)
+      	 { m_coneRmax2 = val; /*ComputeParameters();*/ }
      //! Set the start phi angle
-     void SetConeSPhi  (G4double val) 
-      	{  m_coneSPhi = val; /*ComputeParameters();*/ } 
+     void SetConeSPhi  (G4double val)
+      	{  m_coneSPhi = val; /*ComputeParameters();*/ }
      //! Set the angular span for the phi angle
-     void SetConeDPhi  (G4double val) 
-      	{  m_coneDPhi = val; /*ComputeParameters(); */} 
- 
+     void SetConeDPhi  (G4double val)
+      	{  m_coneDPhi = val; /*ComputeParameters(); */}
+
     //@}
 
   private:
@@ -145,11 +145,10 @@ class GateCone  : public GateVVolume
     //@}
 
      //! Messenger
-     GateConeMessenger* m_Messenger; 
+     GateConeMessenger* m_Messenger;
 
 };
 
 MAKE_AUTO_CREATOR_VOLUME(cone,GateCone)
 
 #endif
-

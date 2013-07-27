@@ -24,25 +24,25 @@ class G4Material;
 
 /*! \class  GateVGeometryVoxelStore
     \brief  This class can store the material info for a matrix of voxels (digital image)
-    
+
     - GateVGeometryVoxelStore - by Giovanni.Santin@cern.ch
-    
-    - It stores the material information for the image voxels and allows to access the info through 
-      several methods, for random or sequential access. 
 
-    - The material info can be filled in several ways, e.g. read by a file reader  
+    - It stores the material information for the image voxels and allows to access the info through
+      several methods, for random or sequential access.
 
-    - The voxel material store is not concrete in this class, and can be of different types, e.g. 
-      a simple 3D matrix (3D array) or a generic map to allow a generic number of spread voxels, for 
-      example for non-cubic voxel material distribution (like voxels in a spheric envelope). 
+    - The material info can be filled in several ways, e.g. read by a file reader
+
+    - The voxel material store is not concrete in this class, and can be of different types, e.g.
+      a simple 3D matrix (3D array) or a generic map to allow a generic number of spread voxels, for
+      example for non-cubic voxel material distribution (like voxels in a spheric envelope).
       (The power of the generic map is exploited only by a geometry
       that allows a voxel placement different from a complete 3D matrix.)
-      
+
       \sa GateVGeometryVoxelStoreMessenger
       \sa GateVGeometryVoxelTranslator
       \sa GateVSourceVoxelReader
       \sa GateVSourceVoxelTranslator
-*/      
+*/
 
 class GateVGeometryVoxelStore
 {
@@ -53,7 +53,7 @@ public:
 
 //E  GateVVolume*     GetInserter()  { return m_inserter; };
   GateVVolume*     GetCreator()  { return m_creator; };
-  
+
   G4String                 GetName()      { return m_name; };
 
   virtual void             SetVerboseLevel(G4int value) { nVerboseLevel = value; };
@@ -64,10 +64,10 @@ public:
   //! it adds an entry in the voxel store
   virtual void             AddVoxel(G4int ix, G4int iy, G4int iz, G4Material* material) = 0;
 
-  //! it sets the material of the voxel in the logical position (ix,iy,iz) 
+  //! it sets the material of the voxel in the logical position (ix,iy,iz)
   virtual void             SetVoxelMaterial(G4int ix, G4int iy, G4int iz, G4Material* material) = 0;
 
-  //! it gives the material of the voxel in the logical position (ix,iy,iz) 
+  //! it gives the material of the voxel in the logical position (ix,iy,iz)
   virtual G4Material*      GetVoxelMaterial(G4int ix, G4int iy, G4int iz) = 0;
 
   //! useful when the voxels have a non cubic distribution: in a loop, with this first you get the 3 indices, then with the 3 indices you ask the material
@@ -107,7 +107,7 @@ protected:
 //E  GateVVolume*           m_inserter;
 
   GateVVolume*                   m_creator;
-  
+
   G4int                          m_voxelNx;
   G4int                          m_voxelNy;
   G4int                          m_voxelNz;
@@ -123,5 +123,3 @@ protected:
 };
 
 #endif
-
-

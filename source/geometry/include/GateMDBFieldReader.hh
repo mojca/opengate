@@ -27,12 +27,12 @@ public:
 public:
   enum MaterialType {
     materialtype_error,
-    materialtype_scratch, 
+    materialtype_scratch,
     materialtype_compound
     };
   enum ComponentType {
     componenttype_error,
-    componenttype_elem, 
+    componenttype_elem,
     componenttype_mat
     };
   enum ElemComponentType {
@@ -40,7 +40,7 @@ public:
     elemcomponent_byNAtoms,
     elemcomponent_byFraction
     };
-    
+
 protected:
   PrefixCode ReadMaterialOptionPrefix(const G4String& materialName,const G4String& field);
   ElemComponentType EvaluateElemComponentType(const G4String& materialName, const G4String& field,
@@ -103,7 +103,7 @@ private:
   static GateCodePair theNamePrefixTable[];
   static GateCodePair theNAtomsPrefixTable[];
   static GateCodePair theFractionPrefixTable[];
-  
+
   static GateUnitPair theAtomicNumberUnitTable[];
   static GateUnitPair theMolarMasUnitTable[];
   static GateUnitPair theDensityUnitTable[];

@@ -31,7 +31,7 @@ class GateListManager : public GateClockDependent
   public:
      virtual  void TheListElements(size_t indent=0) const;
      //virtual  void ListElements(size_t indent=0) const;
-     
+
      virtual GateNamedObject* FindElement(const G4String& name);
      virtual inline GateNamedObject* GetElement(size_t i)
       	  {return (i<theListOfNamedObject.size()) ? theListOfNamedObject[i] : 0; }
@@ -40,7 +40,7 @@ class GateListManager : public GateClockDependent
      virtual inline GateNamedObject* FindElementByBaseName(const G4String& baseName)
        { return FindElement( MakeElementName(baseName) ) ; }
 
-     inline G4bool AcceptNewElements() const 
+     inline G4bool AcceptNewElements() const
       	  { return bAcceptNewElements;}
 
      inline const G4String&  GetElementTypeName()
@@ -52,14 +52,13 @@ class GateListManager : public GateClockDependent
     //! Method overloading GateNamedObject::Describe()
     //! Print-out a description of the object
     virtual void Describe(size_t indent=0);
-     
+
 
   protected:
     G4String mElementTypeName;
     G4bool   bAcceptNewElements;
-    
+
     std::vector<GateNamedObject*>    theListOfNamedObject;
 };
 
 #endif
-

@@ -15,10 +15,10 @@ See GATE/LICENSE.txt for further details
 
 //-----------------------------------------------------------------------------
 GateOpticalBoundaryPB::GateOpticalBoundaryPB():GateVProcess("OpticalBoundary")
-{  
+{
   SetDefaultParticle("opticalphoton");
   SetProcessInfo("Boundary process for optical photons");
-  pMessenger = new GateEMStandardProcessMessenger(this) ;  
+  pMessenger = new GateEMStandardProcessMessenger(this) ;
 }
 //-----------------------------------------------------------------------------
 
@@ -34,7 +34,7 @@ G4VProcess* GateOpticalBoundaryPB::CreateProcess(G4ParticleDefinition *)
 //-----------------------------------------------------------------------------
 void GateOpticalBoundaryPB::ConstructProcess(G4ProcessManager * manager)
 {
-  manager->AddDiscreteProcess(GetProcess());           
+  manager->AddDiscreteProcess(GetProcess());
 }
 //-----------------------------------------------------------------------------
 

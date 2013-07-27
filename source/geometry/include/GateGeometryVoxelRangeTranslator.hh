@@ -23,7 +23,7 @@ class GateGeometryVoxelRangeTranslator : public GateVGeometryVoxelTranslator
 public:
   GateGeometryVoxelRangeTranslator(GateVGeometryVoxelReader* voxelReader);
   virtual ~GateGeometryVoxelRangeTranslator();
-  
+
   void     ReadTranslationTable(G4String fileName);
 
   void     Describe(G4int level);
@@ -35,7 +35,7 @@ public:
   }
 
   G4String TranslateToMaterial(G4int voxelValue) {
-    G4double xVoxelValue = voxelValue; 
+    G4double xVoxelValue = voxelValue;
     return TranslateToMaterial(xVoxelValue);
   };
   G4String TranslateToMaterial(G4double voxelValue);
@@ -55,7 +55,7 @@ protected:
   typedef std::map<G4Material*, G4VisAttributes*>            GateVoxelAttributesTranslationMap;
   GateVoxelAttributesTranslationMap                            m_voxelAttributesTranslation;
 
-  GateGeometryVoxelRangeTranslatorMessenger*                   m_messenger; 
+  GateGeometryVoxelRangeTranslatorMessenger*                   m_messenger;
 
 };
 

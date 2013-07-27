@@ -36,7 +36,7 @@
 struct Dosimetry {
     float *edep;
     float *edep2;
-    
+
     unsigned int mem_data;
     float3 size_in_mm;
     int3 size_in_vox;
@@ -53,7 +53,7 @@ struct Dosimetry {
 struct Materials{
     unsigned int nb_materials;              // n
     unsigned int nb_elements_total;         // k
-    
+
     unsigned short int *nb_elements;        // n
     unsigned short int *index;              // n
     unsigned short int *mixture;            // k
@@ -142,17 +142,17 @@ struct GateGPUIO_Particle {
 struct GateGPUIO_Input {
   typedef std::vector<GateGPUIO_Particle> ParticlesList;
   ParticlesList particles;
-  
-  // Phantom 
-  // Coordinate system : 0,0,0 corner 
-  int phantom_size_x; 
+
+  // Phantom
+  // Coordinate system : 0,0,0 corner
+  int phantom_size_x;
   int phantom_size_y;
   int phantom_size_z;
-  float phantom_spacing_x; // mm 
-  float phantom_spacing_y; // mm 
-  float phantom_spacing_z; // mm 
-  
-  std::vector<unsigned short int> phantom_material_data; 
+  float phantom_spacing_x; // mm
+  float phantom_spacing_y; // mm
+  float phantom_spacing_z; // mm
+
+  std::vector<unsigned short int> phantom_material_data;
 
   int cudaDeviceID;
   long seed;
@@ -180,11 +180,11 @@ struct GateGPUIO_Input {
   float * fA;
   float * fM;
 
-  // When the IO is used as a SourceGPUVoxellized : 
-  std::vector<float> activity_data; 
-  std::vector<unsigned int> activity_index; 
-  // The ID of each particle will start from this number : 
-  int firstInitialID; 
+  // When the IO is used as a SourceGPUVoxellized :
+  std::vector<float> activity_data;
+  std::vector<unsigned int> activity_index;
+  // The ID of each particle will start from this number :
+  int firstInitialID;
   double E; // MeV
   long nb_events;
 };
@@ -193,7 +193,7 @@ struct GateGPUIO_Input {
 
 //----------------------------------------------------------
 struct GateGPUIO_Output
-{ 
+{
   typedef std::vector<GateGPUIO_Particle> ParticlesList;
   ParticlesList particles;
   double deltaTime;
@@ -207,10 +207,10 @@ void GateGPUIO_Particle_Print(const GateGPUIO_Particle & p);
 GateGPUIO_Input* GateGPUIO_Input_new();
 void GateGPUIO_Input_delete(GateGPUIO_Input* input);
 void GateGPUIO_Input_Print_mat(GateGPUIO_Input * input, int i);
-void GateGPUIO_Input_Init_Materials(GateGPUIO_Input* input, 
-                                    std::vector<G4Material*> & m, 
+void GateGPUIO_Input_Init_Materials(GateGPUIO_Input* input,
+                                    std::vector<G4Material*> & m,
                                     G4String & name);
-void GateGPUIO_Input_parse_activities(const ActivityMap& activities, 
+void GateGPUIO_Input_parse_activities(const ActivityMap& activities,
                                       GateGPUIO_Input * input);
 GateGPUIO_Output* GateGPUIO_Output_new();
 void GateGPUIO_Output_delete(GateGPUIO_Output* output);
@@ -219,20 +219,20 @@ void GateGPUIO_Output_delete(GateGPUIO_Output* output);
 
 //----------------------------------------------------------
 // Main function that lunch GPU calculation: Transmission Tomography Application
-void GPU_GateTransTomo(const GateGPUIO_Input * input, 
+void GPU_GateTransTomo(const GateGPUIO_Input * input,
                              GateGPUIO_Output * output);
 
 // Main function that lunch GPU calculation: Emission Tomography Application
-void GPU_GateEmisTomo(const GateGPUIO_Input * input, 
+void GPU_GateEmisTomo(const GateGPUIO_Input * input,
                             GateGPUIO_Output * output);
 
 // Main function that lunch GPU calculation: Photon Radiation Therapy
-void GPU_GatePhotRadThera_init(const GateGPUIO_Input *input, 
+void GPU_GatePhotRadThera_init(const GateGPUIO_Input *input,
                                      Dosimetry &dose_d,
                                      Materials &materials_d,
                                      Volume &phantom_d,
                                      StackParticle &photons_d, StackParticle &electrons_d,
-                                     StackParticle &photons_h, 
+                                     StackParticle &photons_h,
                                      unsigned int nb_of_particles, unsigned int seed);
 void GPU_GatePhotRadThera(Dosimetry &dosemap_d,
                           Materials &materials_d,
@@ -240,14 +240,14 @@ void GPU_GatePhotRadThera(Dosimetry &dosemap_d,
                           StackParticle &photons_d, StackParticle &electrons_d,
                           StackParticle &photons_h,
                           unsigned int nb_of_particles);
-void GPU_GatePhotRadThera_end(Dosimetry &dosemap_d, 
-                              Materials &materials_d, 
+void GPU_GatePhotRadThera_end(Dosimetry &dosemap_d,
+                              Materials &materials_d,
                               Volume &phantom_d,
                               StackParticle &photons_d, StackParticle &electrons_d,
                               StackParticle &photons_h);
 
 // Main function that lunch GPU calculation: Optical photon
-void GateOpticalBiolum_GPU(const GateGPUIO_Input * input, 
+void GateOpticalBiolum_GPU(const GateGPUIO_Input * input,
                            GateGPUIO_Output * output);
 //----------------------------------------------------------
 

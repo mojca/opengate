@@ -36,26 +36,26 @@ class GateXMLDocument
     ~GateXMLDocument();
 
     G4bool Ok() const;
-    
+
     G4String GetName();
     G4String GetProperty(const G4String& property);
     G4bool   HasProperty(const G4String& property);
     G4String GetValue();
-    
+
     void   Reset();
     G4bool Enter();
     void   Leave();
     G4bool Next();
     G4bool Previous();
     void   First();
-    
+
     G4bool Find(const G4String& tag);
     G4bool Find(const G4String& tag, const G4String& name);
     G4bool Find(const G4String& tag, const G4String& property, const G4String& value);
-    
+
     GateXMLDocumentState GetState();
     void SetState(GateXMLDocumentState state);
-      
+
   private:
     G4bool     m_ok;
     xmlDocPtr  m_doc;

@@ -44,7 +44,7 @@ G4double GateUIcmdWithTwoDouble::GetNewDoubleValue(G4int num,G4String paramStrin
   //std::istrstream is((char*)paramString);
   std::istringstream is(paramString);
   is >>  vl[0] >>vl[1];
-  
+
   return vl[num];
 }
 //_____________________________________________________________________________

@@ -32,13 +32,13 @@ void GateUIcmdWithAStringAndADouble::SetParameterName
   theParam->SetParameterName(theName1);
   theParam->SetOmittable(omittable1);
   theParam->SetCurrentAsDefault(currentAsDefault);
-  
+
   theParam = GetParameter(1);
   theParam->SetParameterName(theName2);
   theParam->SetOmittable(omittable2);
   theParam->SetCurrentAsDefault(currentAsDefault);
 
- 
+
 
 
 
@@ -56,7 +56,7 @@ void GateUIcmdWithAStringAndADouble::SetCandidates(const char * candidateList1, 
   canList = candidateList2;
   theParam->SetParameterCandidates(canList);
 
- 
+
 
 
 }
@@ -71,8 +71,6 @@ void GateUIcmdWithAStringAndADouble::SetDefaultValue(const char * defVal1, const
   theParam = GetParameter(1);
   theParam->SetDefaultValue(defVal2);
 
-  
+
 }
 //---------------------------------------------------------------------------
-
-

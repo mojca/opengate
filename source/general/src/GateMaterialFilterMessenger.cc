@@ -42,7 +42,7 @@ void GateMaterialFilterMessenger::BuildCommands(G4String base)
 {
   G4String guidance;
   G4String bb;
-  
+
   bb = base+"/addMaterial";
   pAddMaterialCmd = new G4UIcmdWithAString(bb,this);
   guidance = "Add material";

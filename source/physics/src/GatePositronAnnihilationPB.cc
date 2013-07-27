@@ -15,10 +15,10 @@ See GATE/LICENSE.txt for further details
 
 //-----------------------------------------------------------------------------
 GatePositronAnnihilationPB::GatePositronAnnihilationPB():GateVProcess("PositronAnnihilation")
-{  
+{
   SetDefaultParticle("e+");
   SetProcessInfo("Positron annihilation with accolinearity");
-  pMessenger = new GateEMStandardProcessMessenger(this);  
+  pMessenger = new GateEMStandardProcessMessenger(this);
 }
 //-----------------------------------------------------------------------------
 
@@ -26,7 +26,7 @@ GatePositronAnnihilationPB::GatePositronAnnihilationPB():GateVProcess("PositronA
 //-----------------------------------------------------------------------------
 G4VProcess* GatePositronAnnihilationPB::CreateProcess(G4ParticleDefinition *)
 {
-  return new GatePositronAnnihilation(); 
+  return new GatePositronAnnihilation();
 }
 //-----------------------------------------------------------------------------
 
@@ -34,7 +34,7 @@ G4VProcess* GatePositronAnnihilationPB::CreateProcess(G4ParticleDefinition *)
 //-----------------------------------------------------------------------------
 void GatePositronAnnihilationPB::ConstructProcess(G4ProcessManager * manager)
 {
-  manager->AddProcess(GetProcess(),0, -1, 4); 
+  manager->AddProcess(GetProcess(),0, -1, 4);
 }
 //-----------------------------------------------------------------------------
 
@@ -48,4 +48,3 @@ bool GatePositronAnnihilationPB::IsApplicable(G4ParticleDefinition * par)
 //-----------------------------------------------------------------------------
 
 MAKE_PROCESS_AUTO_CREATOR_CC(GatePositronAnnihilationPB)
-

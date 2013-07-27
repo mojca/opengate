@@ -30,19 +30,19 @@ class GateOscTranslationMove;
 
 /*! \class GateOscTranslationMoveMessenger
     \brief A messenger for a GateOscTranslationMove (an oscillating translation)
-    
+
     - GateOscTranslationMoveMessenger - by Daniel.Strul@iphe.unil.ch (Aug. 10, 2002)
-    
+
     - The GateOscTranslationMoveMessenger inherits from the abilities/responsabilities
       of the GateObjectRepeaterMessenger base-class: creation and management
-      of a Gate UI directory for a Gate movement object; creation of the UI commands 
+      of a Gate UI directory for a Gate movement object; creation of the UI commands
       "describe", "enable" and "disable"
-      
+
     - In addition, it proposes and manages UI commands that are specific
       to an oscillating translation movement: 'setAmplitude', 'setFrequency',
       'setPeriod', 'setPhase'
 
-*/      
+*/
 class GateOscTranslationMoveMessenger: public GateObjectRepeaterMessenger
 {
   public:
@@ -50,14 +50,14 @@ class GateOscTranslationMoveMessenger: public GateObjectRepeaterMessenger
     GateOscTranslationMoveMessenger(GateOscTranslationMove* itsTranslationMove);
     //! destructor
    ~GateOscTranslationMoveMessenger();
-    
+
     //! Command interpreter
     void SetNewValue(G4UIcommand*, G4String);
 
     //! Returns the oscillating translation move controled by the messenger
-    virtual inline GateOscTranslationMove* GetTranslationMove() 
+    virtual inline GateOscTranslationMove* GetTranslationMove()
       { return (GateOscTranslationMove*)GetObjectRepeater(); }
-    
+
   private:
     //! \name command objects
     //@{
@@ -69,4 +69,3 @@ class GateOscTranslationMoveMessenger: public GateObjectRepeaterMessenger
 };
 
 #endif
-

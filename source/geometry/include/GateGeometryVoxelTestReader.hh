@@ -26,7 +26,7 @@ class GateGeometryVoxelTestReaderMessenger;
 
     - GateGeometryVoxelTestReader - by Giovanni.Santin@cern.ch
 
-    - it reads a the voxel info from an ASCII file with the sequence of info: 
+    - it reads a the voxel info from an ASCII file with the sequence of info:
       + nx ny nz
       + dx dy dz (mm)
       + number_of_listed_voxels
@@ -39,7 +39,7 @@ class GateGeometryVoxelTestReaderMessenger;
       \sa GateVGeometryVoxelTranslator
       \sa GateVSourceVoxelReader
       \sa GateVSourceVoxelTranslator
-*/      
+*/
 
 class GateGeometryVoxelTestReader : public GateVGeometryVoxelReader
 {
@@ -54,9 +54,7 @@ public:
 
 protected:
 
-  GateGeometryVoxelTestReaderMessenger* m_messenger; 
+  GateGeometryVoxelTestReaderMessenger* m_messenger;
 };
 
 #endif
-
-

@@ -46,7 +46,7 @@ G4int GateUIterminal::ReceiveG4cout(G4String coutString)
 
   std::cout << coutString << std::flush;
   return 0;
-} 
+}
 #endif
 
 //////////////////////////////////////////////////////
@@ -64,4 +64,3 @@ G4int GateUIterminal::ReceiveG4cerr(G4String cerrString)
   return 0;
 }
 #endif
-

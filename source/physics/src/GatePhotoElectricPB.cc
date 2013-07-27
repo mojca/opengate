@@ -16,7 +16,7 @@ See GATE/LICENSE.txt for further details
 
 //-----------------------------------------------------------------------------
 GatePhotoElectricPB::GatePhotoElectricPB():GateVProcess("PhotoElectric")
-{  
+{
   SetDefaultParticle("gamma");
   SetProcessInfo("Photo electric effect");
 
@@ -25,7 +25,7 @@ GatePhotoElectricPB::GatePhotoElectricPB():GateVProcess("PhotoElectric")
   AddToModelList("LivermorePolarizedModel");
   AddToModelList("PenelopeModel");
 
-  pMessenger = new GatePhotoElectricMessenger(this);  
+  pMessenger = new GatePhotoElectricMessenger(this);
 }
 //-----------------------------------------------------------------------------
 
@@ -41,7 +41,7 @@ G4VProcess* GatePhotoElectricPB::CreateProcess(G4ParticleDefinition *)
 //-----------------------------------------------------------------------------
 void GatePhotoElectricPB::ConstructProcess(G4ProcessManager * manager)
 {
-  manager->AddDiscreteProcess(GetProcess());           
+  manager->AddDiscreteProcess(GetProcess());
 }
 //-----------------------------------------------------------------------------
 
@@ -58,7 +58,7 @@ bool GatePhotoElectricPB::IsApplicable(G4ParticleDefinition * par)
 //-----------------------------------------------------------------------------
 bool GatePhotoElectricPB::IsModelApplicable(G4String ,G4ParticleDefinition * par)
 {
-  for(unsigned int k = 0; k<theListOfParticlesWithSelectedModels.size();k++) 
+  for(unsigned int k = 0; k<theListOfParticlesWithSelectedModels.size();k++)
     if(par==theListOfParticlesWithSelectedModels[k]) GateError("A "<< GetG4ProcessName()<<" model has been already selected for "<< par->GetParticleName());
   if(par == G4Gamma::Gamma()) return true;
   return false;

@@ -26,7 +26,7 @@ class GateVolumeMessenger;
 
 GateWedgeMessenger::GateWedgeMessenger(GateWedge *itsCreator)
   :GateVolumeMessenger(itsCreator)
-{ 
+{
   G4String dir = GetDirectoryName() + "geometry/";
   G4String cmdName = dir+"setXLength";
   WedgeXLengthCmd = new G4UIcmdWithADoubleAndUnit(cmdName.c_str(),this);
@@ -70,19 +70,19 @@ GateWedgeMessenger::~GateWedgeMessenger()
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
 void GateWedgeMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
   if( command==WedgeXLengthCmd )
-    { GetWedgeCreator()->SetWedgeXLength(WedgeXLengthCmd->GetNewDoubleValue(newValue));}   
+    { GetWedgeCreator()->SetWedgeXLength(WedgeXLengthCmd->GetNewDoubleValue(newValue));}
 
   else if( command==WedgeNarrowerXLengthCmd )
-    { GetWedgeCreator()->SetWedgeNarrowerXLength(WedgeNarrowerXLengthCmd->GetNewDoubleValue(newValue));}   
-  
+    { GetWedgeCreator()->SetWedgeNarrowerXLength(WedgeNarrowerXLengthCmd->GetNewDoubleValue(newValue));}
+
   else if( command==WedgeYLengthCmd )
-    { GetWedgeCreator()->SetWedgeYLength(WedgeYLengthCmd->GetNewDoubleValue(newValue));}   
-  
+    { GetWedgeCreator()->SetWedgeYLength(WedgeYLengthCmd->GetNewDoubleValue(newValue));}
+
   else if( command==WedgeZLengthCmd )
-    { GetWedgeCreator()->SetWedgeZLength(WedgeZLengthCmd->GetNewDoubleValue(newValue));}   
-  
+    { GetWedgeCreator()->SetWedgeZLength(WedgeZLengthCmd->GetNewDoubleValue(newValue));}
+
   else
     GateVolumeMessenger::SetNewValue(command,newValue);
 

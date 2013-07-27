@@ -57,12 +57,12 @@ void GateGPUIO_Input_delete(GateGPUIO_Input * input)
 
 
 //-----------------------------------------------------------------------------
-void GateGPUIO_Input_Init_Materials(GateGPUIO_Input * input, 
-                                    std::vector<G4Material*> & m, 
+void GateGPUIO_Input_Init_Materials(GateGPUIO_Input * input,
+                                    std::vector<G4Material*> & m,
                                     G4String & name)
 {
   DD("GateGPUIO_Input_Init_Materials");
-  
+
   // std::vector<G4Material*> m;
   // v->BuildLabelToG4MaterialVector(m);
   DD(m.size());
@@ -70,7 +70,7 @@ void GateGPUIO_Input_Init_Materials(GateGPUIO_Input * input,
   input->nb_materials = n;
 
   // Number of elements per material
-  // Index to access material mixture 
+  // Index to access material mixture
   input->mat_nb_elements = new unsigned short int[n];
   input->mat_index = new unsigned short int[n];
   int k=0;
@@ -102,7 +102,7 @@ void GateGPUIO_Input_Init_Materials(GateGPUIO_Input * input,
       //DD(input->mat_atom_num_dens[p]);
       p++;
     }
-  }  
+  }
   //DD(p);
 
   // Total number of atoms per volume (sum{mat_atom_num_dens_i})
@@ -150,7 +150,7 @@ void GateGPUIO_Input_Init_Materials(GateGPUIO_Input * input,
     //DD(input->electron_max_energy[i]);
     input->electron_mean_excitation_energy[i] = m[i]->GetIonisation()->GetMeanExcitationEnergy();
     //DD(input->electron_mean_excitation_energy[i]);
-    
+
     input->rad_length[i] = m[i]->GetRadlen();
     //DD(m[i]->GetRadlen());
 
@@ -167,7 +167,7 @@ void GateGPUIO_Input_Init_Materials(GateGPUIO_Input * input,
       DD(input->fA[i]);
       DD(input->fM[i]);*/
   }
-    
+
 }
 //-----------------------------------------------------------------------------
 
@@ -194,7 +194,7 @@ typedef std::vector<ActivityMaterialTuple> ActivityMaterialTuplesVector;
 
 
 //----------------------------------------------------------
-void GateGPUIO_Input_parse_activities(const ActivityMap& activities, 
+void GateGPUIO_Input_parse_activities(const ActivityMap& activities,
                                       GateGPUIO_Input * input)
 {
   DD("GateGPUIO_Input_parse_activities");
@@ -223,7 +223,7 @@ void GateGPUIO_Input_parse_activities(const ActivityMap& activities,
         assert(kk < input->phantom_size_z);
 
         const int index = ii + jj*input->phantom_size_x + kk*input->phantom_size_y*input->phantom_size_x;
-    
+
         assert(index >= 0);
         assert(index < input->phantom_size_x*input->phantom_size_y*input->phantom_size_z);
 
@@ -289,12 +289,12 @@ void GateGPUIO_Particle_Print(const GateGPUIO_Particle & p)
 
 
 #ifndef GATE_USE_GPU
-void GateGPUIOTrack(const GateGPUIO_Input * input, 
+void GateGPUIOTrack(const GateGPUIO_Input * input,
                     GateGPUIO_Output * output)
 {
 
   // FAKE TRACKING
-  GateGPUIO_Input::ParticlesList::const_iterator 
+  GateGPUIO_Input::ParticlesList::const_iterator
     iter = input->particles.begin();
   while (iter != input->particles.end()) {
     GateGPUIO_Particle p = *iter;
@@ -308,6 +308,3 @@ void GateGPUIOTrack(const GateGPUIO_Input * input,
   //GateError("Gate is compiled without CUDA enabled. You cannot use 'GateGPUIO'.");
 }
 #endif
-
-
-

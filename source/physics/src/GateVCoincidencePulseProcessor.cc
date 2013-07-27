@@ -18,7 +18,7 @@ See GATE/LICENSE.txt for further details
 //------------------------------------------------------------------------------------------------------
 // Constructs a new pulse-processor attached to a GateDigitizer
 GateVCoincidencePulseProcessor::GateVCoincidencePulseProcessor(GateCoincidencePulseProcessorChain* itsChain,
-      	      	      	   const G4String& itsName) 
+      	      	      	   const G4String& itsName)
     : GateClockDependent(itsName),
 /*      m_isTriCoincProc(0), //mhadi_add*/
       m_chain(itsChain)
@@ -35,11 +35,11 @@ GateVCoincidencePulseProcessor::GateVCoincidencePulseProcessor(GateCoincidencePu
 // Method overloading GateClockDependent::Describe()
 // Print-out a description of the component
 // Calls the pure virtual method DecribeMyself()
-void GateVCoincidencePulseProcessor::Describe(size_t indent) 
+void GateVCoincidencePulseProcessor::Describe(size_t indent)
 {
   GateClockDependent::Describe(indent);
   G4cout << GateTools::Indent(indent) << "Attached to:        '" << GetChain()->GetObjectName() << "'" << G4endl;
   G4cout << GateTools::Indent(indent) << "Output:             '" << GetObjectName() << "'" << G4endl;
   DescribeMyself(indent);
 }
-//------------------------------------------------------------------------------------------------------    
+//------------------------------------------------------------------------------------------------------

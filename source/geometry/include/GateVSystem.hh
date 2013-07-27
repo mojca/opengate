@@ -28,20 +28,20 @@ class GateVVolume;
 
 /*! \class  GateVSystem
     \brief  A GateVSystem is an integrated interface to a GATE geometry.
-    \brief  It can read and return information on the geometry according to a predefined set-up 
-    
+    \brief  It can read and return information on the geometry according to a predefined set-up
+
     - GateVSystem - by Daniel.Strul@iphe.unil.ch (2002)
-    
+
     - A system provides a pre-defined model of a geometry, such as a scanner or a source.
       This model is built as a tree of system-components (GateSystemComponent), starting
       from the 'tree-base' (m_baseComponent). In this model, each component has a specific
       role (detector head, crystal matrix, collimator...)
-    
+
     - System components are activated when they are connected to an inserter of the geometry.
       Once a component is thus connected, it can read the inserter properties, such as its
       dimensions, position, movement parameters, number of copies...
-      
-    - For example, a typical PET scanner would incorporate a component for the detector 
+
+    - For example, a typical PET scanner would incorporate a component for the detector
       blocks ('rsector', 'block', 'bucket'...). This component would then be connected
       to the one geometry inserter that models this detector block. Once this connection
       is done, one can read the scanner properties that are related to the blocks: number
@@ -50,14 +50,14 @@ class GateVVolume;
     - A system is also responsible for computing output volume IDs (GateOutputVolumeID), which
       are used for data analysis and image reconstruction. This task is actually delegated
       to the component tree.
-    
+
     - To see a concrete application of this mechanism, check the class GateCylindricalPETSystem
-      
+
     - Note: from July to Oct. 2002, a system was a vector of system-levels. It was redesigned
       as a tree of system-components in Oct 2002.
 
     \sa GateCylindricalPETSystem, GateSystemComponent, GateOutputVolumeID
-*/      
+*/
 //    Last modification in 12/2011 by Abdul-Fattah.Mohamad-Hadi@subatech.in2p3.fr, for the multi-system approach.
 
 class GateVSystem : public GateClockDependent
@@ -67,7 +67,7 @@ class GateVSystem : public GateClockDependent
 
 	\param itsName:       	the name chosen for this system
 	\param isWithGantry:	tells whether there is a gantry (PET) or not (SPECT)
-    */    
+    */
     GateVSystem(const G4String& itsName,G4bool isWithGantry);
     //| Destructor
     virtual ~GateVSystem();
@@ -84,16 +84,16 @@ class GateVSystem : public GateClockDependent
       	\brief This methods prints-out a description of the system
 
 	\param indent: the print-out indentation (cosmetic parameter)
-    */    
-    virtual void Describe(size_t indent=0); 
-    
-      	   
+    */
+    virtual void Describe(size_t indent=0);
+
+
     /*! \brief Virtual method to print a description of the system to a stream.
       	\brief It is essentially meant to be used by the class GateToLMF, but it may also be used by Describe()
 
 	\param aStream: the output stream
 	\param doPrintNumbers: tells whether we print-out the volume numbers in addition to their dimensions
-    */    
+    */
     //virtual void PrintToStream(std::ostream& aStream,G4bool doPrintNumbers) {}
     virtual void PrintToStream(std::ostream& ,G4bool ) {}
     //@}
@@ -105,7 +105,7 @@ class GateVSystem : public GateClockDependent
     size_t GetTreeDepth() const;
 
     //@}
-     
+
     //! \name Component access methods
     //@{
 
@@ -116,26 +116,26 @@ class GateVSystem : public GateClockDependent
     //! Define the base of the component tres
     void SetBaseComponent(GateSystemComponent* aBaseComponent)
       { m_BaseComponent = aBaseComponent; }
-      
+
     //! Finds a component from its name
-    GateSystemComponent* FindComponent(const G4String& componentName,G4bool silent=false) const; 
+    GateSystemComponent* FindComponent(const G4String& componentName,G4bool silent=false) const;
 
     //! template to find components of a specific type
     template <class C>
     C* FindTypedComponent(const G4String& aComponent) const;
-    
+
     //! Finds an array-component from its name
     GateArrayComponent* FindArrayComponent(const G4String& aComponent) const;
 
     //! Finds a boxcreator-component from its name
     GateBoxComponent* FindBoxCreatorComponent(const G4String& aComponent) const;
- 
+
     //! Finds a creatorcreator-component from its name
     GateCylinderComponent* FindCylinderCreatorComponent(const G4String& aComponent) const;
-   
+
     //! Finds a wedgecreator-component from its name
     GateWedgeComponent* FindWedgeCreatorComponent(const G4String& aComponent) const;
- 
+
     //! Returns the main-component of the system.
     virtual GateSystemComponent* GetMainComponent() const
     {  return m_mainComponentDepth ? m_BaseComponent->GetChildComponent(0) :  m_BaseComponent ; }
@@ -147,11 +147,11 @@ class GateVSystem : public GateClockDependent
     //! Returns the number of coincident-sector of the system.
     virtual size_t GetCoincidentSectorNumber()
     {  return GetMainComponent()->GetAngularRepeatNumber(); }
-    
+
     //! Returns the number of coincident-sector of the system (for the spherical system Ecat Accel)
     virtual size_t GetCoincidentSectorNumberSphere()
     {  return GetMainComponent()->GetSphereAzimuthalRepeatNumber(); }
-    
+
     //! Returns the detector-component (crystal, pixel...) of the system.
     virtual GateArrayComponent* GetDetectorComponent()
     {  return dynamic_cast<GateArrayComponent*>(GetMainComponent()->GetChildComponent(0)) ; }
@@ -176,10 +176,10 @@ class GateVSystem : public GateClockDependent
     			  GateOutputVolumeID& outputVolumeID,
 			  size_t depth);
 
-    //! Compute a single bin of an output ID for a component 
+    //! Compute a single bin of an output ID for a component
     virtual G4int ComputeComponentID(GateSystemComponent* aComponent, const GateVolumeID& volumeID);
 
-    //! Compute a single bin of an output ID for a coincident component 
+    //! Compute a single bin of an output ID for a coincident component
     virtual G4int ComputeMainComponentID(GateSystemComponent* aComponent, const GateVolumeID& volumeID);
 
     //! Compute a ring-ID from a coincident component ID
@@ -189,21 +189,21 @@ class GateVSystem : public GateClockDependent
     //! Compute a sector-ID from coincident component ID (for Ecat, CylindricalPET, CPET)
     inline virtual G4int ComputeSectorID(G4int componentID)
     {  return componentID % GetCoincidentSectorNumber() ; }
-     
+
     //! Compute a sector-ID from coincident component ID (for spherical Ecat Accel system)
     inline virtual G4int ComputeSectorIDSphere(G4int componentID)
     {  return componentID % GetCoincidentSectorNumberSphere() ; }
-    
+
     //! Get the name of the system
     inline G4String GetName()
     {   return mName ; }
-    
+
     //! Get the own name of a system, note thate this name may be any name.
     inline G4String GetOwnName() const { return m_itsOwnName; }
-    
+
     //Get the number of a system, this number is the order insertion number of a system and the systemID.
     inline G4int GetItsNumber() const { return m_itsNumber; }
-    
+
     size_t ComputeNofElementsAtLevel(size_t level) const;
     size_t ComputeNofSubCrystalsAtLevel(size_t level, std::vector<G4bool>& enableList) const;
     size_t ComputeIdFromVolID(const GateOutputVolumeID& volID,std::vector<G4bool>& enableList) const;
@@ -222,4 +222,3 @@ class GateVSystem : public GateClockDependent
 
 
 #endif
-

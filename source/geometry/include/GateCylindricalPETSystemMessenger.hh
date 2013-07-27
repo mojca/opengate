@@ -1,21 +1,21 @@
 /*----------------------
 
-   GATE - Geant4 Application for Tomographic Emission 
-   OpenGATE Collaboration 
-     
-   Daniel Strul <daniel.strul@iphe.unil.ch> 
-     
-   Copyright (C) 2002,2003 UNIL/IPHE, CH-1015 Lausanne 
+   GATE - Geant4 Application for Tomographic Emission
+   OpenGATE Collaboration
 
-This software is distributed under the terms 
-of the GNU Lesser General  Public Licence (LGPL) 
-See GATE/LICENSE.txt for further details 
+   Daniel Strul <daniel.strul@iphe.unil.ch>
+
+   Copyright (C) 2002,2003 UNIL/IPHE, CH-1015 Lausanne
+
+This software is distributed under the terms
+of the GNU Lesser General  Public Licence (LGPL)
+See GATE/LICENSE.txt for further details
 ----------------------*/
 
 /*!
 
   \file GateCylindricalPETSystemMessenger.hh
-  
+
   $Log: GateCylindricalPETSystemMessenger.hh,v $
   Revision 1.9  2003/07/02 22:19:44  dstrul
   Digitizer re-engineering
@@ -45,16 +45,16 @@ class G4UIcmdWithAString;
 
 /*! \class GateCylindricalPETSystemMessenger
     \brief Base class for GateCylindricalPETSystem messengers
-    
-    - GateCylindricalPETSystemMessenger - by Daniel.Strul@iphe.unil.ch 
-    
+
+    - GateCylindricalPETSystemMessenger - by Daniel.Strul@iphe.unil.ch
+
     - The GateCylindricalPETSystemMessenger inherits from the abilities/responsabilities
       of the GateClockDependentMessenger base-class: creation and management
       of a Gate UI directory for a Gate object; creation of the UI command "describe"
-      
+
     - In addition, it proposes and manages the UI commands 'enable' and 'disable'.
 
-*/      
+*/
 class GateCylindricalPETSystemMessenger: public GateClockDependentMessenger
 {
   public:
@@ -64,12 +64,12 @@ class GateCylindricalPETSystemMessenger: public GateClockDependentMessenger
     			        const G4String& itsDirectoryName="");
 
    ~GateCylindricalPETSystemMessenger();  //!< destructor
-    
+
     //! UI command interpreter method
     void SetNewValue(G4UIcommand*, G4String);
 
     //! Get the clock-dependent object
-    inline GateCylindricalPETSystem* GetCylindricalPETSystem() 
+    inline GateCylindricalPETSystem* GetCylindricalPETSystem()
       { return (GateCylindricalPETSystem*) GetClockDependent(); }
 
   private:
@@ -78,4 +78,3 @@ class GateCylindricalPETSystemMessenger: public GateClockDependentMessenger
 };
 
 #endif
-

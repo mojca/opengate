@@ -26,7 +26,7 @@ See GATE/LICENSE.txt for further details
 //--------------------------------------------------------------------------------------------------
 GateObjectRepeaterMessenger::GateObjectRepeaterMessenger(GateVGlobalPlacement* itsObjectRepeater)
 :GateClockDependentMessenger(itsObjectRepeater)
-{ 
+{
   G4String guidance;
   G4String cmdName;
 
@@ -46,7 +46,7 @@ GateObjectRepeaterMessenger::~GateObjectRepeaterMessenger()
 
 //--------------------------------------------------------------------------------------------------
 void GateObjectRepeaterMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
   GateClockDependentMessenger::SetNewValue(command,newValue);
 }
 //--------------------------------------------------------------------------------------------------

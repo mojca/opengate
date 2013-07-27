@@ -59,17 +59,17 @@ protected:
 
   // Used for creating a primary
   G4ParticleDefinition* gamma_particle_definition;
-  
+
   // Name of the attached volume
   G4String attachedVolumeName;
-  
+
   // FIXME
   int mNumberOfNextTime;
   int mCurrentTimeID;
 
   int mCudaDeviceID;
 
-  void GeneratePrimaryEventFromGPUOutput(const GateGPUIO_Particle & particle, G4Event * event);  
+  void GeneratePrimaryEventFromGPUOutput(const GateGPUIO_Particle & particle, G4Event * event);
   void SetPhantomVolumeData();
 };
 

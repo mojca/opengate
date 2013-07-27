@@ -67,4 +67,3 @@ G4int GateMaterialTableToProductionCutsTable::P2M ( G4int i ) const
 	}
 	return P2M_nocheck ( i );
 }
-

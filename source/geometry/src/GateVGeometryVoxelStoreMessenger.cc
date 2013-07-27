@@ -26,11 +26,11 @@ See GATE/LICENSE.txt for further details
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
 GateVGeometryVoxelStoreMessenger::GateVGeometryVoxelStoreMessenger(GateVGeometryVoxelStore* voxelStore)
-  : GateMessenger(voxelStore->GetCreator()->GetObjectName() + 
+  : GateMessenger(voxelStore->GetCreator()->GetObjectName() +
 		  G4String("/") +
 		  voxelStore->GetName(),true),
   m_voxelStore(voxelStore)
-{ 
+{
 
   G4String cmdName;
 
@@ -51,7 +51,7 @@ GateVGeometryVoxelStoreMessenger::~GateVGeometryVoxelStoreMessenger()
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
 void GateVGeometryVoxelStoreMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
   if ( command == DefaultMaterialCmd ) {
     m_voxelStore->SetDefaultMaterial(newValue);
   }
@@ -59,6 +59,3 @@ void GateVGeometryVoxelStoreMessenger::SetNewValue(G4UIcommand* command,G4String
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
-
-
-

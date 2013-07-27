@@ -9,8 +9,8 @@ See GATE/LICENSE.txt for further details
 ----------------------*/
 
 
-/*! 
-  \class  GateImageNestedParametrisedVolumeMessenger : 
+/*!
+  \class  GateImageNestedParametrisedVolumeMessenger :
   \brief  Messenger of GateImageNestedParametrisedVolume.
   \author thibault.frisson@creatis.insa-lyon.fr
           laurent.guigues@creatis.insa-lyon.fr
@@ -32,14 +32,13 @@ class GateImageNestedParametrisedVolumeMessenger : public GateVImageVolumeMessen
 public:
   GateImageNestedParametrisedVolumeMessenger(GateImageNestedParametrisedVolume* volume);
   ~GateImageNestedParametrisedVolumeMessenger();
-    
+
   void SetNewValue(G4UIcommand*, G4String);
 
 private:
-  GateImageNestedParametrisedVolume* pVolume; 
+  GateImageNestedParametrisedVolume* pVolume;
   //G4UIcmdWithADouble * pSmartLessCmd;
 };
 //-----------------------------------------------------------------------------
 
 #endif
-

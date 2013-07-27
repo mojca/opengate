@@ -11,16 +11,16 @@ See GATE/LICENSE.txt for further details
 
 /*----------------------
 
-   GATE - Geant4 Application for Tomographic Emission 
-   OpenGATE Collaboration 
-     
+   GATE - Geant4 Application for Tomographic Emission
+   OpenGATE Collaboration
+
    Richard Taschereau <rtaschereau@mednet.ucla.edu>
-   
+
    Copyright (C) 2005 Crump Institute for Molecular Imaging, UCLA
 
-This software is distributed under the terms 
-of the GNU Lesser General  Public Licence (LGPL) 
-See GATE/LICENSE.txt for further details 
+This software is distributed under the terms
+of the GNU Lesser General  Public Licence (LGPL)
+See GATE/LICENSE.txt for further details
 ----------------------*/
 
 

@@ -32,12 +32,12 @@ class GatePrimaryGeneratorMessenger: public G4UImessenger
 public:
   GatePrimaryGeneratorMessenger(GatePrimaryGeneratorAction*);
   ~GatePrimaryGeneratorMessenger();
-  
+
   void SetNewValue(G4UIcommand*, G4String);
-    
+
 private:
   GatePrimaryGeneratorAction* m_primaryGenerator;
-    
+
   G4UIdirectory*             GateGeneratorDir;
   G4UIcmdWithAnInteger*      VerboseCmd;
   G4UIcmdWithoutParameter*   GPSCmd;
@@ -45,4 +45,3 @@ private:
 //-------------------------------------------------------------------------------------------------
 
 #endif
-

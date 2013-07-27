@@ -36,16 +36,16 @@ GateOrbitingMove::GateOrbitingMove(GateVVolume* itsObjectInserter,
     m_currentAngle(0),
     m_Messenger(0)
 {
-  
+
   m_Messenger = new GateOrbitingMoveMessenger(this);
-  
+
 }
 //-------------------------------------------------------------------------------------------------
 
 
 //-------------------------------------------------------------------------------------------------
 GateOrbitingMove::~GateOrbitingMove()
-{  
+{
   delete m_Messenger;
 }
 //-------------------------------------------------------------------------------------------------
@@ -56,13 +56,13 @@ void GateOrbitingMove::PushMyPlacements(const G4RotationMatrix& currentRotationM
 	        	        	const G4ThreeVector& currentPosition,
 			      	      	G4double aTime)
 {
-    
+
     G4RotationMatrix newRotationMatrix = currentRotationMatrix;
     G4Point3D newPosition = currentPosition;
-        	
+
     m_currentAngle = m_velocity * aTime;
     newPosition = G4Rotate3D(m_currentAngle, m_point1, m_point2) * newPosition;
-        
+
     if (m_flagAutoRotation)
     {
       G4ThreeVector axis = m_point2 - m_point1;
@@ -70,7 +70,7 @@ void GateOrbitingMove::PushMyPlacements(const G4RotationMatrix& currentRotationM
     }
 
     PushBackPlacement(GatePlacement(newRotationMatrix,newPosition));
-    
+
 }
 //-------------------------------------------------------------------------------------------------
 

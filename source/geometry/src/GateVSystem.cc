@@ -38,23 +38,23 @@ G4int GateVSystem::m_insertionOrder=-1;
 
   itsName:      the name chosen for this system
   isWithGantry:	tells whether there is a gantry (PET) or not (SPECT)
-*/    
+*/
 GateVSystem::GateVSystem(const G4String& itsName,G4bool isWithGantry)
 : GateClockDependent( itsName , false ),
   m_BaseComponent(0),
-  m_mainComponentDepth( isWithGantry ? 1 : 0 ) 
+  m_mainComponentDepth( isWithGantry ? 1 : 0 )
 {
    // Next lines were added for the multi-system approach
   G4String itsOwnName = GateSystemListManager::GetInstance()->GetInsertedSystemsNames()->back();
   m_itsOwnName = itsOwnName;
   m_insertionOrder++;
   m_itsNumber = m_insertionOrder;
-  
+
   SetBaseComponent( new GateSystemComponent("base",0,this) );
-  
+
   // Register the system in the system-store
   GateSystemListManager::GetInstance()->RegisterSystem(this);
-  
+
 
  #ifdef G4ANALYSIS_USE_ROOT
   GateRootDefs::SetDefaultOutputIDNames();
@@ -64,7 +64,7 @@ GateVSystem::GateVSystem(const G4String& itsName,G4bool isWithGantry)
 
 //-----------------------------------------------------------------------------
 // Destructor
-GateVSystem::~GateVSystem() 
+GateVSystem::~GateVSystem()
 {
   // Delete the tree of system-components
   delete m_BaseComponent;
@@ -86,7 +86,7 @@ void GateVSystem::SetOutputIDName(char * anOutputIDName, size_t depth)
    This methods prints-out a description of the system
 
   indent: the print-out indentation (cosmetic parameter)
-*/    
+*/
 void GateVSystem::Describe(size_t indent)
 {
   // Call the base-class method
@@ -129,18 +129,18 @@ C* GateVSystem::FindTypedComponent(const G4String& componentName) const
 {
   // Look for the component, based on its name
   GateSystemComponent* aComponent = FindComponent(componentName);
-  
+
   // Cast to the requested type
   return dynamic_cast<C*>(aComponent);
-} 
+}
 //-----------------------------------------------------------------------------
-    
+
 //-----------------------------------------------------------------------------
 // Finds an array-component from its name
 GateArrayComponent* GateVSystem::FindArrayComponent(const G4String& componentName) const
 {
   return FindTypedComponent<GateArrayComponent>(componentName);
-} 
+}
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
@@ -148,22 +148,22 @@ GateArrayComponent* GateVSystem::FindArrayComponent(const G4String& componentNam
 GateBoxComponent* GateVSystem::FindBoxCreatorComponent(const G4String& componentName) const
 {
   return FindTypedComponent<GateBoxComponent>(componentName);
-} 
+}
 //-----------------------------------------------------------------------------
- 
+
 //-----------------------------------------------------------------------------
 // Finds a cylindercreator-component from its name
 GateCylinderComponent* GateVSystem::FindCylinderCreatorComponent(const G4String& componentName) const
 {
   return FindTypedComponent<GateCylinderComponent>(componentName);
-} 
+}
 //-----------------------------------------------------------------------------
 //-----------------------------------------------------------------------------
 // Finds a cylindercreator-component from its name
 GateWedgeComponent* GateVSystem::FindWedgeCreatorComponent(const G4String& componentName) const
 {
   return FindTypedComponent<GateWedgeComponent>(componentName);
-} 
+}
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
@@ -176,13 +176,13 @@ GateOutputVolumeID GateVSystem::ComputeOutputVolumeID(const GateVolumeID& aVolum
   // verbose output
   if (nVerboseLevel)
     G4cout << "[" << GetObjectName() << "::ComputeOutputVolumeID]:" << G4endl
-      	   << "\tComputing the output volume ID for the hit in volume:" << aVolumeID << G4endl; 
+      	   << "\tComputing the output volume ID for the hit in volume:" << aVolumeID << G4endl;
 
   // Ask the component-tree to compute the output-volume ID
   outputVolumeID[0]=ComputeSubtreeID(m_BaseComponent,aVolumeID,outputVolumeID,0);
   // Set the first cell to the systemID
   //outputVolumeID[0]=this->GetItsNumber();
-  
+
   // verbose output
   if (nVerboseLevel)
     G4cout << "[" << GetObjectName() << "::ComputeOutputVolumeID]:" << G4endl
@@ -194,7 +194,7 @@ GateOutputVolumeID GateVSystem::ComputeOutputVolumeID(const GateVolumeID& aVolum
 
 //-----------------------------------------------------------------------------
 // Compute a subsection of an output-volumeID for the subtree starting from a component
-G4int GateVSystem::ComputeSubtreeID(GateSystemComponent* aComponent, 
+G4int GateVSystem::ComputeSubtreeID(GateSystemComponent* aComponent,
 				   const GateVolumeID& volumeID,
 				   GateOutputVolumeID& outputVolumeID,
 				   size_t depth)
@@ -211,14 +211,14 @@ G4int GateVSystem::ComputeSubtreeID(GateSystemComponent* aComponent,
       	break;
     }
   }
-	
+
   // If a subtree returned a success value while the current component failed,
   // set the result to 0
   if ( (subtreeResult>=0) && (result<0) )
     result = 0;
 
   // If a result was found, increase the result by the number of 'younger' components
-  if (result>=0) 
+  if (result>=0)
     result += aComponent->ComputeOutputOffset();
 
   // Return our result, so that our caller can know whether we succeeded or failed
@@ -227,7 +227,7 @@ G4int GateVSystem::ComputeSubtreeID(GateSystemComponent* aComponent,
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
-// Compute a single bin of an output ID for a component 
+// Compute a single bin of an output ID for a component
 G4int GateVSystem::ComputeComponentID(GateSystemComponent* aComponent, const GateVolumeID& volumeID)
 {
   if (aComponent->GetCreator()==0)
@@ -243,11 +243,11 @@ G4int GateVSystem::ComputeComponentID(GateSystemComponent* aComponent, const Gat
 
   // We did not recognise the Cretaor
   return -1;
-}  
+}
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
-// Compute a single bin of an output ID for a coincident component 
+// Compute a single bin of an output ID for a coincident component
 G4int GateVSystem::ComputeMainComponentID(GateSystemComponent* aComponent, const GateVolumeID& volumeID)
 {
   G4int copyNo=-1;
@@ -261,7 +261,7 @@ G4int GateVSystem::ComputeMainComponentID(GateSystemComponent* aComponent, const
     }
 
   // We did not recognise the creator
-  if (depth==volumeID.size()) 
+  if (depth==volumeID.size())
     return -1;
 
   // OK, we found our creator, so we need to check that the copyNo agrees with the CCC convention
@@ -273,7 +273,7 @@ G4int GateVSystem::ComputeMainComponentID(GateSystemComponent* aComponent, const
     return copyNo;
   if (dynamic_cast<GateLinearRepeater*>(firstRepeater)!=0)
     return copyNo;
-    
+
   // OK, we assume that the angular repeater comes first
   // We must decode the copyNo then create the componentID
   G4int angularRepeatNumber = aComponent->GetAngularRepeatNumber();
@@ -281,24 +281,24 @@ G4int GateVSystem::ComputeMainComponentID(GateSystemComponent* aComponent, const
   G4int angularIndex        = copyNo / linearRepeatNumber;
   G4int axialIndex          = copyNo % linearRepeatNumber;
 
-  G4int componentID         =  axialIndex * angularRepeatNumber + angularIndex; 
+  G4int componentID         =  axialIndex * angularRepeatNumber + angularIndex;
 
   return componentID;
-}  
+}
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
 /* Check whether an creator is connected to the system
    (directly or through one of its ancestors)
-      	
+
     anCreator: the creator we want to check
-	
+
     returns true if the creatr belongs (directly or inderectly) to the system
 */
 G4bool GateVSystem::CheckConnectionToCreator(GateVVolume* anCreator) const
 {
 //  G4cout << " DEBUT CheckConnectionToCreator " << G4endl;
-  
+
   // Loop as long as we have a valid creator
   while (anCreator)
   {
@@ -309,14 +309,14 @@ G4bool GateVSystem::CheckConnectionToCreator(GateVVolume* anCreator) const
     // A conncetion was found: return true
     if (result)
       return true;
-      
+
     // No connection was found: move up by one step in the creator tree
     GateVVolume *motherCreator = anCreator->GetMotherCreator();
-    
+
 //    G4cout << " motherCreator "  << G4endl;
     anCreator = motherCreator ?  motherCreator->GetCreator() : 0;
   }
-  
+
   // No connection was found with the creator or with its ancestors: return false
   return false;
 }
@@ -392,7 +392,7 @@ size_t GateVSystem::ComputeIdFromVolID(const GateOutputVolumeID& volID,std::vect
    for (size_t i=0;i<GetTreeDepth();i++){
       if (enableList[i] && volID[i]>=0)  ans += volID[i] * nofCrystalList[i];
    }
-   return ans; 
+   return ans;
 }
 //-----------------------------------------------------------------------------
 
@@ -405,7 +405,7 @@ GateVolumeID* GateVSystem::MakeVolumeID(const std::vector<G4int>& numList) const
    GateVolumeID* ans = new GateVolumeID;
    ans->push_back( GateVolumeSelector(GateDetectorConstruction::GetGateDetectorConstruction()->GetWorldVolume()));
    if (vol) ans->push_back( GateVolumeSelector(vol)); else return ans;
-   
+
    for (size_t i=1;i<numList.size();++i){
       if (comp->GetChildNumber()<1) break;
       G4int num = numList[i];
@@ -472,7 +472,7 @@ G4ThreeVector GateVSystem::ComputeObjectCenter(const GateVolumeID* volID) const
    const G4VoxelLimits noLimits;
    G4double x[2],y[2],z[2];
    G4bool ok=true;
-   
+
    G4AffineTransform transform(rotation,translation);
    ok = ok && solid->CalculateExtent(kXAxis,noLimits,transform,x[0],x[1]) ;
    ok = ok && solid->CalculateExtent(kYAxis,noLimits,transform,y[0],y[1]) ;

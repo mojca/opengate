@@ -1,16 +1,16 @@
 /*----------------------
 
-   GATE - Geant4 Application for Tomographic Emission 
-   OpenGATE Collaboration 
-     
+   GATE - Geant4 Application for Tomographic Emission
+   OpenGATE Collaboration
+
    Didier Benoit <benoit@cppm.in2p3.fr>
    Franca Cassol Brunner <cassol@cppm.in2p3.fr>
-     
+
    Copyright (C) 2009 imXgam/CNRS, CPPM Marseille
 
-   This software is distributed under the terms 
-   of the GNU Lesser General  Public Licence (LGPL) 
-   See GATE/LICENSE.txt for further details 
+   This software is distributed under the terms
+   of the GNU Lesser General  Public Licence (LGPL)
+   See GATE/LICENSE.txt for further details
 ----------------------*/
 
 /*!
@@ -36,11 +36,11 @@ class GateCTScannerSystem : public GateVSystem
 		GateCTScannerSystem( const G4String& );
 		//! Destructor
 		virtual ~GateCTScannerSystem();
-		
+
 	private:
 		GateToImageCT* m_gateToImageCT;
 		GateClockDependentMessenger* m_messenger;
-		
+
 };
 
 #endif

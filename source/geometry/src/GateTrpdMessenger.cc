@@ -24,10 +24,10 @@ See GATE/LICENSE.txt for further details
 
 GateTrpdMessenger::GateTrpdMessenger(GateTrpd *itsCreator)
   :GateVolumeMessenger(itsCreator)
-{ 
+{
 
   G4String dir = GetDirectoryName() + "geometry/";
-  
+
   G4String cmdName = dir+"setX1Length";
   TrpdX1LengthCmd = new G4UIcmdWithADoubleAndUnit(cmdName.c_str(),this);
   TrpdX1LengthCmd->SetGuidance("Set half length along X of the plane at -dz position");
@@ -107,56 +107,56 @@ GateTrpdMessenger::GateTrpdMessenger(GateTrpd *itsCreator)
 
 GateTrpdMessenger::~GateTrpdMessenger()
 {
-  delete  TrpdX1LengthCmd;    
-  delete  TrpdY1LengthCmd;    
-  delete  TrpdX2LengthCmd;    
-  delete  TrpdY2LengthCmd;    
-  delete  TrpdZLengthCmd;     
-  delete  TrpdXBoxLengthCmd;  
-  delete  TrpdYBoxLengthCmd;  
-  delete  TrpdZBoxLengthCmd;  
-  delete  TrpdXBoxPosCmd;     
-  delete  TrpdYBoxPosCmd;     
-  delete  TrpdZBoxPosCmd;     
+  delete  TrpdX1LengthCmd;
+  delete  TrpdY1LengthCmd;
+  delete  TrpdX2LengthCmd;
+  delete  TrpdY2LengthCmd;
+  delete  TrpdZLengthCmd;
+  delete  TrpdXBoxLengthCmd;
+  delete  TrpdYBoxLengthCmd;
+  delete  TrpdZBoxLengthCmd;
+  delete  TrpdXBoxPosCmd;
+  delete  TrpdYBoxPosCmd;
+  delete  TrpdZBoxPosCmd;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
 void GateTrpdMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
   if(      command==TrpdX1LengthCmd )
-    { GetTrpdCreator()->SetTrpdX1Length(TrpdX1LengthCmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}   
-  
+    { GetTrpdCreator()->SetTrpdX1Length(TrpdX1LengthCmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}
+
   else if( command==TrpdY1LengthCmd )
-    { GetTrpdCreator()->SetTrpdY1Length(TrpdY1LengthCmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}   
-  
+    { GetTrpdCreator()->SetTrpdY1Length(TrpdY1LengthCmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}
+
   else if( command==TrpdX2LengthCmd )
-    { GetTrpdCreator()->SetTrpdX2Length(TrpdX2LengthCmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}   
-  
+    { GetTrpdCreator()->SetTrpdX2Length(TrpdX2LengthCmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}
+
   else if( command==TrpdY2LengthCmd )
-    { GetTrpdCreator()->SetTrpdY2Length(TrpdY2LengthCmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}   
-  
+    { GetTrpdCreator()->SetTrpdY2Length(TrpdY2LengthCmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}
+
   else if( command==TrpdZLengthCmd )
-    { GetTrpdCreator()->SetTrpdZLength(TrpdZLengthCmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}   
-  
+    { GetTrpdCreator()->SetTrpdZLength(TrpdZLengthCmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}
+
   else if( command==TrpdXBoxLengthCmd )
-    { GetTrpdCreator()->SetTrpdTrudXLength(TrpdXBoxLengthCmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}   
-  			                   
-  else if( command==TrpdYBoxLengthCmd )	                   
-    { GetTrpdCreator()->SetTrpdTrudYLength(TrpdYBoxLengthCmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}   
-  			                   
-  else if( command==TrpdZBoxLengthCmd )	                   
-    { GetTrpdCreator()->SetTrpdTrudZLength(TrpdZBoxLengthCmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}   
-  
+    { GetTrpdCreator()->SetTrpdTrudXLength(TrpdXBoxLengthCmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}
+
+  else if( command==TrpdYBoxLengthCmd )
+    { GetTrpdCreator()->SetTrpdTrudYLength(TrpdYBoxLengthCmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}
+
+  else if( command==TrpdZBoxLengthCmd )
+    { GetTrpdCreator()->SetTrpdTrudZLength(TrpdZBoxLengthCmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}
+
   else if( command==TrpdXBoxPosCmd )
-    { GetTrpdCreator()->SetTrpdTrudXPos(TrpdXBoxPosCmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}   
-  			                   
-  else if( command==TrpdYBoxPosCmd )	                   
-    { GetTrpdCreator()->SetTrpdTrudYPos(TrpdYBoxPosCmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}   
-  			                   
-  else if( command==TrpdZBoxPosCmd )	                   
-    { GetTrpdCreator()->SetTrpdTrudZPos(TrpdZBoxPosCmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}   
-  
+    { GetTrpdCreator()->SetTrpdTrudXPos(TrpdXBoxPosCmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}
+
+  else if( command==TrpdYBoxPosCmd )
+    { GetTrpdCreator()->SetTrpdTrudYPos(TrpdYBoxPosCmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}
+
+  else if( command==TrpdZBoxPosCmd )
+    { GetTrpdCreator()->SetTrpdTrudZPos(TrpdZBoxPosCmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}
+
   else
     GateVolumeMessenger::SetNewValue(command,newValue);
 

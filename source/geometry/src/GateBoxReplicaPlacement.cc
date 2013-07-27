@@ -32,7 +32,7 @@ GateBoxReplicaPlacement::~GateBoxReplicaPlacement()
 void GateBoxReplicaPlacement::ConstructOwnPhysicalVolume(G4bool flagUpdateOnly)
 {
   if (!flagUpdateOnly) {
-    
+
     m_Replica = new GateBoxReplica( this,
       	      	      	      	      mPhysicalVolumeName,
                               	      GetCreator()->GetLogicalVolume(),

@@ -29,7 +29,7 @@ GateListManager::GateListManager(const G4String& itsName,
 
 //--------------------------------------------------------------------------------------
 GateListManager::~GateListManager()
-{  
+{
   for (std::vector<GateNamedObject*>::iterator it = theListOfNamedObject.begin(); it != theListOfNamedObject.end(); )
     {
       //delete (*it);

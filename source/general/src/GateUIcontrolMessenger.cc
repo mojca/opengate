@@ -30,7 +30,7 @@ See GATE/LICENSE.txt for further details
 // Constructor
 GateUIcontrolMessenger::GateUIcontrolMessenger()
 : GateMessenger("control")
-{ 
+{
   GetDirectory()->SetGuidance("GATE user-interface commands");
 
   G4String cmdName;
@@ -50,16 +50,16 @@ GateUIcontrolMessenger::GateUIcontrolMessenger()
 
 GateUIcontrolMessenger::~GateUIcontrolMessenger()
 {
-  delete ExecuteCmd; 
+  delete ExecuteCmd;
 }
 
 
 
 // UI command interpreter method
 void GateUIcontrolMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
   if( command==ExecuteCmd )
-    { LaunchMacroFile(newValue); }   
+    { LaunchMacroFile(newValue); }
   else
     GateMessenger::SetNewValue(command,newValue);
 }
@@ -77,4 +77,3 @@ void GateUIcontrolMessenger::LaunchMacroFile(G4String fileName)
 
   G4UImanager::GetUIpointer()->ExecuteMacroFile(filePath);
 }
-

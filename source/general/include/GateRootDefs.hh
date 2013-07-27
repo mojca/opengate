@@ -34,13 +34,13 @@ class GateCoincidenceDigi;
 
 /*! \namespace  GateRootDefs
     \brief  Namespace to provide general-purpose methods to the ROOT-based classes
-    
+
     - GateTools - by Daniel.Strul@iphe.unil.ch
-    
-    - The GateRootDefs namespace is a collection of data and functions providing 
+
+    - The GateRootDefs namespace is a collection of data and functions providing
       some general-purpose definitions to the ROOT-based classes:
       - Methods allowing to change the output-ID names
-*/      
+*/
 
 namespace GateRootDefs
 {
@@ -51,12 +51,12 @@ namespace GateRootDefs
 
 /*! \class  GateRootHitBuffer
     \brief  ROOT structure to store hits for GateToRoot and GateHitFileReader
-    
+
     - GateRootHitBuffer - by Giovanni.Santin@cern.ch (May 1, 2002)
-    
+
     - This structure was initally declared in GateToRoot. To insure consistency between
       GateToRoot and GatHitFileReader, I have made it a separate class.
-*/      
+*/
 class GateRootHitBuffer
 {
   public:
@@ -97,10 +97,10 @@ class GateRootHitBuffer
       { return G4ThreeVector(posX,posY,posZ) * mm ;}
     //! Set the global position from a value given in G4 units (conversion into millimeters)
     inline void SetPos(const G4ThreeVector& aPosition)
-      { 
-      	posX = aPosition.x() / mm; 
-	posY = aPosition.y() / mm; 
-	posZ = aPosition.z() / mm; 
+      {
+      	posX = aPosition.x() / mm;
+	posY = aPosition.y() / mm;
+	posZ = aPosition.z() / mm;
       }
 
     //! Returns the local position in G4 units (conversion from millimeters)
@@ -108,10 +108,10 @@ class GateRootHitBuffer
       { return G4ThreeVector(localPosX,localPosY,localPosZ) * mm ;}
     //! Set the local position from a value given in G4 units (conversion into millimeters)
     inline void SetLocalPos(const G4ThreeVector& aPosition)
-      { 
-      	localPosX = aPosition.x() / mm; 
-	localPosY = aPosition.y() / mm; 
-	localPosZ = aPosition.z() / mm; 
+      {
+      	localPosX = aPosition.x() / mm;
+	localPosY = aPosition.y() / mm;
+	localPosZ = aPosition.z() / mm;
       }
 
     //! Returns the source position in G4 units (conversion from millimeters)
@@ -119,10 +119,10 @@ class GateRootHitBuffer
       { return G4ThreeVector(sourcePosX,sourcePosY,sourcePosZ) * mm ;}
     //! Set the source position from a value given in G4 units (conversion into millimeters)
     inline void SetSourcePos(const G4ThreeVector& aPosition)
-      { 
-      	sourcePosX = aPosition.x() / mm; 
-	sourcePosY = aPosition.y() / mm; 
-	sourcePosZ = aPosition.z() / mm; 
+      {
+      	sourcePosX = aPosition.x() / mm;
+	sourcePosY = aPosition.y() / mm;
+	sourcePosZ = aPosition.z() / mm;
       }
 
     //! Returns the scanner axial position in G4 units (conversion from millimeters)
@@ -176,12 +176,12 @@ class GateRootHitBuffer
 
 /*! \class  GateHitTree
     \brief  ROOT tree to store hits
-    
+
     - GateHitTree - by Giovanni.Santin@cern.ch (May 1, 2002)
-    
-    - This tree, initally declared in GateToRoot, was changed 
+
+    - This tree, initally declared in GateToRoot, was changed
       into a separate class.
-*/      
+*/
 class GateHitTree : public  TTree
 {
   public:
@@ -198,12 +198,12 @@ class GateHitTree : public  TTree
 
 /*! \class  GateRootSingleBuffer
     \brief  ROOT structure to store singles for GateToRoot
-    
+
     - GateRootHitBuffer - by Giovanni.Santin@cern.ch (May 1, 2002)
-    
-    - This structure, initally declared in GateToRoot, was changed 
+
+    - This structure, initally declared in GateToRoot, was changed
       into a separate class.
-*/      
+*/
 class GateRootSingleBuffer
 {
   public:
@@ -229,12 +229,12 @@ class GateRootSingleBuffer
     Float_t  globalPosY;
     Float_t  globalPosZ;
     Int_t    outputID[ROOT_OUTPUTIDSIZE];
-    Int_t    comptonPhantom; 
-    Int_t    comptonCrystal;    
-    Int_t    RayleighPhantom; 
-    Int_t    RayleighCrystal;    
+    Int_t    comptonPhantom;
+    Int_t    comptonCrystal;
+    Int_t    RayleighPhantom;
+    Int_t    RayleighCrystal;
     Float_t  axialPos;
-    Float_t  rotationAngle;    
+    Float_t  rotationAngle;
     Char_t   comptonVolumeName[40];
     Char_t   RayleighVolumeName[40];
     Int_t    septalNb;							//!< HDS : septal penetration
@@ -243,12 +243,12 @@ class GateRootSingleBuffer
 
 /*! \class  GateSingleTree
     \brief  ROOT tree to store singles
-    
+
     - GateSingleTree - by Giovanni.Santin@cern.ch (May 1, 2002)
-    
-    - This tree, initally declared in GateToRoot, was changed 
+
+    - This tree, initally declared in GateToRoot, was changed
       into a separate class.
-*/      
+*/
 class GateSingleTree : public  TTree
 {
   public:
@@ -264,12 +264,12 @@ class GateSingleTree : public  TTree
 
 /*! \class  GateRootCoincBuffer
     \brief  ROOT structure to store coincidences for GateToRoot
-    
+
     - GateRootHitBuffer - by Giovanni.Santin@cern.ch (May 1, 2002)
-    
-    - This structure, initally declared in GateToRoot, was changed 
+
+    - This structure, initally declared in GateToRoot, was changed
       into a separate class.
-*/      
+*/
 class GateRootCoincBuffer
 {
   public:
@@ -288,7 +288,7 @@ class GateRootCoincBuffer
 
     Int_t    runID;
     Float_t  axialPos;
-    Float_t  rotationAngle;    
+    Float_t  rotationAngle;
 
     Int_t    eventID1;
     Int_t    sourceID1;
@@ -302,9 +302,9 @@ class GateRootCoincBuffer
     Float_t  globalPosZ1;
     Int_t    outputID1[ROOT_OUTPUTIDSIZE];
     Int_t    comptonPhantom1;
-    Int_t    comptonCrystal1;   
+    Int_t    comptonCrystal1;
     Int_t    RayleighPhantom1;
-    Int_t    RayleighCrystal1;   
+    Int_t    RayleighCrystal1;
     Char_t   comptonVolumeName1[40];
     Char_t   RayleighVolumeName1[40];
 
@@ -320,9 +320,9 @@ class GateRootCoincBuffer
     Float_t  globalPosZ2;
     Int_t    outputID2[ROOT_OUTPUTIDSIZE];
     Int_t    comptonPhantom2;
-    Int_t    comptonCrystal2;    
+    Int_t    comptonCrystal2;
     Int_t    RayleighPhantom2;
-    Int_t    RayleighCrystal2;    
+    Int_t    RayleighCrystal2;
     Char_t   comptonVolumeName2[40];
     Char_t   RayleighVolumeName2[40];
 
@@ -335,12 +335,12 @@ class GateRootCoincBuffer
 
 /*! \class  GateCoincTree
     \brief  ROOT tree to store singles
-    
+
     - GateCoincTree - by Giovanni.Santin@cern.ch (May 1, 2002)
-    
-    - This tree, initally declared in GateToRoot, was changed 
+
+    - This tree, initally declared in GateToRoot, was changed
       into a separate class.
-*/      
+*/
 class GateCoincTree : public  TTree
 {
   public:

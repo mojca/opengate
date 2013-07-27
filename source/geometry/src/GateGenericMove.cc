@@ -33,7 +33,7 @@ GateGenericMove::GateGenericMove(GateVVolume* itsObjectInserter, const G4String&
 
 //-------------------------------------------------------------------------------------------------
 GateGenericMove::~GateGenericMove()
-{  
+{
   delete mMessenger;
 }
 //-------------------------------------------------------------------------------------------------
@@ -62,18 +62,18 @@ void GateGenericMove::PushMyPlacements(const G4RotationMatrix& currentRotationMa
   GateDebugMessage("Move", 3, "\t current index " << i << G4endl);
   GateDebugMessage("Move", 3, "\t pos " << currentPosition << G4endl);
   GateDebugMessage("Move", 3, "\t plac " << mPlacementsList[i].second << G4endl);
-  
+
   // New placement
   G4RotationMatrix newRotationMatrix;
   G4ThreeVector newPosition;
   if (mUseRotation) newRotationMatrix = mPlacementsList[i].first;
   else newRotationMatrix = currentRotationMatrix;
-  if (mUseTranslation) 
+  if (mUseTranslation)
     {
       // if (mUseRelativeTranslation) {
       //         newPosition = currentPosition + mPlacementsList[i].second;
       //       }
-      //       else 
+      //       else
         newPosition = mPlacementsList[i].second;
     }
   else newPosition = currentPosition;

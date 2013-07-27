@@ -22,7 +22,7 @@ See GATE/LICENSE.txt for further details
 GateVProcessMessenger::GateVProcessMessenger(GateVProcess *pb):pProcess(pb)
 {
   mPrefix = "/gate/physics/";
-  //BuildCommands(G4String base)  
+  //BuildCommands(G4String base)
 
   pSetSplit              = 0;
   pSetRussianR           = 0;
@@ -53,7 +53,7 @@ GateVProcessMessenger::~GateVProcessMessenger()
 {
   if(pSetEmin) delete pSetEmin;
   if(pSetEmax) delete pSetEmax;
-  if(pClearERange) delete pClearERange;  
+  if(pClearERange) delete pClearERange;
 
   if(pAddDataSet) delete pAddDataSet;
   if(pRemoveDataSet) delete pRemoveDataSet;
@@ -220,7 +220,7 @@ void GateVProcessMessenger::BuildDataSetCommands(G4String base)
   G4String candCS = "";
   for(unsigned int i=0; i<nCS; i++)
     candCS += lcs[i]  + " ";
-  
+
   base = mPrefix+base;
 
   bb = base+"/setDataSet";
@@ -256,7 +256,7 @@ void GateVProcessMessenger::SetDataSetNewValue(G4UIcommand* command, G4String pa
 
   std::vector<G4String> lcs = pProcess->GetTheListOfDataSets();
   unsigned int nCS = lcs.size();
-  
+
   if(nCS == 0) return;
 
   if(command==pAddDataSet)
@@ -380,7 +380,7 @@ void GateVProcessMessenger::SetModelsNewValue(G4UIcommand* command, G4String par
 {
   std::vector<G4String> lmod = pProcess->GetTheListOfModels();
   unsigned int nMod = lmod.size();
-  
+
   if(nMod == 0) return;
 
   if(command==pAddModel)
@@ -417,7 +417,7 @@ void GateVProcessMessenger::SetEnergyRangeModelsNewValue(G4UIcommand* command, G
 {
   std::vector<G4String> lmod = pProcess->GetTheListOfModels();
   unsigned int nMod = lmod.size();
-  
+
   if(nMod == 0) return;
 
   if(command==pAddModel)
@@ -465,24 +465,24 @@ void GateVProcessMessenger::SetEnergyRangeModelsNewValue(G4UIcommand* command, G
       char par4[30];
       std::istringstream is(param);
       is >> par1 >> par2 >> par3 >> par4;
-      
+
       double par1unit = ScaleValue(par1,par2);
 
       pProcess->SetModelEnergyMin(lmod[i],par1unit,par3,par4);
-    }  
+    }
 
     if(command == plModelSetEmax[i])
-    { 
+    {
       double par1;
       char par2[30];
       char par3[30];
       char par4[30];
       std::istringstream is(param);
       is >> par1 >> par2 >> par3 >> par4 ;
-      
+
       double par1unit = ScaleValue(par1,par2);
 
-      pProcess->SetModelEnergyMax(lmod[i],par1unit,par3,par4);  
+      pProcess->SetModelEnergyMax(lmod[i],par1unit,par3,par4);
     }
   }
 }

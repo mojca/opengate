@@ -43,7 +43,7 @@ public:
   void ConstructProcess();
   void ConstructParticle();
 
- 
+
   void Print(G4String type, G4String particlename);
   void Print(G4String name);
 
@@ -51,14 +51,14 @@ public:
   void AddProcesses(G4String process, G4String particle);
 
   void PurgeIfFictitious();
- 
+
   void Write(G4String file);
 
-  std::vector<GateVProcess*> FindProcess(G4String name);  
+  std::vector<GateVProcess*> FindProcess(G4String name);
 
   std::vector<G4String> GetTheListOfPBName() {return theListOfPBName;}
 
-  // SetCuts() 
+  // SetCuts()
   void SetCuts();
   void DefineCuts();
   void SetCutInRegion(G4String particleName, G4String regionName, G4double cutValue);
@@ -76,7 +76,7 @@ private:
 public:
 
   static GatePhysicsList *GetInstance()
-  {   
+  {
     if (singleton == 0)
     {
       //std::cout << "creating PhysicscList..." << std::endl;
@@ -90,7 +90,7 @@ public:
   {
     return GateVProcess::GetTheListOfProcesses();
   }
-  
+
   std::vector<G4String> mListOfStepLimiter;
   std::vector<G4String> mListOfG4UserSpecialCut;
 
@@ -106,7 +106,7 @@ private:
   };
   typedef std::map<G4String, ParticleCutType> RegionCutMapType;
   RegionCutMapType mapOfRegionCuts;
-  
+
   typedef std::map<G4String, GateUserLimits*> VolumeUserLimitsMapType;
   VolumeUserLimitsMapType mapOfVolumeUserLimits;
 
@@ -135,6 +135,3 @@ private:
 
 
 #endif /* end #define GATEPHYSICSLIST_HH */
-
-
-

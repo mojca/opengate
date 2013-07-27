@@ -27,7 +27,7 @@ See GATE/LICENSE.txt for further details
 
 GateCoincidencePulseProcessorChainMessenger::GateCoincidencePulseProcessorChainMessenger(GateCoincidencePulseProcessorChain* itsProcessorChain)
 :GateListMessenger(itsProcessorChain)
-{ 
+{
   pInsertCmd->SetCandidates(DumpMap());
 
   G4String cmdName;
@@ -55,11 +55,11 @@ GateCoincidencePulseProcessorChainMessenger::~GateCoincidencePulseProcessorChain
 
 
 void GateCoincidencePulseProcessorChainMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
-  if (command == AddInputNameCmd) 
+{
+  if (command == AddInputNameCmd)
   { GetProcessorChain()->GetInputNames().push_back(newValue);  //mhadi_modif
     GetProcessorChain()->SetSystem(newValue); } //mhadi
-  else if (command == usePriorityCmd) 
+  else if (command == usePriorityCmd)
     { GetProcessorChain()->SetNoPriority(!usePriorityCmd->GetNewBoolValue(newValue)); }
   else
     GateListMessenger::SetNewValue(command,newValue);
@@ -80,7 +80,7 @@ void GateCoincidencePulseProcessorChainMessenger::DoInsertion(const G4String& ch
 {
   if (GetNewInsertionBaseName().empty())
     SetNewInsertionBaseName(childTypeName);
-    
+
   AvoidNameConflicts();
 
   GateVCoincidencePulseProcessor* newProcessor=0;
@@ -103,7 +103,7 @@ void GateCoincidencePulseProcessorChainMessenger::DoInsertion(const G4String& ch
     G4cout << "Pulse-processor type name '" << childTypeName << "' was not recognised --> insertion request must be ignored!\n";
     return;
   }
-  
+
   GetProcessorChain()->InsertProcessor(newProcessor);
   SetNewInsertionBaseName("");
 }
@@ -114,8 +114,3 @@ G4bool GateCoincidencePulseProcessorChainMessenger::CheckNameConflict(const G4St
   // Check whether an object with the same name already exists in the list
   return ( GetListManager()->FindElement( GetListManager()->GetObjectName() + "/" + name ) != 0 ) ;
 }
-
-
-
-
-

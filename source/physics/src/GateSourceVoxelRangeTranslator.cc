@@ -16,14 +16,14 @@ See GATE/LICENSE.txt for further details
 #include <fstream>
 #include <iomanip>
 
-GateSourceVoxelRangeTranslator::GateSourceVoxelRangeTranslator(GateVSourceVoxelReader* voxelReader) 
+GateSourceVoxelRangeTranslator::GateSourceVoxelRangeTranslator(GateVSourceVoxelReader* voxelReader)
   : GateVSourceVoxelTranslator(voxelReader)
 {
   m_name = G4String("rangeTranslator");
   m_messenger = new GateSourceVoxelRangeTranslatorMessenger(this);
 }
 
-GateSourceVoxelRangeTranslator::~GateSourceVoxelRangeTranslator() 
+GateSourceVoxelRangeTranslator::~GateSourceVoxelRangeTranslator()
 {
   delete m_messenger;
 }
@@ -81,23 +81,23 @@ void GateSourceVoxelRangeTranslator::ReadTranslationTable(G4String fileName)
 
 }
 
-void GateSourceVoxelRangeTranslator::Describe(G4int) 
+void GateSourceVoxelRangeTranslator::Describe(G4int)
 {
   G4cout << " Range Translator" << G4endl;
   for (G4int iRange = 0; iRange< (G4int)m_voxelActivityTranslation.size(); iRange++) {
     G4double    xmin      = (m_voxelActivityTranslation[iRange].first).first;
     G4double    xmax      = (m_voxelActivityTranslation[iRange].first).second;
     G4double activity = (m_voxelActivityTranslation[iRange].second);
-    G4cout << "\tRange "  << std::setw(3) << iRange 
-	   << " : imageValue in [ " 
-	   << std::resetiosflags(std::ios::floatfield) 
-	   << std::setiosflags(std::ios::scientific) 
-	   << std::setprecision(3) 
-	   << std::setw(12) 
-	   << xmin 
-	   << " , "   << xmax 
-	   << " ]  ---> activity (Bq) " 
-	   << activity/becquerel 
+    G4cout << "\tRange "  << std::setw(3) << iRange
+	   << " : imageValue in [ "
+	   << std::resetiosflags(std::ios::floatfield)
+	   << std::setiosflags(std::ios::scientific)
+	   << std::setprecision(3)
+	   << std::setw(12)
+	   << xmin
+	   << " , "   << xmax
+	   << " ]  ---> activity (Bq) "
+	   << activity/becquerel
 	   << G4endl;
   }
 }
@@ -119,16 +119,16 @@ void GateSourceVoxelRangeTranslator::UpdateActivity(G4double activmin , G4double
 
 }
 
-void GateSourceVoxelRangeTranslator::AddTranslationRange( G4double rmin , G4double rmax ) 
+void GateSourceVoxelRangeTranslator::AddTranslationRange( G4double rmin , G4double rmax )
 {
     std::pair<G4double,G4double> minmax(rmin, rmax);
     GateVoxelActivityTranslationRange range(minmax, 0. );
     // Add check on possible overlaps with previously defined image value ranges
     // before adding this range to the range table
-    
+
     GateVoxelActivityTranslationRangeVector::iterator it = find(m_voxelActivityTranslation.begin(),m_voxelActivityTranslation.end(),range);
-    
-    
+
+
     if ( it != m_voxelActivityTranslation.end() ) m_voxelActivityTranslation.push_back(range);
   }
 

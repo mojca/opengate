@@ -25,7 +25,7 @@ See GATE/LICENSE.txt for further details
 GateVGeometryVoxelReaderMessenger::GateVGeometryVoxelReaderMessenger(GateVGeometryVoxelReader* voxelReader)
   : GateVGeometryVoxelStoreMessenger(voxelReader)
     , m_voxelReader(voxelReader)
-{ 
+{
 
   G4String cmdName;
 
@@ -65,7 +65,7 @@ GateVGeometryVoxelReaderMessenger::~GateVGeometryVoxelReaderMessenger()
 
 //----------------------------------------------------------------------------------------------------------
 void GateVGeometryVoxelReaderMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
   if( command == ReadFileCmd ) {
     m_voxelReader->ReadFile(newValue);
   } else if ( command == DescribeCmd ) {
@@ -79,6 +79,3 @@ void GateVGeometryVoxelReaderMessenger::SetNewValue(G4UIcommand* command,G4Strin
   }
 }
 //----------------------------------------------------------------------------------------------------------
-
-
-

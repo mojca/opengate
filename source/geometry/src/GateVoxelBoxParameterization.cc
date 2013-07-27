@@ -24,9 +24,9 @@ See GATE/LICENSE.txt for further details
 #include "GateGeometryVoxelRangeTranslator.hh"
 
 //! Constructor.
-GateVoxelBoxParameterization::GateVoxelBoxParameterization( 
-						     GateVGeometryVoxelReader* voxR, 
-						     const G4ThreeVector& voxN, 
+GateVoxelBoxParameterization::GateVoxelBoxParameterization(
+						     GateVGeometryVoxelReader* voxR,
+						     const G4ThreeVector& voxN,
 						     const G4ThreeVector& voxS):
   GatePVParameterisation(),
   voxelNumber(voxN),
@@ -36,7 +36,7 @@ GateVoxelBoxParameterization::GateVoxelBoxParameterization(
   translator( voxelReader->GetVoxelTranslator()),
   nxy( static_cast<int> ( voxelNumber.x() * voxelNumber.y() ) ),
   nx ( static_cast<int> ( voxelNumber.x() ) ){
-    
+
 }
 
 
@@ -46,16 +46,16 @@ GateVoxelBoxParameterization::GateVoxelBoxParameterization(
 
 void GateVoxelBoxParameterization::ComputeTransformation(G4int copyNo  ,G4VPhysicalVolume * pv) const
 {
-    
+
   // Calculate the relative distance "relPos" of the center of the current voxel
   // from the center of the corner voxel (voxel #0), and
   // calculate the position (relative to the center of the matrix) by adding to relpos the corner position
   G4ThreeVector relPos( KroneckerProduct( ComputeArrayIndices(copyNo), voxelSize) );
   G4ThreeVector xlat  ( relPos+voxelZeroPos );
- 
+
   pv->SetTranslation( xlat );
   pv->SetRotation(0);
-   
+
 }
 
 
@@ -79,7 +79,7 @@ G4Material* GateVoxelBoxParameterization::ComputeMaterial(G4int copyNo , G4VPhys
 
   G4Material*      mp( voxelReader  ->GetVoxelMaterial(copyNo)  );
   G4LogicalVolume* lv( pv->GetLogicalVolume()                   );
-  
+
   if (translator){
     lv->SetVisAttributes( translator->GetMaterialAttributes(mp) );
   }

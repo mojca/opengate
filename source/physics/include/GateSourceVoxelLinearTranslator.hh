@@ -22,7 +22,7 @@ class GateSourceVoxelLinearTranslator : public GateVSourceVoxelTranslator
 public:
   GateSourceVoxelLinearTranslator(GateVSourceVoxelReader* voxelReader);
   virtual ~GateSourceVoxelLinearTranslator();
-  
+
   void     SetValueToActivityScale(G4double value) { m_valueToActivityScale = value; };
   G4double GetValueToActivityScale()               { return m_valueToActivityScale; };
   void Describe(G4int){ };
@@ -34,7 +34,7 @@ protected:
 
   G4double m_valueToActivityScale;
 
-  GateSourceVoxelLinearTranslatorMessenger* m_messenger; 
+  GateSourceVoxelLinearTranslatorMessenger* m_messenger;
 
 };
 

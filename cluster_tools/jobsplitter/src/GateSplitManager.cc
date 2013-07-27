@@ -26,11 +26,11 @@ void GateSplitManager::CheckEnvironment()
  if (!getenv("GC_GATE_EXE_DIR")) err=2;
  if (!getenv("PWD"))             err=3;
 
- if (err==1) cout<<"Environment variable GC_DOT_GATE_DIR not set !"<<endl; 
+ if (err==1) cout<<"Environment variable GC_DOT_GATE_DIR not set !"<<endl;
  if (err==2) cout<<"Environment variable GC_GATE_EXE_DIR not set !"<<endl;
  if (err==3) cout<<"Environment variable PWD not set !"<<endl;
  if (err>0) CleanAbort();
- 
+
  env=getenv("GC_DOT_GATE_DIR");
  if (env.length()==0) err=4;
  env=getenv("GC_GATE_EXE_DIR");
@@ -38,10 +38,10 @@ void GateSplitManager::CheckEnvironment()
  env=getenv("PWD");
  if (env.length()==0) err=6;
 
- if (err==4) cout<<"Environment variable GC_DOT_GATE_DIR not set !"<<endl; 
+ if (err==4) cout<<"Environment variable GC_DOT_GATE_DIR not set !"<<endl;
  if (err==5) cout<<"Environment variable GC_GATE_EXE_DIR not set !"<<endl;
  if (err==6) cout<<"Environment variable PWD not set !"<<endl;
- if (err>0) CleanAbort(); 
+ if (err>0) CleanAbort();
 }
 
 void GateSplitManager::StartSplitting()
@@ -54,13 +54,13 @@ void GateSplitManager::StartSplitting()
  G4String dir=getenv("GC_DOT_GATE_DIR");
  if (dir.substr(dir.length()-1,dir.length())=="/") dir=dir+".Gate/";
  else dir=dir+"/.Gate/";
- ifstream dirstream(dir.c_str()); 
- if (!dirstream) { 
- const G4String mkdir("mkdir "+dir); 
- if(m_verboseLevel>1)cout<<"Information : Creating a .Gate directory... "; 
- const int res = system(mkdir.c_str()); 
+ ifstream dirstream(dir.c_str());
+ if (!dirstream) {
+ const G4String mkdir("mkdir "+dir);
+ if(m_verboseLevel>1)cout<<"Information : Creating a .Gate directory... ";
+ const int res = system(mkdir.c_str());
  if(m_verboseLevel>1)cout<<"done"<<endl;
- if (res!=0) 
+ if (res!=0)
   {
    cout<<"Error : Failed to create .Gate directory"<<endl;
    CleanAbort();
@@ -81,14 +81,12 @@ void GateSplitManager::CleanAbort()
 {
  ofstream tmp1, tmp2;
  if (macParser) macParser->CleanAbort(tmp1,tmp2);
- cout<<"Made clean exit !"<<endl;  
+ cout<<"Made clean exit !"<<endl;
  exit(1);
 }
 
 GateSplitManager::~GateSplitManager()
 {
  delete macParser;
- delete toPlatform; 
+ delete toPlatform;
 }
-
-

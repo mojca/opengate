@@ -30,7 +30,7 @@ GateSPSPosDistribution::GateSPSPosDistribution()
 
 //-----------------------------------------------------------------------------
 GateSPSPosDistribution::~GateSPSPosDistribution()
-{ 
+{
 }
 //-----------------------------------------------------------------------------
 
@@ -38,7 +38,7 @@ GateSPSPosDistribution::~GateSPSPosDistribution()
 //-----------------------------------------------------------------------------
 void GateSPSPosDistribution::setVerbosity(G4int vL)
 {
-  verbosityLevel = vL; 
+  verbosityLevel = vL;
 }
 //-----------------------------------------------------------------------------
 
@@ -68,78 +68,78 @@ void GateSPSPosDistribution::GeneratePositronRange()
   G4double Fit = 0 ;
 
   if( positronrange == "Fluor18" )
-    {   
+    {
       while( R >= Fit || R > 2.0 )
         {
-          X = CLHEP::RandFlat::shoot( -2.0, 2.0 ) ; // Rangemin ; Rangemax	 
-          Y = CLHEP::RandFlat::shoot( -2.0, 2.0 ) ; // Rangemin ; Rangemax	 
+          X = CLHEP::RandFlat::shoot( -2.0, 2.0 ) ; // Rangemin ; Rangemax
+          Y = CLHEP::RandFlat::shoot( -2.0, 2.0 ) ; // Rangemin ; Rangemax
           Z = CLHEP::RandFlat::shoot( -2.0, 2.0 ) ; // Rangemin ; Rangemax
-     	 
+
           Fit = CLHEP::RandExponential::shoot( 0.7 ) ;
-	 
+
           R = sqrt( X*X + Y*Y + Z*Z ) ;
-	 
+
           rangex = X ;
           rangey = Y ;
           rangez = Z ;
         }
-	  
+
       IsotopeRange.setX( rangex ) ;
       IsotopeRange.setY( rangey ) ;
       IsotopeRange.setZ( rangez ) ;
-  
+
       particle_position += IsotopeRange ;
 
     }
 
   if( positronrange == "Carbon11" )
-    {  
+    {
       while( R >= Fit || R > 4.0 )
         {
-          X = CLHEP::RandFlat::shoot(-4.0, 4.0 ) ; // Rangemin ; Rangemax	 
-          Y = CLHEP::RandFlat::shoot(-4.0, 4.0 ) ; // Rangemin ; Rangemax	 
-          Z = CLHEP::RandFlat::shoot(-4.0, 4.0 ) ; // Rangemin ; Rangemax	 
-	 
+          X = CLHEP::RandFlat::shoot(-4.0, 4.0 ) ; // Rangemin ; Rangemax
+          Y = CLHEP::RandFlat::shoot(-4.0, 4.0 ) ; // Rangemin ; Rangemax
+          Z = CLHEP::RandFlat::shoot(-4.0, 4.0 ) ; // Rangemin ; Rangemax
+
           Fit = CLHEP::RandExponential::shoot(1.4) ;
-	 
+
           R = sqrt( X*X + Y*Y + Z*Z ) ;
-	 
+
           rangex = X ;
           rangey = Y ;
           rangez = Z ;
         }
-	  
+
       IsotopeRange.setX( rangex ) ;
       IsotopeRange.setY( rangey ) ;
       IsotopeRange.setZ( rangez ) ;
-  
+
       particle_position += IsotopeRange ;
- 
+
     }
- 
+
   if( positronrange == "Oxygen15" )
-    {  
+    {
       while( R >= Fit || R > 8.0 )
         {
-          X = CLHEP::RandFlat::shoot(-8.0,8.0) ; // Rangemin ; Rangemax	 
-          Y = CLHEP::RandFlat::shoot(-8.0,8.0) ; // Rangemin ; Rangemax	 
-          Z = CLHEP::RandFlat::shoot(-8.0,8.0) ; // Rangemin ; Rangemax	 
-	 
+          X = CLHEP::RandFlat::shoot(-8.0,8.0) ; // Rangemin ; Rangemax
+          Y = CLHEP::RandFlat::shoot(-8.0,8.0) ; // Rangemin ; Rangemax
+          Z = CLHEP::RandFlat::shoot(-8.0,8.0) ; // Rangemin ; Rangemax
+
           Fit = CLHEP::RandExponential::shoot( 2.4 ) ;
-	 
+
           R = sqrt( X*X + Y*Y + Z*Z ) ;
-	 
+
           rangex = X ;
           rangey = Y ;
           rangez = Z ;
         }
-	  
+
       IsotopeRange.setX( rangex ) ;
       IsotopeRange.setY( rangey ) ;
       IsotopeRange.setZ( rangez ) ;
- 
+
       particle_position += IsotopeRange ;
-  
+
     }
 
 }
@@ -152,7 +152,7 @@ G4ThreeVector GateSPSPosDistribution::GenerateOne()
 /*
   G4bool srcconf = false;
   // G4int LoopCount = 0;
- 
+
   if(Forbid == true)
     {
       srcconf = IsSourceForbidden();
@@ -167,16 +167,16 @@ G4ThreeVector GateSPSPosDistribution::GenerateOne()
   G4int nbShoot = 0;
   G4int limitShoot = 1000000;
   while (shootAgain && nbShoot<limitShoot)
-  {	
+  {
     if( GetPosDisType() != "NULL" )
-      { 
-        particle_position = G4SPSPosDistribution::GenerateOne() ;     
+      {
+        particle_position = G4SPSPosDistribution::GenerateOne() ;
       }
-    else 
-      { 
+    else
+      {
         GetPosDisType() = "Point" ;
         particle_position = G4SPSPosDistribution::GenerateOne() ;
-      }      
+      }
     if( positronrange != "NULL" )
       {
         GeneratePositronRange() ;
@@ -230,7 +230,7 @@ void GateSPSPosDistribution::ForbidSourceToVolume( const G4String& Vname )
 	G4cout << "Volume " << Vname << " exists" << G4endl;
       Forbid = true;
       ForbidVector.push_back(tempPV);
-      // Modif DS: we write a confirmation message 
+      // Modif DS: we write a confirmation message
       G4cout << " Activity forbidden in volume '" << Vname << "' confirmed" << G4endl;
     }
   else
@@ -254,7 +254,7 @@ G4bool GateSPSPosDistribution::IsSourceForbidden()
   G4ThreeVector null(0.,0.,0.);
   G4ThreeVector *ptr = &null;
 
-  // Check particle_position is within VolName, if so true, 
+  // Check particle_position is within VolName, if so true,
   // else false
   G4VPhysicalVolume *currentVolume = gNavigator->LocateGlobalPointAndSetup(particle_position,ptr,true);
 
@@ -270,4 +270,3 @@ G4bool GateSPSPosDistribution::IsSourceForbidden()
   return isForbidden;
 }
 //-----------------------------------------------------------------------------
-

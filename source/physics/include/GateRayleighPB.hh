@@ -17,7 +17,7 @@ See GATE/LICENSE.txt for further details
 
 #include "GateVProcess.hh"
 
-#include "G4RayleighScattering.hh" 
+#include "G4RayleighScattering.hh"
 
 MAKE_PROCESS_AUTO_CREATOR_WITH_MODEL(GateRayleighPB)
 

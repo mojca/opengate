@@ -2,7 +2,7 @@
 #ifndef GateRTVPhantom_HH
 #define GateRTVPhantom_HH 1
 
-#include <stdio.h>          
+#include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
@@ -50,4 +50,3 @@ void Compute(G4double aTime);
 };
 
 #endif
-

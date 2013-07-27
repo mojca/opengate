@@ -23,7 +23,7 @@ See GATE/LICENSE.txt for further details
 
 //-------------------------------------------------------------------------------
 GateSourceMgrMessenger::GateSourceMgrMessenger(GateSourceMgr* sourceMgr)
-{ 
+{
   m_sourceMgr = sourceMgr;
 
   GateSourceDir = new G4UIdirectory("/gate/source/");
@@ -75,7 +75,7 @@ GateSourceMgrMessenger::~GateSourceMgrMessenger()
 
 //-------------------------------------------------------------------------------
 void GateSourceMgrMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
   if( command == VerboseCmd ) {
     m_sourceMgr->SetVerboseLevel(VerboseCmd->GetNewIntValue(newValue));
   } else if( command == SelectSourceCmd ) {
@@ -91,5 +91,3 @@ void GateSourceMgrMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
     }*/
 }
 //-------------------------------------------------------------------------------
-
-

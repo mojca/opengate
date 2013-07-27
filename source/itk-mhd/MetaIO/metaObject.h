@@ -67,7 +67,7 @@ class METAIO_EXPORT MetaObject
       float m_Color[4];             // "Color = "            1.0, 0.0, 0.0, 1.0
 
       char  m_AcquisitionDate[255]; // "AcquisitionDate = "  "2007.03.21"
- 
+
       int   m_ID;                   // "ID = "               0
 
       int   m_ParentID;             // "ParentID = "         -1
@@ -80,9 +80,9 @@ class METAIO_EXPORT MetaObject
 
       METAIO_STL::streamoff m_CompressedDataSize;
       // Used internally to set if the dataSize should be written
-      bool m_WriteCompressedDataSize; 
+      bool m_WriteCompressedDataSize;
       bool m_CompressedData;
-      
+
       virtual void M_Destroy(void);
 
       virtual void M_SetupReadFields(void);
@@ -92,7 +92,7 @@ class METAIO_EXPORT MetaObject
       virtual bool M_Read(void);
 
       virtual bool M_Write(void);
-    
+
       virtual void M_PrepareNewReadStream();
 
       MetaEvent*     m_Event;
@@ -213,7 +213,7 @@ class METAIO_EXPORT MetaObject
       void AnatomicalOrientation(int _dim, MET_OrientationEnumType _ao);
       void AnatomicalOrientation(int _dim, char ao);
 
-      
+
       //    ElementSpacing(...)
       //       Optional Field
       //       Physical Spacing (in same units as position)
@@ -230,11 +230,11 @@ class METAIO_EXPORT MetaObject
 
       //    Color(...)
       //       Optional Field
-      //       Color of the current metaObject   
+      //       Color of the current metaObject
       const float * Color(void) const;
       void  Color(float _r, float _g, float _b, float _a);
-      void  Color(const float * _color);    
- 
+      void  Color(const float * _color);
+
       //    ID(...)
       //       Optional Field
       //       ID number of the current metaObject
@@ -277,7 +277,7 @@ class METAIO_EXPORT MetaObject
 
       //
       //
-      // User's field definitions 
+      // User's field definitions
       bool AddUserField(const char* _fieldName, MET_ValueEnumType _type,
                         int _length=0, bool _required=true,
                         int _dependsOn=-1);
@@ -353,15 +353,15 @@ class METAIO_EXPORT MetaObject
       char * GetAdditionalReadFieldValue( int i );
       int GetAdditionalReadFieldValueLength( int i );
 
-      // 
+      //
       void SetEvent(MetaEvent* event) {m_Event = event;}
 
       // Set the double precision for writing
-      void SetDoublePrecision(unsigned int precision) 
+      void SetDoublePrecision(unsigned int precision)
         {
         m_DoublePrecision = precision;
         }
-      unsigned int GetDoublePrecision() 
+      unsigned int GetDoublePrecision()
         {
         return m_DoublePrecision;
         }

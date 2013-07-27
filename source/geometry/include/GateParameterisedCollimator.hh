@@ -25,7 +25,7 @@ class GateParameterisedCollimator : public GateBox
 {
   public:
   // Constructor1
-     GateParameterisedCollimator(const G4String& itsName,G4bool acceptsChildren=true, 
+     GateParameterisedCollimator(const G4String& itsName,G4bool acceptsChildren=true,
 		 			 G4int depth=0);
   // Constructor2
      GateParameterisedCollimator(const G4String& itsName,const G4String& itsMaterialName,
@@ -35,7 +35,7 @@ class GateParameterisedCollimator : public GateBox
      virtual ~GateParameterisedCollimator();
 
      FCT_FOR_AUTO_CREATOR_VOLUME(GateParameterisedCollimator)
-     
+
      GateBox* GetCollimatorCreator() const
       { return (GateBox*) GetCreator(); }
 

@@ -44,7 +44,7 @@ GateAnalyzeHeader::GateAnalyzeHeader()
 {
   SetDefaults();
 }
-//----------------------------------------------------------------------------- 
+//-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
 void GateAnalyzeHeader::SetDefaults()
@@ -57,17 +57,17 @@ void GateAnalyzeHeader::SetDefaults()
   m_data.hk.session_error = 0;
   m_data.hk.regular = 'r';
   m_data.hk.hkey_un0 = '0';
-	
+
   /* image dimension */
   m_data.ic.dim[0] = 4;
-  m_data.ic.dim[1] = 0; 
-  m_data.ic.dim[2] = 0;  
-  m_data.ic.dim[3] = 0; 
+  m_data.ic.dim[1] = 0;
+  m_data.ic.dim[2] = 0;
+  m_data.ic.dim[3] = 0;
   m_data.ic.dim[4] = 1;
   m_data.ic.dim[5] = 0;
   m_data.ic.dim[6] = 0;
   m_data.ic.dim[7] = 0;
-	
+
   strcpy(m_data.ic.vox_units,"mm");
   strcpy(m_data.ic.cal_units,"Bq/cc");
   // I USE UNUSED1 TO STORE THE NUMBER OF CHANNELS
@@ -98,22 +98,22 @@ void GateAnalyzeHeader::SetDefaults()
   /* data_history */
   strcpy(m_data.hist.descrip,"image");
   strcpy(m_data.hist.aux_file,"none");
-  m_data.hist.orient='0';                
-  strcpy(m_data.hist.originator,"none");  
-  strcpy(m_data.hist.generated,"none"); 
-  strcpy(m_data.hist.scannum,"none");   
-  strcpy(m_data.hist.patient_id,"none");    
-  strcpy(m_data.hist.exp_date,"none");  
-  strcpy(m_data.hist.exp_time,"none");  
-  strcpy(m_data.hist.hist_un0,"no");  
-  m_data.hist.views = 0;       
-  m_data.hist.vols_added = 0;  
-  m_data.hist.start_field = 0;  
-  m_data.hist.field_skip = 0;   
+  m_data.hist.orient='0';
+  strcpy(m_data.hist.originator,"none");
+  strcpy(m_data.hist.generated,"none");
+  strcpy(m_data.hist.scannum,"none");
+  strcpy(m_data.hist.patient_id,"none");
+  strcpy(m_data.hist.exp_date,"none");
+  strcpy(m_data.hist.exp_time,"none");
+  strcpy(m_data.hist.hist_un0,"no");
+  m_data.hist.views = 0;
+  m_data.hist.vols_added = 0;
+  m_data.hist.start_field = 0;
+  m_data.hist.field_skip = 0;
   m_data.hist.omax = 0;
-  m_data.hist.omin = 0;    
+  m_data.hist.omin = 0;
   m_data.hist.smax = 0;
-  m_data.hist.smin = 0; 
+  m_data.hist.smin = 0;
 
   // Initialize
 //   strcpy(m_data.hist.orient, "0");
@@ -134,13 +134,13 @@ bool GateAnalyzeHeader::Read( const G4String& name)
 
   /// Tests wether the bytes are written in reverse order than the current machine settings
 	/// (little/big endians)
-	/// The first record should be the file size, hence if reading it doesn't match 
+	/// The first record should be the file size, hence if reading it doesn't match
 	/// the actual file size assume the header has bytes inverted
 	/// gets the file size
-	fseek(fph,0, SEEK_END);			
-	int file_size = ftell(fph);   
-	fseek(fph,0, SEEK_SET);		
-	
+	fseek(fph,0, SEEK_END);
+	int file_size = ftell(fph);
+	fseek(fph,0, SEEK_SET);
+
 	/// reads the records
 if(	  fread(&m_data.hk.sizeof_hdr, sizeof(int), 1, fph) == 0 ){G4cerr << "Problem reading data!!!" << G4endl;}
 if(	  fread(m_data.hk.data_type,sizeof(char),10,fph) == 0 ){G4cerr << "Problem reading data!!!" << G4endl;}
@@ -188,7 +188,7 @@ if(	  fread(&m_data.hist.smin,sizeof(int),1,fph) == 0 ){G4cerr << "Problem readi
 	  fclose(fph),fph=NULL;
 
 
-	  //std::cout << "m_data.hk.data_type=" <<m_data.hk.data_type << std::endl; 
+	  //std::cout << "m_data.hk.data_type=" <<m_data.hk.data_type << std::endl;
 
 	  m_rightEndian = TRUE;
 	  /// if opposite endian : reverse all data
@@ -240,11 +240,11 @@ if(	  fread(&m_data.hist.smin,sizeof(int),1,fph) == 0 ){G4cerr << "Problem readi
 			GateMachine::SwapEndians(&m_data.hist.omax,1);
 			GateMachine::SwapEndians(&m_data.hist.omin,1);
 			GateMachine::SwapEndians(&m_data.hist.smax,1);
-			GateMachine::SwapEndians(&m_data.hist.smin,1);	
+			GateMachine::SwapEndians(&m_data.hist.smin,1);
 		}
-		///	
+		///
 		  return true;
-	
+
 }
 //-----------------------------------------------------------------------------
 
@@ -270,7 +270,7 @@ m_data.ic.bitpix = BasicType::size(i.type());
 */
 
 //-----------------------------------------------------------------------------
-/// Writes the header 
+/// Writes the header
 bool GateAnalyzeHeader::Write( const G4String& filename )
 {
   FILE *fph=0;
@@ -284,7 +284,7 @@ bool GateAnalyzeHeader::Write( const G4String& filename )
   fwrite(&m_data.hk.session_error,sizeof(short int),1,fph);
   fwrite(&m_data.hk.regular,sizeof(char),1,fph);
   fwrite(&m_data.hk.hkey_un0,sizeof(char),1,fph);
-	
+
   fwrite(m_data.ic.dim,sizeof(short int),8,fph);
   fwrite(m_data.ic.vox_units,sizeof(char),4,fph);
   fwrite(m_data.ic.cal_units,sizeof(char),8,fph);
@@ -303,7 +303,7 @@ bool GateAnalyzeHeader::Write( const G4String& filename )
   fwrite(&m_data.ic.verified,sizeof(int),1,fph);
   fwrite(&m_data.ic.glmax,sizeof(int),1,fph);
   fwrite(&m_data.ic.glmin,sizeof(int),1,fph);
-	
+
   fwrite(m_data.hist.descrip,sizeof(char),80,fph);
   fwrite(m_data.hist.aux_file,sizeof(char),24,fph);
   fwrite(&m_data.hist.orient,sizeof(char),1,fph);
@@ -324,7 +324,7 @@ bool GateAnalyzeHeader::Write( const G4String& filename )
   fwrite(&m_data.hist.smin,sizeof(int),1,fph);
 
   fclose(fph), fph=NULL;
-  return true;		
+  return true;
 }
 //-----------------------------------------------------------------------------
 
@@ -333,4 +333,3 @@ bool GateAnalyzeHeader::Write( const G4String& filename )
 
 
 // EOF
-

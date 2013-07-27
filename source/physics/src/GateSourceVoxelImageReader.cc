@@ -72,7 +72,7 @@ void GateSourceVoxelImageReader::ReadFile(G4String fileName)
 }
 
 
-/* PY Descourt 11/12/2008 */ 
+/* PY Descourt 11/12/2008 */
 void GateSourceVoxelImageReader::ReadRTFile(G4String , G4String fileName)
 {
 
@@ -80,11 +80,11 @@ void GateSourceVoxelImageReader::ReadRTFile(G4String , G4String fileName)
 
 GateRTPhantom *Ph = GateRTPhantomMgr::GetInstance()->CheckSourceAttached( m_name );
 
-if ( Ph != 0) 
+if ( Ph != 0)
 {G4cout << " The Object "<< Ph->GetName()
 <<" is attached to the "<<m_name<<" Geometry Voxel Reader"<<G4endl;
 
-} 
+}
 
 
   if (!m_voxelTranslator) {
@@ -123,4 +123,4 @@ if ( Ph != 0)
   PrepareIntegratedActivityMap();
 
 }
-/* PY Descourt 11/12/2008 */ 
+/* PY Descourt 11/12/2008 */

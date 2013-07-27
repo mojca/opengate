@@ -26,10 +26,10 @@ GateGenericRepeaterMove::GateGenericRepeaterMove(GateVVolume* itsObjectInserter,
   : GateVGlobalPlacement(itsObjectInserter,itsName)
 {
   mMessenger = new GateGenericRepeaterMoveMessenger(this);
-  
+
   // Create internal random repeater
   mGenericRepeater = new GateGenericRepeater(itsObjectInserter, itsName+"GenericRepeater");
-  itsObjectInserter->GetRepeaterList()->AppendObjectRepeater(mGenericRepeater);  
+  itsObjectInserter->GetRepeaterList()->AppendObjectRepeater(mGenericRepeater);
   mGenericRepeater->EnableRelativeTranslation(true);
 }
 //-------------------------------------------------------------------------------------------------
@@ -37,7 +37,7 @@ GateGenericRepeaterMove::GateGenericRepeaterMove(GateVVolume* itsObjectInserter,
 
 //-------------------------------------------------------------------------------------------------
 GateGenericRepeaterMove::~GateGenericRepeaterMove()
-{  
+{
   delete mMessenger;
 }
 //-------------------------------------------------------------------------------------------------
@@ -53,10 +53,10 @@ void GateGenericRepeaterMove::SetFilename(G4String filename) {
 //-------------------------------------------------------------------------------------------------
 
 //-------------------------------------------------------------------------------------------------
-// void GateGenericRepeaterMove::InsertLineOfTimePlacement(std::string & line, 
-//                                                         double timeUnit, 
+// void GateGenericRepeaterMove::InsertLineOfTimePlacement(std::string & line,
+//                                                         double timeUnit,
 //                                                         double translationUnit,
-//                                                         double angleUnit) {  
+//                                                         double angleUnit) {
 //   std::istringstream is(line);
 //   // Read time
 //   double time = ReadDouble(is);
@@ -93,7 +93,7 @@ void GateGenericRepeaterMove::PushMyPlacements(const G4RotationMatrix& currentRo
   if (mTimeList.size() ==0) {
     GateError("Please provide a time-placement-repeat file with 'setPlacementsFilename'\n.");
   }
-  
+
   //  GateMessage("Core", 0, "GateGenericRepeaterMove::PushMyPlacements " << GetObjectName() << " t=" << aTime/s << " sec." << G4endl);
   std::vector<GatePlacement> list;
   GetPlacementListFromTime(aTime, list);
@@ -104,10 +104,10 @@ void GateGenericRepeaterMove::PushMyPlacements(const G4RotationMatrix& currentRo
 //-------------------------------------------------------------------------------------------------
 
 //-------------------------------------------------------------------------------------------------
-void GateGenericRepeaterMove::GetPlacementListFromTime(double aTime, 
+void GateGenericRepeaterMove::GetPlacementListFromTime(double aTime,
                                                        std::vector<GatePlacement> & list) {
   // Search for current "time"
-  int i=0; 
+  int i=0;
   while ((i < (int)mTimeList.size()) && (aTime >= mTimeList[i])) {
     i++;
   }

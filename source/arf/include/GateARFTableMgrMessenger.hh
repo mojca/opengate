@@ -33,12 +33,12 @@ class GateARFTableMgrMessenger: public G4UImessenger
 public:
   GateARFTableMgrMessenger(G4String aName, GateARFTableMgr*);
   ~GateARFTableMgrMessenger();
-  
+
   void SetNewValue(G4UIcommand*, G4String);
-  
+
 private:
   GateARFTableMgr*                     m_ARFTableMgr;
-    
+
   G4UIdirectory*                       GateARFTableDir;
   G4UIcmdWithAString*                  cptTableCmd;
   G4UIcmdWithAString*                  cptTableEWCmd;
@@ -57,4 +57,3 @@ private:
 };
 
 #endif
-

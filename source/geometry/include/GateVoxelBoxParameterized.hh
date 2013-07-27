@@ -28,7 +28,7 @@ class GateVoxelBoxParameterized : public GateBox
 public:
   // Constructor1
   GateVoxelBoxParameterized(const G4String& name,
-  				    G4bool acceptsChildren=true, 
+  				    G4bool acceptsChildren=true,
 		 		    G4int depth=0)
   : GateBox(name,"Vacuum",1,1,1,acceptsChildren,depth),
     m_name(name),
@@ -37,7 +37,7 @@ public:
     m_voxelInserter(new GateVoxelBoxParam(name+"Voxel", this)),
     voxelNumber(G4ThreeVector(1,1,1)),
     voxelSize(G4ThreeVector(1,1,1))
-  { 
+  {
     GetCreator()->GetTheChildList()->AddChild(m_voxelInserter);
   }
 
@@ -49,15 +49,15 @@ public:
 							  m_voxelInserter(new GateVoxelBoxParam(name+"Voxel", this)),
 							  voxelNumber(G4ThreeVector(1,1,1)),
 							  voxelSize(G4ThreeVector(1,1,1))
-  { 
+  {
     GetCreator()->GetTheChildList()->AddChild(m_voxelInserter);
   }
-  
+
   // Destructor
   ~GateVoxelBoxParameterized(){
     delete m_messenger;
   }
-  
+
   FCT_FOR_AUTO_CREATOR_VOLUME(GateVoxelBoxParameterized)
 
   //! Insert the reader to read and store the voxel material info
@@ -69,7 +69,7 @@ public:
   //! Get the reader to read and store the voxel material info
   inline GateVGeometryVoxelReader* GetReader() const
   { return m_voxelReader;}
-  
+
   //! Attach the matrix to the phantom SD
   void AttachPhantomSD();
 
@@ -79,13 +79,13 @@ public:
 
 
 private:
-  
+
   G4String m_name;
 
   GateVoxelBoxParameterizedMessenger* m_messenger;
   GateVGeometryVoxelReader*                   m_voxelReader;
   GateVoxelBoxParam*                  m_voxelInserter;
-  
+
   G4ThreeVector                               voxelNumber;
   G4ThreeVector                               voxelSize;
 

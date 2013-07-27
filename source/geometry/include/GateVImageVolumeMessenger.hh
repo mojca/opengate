@@ -9,8 +9,8 @@ See GATE/LICENSE.txt for further details
 ----------------------*/
 
 
-/*! 
-  \class GateVImageVolumeMessenger : 
+/*!
+  \class GateVImageVolumeMessenger :
   \brief Messenger of GateVImageVolume.
   \author thibault.frisson@creatis.insa-lyon.fr
           laurent.guigues@creatis.insa-lyon.fr
@@ -37,11 +37,11 @@ class GateVImageVolumeMessenger : public GateVolumeMessenger
 public:
   GateVImageVolumeMessenger(GateVImageVolume* volume);
   ~GateVImageVolumeMessenger();
-    
+
   void SetNewValue(G4UIcommand* cmd=0, G4String = " ");
 
 private:
-  GateVImageVolume * pVImageVolume; 
+  GateVImageVolume * pVImageVolume;
 
   G4UIcmdWithAString        * pImageFileNameCmd;
   //G4UIcmdWithAString        * pLabelToMaterialFileNameCmd;
@@ -55,4 +55,3 @@ private:
 //-----------------------------------------------------------------------------
 
 #endif
-

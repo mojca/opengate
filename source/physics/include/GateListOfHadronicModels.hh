@@ -54,7 +54,7 @@ public:
   std::vector<double> GetTheListOfEmin() {return theListOfEmin  ;}
   std::vector<double> GetTheListOfEmax() {return theListOfEmax  ;}
   G4String GetModelName(){return modelName;}
-  
+
   bool IsEnergyRangeDefined() {if(theListOfOptions.size()!=0) return true; return false;}
 
 protected:

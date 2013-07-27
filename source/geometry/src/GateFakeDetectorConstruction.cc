@@ -29,7 +29,7 @@ See GATE/LICENSE.txt for further details
 G4VPhysicalVolume* GateFakeDetectorConstruction::Construct() {
 
   G4String name, symbol;             //a=mass of a mole;
-  G4double a, z, density;            //z=mean number of protons;  
+  G4double a, z, density;            //z=mean number of protons;
 
   G4int ncomponents, natoms;
   G4double fractionmass;
@@ -67,7 +67,7 @@ G4VPhysicalVolume* GateFakeDetectorConstruction::Construct() {
 					      "world",         // its name
 					      0,               // its mother (logical) volume
 					      false,           // no boolean operations
-					      0);              // 
+					      0);              //
 
 
   G4Box * target_box = new G4Box("target_box",30*cm, 30*cm,30*cm);
@@ -79,7 +79,7 @@ G4VPhysicalVolume* GateFakeDetectorConstruction::Construct() {
 		    "target",         // its name
 		    world_log,               // its mother (logical) volume
 		    false,           // no boolean operations
-		    0);              // 
+		    0);              //
 
   return world;
 }

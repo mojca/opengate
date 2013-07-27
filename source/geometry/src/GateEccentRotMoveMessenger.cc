@@ -23,7 +23,7 @@ See GATE/LICENSE.txt for further details
 //------------------------------------------------------------------------------------------------------------
 GateEccentRotMoveMessenger::GateEccentRotMoveMessenger(GateEccentRotMove* itsEccentRotMove)
   :GateObjectRepeaterMessenger(itsEccentRotMove)
-{ 
+{
     G4String cmdName;
 
     cmdName = GetDirectoryName()+"setShiftXYZ";
@@ -52,15 +52,15 @@ GateEccentRotMoveMessenger::~GateEccentRotMoveMessenger()
 
 //------------------------------------------------------------------------------------------------------------
 void GateEccentRotMoveMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
   if( command==ShiftCmd )
-    { GetEccentRotMove()->SetShift(ShiftCmd->GetNew3VectorValue(newValue));}   
-  
+    { GetEccentRotMove()->SetShift(ShiftCmd->GetNew3VectorValue(newValue));}
+
   else if( command==VelocityCmd )
-    { GetEccentRotMove()->SetVelocity(VelocityCmd->GetNewDoubleValue(newValue));}   
-  
-  else 
+    { GetEccentRotMove()->SetVelocity(VelocityCmd->GetNewDoubleValue(newValue));}
+
+  else
     GateObjectRepeaterMessenger::SetNewValue(command,newValue);
-  
+
 }
 //------------------------------------------------------------------------------------------------------------

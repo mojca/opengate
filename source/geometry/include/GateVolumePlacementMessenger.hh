@@ -30,19 +30,19 @@ class GateVolumePlacement;
 
 /*! \class GateVolumePlacementMessenger
     \brief A messenger for a GateVolumePlacement (a static placement)
-    
+
     - GateVolumePlacementMessenger - by Daniel.Strul@iphe.unil.ch
-    
+
     - The GateVolumePlacementMessenger inherits from the abilities/responsabilities
       of the GateObjectRepeaterMessenger base-class: creation and management
-      of a Gate UI directory for a Gate movement object; creation of the UI commands 
+      of a Gate UI directory for a Gate movement object; creation of the UI commands
       "describe", "enable" and "disable"
-      
+
     - In addition, it proposes and manages UI commands that are specific
       to a static placement: 'setTranslation', 'setRotationAngle',
       'setRotationAxis', 'alignToX', 'alignToY', 'alignToZ'
 
-*/      
+*/
 //--------------------------------------------------------------------
 class GateVolumePlacementMessenger: public GateObjectRepeaterMessenger
 {
@@ -51,14 +51,14 @@ class GateVolumePlacementMessenger: public GateObjectRepeaterMessenger
     GateVolumePlacementMessenger(GateVolumePlacement* itsPlacementMove);
     //! destructor
    ~GateVolumePlacementMessenger();
-    
+
     //! Command interpreter
     void SetNewValue(G4UIcommand*, G4String);
 
     //! Returns the placement move controled by the messenger
-    virtual inline GateVolumePlacement* GetVolumePlacement() 
+    virtual inline GateVolumePlacement* GetVolumePlacement()
       { return (GateVolumePlacement*)GetObjectRepeater(); }
-    
+
   private:
     //! \name command objects
     //@{
@@ -77,4 +77,3 @@ class GateVolumePlacementMessenger: public GateObjectRepeaterMessenger
 //--------------------------------------------------------------------
 
 #endif
-

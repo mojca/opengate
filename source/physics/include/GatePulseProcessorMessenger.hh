@@ -33,14 +33,13 @@ class GatePulseProcessorMessenger: public GateClockDependentMessenger
   public:
     GatePulseProcessorMessenger(GateVPulseProcessor* itsPulseProcessor);
    ~GatePulseProcessorMessenger();
-    
+
     void SetNewValue(G4UIcommand*, G4String);
 
-    inline GateVPulseProcessor* GetPulseProcessor() 
+    inline GateVPulseProcessor* GetPulseProcessor()
       { return (GateVPulseProcessor*) GetClockDependent(); }
 
   private:
 };
 
 #endif
-

@@ -7,7 +7,7 @@
 #Department of Radiation Oncology
 #Medical University of Vienna
 #
-#and 
+#and
 #
 #Pierre Gueth
 #CREATIS
@@ -34,7 +34,7 @@ See GATE/LICENSE.txt for further details
 
 //-----------------------------------------------------------------------------
 GateCerenkovPB::GateCerenkovPB():GateVProcess("Cerenkov")
-{  
+{
   SetDefaultParticle("e+"); SetDefaultParticle("e-");
   SetDefaultParticle("mu+"); SetDefaultParticle("mu-");
   SetDefaultParticle("tau+"); SetDefaultParticle("tau-");
@@ -50,10 +50,10 @@ GateCerenkovPB::GateCerenkovPB():GateVProcess("Cerenkov")
   SetDefaultParticle("He3");
   SetDefaultParticle("alpha");
   SetDefaultParticle("GenericIon");
-  
+
   SetProcessInfo("Cerenkov effect");
 
-  pMessenger = new GateCerenkovMessenger(this);  
+  pMessenger = new GateCerenkovMessenger(this);
 }
 //-----------------------------------------------------------------------------
 

@@ -28,7 +28,7 @@ See GATE/LICENSE.txt for further details
 #include "G4UnitsTable.hh"
 
 
-class GateEnergyFilter : 
+class GateEnergyFilter :
   public GateVFilter
 {
 public:
@@ -47,7 +47,7 @@ public:
   void SetEmax(G4double e);
   // Set acceptable kinetic energy range.
   //
- 
+
   virtual void show();
 
 private:

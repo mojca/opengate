@@ -37,14 +37,14 @@ public:
   void SetVerboseLevel(G4int value) { nVerboseLevel = value; };
 
 private:
-  
+
   GateClock();
 
 
 private:
 
   static GateClock* pInstance;
- 
+
   G4double mTime;
   GateClockMessenger* pClockMessenger;
 

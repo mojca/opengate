@@ -15,11 +15,11 @@ See GATE/LICENSE.txt for further details
 
 //-----------------------------------------------------------------------------
 GateMuBremsstrahlungPB::GateMuBremsstrahlungPB():GateVProcess("MuBremsstrahlung")
-{  
+{
   SetDefaultParticle("mu+");
   SetDefaultParticle("mu-");
   SetProcessInfo("Bremsstrahlung by mu- and mu+");
-  pMessenger = new GateEMStandardProcessMessenger(this);  
+  pMessenger = new GateEMStandardProcessMessenger(this);
 }
 //-----------------------------------------------------------------------------
 
@@ -34,7 +34,7 @@ G4VProcess* GateMuBremsstrahlungPB::CreateProcess(G4ParticleDefinition *)
 //-----------------------------------------------------------------------------
 void GateMuBremsstrahlungPB::ConstructProcess(G4ProcessManager * manager)
 {
-  manager->AddProcess(pFinalProcess,-1, -1, 3);           
+  manager->AddProcess(pFinalProcess,-1, -1, 3);
 }
 //-----------------------------------------------------------------------------
 
@@ -48,4 +48,3 @@ bool GateMuBremsstrahlungPB::IsApplicable(G4ParticleDefinition * par)
 //-----------------------------------------------------------------------------
 
 MAKE_PROCESS_AUTO_CREATOR_CC(GateMuBremsstrahlungPB)
-

@@ -17,10 +17,10 @@ See GATE/LICENSE.txt for further details
 
 //-----------------------------------------------------------------------------
 GateOpticalMiePB::GateOpticalMiePB():GateVProcess("OpticalMie")
-{  
+{
   SetDefaultParticle("opticalphoton");
   SetProcessInfo("Mie process for optical photons");
-  pMessenger = new GateEMStandardProcessMessenger(this) ;  
+  pMessenger = new GateEMStandardProcessMessenger(this) ;
 }
 //-----------------------------------------------------------------------------
 
@@ -38,7 +38,7 @@ G4VProcess* GateOpticalMiePB::CreateProcess(G4ParticleDefinition *)
 //-----------------------------------------------------------------------------
 void GateOpticalMiePB::ConstructProcess(G4ProcessManager * manager)
 {
-  manager->AddDiscreteProcess(GetProcess());           
+  manager->AddDiscreteProcess(GetProcess());
 }
 //-----------------------------------------------------------------------------
 

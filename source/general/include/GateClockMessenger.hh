@@ -31,12 +31,12 @@ class GateClockMessenger: public G4UImessenger
 public:
   GateClockMessenger();
   ~GateClockMessenger();
-  
+
   void SetNewValue(G4UIcommand*, G4String);
-  
+
 private:
   GateClock* pGateClock;
-  
+
   G4UIdirectory*             pGateTimingDir;
 
   G4UIcmdWithADoubleAndUnit* pTimeCmd;
@@ -44,4 +44,3 @@ private:
 };
 
 #endif
-

@@ -40,7 +40,7 @@ G4String GateTools::GetBaseName(const G4String& name,const G4String& tag)
 
 
 //---------------------------------------------------------------------------
-// Looks for a GATE file: if the file can not be found in the current 
+// Looks for a GATE file: if the file can not be found in the current
 // directory, FindGateFile() looks for it in the directory $GATEHOME.
 // The function returns either the full file path or "" (file not found).
 G4String GateTools::FindGateFile(const G4String& fileName)
@@ -64,7 +64,7 @@ G4String GateTools::FindGateFile(const G4String& fileName)
   if (fp) {
     fclose(fp);
     return filePath;
-  } 
+  }
   else
     return "";
 

@@ -38,7 +38,7 @@ public:
                              const G4Track& track,
                              G4double   previousStepSize,
                              G4ForceCondition* condition
-                            ) ;  
+                            ) ;
 
   void SetSplitFactor(G4double);
   void SetCSEFactor(G4double);

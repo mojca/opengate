@@ -7,7 +7,7 @@
   of the GNU Lesser General  Public Licence (LGPL)
   See GATE/LICENSE.txt for further details
   ----------------------*/
-  
+
 #include "GateWedgeComponent.hh"
 #include "GateWedge.hh"
 
@@ -22,7 +22,7 @@ GateWedgeComponent::GateWedgeComponent(const G4String& itsName,
 
 
 // Destructor
-GateWedgeComponent::~GateWedgeComponent() 
+GateWedgeComponent::~GateWedgeComponent()
 {
 }
 
@@ -50,7 +50,7 @@ G4bool GateWedgeComponent::IsValidAttachmentRequest(GateVVolume* anCreator) cons
   // OK, everything's fine
   return true;
 }
-   
+
 
 
 // Return the length along an axis of the Wedge-creator attached to our creator
@@ -63,8 +63,6 @@ G4double GateWedgeComponent::GetWedgeLength(size_t axis) const
 
 // Tool method: try to cast a creator into a Wedge creator
 GateWedge* GateWedgeComponent::CastToWedgeCreator(GateVVolume* creator)
-{ 
-  return dynamic_cast<GateWedge*>(creator); 
+{
+  return dynamic_cast<GateWedge*>(creator);
 }
-
-

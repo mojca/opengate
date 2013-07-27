@@ -38,7 +38,7 @@ GateObjectStore* GateObjectStore::GetInstance()
 //----------------------------------------------------------------------------
 // Private constructor
 GateObjectStore::GateObjectStore()
-{  
+{
   ;
 }
 //----------------------------------------------------------------------------
@@ -47,7 +47,7 @@ GateObjectStore::GateObjectStore()
 //----------------------------------------------------------------------------
 // Public destructor
 GateObjectStore::~GateObjectStore()
-{  
+{
   ;
 }
 //----------------------------------------------------------------------------
@@ -57,15 +57,15 @@ GateObjectStore::~GateObjectStore()
 //----------------------------------------------------------------------------
 // Registers a new object-creator in the creator list
 void GateObjectStore::RegisterCreator(GateVVolume* newCreator)
-{   
+{
   insert(MapPair(newCreator->GetObjectName(),newCreator));
 }
 //----------------------------------------------------------------------------
 
 
 //----------------------------------------------------------------------------
-// Removes a deleted object-creator from the creator-list    
-void GateObjectStore::UnregisterCreator(GateVVolume* creator) 
+// Removes a deleted object-creator from the creator-list
+void GateObjectStore::UnregisterCreator(GateVVolume* creator)
 {
   erase(creator->GetObjectName());
 }
@@ -95,7 +95,7 @@ GateVVolume* GateObjectStore::FindCreator(const G4String& name)
 //---------------------------------------------------------------------------
 // Retrieves the inserter of a volume by his name
 GateVVolume* GateObjectStore::FindVolumeCreator(const G4String& volumeName)
-{  
+{
   // for (iterator iter = begin() ; iter != end() ; ++iter){
   //     DD(GetCreator(iter)->GetObjectName());
   //     DD(GetCreator(iter));
@@ -108,7 +108,7 @@ GateVVolume* GateObjectStore::FindVolumeCreator(const G4String& volumeName)
   }
 
   GateError("The volume '" << volumeName << "' cannot be found in the list of volumes. Abort. "
-            << G4endl << "Here is the list of available volumes : " 
+            << G4endl << "Here is the list of available volumes : "
             << G4endl << list << G4endl);
   return 0;
 }
@@ -120,13 +120,13 @@ GateVVolume* GateObjectStore::FindVolumeCreator(const G4String& volumeName)
 // Retrieves the inserter of a volume by his name
 GateVVolume* GateObjectStore::FindVolumeCreator(G4VPhysicalVolume* volume)
 {
-   
+
   for (iterator iter = begin() ; iter != end() ; ++iter){
-        
+
   if ( GetCreator(iter)->GetPhysicalVolumeName() == volume->GetName()){
-       
+
       return GetCreator(iter);}
-   }   
+   }
   return 0;
 }
 //---------------------------------------------------------------------------
@@ -142,5 +142,3 @@ GateVVolume* GateObjectStore::FindVolumeCreator(G4VPhysicalVolume* volume)
 }
 */
 //----------------------------------------------------------------------------
-
-

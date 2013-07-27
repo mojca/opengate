@@ -39,11 +39,11 @@ class GateSourcePhaseSpaceMessenger: public GateVSourceMessenger
 public:
   GateSourcePhaseSpaceMessenger(GateSourcePhaseSpace* source);
   ~GateSourcePhaseSpaceMessenger();
-  
+
   void SetNewValue(G4UIcommand*, G4String);
-    
+
 private:
-  GateSourcePhaseSpace*    pSource;    
+  GateSourcePhaseSpace*    pSource;
   G4UIcmdWithAString*      AddFileCmd;
   G4UIcmdWithAString*      setParticleTypeCmd;
   G4UIcmdWithoutParameter* RelativeVolumeCmd;
@@ -57,4 +57,3 @@ private:
 #endif // GATESOURCEPHASESPACEMESSENGER_H
 
 #endif // G4ANALYSIS_USE_ROOT
-

@@ -28,45 +28,45 @@ class G4VPhysicalVolume;
 class GateWedge  : public GateVVolume
 {
   public:
-    //! Constructor    
-    
+    //! Constructor
+
     GateWedge(const G4String& itsName,
-		    G4bool acceptsChildren=true, 
-		    G4int depth=0); 
-		 
+		    G4bool acceptsChildren=true,
+		    G4int depth=0);
+
     GateWedge(const G4String& itsName,const G4String& itsMaterialName,
       	      	    G4double itsXLength, G4double itsNarrowerXLength, G4double itsYLength,G4double itsZLength);
     //! Destructor
     virtual ~GateWedge();
-    
+
     FCT_FOR_AUTO_CREATOR_VOLUME(GateWedge)
 
   public:
 
      virtual G4LogicalVolume* ConstructOwnSolidAndLogicalVolume(G4Material* mater, G4bool flagUpdateOnly);
-     virtual void DestroyOwnSolidAndLogicalVolume();  
+     virtual void DestroyOwnSolidAndLogicalVolume();
 
      virtual void DescribeMyself(size_t indent);
 
      inline G4double GetHalfDimension(size_t axis)	  {return GetWedgeHalfLength(axis); }
 
-     inline G4double ComputeMyOwnVolume()  const	 
+     inline G4double ComputeMyOwnVolume()  const
        {return m_WedgeLength[0]*m_WedgeLength[1]*m_WedgeLength[2]; }
 
 
      //! Set the Wedge length along X
-     void SetWedgeXLength (G4double val)   
+     void SetWedgeXLength (G4double val)
      {  m_WedgeLength[0] = val; /*ComputeParameters();*/ }
      //! Set the Wedge length along narrower X
-     void SetWedgeNarrowerXLength (G4double val)   
+     void SetWedgeNarrowerXLength (G4double val)
      {  m_WedgeLength[1] = val; /*ComputeParameters();*/ }
      //! Set the Wedge length along Y
-     void SetWedgeYLength (G4double val)   
+     void SetWedgeYLength (G4double val)
      {  m_WedgeLength[2] = val; /*ComputeParameters();*/ }
      //! Set the Wedge length along Z
-     void SetWedgeZLength (G4double val)   
+     void SetWedgeZLength (G4double val)
      {  m_WedgeLength[3] = val; /*ComputeParameters();*/ }
-     
+
 
      //! Get the Wedge length along an axis  (X=0, Narrower X=1, Y=2, Z=3)
      inline G4double GetWedgeLength(size_t axis)       {return m_WedgeLength[axis];}
@@ -89,7 +89,7 @@ class GateWedge  : public GateVVolume
      inline G4double GetWedgeYHalfLength()      	      {return GetWedgeHalfLength(2);}
      //! Get the Wedge half-length along Z
      inline G4double GetWedgeZHalfLength()      	      {return GetWedgeHalfLength(3);}
- 
+
     //@}
 
   private:
@@ -105,11 +105,10 @@ class GateWedge  : public GateVVolume
     //@}
 
      //! Messenger
-     GateWedgeMessenger* m_Messenger; 
+     GateWedgeMessenger* m_Messenger;
 
 };
 
 MAKE_AUTO_CREATOR_VOLUME(wedge,GateWedge)
 
 #endif
-

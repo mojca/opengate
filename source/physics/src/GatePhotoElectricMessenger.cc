@@ -50,7 +50,7 @@ void GatePhotoElectricMessenger::BuildCommands(G4String base)
   pActiveAugerCmd = new G4UIcmdWithABool(bb,this);
   guidance = "Activation of Auger electron production";
   pActiveAugerCmd->SetGuidance(guidance);
- 
+
   bb = baseModel+"/setDeltaRayCut";
   pSetLowEElectron = new G4UIcmdWithADoubleAndUnit(bb,this);
   guidance = "Set the production cut (in energy) for delta-rays by low-energy photo-electric";
@@ -82,4 +82,3 @@ void GatePhotoElectricMessenger::SetNewValue(G4UIcommand* command, G4String para
 
 }
 //-----------------------------------------------------------------------------
-

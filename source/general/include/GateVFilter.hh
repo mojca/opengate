@@ -29,7 +29,7 @@ See GATE/LICENSE.txt for further details
 #include "G4Step.hh"
 #include "G4Track.hh"
 
-class GateVFilter : 
+class GateVFilter :
   public GateNamedObject
 {
 public:
@@ -39,10 +39,10 @@ public:
   virtual G4bool Accept(const G4Step*);
   virtual G4bool Accept(const G4Track*);
 
- 
+
   virtual void show();
 
- 
+
 
 private:
 

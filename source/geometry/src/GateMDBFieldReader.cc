@@ -12,7 +12,7 @@ See GATE/LICENSE.txt for further details
 
 /*!
   \file GateMDBFieldReader.cc
-  
+
   \brief Class GateMDBFieldReader
 */
 
@@ -20,19 +20,19 @@ See GATE/LICENSE.txt for further details
 #include "GateTokenizer.hh"
 
 #define N_STATECODES 12
-GateCodePair GateMDBFieldReader::theStateCodeTable[N_STATECODES] = { 
-    GateCodePair("kStateUndefined",kStateUndefined) , 
-    GateCodePair("kStateSolid",    kStateSolid) , 
-    GateCodePair("kStateLiquid",   kStateLiquid) , 
-    GateCodePair("kStateGas",      kStateGas) , 
-    GateCodePair("Undefined",  	  kStateUndefined) , 
-    GateCodePair("Solid",      	  kStateSolid) , 
-    GateCodePair("Liquid",     	  kStateLiquid) , 
-    GateCodePair("gas",        	  kStateGas), 
-    GateCodePair("undefined",  	  kStateUndefined) , 
-    GateCodePair("solid",      	  kStateSolid) , 
-    GateCodePair("liquid",     	  kStateLiquid) , 
-    GateCodePair("fas",        	  kStateGas) 
+GateCodePair GateMDBFieldReader::theStateCodeTable[N_STATECODES] = {
+    GateCodePair("kStateUndefined",kStateUndefined) ,
+    GateCodePair("kStateSolid",    kStateSolid) ,
+    GateCodePair("kStateLiquid",   kStateLiquid) ,
+    GateCodePair("kStateGas",      kStateGas) ,
+    GateCodePair("Undefined",  	  kStateUndefined) ,
+    GateCodePair("Solid",      	  kStateSolid) ,
+    GateCodePair("Liquid",     	  kStateLiquid) ,
+    GateCodePair("gas",        	  kStateGas),
+    GateCodePair("undefined",  	  kStateUndefined) ,
+    GateCodePair("solid",      	  kStateSolid) ,
+    GateCodePair("liquid",     	  kStateLiquid) ,
+    GateCodePair("fas",        	  kStateGas)
   };
 
 
@@ -43,101 +43,101 @@ GateCodePair GateMDBFieldReader::theSymbolPrefixTable[N_SYMBOLPREFIX] = {
     GateCodePair ("S",        prefix_symbol),
     GateCodePair ("Symbol",     prefix_symbol),
     GateCodePair ("symbol",     prefix_symbol)
-  };  
+  };
 GateCodeMap GateMDBFieldReader::theSymbolPrefixMap = GateCodeMap(N_SYMBOLPREFIX,theSymbolPrefixTable);
 
-  
+
 #define N_ATOMICNUMBERPREFIX 2
 GateCodePair GateMDBFieldReader::theAtomicNumberPrefixTable[N_ATOMICNUMBERPREFIX] = {
     GateCodePair ("Z",        prefix_atomicnumber),
     GateCodePair ("Zeff",     prefix_atomicnumber)
-  };  
+  };
 GateCodeMap GateMDBFieldReader::theAtomicNumberPrefixMap = GateCodeMap(N_ATOMICNUMBERPREFIX,theAtomicNumberPrefixTable);
 
-  
+
 #define N_MOLARMASSPREFIX 2
 GateCodePair GateMDBFieldReader::theMolarMassPrefixTable[N_MOLARMASSPREFIX] = {
     GateCodePair ("A",        prefix_molarmass),
     GateCodePair ("Aeff",     prefix_molarmass)
-  };  
+  };
 GateCodeMap GateMDBFieldReader::theMolarMassPrefixMap = GateCodeMap(N_MOLARMASSPREFIX,theMolarMassPrefixTable);
 
-  
+
 #define N_DENSITYPREFIX 4
 GateCodePair GateMDBFieldReader::theDensityPrefixTable[N_DENSITYPREFIX] = {
     GateCodePair ("d",        prefix_density),
     GateCodePair ("D",        prefix_density),
     GateCodePair ("density",  prefix_density),
     GateCodePair ("Density",  prefix_density)
-  };  
+  };
 GateCodeMap GateMDBFieldReader::theDensityPrefixMap = GateCodeMap(N_DENSITYPREFIX,theDensityPrefixTable);
 
-  
+
 #define N_STATEPREFIX 2
 GateCodePair GateMDBFieldReader::theStatePrefixTable[N_STATEPREFIX] = {
     GateCodePair ("state",  prefix_state),
     GateCodePair ("State",  prefix_state)
-  };  
+  };
 GateCodeMap  GateMDBFieldReader::theStatePrefixMap = GateCodeMap(N_STATEPREFIX,theStatePrefixTable);
-  
+
 #define N_TEMPPREFIX 6
-GateCodePair GateMDBFieldReader::theTempPrefixTable[N_TEMPPREFIX] = { 
-    GateCodePair("t",          	 prefix_temp) , 
+GateCodePair GateMDBFieldReader::theTempPrefixTable[N_TEMPPREFIX] = {
+    GateCodePair("t",          	 prefix_temp) ,
     GateCodePair("T",          	 prefix_temp) ,
-    GateCodePair("temp",       	 prefix_temp) , 
+    GateCodePair("temp",       	 prefix_temp) ,
     GateCodePair("Temp",       	 prefix_temp) ,
-    GateCodePair("temperature",   prefix_temp) , 
-    GateCodePair("Temperature",   prefix_temp) 
+    GateCodePair("temperature",   prefix_temp) ,
+    GateCodePair("Temperature",   prefix_temp)
   };
 GateCodeMap GateMDBFieldReader::theTempPrefixMap = GateCodeMap(N_TEMPPREFIX,theTempPrefixTable);
 
 #define N_PRESSUREPREFIX 6
-GateCodePair GateMDBFieldReader::thePressurePrefixTable[N_PRESSUREPREFIX] = { 
-    GateCodePair("p",          prefix_pressure) , 
+GateCodePair GateMDBFieldReader::thePressurePrefixTable[N_PRESSUREPREFIX] = {
+    GateCodePair("p",          prefix_pressure) ,
     GateCodePair("P",          prefix_pressure) ,
-    GateCodePair("pressure",   prefix_pressure) , 
+    GateCodePair("pressure",   prefix_pressure) ,
     GateCodePair("Pressure",   prefix_pressure) ,
-    GateCodePair("press",      prefix_pressure) , 
-    GateCodePair("Press",      prefix_pressure) 
+    GateCodePair("press",      prefix_pressure) ,
+    GateCodePair("Press",      prefix_pressure)
   };
 GateCodeMap  GateMDBFieldReader::thePressurePrefixMap = GateCodeMap(N_PRESSUREPREFIX,thePressurePrefixTable);
 
 #define N_NCOMPONENTSSPREFIX 6
-GateCodePair GateMDBFieldReader::theNComponentsPrefixTable[N_NCOMPONENTSSPREFIX] = { 
-    GateCodePair("N",          prefix_ncomponents) , 
+GateCodePair GateMDBFieldReader::theNComponentsPrefixTable[N_NCOMPONENTSSPREFIX] = {
+    GateCodePair("N",          prefix_ncomponents) ,
     GateCodePair("n",          prefix_ncomponents) ,
-    GateCodePair("ncomponents",prefix_ncomponents) , 
+    GateCodePair("ncomponents",prefix_ncomponents) ,
     GateCodePair("nComponents",prefix_ncomponents) ,
-    GateCodePair("Ncomponents",prefix_ncomponents) , 
-    GateCodePair("NComponents",prefix_ncomponents) 
+    GateCodePair("Ncomponents",prefix_ncomponents) ,
+    GateCodePair("NComponents",prefix_ncomponents)
   };
 GateCodeMap GateMDBFieldReader::theNComponentsPrefixMap = GateCodeMap(N_NCOMPONENTSSPREFIX,theNComponentsPrefixTable);
 
 
 #define N_NAMEPREFIX 2
-GateCodePair GateMDBFieldReader::theNamePrefixTable[N_NAMEPREFIX] = { 
-    GateCodePair("Name",     prefix_name) , 
-    GateCodePair("name",     prefix_name) 
+GateCodePair GateMDBFieldReader::theNamePrefixTable[N_NAMEPREFIX] = {
+    GateCodePair("Name",     prefix_name) ,
+    GateCodePair("name",     prefix_name)
   };
 GateCodeMap GateMDBFieldReader::theNamePrefixMap = GateCodeMap(N_NAMEPREFIX,theNamePrefixTable);
 
 
 #define N_NATOMSPREFIX 6
-GateCodePair GateMDBFieldReader::theNAtomsPrefixTable[N_NATOMSPREFIX] = { 
-    GateCodePair("N",     prefix_natoms) , 
+GateCodePair GateMDBFieldReader::theNAtomsPrefixTable[N_NATOMSPREFIX] = {
+    GateCodePair("N",     prefix_natoms) ,
     GateCodePair("n",     prefix_natoms) ,
-    GateCodePair("Natoms",prefix_natoms) , 
+    GateCodePair("Natoms",prefix_natoms) ,
     GateCodePair("natoms",prefix_natoms) ,
-    GateCodePair("NAtoms",prefix_natoms) , 
-    GateCodePair("nAtoms",prefix_natoms) 
+    GateCodePair("NAtoms",prefix_natoms) ,
+    GateCodePair("nAtoms",prefix_natoms)
   };
 GateCodeMap GateMDBFieldReader::theNAtomsPrefixMap = GateCodeMap(N_NATOMSPREFIX,theNAtomsPrefixTable);
 
 #define N_FRACTIONPREFIX  4
-GateCodePair GateMDBFieldReader::theFractionPrefixTable[N_FRACTIONPREFIX] = { 
-    GateCodePair("F",        prefix_fraction) , 
+GateCodePair GateMDBFieldReader::theFractionPrefixTable[N_FRACTIONPREFIX] = {
+    GateCodePair("F",        prefix_fraction) ,
     GateCodePair("f",        prefix_fraction) ,
-    GateCodePair("Fraction", prefix_fraction) , 
+    GateCodePair("Fraction", prefix_fraction) ,
     GateCodePair("fraction", prefix_fraction)
   };
 GateCodeMap GateMDBFieldReader::theFractionPrefixMap = GateCodeMap(N_FRACTIONPREFIX,theFractionPrefixTable);
@@ -270,7 +270,7 @@ GateMDBFieldReader::ComponentType GateMDBFieldReader::EvaluateComponentType(cons
   GateTokenizer::CleanUpString(field);
   if ( (field=="+el") || (field=="+elem") )
     return componenttype_elem;
-  else if (field=="+mat") 
+  else if (field=="+mat")
     return componenttype_mat;
   else {
 	G4String msg = "Incorrect definition line for the " +  componentOrdinal +  " component of the compound material '" + materialName + "'.";
@@ -433,7 +433,7 @@ G4double GateMDBFieldReader::ReadComponentFraction(const G4String& componentName
 G4String GateMDBFieldReader::CreateOrdinalString(G4int anIndex)
 {
   static char buffer[256];
-  
+
   switch (anIndex) {
   case 1:
     return "1st";
@@ -446,5 +446,3 @@ G4String GateMDBFieldReader::CreateOrdinalString(G4int anIndex)
     return buffer;
   }
 }
-
-

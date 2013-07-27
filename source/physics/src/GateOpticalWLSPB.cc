@@ -17,10 +17,10 @@ See GATE/LICENSE.txt for further details
 
 //-----------------------------------------------------------------------------
 GateOpticalWLSPB::GateOpticalWLSPB():GateVProcess("OpticalWLS")
-{  
+{
   SetDefaultParticle("opticalphoton");
   SetProcessInfo("Wave Length Shifting process for optical photons");
-  pMessenger = new GateEMStandardProcessMessenger(this) ;  
+  pMessenger = new GateEMStandardProcessMessenger(this) ;
 }
 //-----------------------------------------------------------------------------
 
@@ -38,7 +38,7 @@ G4VProcess* GateOpticalWLSPB::CreateProcess(G4ParticleDefinition *)
 //-----------------------------------------------------------------------------
 void GateOpticalWLSPB::ConstructProcess(G4ProcessManager * manager)
 {
-  manager->AddDiscreteProcess(GetProcess());           
+  manager->AddDiscreteProcess(GetProcess());
 }
 //-----------------------------------------------------------------------------
 

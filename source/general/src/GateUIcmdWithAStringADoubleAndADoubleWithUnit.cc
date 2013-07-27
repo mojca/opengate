@@ -39,7 +39,7 @@ void GateUIcmdWithAStringADoubleAndADoubleWithUnit::SetParameterName
   theParam->SetParameterName(theName1);
   theParam->SetOmittable(omittable1);
   theParam->SetCurrentAsDefault(currentAsDefault);
-  
+
   theParam = GetParameter(1);
   theParam->SetParameterName(theName2);
   theParam->SetOmittable(omittable2);
@@ -104,4 +104,3 @@ void GateUIcmdWithAStringADoubleAndADoubleWithUnit::SetDefaultValue(const char *
 //---------------------------------------------------------------------------
 
 #endif
-

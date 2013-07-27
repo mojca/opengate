@@ -30,13 +30,13 @@ See GATE/LICENSE.txt for further details
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
 GateVSourceVoxelReaderMessenger::GateVSourceVoxelReaderMessenger(GateVSourceVoxelReader* voxelReader)
-  : GateMessenger(G4String("source/") + 
-		  voxelReader->GetSource()->GetName() + 
+  : GateMessenger(G4String("source/") +
+		  voxelReader->GetSource()->GetName() +
 		  G4String("/") +
-		  voxelReader->GetName(), 
+		  voxelReader->GetName(),
 		  true),
   m_voxelReader(voxelReader)
-{ 
+{
 
   G4String cmdName;
 
@@ -67,14 +67,14 @@ GateVSourceVoxelReaderMessenger::GateVSourceVoxelReaderMessenger(GateVSourceVoxe
   VerboseCmd->SetGuidance("1. Integer verbose level");
   VerboseCmd->SetParameterName("verbose",false);
   VerboseCmd->SetRange("verbose>=0");
-  
+
       cmdName = GetDirectoryName()+"SetTimeActivityTablesFrom";
   TimeActivTablesCmd = new G4UIcmdWithAString(cmdName,this);
 
   cmdName = GetDirectoryName()+"SetTimeSampling";
   SetTimeSamplingCmd = new G4UIcmdWithADoubleAndUnit(cmdName,this);
 
-  
+
 }
 
 
@@ -114,6 +114,3 @@ void GateVSourceVoxelReaderMessenger::SetNewValue(G4UIcommand* command,G4String 
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
-
-
-

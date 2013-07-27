@@ -45,7 +45,7 @@ GateSphereRepeater::GateSphereRepeater(GateVVolume* itsObjectInserter,
 
 
 GateSphereRepeater::~GateSphereRepeater()
-{  
+{
   delete m_Messenger;
 }
 
@@ -64,7 +64,7 @@ void GateSphereRepeater::PushMyPlacements(const G4RotationMatrix& currentRotatio
 	   nTheta = m_repeatNumberWithTheta;
 
   G4ThreeVector firstCopyOffset(0.,0.,0.);
-      
+
   G4double x_0 = currentPosition[0] + firstCopyOffset[0],
       	   y_0 = currentPosition[1] + firstCopyOffset[1],
 	   z_0 = currentPosition[2] + firstCopyOffset[2];
@@ -76,15 +76,15 @@ void GateSphereRepeater::PushMyPlacements(const G4RotationMatrix& currentRotatio
     {
       G4double phi_k = phi_0 + k * phi;
 
-    for ( G4int j=0 ; j < nTheta ; j++) 
+    for ( G4int j=0 ; j < nTheta ; j++)
       {
 	theta_j = j * theta;
-	G4RotationMatrix newRotationMatrix =  currentRotationMatrix; 
+	G4RotationMatrix newRotationMatrix =  currentRotationMatrix;
 
 	G4double x = x_0 + radius*sin(theta_j)*cos(phi_k),
 	         y = y_0 + radius*cos(theta_j)*cos(phi_k),
 	         z = z_0 + radius*sin(phi_k);
-	  
+
       	G4ThreeVector newPosition = G4ThreeVector(x,y,z);
 	if (m_flagAutoRotation) {
 	  newRotationMatrix.rotateZ(theta_j);
@@ -111,5 +111,3 @@ void GateSphereRepeater::DescribeMyself(size_t indent)
     G4cout << GateTools::Indent(indent) << "Centering:               " << ( GetAutoCenterFlag() ? "Yes" : "No" ) << "\n";
     G4cout << GateTools::Indent(indent) << "Auto-rotation:        " << GetAutoRotation()  << "\n";
 }
-
-

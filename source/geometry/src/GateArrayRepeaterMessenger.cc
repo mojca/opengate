@@ -25,9 +25,9 @@ See GATE/LICENSE.txt for further details
 
 GateArrayRepeaterMessenger::GateArrayRepeaterMessenger(GateArrayRepeater* itsCubicArrayRepeater)
   :GateObjectRepeaterMessenger(itsCubicArrayRepeater)
-{ 
+{
 //    G4cout << " ***** Passage dans le constructeur de GateArrayRepeaterMessenger" << G4endl;
-    
+
     G4String cmdName;
 
     cmdName = GetDirectoryName()+"setRepeatVector";
@@ -76,23 +76,23 @@ GateArrayRepeaterMessenger::~GateArrayRepeaterMessenger()
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
 void GateArrayRepeaterMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
 //  G4cout << " Cubic array new value" << G4endl;
-  
+
   if( command==SetRepeatVectorCmd )
-    { 
+    {
 //     G4cout << " repeat number = " << SetRepeatVectorCmd->GetNew3VectorValue(newValue) << G4endl;
-      
-     GetCubicArrayRepeater()->SetRepeatVector(SetRepeatVectorCmd->GetNew3VectorValue(newValue));/*TellGeometryToUpdate();*/}   
+
+     GetCubicArrayRepeater()->SetRepeatVector(SetRepeatVectorCmd->GetNew3VectorValue(newValue));/*TellGeometryToUpdate();*/}
   else if( command==SetRepeatNumberXCmd )
-    { GetCubicArrayRepeater()->SetRepeatNumberX(SetRepeatNumberXCmd->GetNewIntValue(newValue)); /*TellGeometryToRebuild();*/}   
+    { GetCubicArrayRepeater()->SetRepeatNumberX(SetRepeatNumberXCmd->GetNewIntValue(newValue)); /*TellGeometryToRebuild();*/}
   else if( command==SetRepeatNumberYCmd )
-    { GetCubicArrayRepeater()->SetRepeatNumberY(SetRepeatNumberYCmd->GetNewIntValue(newValue)); /*TellGeometryToRebuild();*/}   
+    { GetCubicArrayRepeater()->SetRepeatNumberY(SetRepeatNumberYCmd->GetNewIntValue(newValue)); /*TellGeometryToRebuild();*/}
   else if( command==SetRepeatNumberZCmd )
-    { GetCubicArrayRepeater()->SetRepeatNumberZ(SetRepeatNumberZCmd->GetNewIntValue(newValue)); /*TellGeometryToRebuild();*/}   
+    { GetCubicArrayRepeater()->SetRepeatNumberZ(SetRepeatNumberZCmd->GetNewIntValue(newValue)); /*TellGeometryToRebuild();*/}
   else if( command==AutoCenterCmd )
-    { GetCubicArrayRepeater()->SetAutoCenterFlag(AutoCenterCmd->GetNewBoolValue(newValue)); /*TellGeometryToUpdate();*/}   
-  else 
+    { GetCubicArrayRepeater()->SetAutoCenterFlag(AutoCenterCmd->GetNewBoolValue(newValue)); /*TellGeometryToUpdate();*/}
+  else
     GateObjectRepeaterMessenger::SetNewValue(command,newValue);
 }
 

@@ -32,30 +32,30 @@ class GateQuadrantRepeater;
 
 /*! \class GateQuadrantRepeaterMessenger
     \brief Messenger for a GateQuadrantRepeater
-    
-    - GateQuadrantRepeaterMessenger - by Daniel.Strul@iphe.unil.ch 
-    
+
+    - GateQuadrantRepeaterMessenger - by Daniel.Strul@iphe.unil.ch
+
     - The GateQuadrantRepeaterMessenger inherits from the abilities/responsabilities
       of the GateObjectRepeaterMessenger base-class: creation and management
       of a Gate UI directory for a Gate object; UI commands "describe",
       'enable' and 'disable'.
-      
+
     - In addition, it creates UI commands to manage a quadrant repeater:
       'setLineNumber', 'setOrientation', 'setCopySpacing', 'setMaxRange'
 
-*/      
+*/
 class GateQuadrantRepeaterMessenger: public GateObjectRepeaterMessenger
 {
   public:
     GateQuadrantRepeaterMessenger(GateQuadrantRepeater* itsQuadrantRepeater);
    ~GateQuadrantRepeaterMessenger();
-    
+
     void SetNewValue(G4UIcommand*, G4String);
 
   public:
-    virtual inline GateQuadrantRepeater* GetQuadrantRepeater() 
+    virtual inline GateQuadrantRepeater* GetQuadrantRepeater()
       { return (GateQuadrantRepeater*)GetObjectRepeater(); }
-    
+
   private:
     G4UIcmdWithAnInteger*      SetLineNumberCmd;
     G4UIcmdWithADoubleAndUnit* SetOrientationCmd;
@@ -65,4 +65,3 @@ class GateQuadrantRepeaterMessenger: public GateObjectRepeaterMessenger
 };
 
 #endif
-

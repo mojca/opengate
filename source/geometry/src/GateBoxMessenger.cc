@@ -23,15 +23,15 @@ See GATE/LICENSE.txt for further details
 GateBoxMessenger::GateBoxMessenger(GateBox *itsCreator)
 : GateVolumeMessenger(itsCreator)
 {
-  
+
 //  G4cout << " DEBUT GateBoxMessenger" << G4endl;
-  
+
   G4String dir = GetDirectoryName() + "geometry/";
-  
+
   G4String cmdName;
-  cmdName = dir + "setXLength"; 
+  cmdName = dir + "setXLength";
 //  G4cout << " ########################"<< G4endl;
-//  G4cout << " ### GetDirectoryName() = " << cmdName << G4endl;  
+//  G4cout << " ### GetDirectoryName() = " << cmdName << G4endl;
   pBoxXLengthCmd = new G4UIcmdWithADoubleAndUnit(cmdName.c_str(),this);
   pBoxXLengthCmd->SetGuidance("Set length along X of the box.");
   pBoxXLengthCmd->SetParameterName("Length",false);
@@ -72,29 +72,29 @@ GateBoxMessenger::~GateBoxMessenger()
 
 //---------------------------------------------------------------------------
 void GateBoxMessenger::SetNewValue(G4UIcommand* command, G4String newValue)
-{ 
+{
   if( command==pBoxXLengthCmd )
-    { 
+    {
 //    G4cout << " ^^^ command==ppBoxXLengthCmd" << G4endl;
 //    G4cout << " ^^^ ppBoxXLengthCmd->GetNewDoubleValue(newValue) = " << ppBoxXLengthCmd->GetNewDoubleValue(newValue) << G4endl;
 //    G4cout << " SetNewValue GateBoxMessenger XLength = " << newValue << G4endl;
-    
-    GetBoxCreator()->SetBoxXLength(pBoxXLengthCmd->GetNewDoubleValue(newValue)); /*TellGeometryToUpdate();*/}   
-  
+
+    GetBoxCreator()->SetBoxXLength(pBoxXLengthCmd->GetNewDoubleValue(newValue)); /*TellGeometryToUpdate();*/}
+
   else if( command==pBoxYLengthCmd )
-    { 
+    {
 //     G4cout << " ^^^ command==BoxYLengthCmd" << G4endl;
 //     G4cout << " ^^^ BoxYLengthCmd->GetNewDoubleValue(newValue) = " << BoxYLengthCmd->GetNewDoubleValue(newValue) << G4endl;
-    GetBoxCreator()->SetBoxYLength(pBoxYLengthCmd->GetNewDoubleValue(newValue)); /*TellGeometryToUpdate();*/}   
-    
+    GetBoxCreator()->SetBoxYLength(pBoxYLengthCmd->GetNewDoubleValue(newValue)); /*TellGeometryToUpdate();*/}
+
   else if( command==pBoxZLengthCmd )
-    { 
+    {
 //    G4cout << " ^^^ command==BoxZLengthCmd" << G4endl;
 //    G4cout << " ^^^ BoxZLengthCmd->GetNewDoubleValue(newValue) = " << BoxZLengthCmd->GetNewDoubleValue(newValue) << G4endl;
-    
-    GetBoxCreator()->SetBoxZLength(pBoxZLengthCmd->GetNewDoubleValue(newValue)); /*TellGeometryToUpdate();*/}   
 
-  
+    GetBoxCreator()->SetBoxZLength(pBoxZLengthCmd->GetNewDoubleValue(newValue)); /*TellGeometryToUpdate();*/}
+
+
   else
 //    G4cout << " ^^^ GateVolumeMessenger::SetNewValue" << G4endl;
     GateVolumeMessenger::SetNewValue(command,newValue);

@@ -42,7 +42,7 @@ void GateParticleFilterMessenger::BuildCommands(G4String base)
 {
   G4String guidance;
   G4String bb;
-  
+
   bb = base+"/addParticle";
   pAddParticleCmd = new G4UIcmdWithAString(bb,this);
   guidance = "Add particle";

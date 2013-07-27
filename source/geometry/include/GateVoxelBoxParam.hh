@@ -23,17 +23,17 @@ class G4VPhysicalVolume;
 class GateVoxelBoxParam : public GateBox
 {
 public:
-  
+
   //! Constructor
   GateVoxelBoxParam( const G4String& itsName, GateVoxelBoxParameterized* vpi);
   //! Destructor
   virtual ~GateVoxelBoxParam();
-     
+
   void ConstructOwnPhysicalVolume(G4bool flagUpdate);
 //e  void DestroyOwnPhysicalVolumes();
   void DestroyGeometry();
-  
-  
+
+
 private:
   GateVoxelBoxParameterized* itsInserter;
   GateVoxelBoxParameterization*      m_parameterization;

@@ -73,7 +73,7 @@ GateSystemListManager* GateSystemListManager::GetInstance()
 // Private constructor
 GateSystemListManager::GateSystemListManager()
   : GateListManager( "systems", "system", false, false )
-{    
+{
   m_messenger = new GateSystemListMessenger(this);
   theInsertedSystemsNames = new std::vector<G4String>;
 }
@@ -83,7 +83,7 @@ GateSystemListManager::GateSystemListManager()
 //-----------------------------------------------------------------------------
 // Public destructor
 GateSystemListManager::~GateSystemListManager()
-{  
+{
   delete m_messenger;
   delete theInsertedSystemsNames;
 }
@@ -93,15 +93,15 @@ GateSystemListManager::~GateSystemListManager()
 //-----------------------------------------------------------------------------
 // Registers a new object-system in the system list
 void GateSystemListManager::RegisterSystem(GateVSystem* newSystem)
-{   
-  theListOfNamedObject.push_back(newSystem);  
+{
+  theListOfNamedObject.push_back(newSystem);
 }
 //-----------------------------------------------------------------------------
 
 
 //-----------------------------------------------------------------------------
-// Removes a deleted object-system from the system-list    
-void GateSystemListManager::UnregisterSystem(GateVSystem* aSystem) 
+// Removes a deleted object-system from the system-list
+void GateSystemListManager::UnregisterSystem(GateVSystem* aSystem)
 {
   for (std::vector<GateNamedObject*>::iterator iter = theListOfNamedObject.begin(); iter!=theListOfNamedObject.end(); ++iter)
     if ( (*iter) == aSystem )
@@ -114,12 +114,12 @@ void GateSystemListManager::UnregisterSystem(GateVSystem* aSystem)
 //-----------------------------------------------------------------------------
 /* Tries to find to which system an inserter is attached
    (either directly or through one of its ancestors)
-   anCreator: the inserter to test  
+   anCreator: the inserter to test
    Returns: the system to which the inserter is attached, if any
 */
 GateVSystem* GateSystemListManager::FindSystemOfCreator(GateVVolume* anCreator)
 {
-  
+
   for (std::vector<GateNamedObject*>::iterator iter = theListOfNamedObject.begin(); iter!=theListOfNamedObject.end(); ++iter)
     if ( ((GateVSystem*)(*iter))->CheckConnectionToCreator(anCreator) )
       return ((GateVSystem*)(*iter));
@@ -132,13 +132,13 @@ GateVSystem* GateSystemListManager::FindSystemOfCreator(GateVVolume* anCreator)
 /* this function underwent an important modification for the multi-system approach.
    Check whether the name of a new inserter,or the system type, has the same name as one of the predefined systems
    If that's the case, auto-create the system
-   newChildCreator: the newly-created inserter  
+   newChildCreator: the newly-created inserter
 */
 void GateSystemListManager::CheckScannerAutoCreation(GateVVolume* newChildCreator)
 {
   // Check whether the name of the new inserter,or the system type, has the same name as one of the predefined systems
    G4String baseName;
-  
+
    if(m_messenger->GetSystemType().empty() == false)
    {
       baseName = m_messenger->GetSystemType();
@@ -146,7 +146,7 @@ void GateSystemListManager::CheckScannerAutoCreation(GateVVolume* newChildCreato
    }
    else baseName= newChildCreator->GetObjectName();
 
-   if (DecodeTypeName(baseName)>=0) { 
+   if (DecodeTypeName(baseName)>=0) {
     // A predefined-system name was recognised: launch the autocreation of the system
       GateMessage("Core", 2, "[GateSystemListManager::CheckScannerAutoCreation:" << G4endl
             << "\tCreating new system based on volume inserter '" << baseName << "'" << G4endl);
@@ -154,9 +154,9 @@ void GateSystemListManager::CheckScannerAutoCreation(GateVVolume* newChildCreato
     // Create the system
       theInsertedSystemsNames->push_back(newChildCreator->GetObjectName());
       GateVSystem* newSystem = InsertNewSystem(baseName);
-    
+
     // Attach the system's base to the inserter
-      newSystem->GetBaseComponent()->SetCreator(newChildCreator);        
+      newSystem->GetBaseComponent()->SetCreator(newChildCreator);
    }
 }
 //-----------------------------------------------------------------------------
@@ -164,8 +164,8 @@ void GateSystemListManager::CheckScannerAutoCreation(GateVVolume* newChildCreato
 
 
 //-----------------------------------------------------------------------------
-/* Checks whether a name corresponds to onw of the predefined system-names    
-   name: the name to check	
+/* Checks whether a name corresponds to onw of the predefined system-names
+   name: the name to check
    returns:  the position of the name in the name-table (-1 if not found)
 */
 G4int GateSystemListManager::DecodeTypeName(const G4String& name)
@@ -181,19 +181,19 @@ G4int GateSystemListManager::DecodeTypeName(const G4String& name)
 
 
 //-----------------------------------------------------------------------------
-/* Create a new system of a specific type      	
-   typeName: the type-name of the system to create	
+/* Create a new system of a specific type
+   typeName: the type-name of the system to create
    returns the newly created system
 */
 GateVSystem* GateSystemListManager::InsertNewSystem(const G4String& typeName)
 {
-  
+
   // Finds the type-name in the type-name table
   G4int typePos = DecodeTypeName(typeName);
 
   // Create the requested system
   GateVSystem* newSystem=0;
-  switch (typePos) 
+  switch (typePos)
     {
     case 0:
     case 1:
@@ -220,17 +220,17 @@ GateVSystem* GateSystemListManager::InsertNewSystem(const G4String& typeName)
     case 8:
       newSystem = new GateCTScannerSystem(MakeElementName(typeName));
       break;
-    case 9:  
+    case 9:
       newSystem = new GateOPETSystem(MakeElementName(typeName));
       break;
-    case 10:  
+    case 10:
       newSystem = new GateOpticalSystem(MakeElementName(typeName));  // Optical System - v. cuplov
       break;
     default:
       G4cout << "System type name '" << typeName << "' was not recognised --> insertion request must be ignored!\n";
       break;
     }
-  
+
   return newSystem;
 }
 //-----------------------------------------------------------------------------
@@ -249,6 +249,3 @@ const G4String& GateSystemListManager::DumpChoices()
   return theList;
 }
 //-----------------------------------------------------------------------------
-
-
-

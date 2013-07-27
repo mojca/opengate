@@ -23,7 +23,7 @@ GateScannerSystem::GateScannerSystem(const G4String& itsName)
   // Setup a messenger
   m_messenger = new GateClockDependentMessenger(this);
   m_messenger->SetDirectoryGuidance(G4String("Controls the system '") + GetObjectName() + "'" );
-  
+
   // Define the scanner components
   GateSystemComponent* aComponent;
   aComponent = new GateSystemComponent("level1",GetBaseComponent(),this);
@@ -43,8 +43,7 @@ GateScannerSystem::GateScannerSystem(const G4String& itsName)
 
 
 // Destructor
-GateScannerSystem::~GateScannerSystem() 
+GateScannerSystem::~GateScannerSystem()
 {
   delete m_messenger;
 }
-

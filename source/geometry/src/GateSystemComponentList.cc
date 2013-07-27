@@ -30,7 +30,7 @@ GateSystemComponentList::GateSystemComponentList(GateSystemComponent* itsMother,
 
 
 GateSystemComponentList::~GateSystemComponentList()
-{  
+{
     delete m_messenger;
 }
 
@@ -61,22 +61,22 @@ void GateSystemComponentList::ListElements()
 
 
 /* Check whether an inserter is connected to the component tree
-      	
+
 	anCreator: the inserter we want to check
-	
+
 	returns true if the inserter is attached to one of the components
 */
-G4bool GateSystemComponentList::CheckConnectionToCreator(GateVVolume* anCreator) 
-{ 
-  for ( size_t i=0 ; i < GetChildNumber() ; ++i) 
+G4bool GateSystemComponentList::CheckConnectionToCreator(GateVVolume* anCreator)
+{
+  for ( size_t i=0 ; i < GetChildNumber() ; ++i)
     if ( GetChildComponent(i)->CheckConnectionToCreator(anCreator) )
       return true;
 
   return false;
 }
-    
-    
-    
+
+
+
 
 // Compute the maximum depth of the child component trees
 size_t GateSystemComponentList::GetMaxChildTreeDepth()
@@ -89,7 +89,7 @@ size_t GateSystemComponentList::GetMaxChildTreeDepth()
     if (childResult>childTreeDepth)
       childTreeDepth=childResult;
   }
-  
+
   return childTreeDepth;
 }
 
@@ -101,10 +101,10 @@ size_t GateSystemComponentList::GetActiveChildNumber()
   // We loop on the list of daughter-components
   // We increment the number of active children for each daughter-component that is active
   size_t activeChildNumber=0;
-  for ( size_t i=0 ; i<GetChildNumber() ; ++i) 
+  for ( size_t i=0 ; i<GetChildNumber() ; ++i)
     if ( GetChildComponent(i)->IsActive() )
       ++activeChildNumber;
-  
+
   return activeChildNumber;
 }
 

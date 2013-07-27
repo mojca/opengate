@@ -75,16 +75,16 @@ class GateParameterisedHole : public GateTrap
      //! Implementation of the pure virtual method declared by the base class GateVCreator
      //! If flagUpdateOnly is 0, it creates a new parameterised, using the parameterisation
      //! This parameterisation must have been created by a concrete class derived from GateVParameterised
-     //! If flagUpdateOnly is set to 1, the default position is updated 
+     //! If flagUpdateOnly is set to 1, the default position is updated
      virtual void ConstructOwnPhysicalVolume(G4bool flagUpdateOnly);
-     
+
      //! Return the parameterisation
      virtual inline GatePVParameterisation* GetParameterisation() const
       	{ return m_parameterisation; }
      //! Set the parameterisation
-     virtual inline void SetParameterisation(GatePVParameterisation* aParameterisation) 
+     virtual inline void SetParameterisation(GatePVParameterisation* aParameterisation)
       	{ m_parameterisation = aParameterisation; }
-	
+
   protected:
 
      G4double m_FocalDistanceX,m_FocalDistanceY,m_SeptalThickness,m_InnerRadius,m_Height,m_DimensionX,m_DimensionY;

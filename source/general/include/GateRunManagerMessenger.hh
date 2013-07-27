@@ -22,14 +22,14 @@ class GateRunManagerMessenger : public G4UImessenger
   public :
     GateRunManagerMessenger(GateRunManager* );
     virtual ~GateRunManagerMessenger();
-    
+
     virtual void SetNewValue(G4UIcommand*, G4String);
-    
+
   private :
-    GateRunManager* pRunManager;    
+    GateRunManager* pRunManager;
     G4UIcmdWithoutParameter* pRunInitCmd;
     G4UIcmdWithoutParameter* pRunGeomUpdateCmd;
-    G4UIcmdWithABool* pRunEnableGlobalOutputCmd;  
+    G4UIcmdWithABool* pRunEnableGlobalOutputCmd;
 };
 //-----------------------------------------------------------------------------
 

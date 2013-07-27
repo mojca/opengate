@@ -9,12 +9,12 @@ See GATE/LICENSE.txt for further details
 ----------------------*/
 
 
-/*! 
+/*!
   \class  GateHounsfieldDensityTable.hh
-  \brief  
+  \brief
   \author david.sarrut@creatis.insa-lyon.fr
 */
- 
+
 #ifndef __GateHounsfieldDensityTable__hh__
 #define __GateHounsfieldDensityTable__hh__
 

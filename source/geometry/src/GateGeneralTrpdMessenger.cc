@@ -23,7 +23,7 @@ See GATE/LICENSE.txt for further details
 //-------------------------------------------------------------------------------------
 GateGeneralTrpdMessenger::GateGeneralTrpdMessenger(GateGeneralTrpd *itsCreator)
   :GateVolumeMessenger(itsCreator)
-{ 
+{
   G4String dir = GetDirectoryName() + "geometry/";
 
   G4String cmdName = dir+"setX1Length";
@@ -150,18 +150,18 @@ GateGeneralTrpdMessenger::GateGeneralTrpdMessenger(GateGeneralTrpd *itsCreator)
 //-------------------------------------------------------------------------------------
 GateGeneralTrpdMessenger::~GateGeneralTrpdMessenger()
 {
-  delete  TrpdX1LengthCmd;    
-  delete  TrpdX2LengthCmd;    
-  delete  TrpdX3LengthCmd;    
-  delete  TrpdX4LengthCmd;    
-  delete  TrpdY1LengthCmd;    
-  delete  TrpdY2LengthCmd;    
-  delete  TrpdZLengthCmd;     
-/*  delete  TrpdXBoxLengthCmd;  
-  delete  TrpdYBoxLengthCmd;  
-  delete  TrpdZBoxLengthCmd;  
-  delete  TrpdXBoxPosCmd;     
-  delete  TrpdYBoxPosCmd;     
+  delete  TrpdX1LengthCmd;
+  delete  TrpdX2LengthCmd;
+  delete  TrpdX3LengthCmd;
+  delete  TrpdX4LengthCmd;
+  delete  TrpdY1LengthCmd;
+  delete  TrpdY2LengthCmd;
+  delete  TrpdZLengthCmd;
+/*  delete  TrpdXBoxLengthCmd;
+  delete  TrpdYBoxLengthCmd;
+  delete  TrpdZBoxLengthCmd;
+  delete  TrpdXBoxPosCmd;
+  delete  TrpdYBoxPosCmd;
   delete  TrpdZBoxPosCmd;     */
   delete  TrpdThetaCmd;
   delete  TrpdAlp2Cmd;
@@ -175,56 +175,56 @@ GateGeneralTrpdMessenger::~GateGeneralTrpdMessenger()
 
 //-------------------------------------------------------------------------------------
 void GateGeneralTrpdMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
   if(      command==TrpdX1LengthCmd )
-    { GetGeneralTrpdCreator()->SetTrpdX1Length(TrpdX1LengthCmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}   
+    { GetGeneralTrpdCreator()->SetTrpdX1Length(TrpdX1LengthCmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}
   else if( command==TrpdX2LengthCmd )
-    { GetGeneralTrpdCreator()->SetTrpdX2Length(TrpdX2LengthCmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}   
+    { GetGeneralTrpdCreator()->SetTrpdX2Length(TrpdX2LengthCmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}
   else if( command==TrpdX3LengthCmd )
-    { GetGeneralTrpdCreator()->SetTrpdX3Length(TrpdX3LengthCmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}   
+    { GetGeneralTrpdCreator()->SetTrpdX3Length(TrpdX3LengthCmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}
   else if( command==TrpdX4LengthCmd )
-    { GetGeneralTrpdCreator()->SetTrpdX4Length(TrpdX4LengthCmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}   
+    { GetGeneralTrpdCreator()->SetTrpdX4Length(TrpdX4LengthCmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}
 
   else if( command==TrpdY1LengthCmd )
-    { GetGeneralTrpdCreator()->SetTrpdY1Length(TrpdY1LengthCmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}   
-  
- 
+    { GetGeneralTrpdCreator()->SetTrpdY1Length(TrpdY1LengthCmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}
+
+
   else if( command==TrpdY2LengthCmd )
-    { GetGeneralTrpdCreator()->SetTrpdY2Length(TrpdY2LengthCmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}   
-  
+    { GetGeneralTrpdCreator()->SetTrpdY2Length(TrpdY2LengthCmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}
+
   else if( command==TrpdZLengthCmd )
-    { GetGeneralTrpdCreator()->SetTrpdZLength(TrpdZLengthCmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}   
-  
+    { GetGeneralTrpdCreator()->SetTrpdZLength(TrpdZLengthCmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}
+
   else if( command==TrpdThetaCmd )
-    { GetGeneralTrpdCreator()->SetTrpdTheta(TrpdThetaCmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}   
-  
+    { GetGeneralTrpdCreator()->SetTrpdTheta(TrpdThetaCmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}
+
   else if( command==TrpdPhiCmd )
-    { GetGeneralTrpdCreator()->SetTrpdPhi(TrpdPhiCmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}   
-  
+    { GetGeneralTrpdCreator()->SetTrpdPhi(TrpdPhiCmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}
+
   else if( command==TrpdAlp1Cmd )
-    { GetGeneralTrpdCreator()->SetTrpdAlp1(TrpdAlp1Cmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}   
-  
+    { GetGeneralTrpdCreator()->SetTrpdAlp1(TrpdAlp1Cmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}
+
   else if( command==TrpdAlp2Cmd )
-    { GetGeneralTrpdCreator()->SetTrpdAlp2(TrpdAlp2Cmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}   
-  
+    { GetGeneralTrpdCreator()->SetTrpdAlp2(TrpdAlp2Cmd->GetNewDoubleValue(newValue)); /*TellGeometryToRebuild();*/}
+
 /*
 Loic  else if( command==TrpdXBoxLengthCmd )
-    { GetGeneralTrpdCreator()->SetTrpdTrudXLength(TrpdXBoxLengthCmd->GetNewDoubleValue(newValue)); TellGeometryToRebuild();}   
-  			                   
-  else if( command==TrpdYBoxLengthCmd )	                   
-    { GetGeneralTrpdCreator()->SetTrpdTrudYLength(TrpdYBoxLengthCmd->GetNewDoubleValue(newValue)); TellGeometryToRebuild();}   
-  			                   
-  else if( command==TrpdZBoxLengthCmd )	                   
-    { GetGeneralGeneralTrpdCreator()->SetTrpdTrudZLength(TrpdZBoxLengthCmd->GetNewDoubleValue(newValue)); TellGeometryToRebuild();}   
-  
+    { GetGeneralTrpdCreator()->SetTrpdTrudXLength(TrpdXBoxLengthCmd->GetNewDoubleValue(newValue)); TellGeometryToRebuild();}
+
+  else if( command==TrpdYBoxLengthCmd )
+    { GetGeneralTrpdCreator()->SetTrpdTrudYLength(TrpdYBoxLengthCmd->GetNewDoubleValue(newValue)); TellGeometryToRebuild();}
+
+  else if( command==TrpdZBoxLengthCmd )
+    { GetGeneralGeneralTrpdCreator()->SetTrpdTrudZLength(TrpdZBoxLengthCmd->GetNewDoubleValue(newValue)); TellGeometryToRebuild();}
+
   else if( command==TrpdXBoxPosCmd )
-    { GetGeneralTrpdCreator()->SetTrpdTrudXPos(TrpdXBoxPosCmd->GetNewDoubleValue(newValue)); TellGeometryToRebuild();}   
-  			                   
-  else if( command==TrpdYBoxPosCmd )	                   
-    { GetGeneralTrpdCreator()->SetTrpdTrudYPos(TrpdYBoxPosCmd->GetNewDoubleValue(newValue)); TellGeometryToRebuild();}   
-  			                   
-  else if( command==TrpdZBoxPosCmd )	                   
-    { GetGeneralTrpdCreator()->SetTrpdTrudZPos(TrpdZBoxPosCmd->GetNewDoubleValue(newValue)); TellGeometryToRebuild();}   
+    { GetGeneralTrpdCreator()->SetTrpdTrudXPos(TrpdXBoxPosCmd->GetNewDoubleValue(newValue)); TellGeometryToRebuild();}
+
+  else if( command==TrpdYBoxPosCmd )
+    { GetGeneralTrpdCreator()->SetTrpdTrudYPos(TrpdYBoxPosCmd->GetNewDoubleValue(newValue)); TellGeometryToRebuild();}
+
+  else if( command==TrpdZBoxPosCmd )
+    { GetGeneralTrpdCreator()->SetTrpdTrudZPos(TrpdZBoxPosCmd->GetNewDoubleValue(newValue)); TellGeometryToRebuild();}
 */
 
   else

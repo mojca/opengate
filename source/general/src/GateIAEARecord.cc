@@ -34,7 +34,7 @@
  *   Iwan Kawrakow, PhD
  *   e-mail iwan@irs.phy.nrc.ca
  *   Ionizing Radiation Standards
- *   Institute for National Measurement Standards 
+ *   Institute for National Measurement Standards
  *   National Research Council of Canada Ottawa, ON, K1A 0R6 Canada
  *   Phone: +1-613-993 2197, ext.241; Fax: +1-613-952 9865
  *
@@ -56,23 +56,23 @@ short iaea_record_type::initialize()
 
   // Defines i/o logic and variable quantities to be stored
   // If the value is zero, then corresponding quantity is fixed
-  ix = 1;       
+  ix = 1;
   iy = 1;
   iz = 1;
   iu = 1;
   iv = 1;
   iw = 1;
   iweight = 1;
-  // Defines a number of EXTRA long variables stored 
+  // Defines a number of EXTRA long variables stored
   // (EGS need 2 for incremental history number and LATCH)
-  iextralong = 1;    
+  iextralong = 1;
   if( iextralong >= NUM_EXTRA_LONG)
   {
      fprintf(stderr, "\n ERROR: Increase NUM_EXTRA_LONG number in iaea_record.h\n");
      return (FAIL);
   }
   // Defines a number of EXTRA float variables stored (EGS could need 1 for ZLAST)
-  iextrafloat = 0;     
+  iextrafloat = 0;
   if( iextrafloat >= NUM_EXTRA_FLOAT)
   {
      fprintf(stderr, "\n ERROR: Increase NUM_EXTRA_FLOAT number in iaea_record.h\n");
@@ -89,7 +89,7 @@ short iaea_record_type::write_particle()
 
   char ishort = (char) particle;
   if(w < 0) ishort = -ishort; // Sign of w is stored in particle type
-  
+
   if( fwrite(&ishort, sizeof(char),   1, p_file) != 1)
   {
     fprintf(stderr, "\n ERROR: write_particle: Failed to write particle type\n");
@@ -101,7 +101,7 @@ short iaea_record_type::write_particle()
   if(IsNewHistory > 0) energy *= (-1); // New history is signaled by negative energy
 
   floatArray[0] = energy;
-  
+
   int i = 0;
 
   if(ix > 0) floatArray[++i] = x;
@@ -122,7 +122,7 @@ short iaea_record_type::write_particle()
      return (FAIL);
   }
 
-  if(iextralong > 0) 
+  if(iextralong > 0)
   {
      for(j=0;j<iextralong;j++) longArray[j] = extralong[j];
      reclength += iextralong*sizeof(IAEA_I32);
@@ -136,20 +136,20 @@ short iaea_record_type::write_particle()
   if(reclength == 0) return(FAIL);
 
   #ifdef DEBUG
-  // charge defined 
+  // charge defined
   int iaea_charge[MAX_NUM_PARTICLES]={0,-1,+1,0,+1};
   int charge = iaea_charge[particle - 1];
 
   printf("\n Wrote a particle with a record lenght %d",reclength);
   printf("\n Q %d E %f X %f Y %f Z %f \n\t u %f v %f w %f W %f Part %d \n",
   charge, energy, x, y, z, u, v, w, weight, particle);
-  if( iextrafloat > 0) printf(" EXTRA FLOATs:"); 
+  if( iextrafloat > 0) printf(" EXTRA FLOATs:");
   for(j=0;j<iextrafloat;j++) printf(" F%i %f",j+1,extrafloat[j]);
-  if( iextralong > 0)  printf(" EXTRA LONGs:"); 
+  if( iextralong > 0)  printf(" EXTRA LONGs:");
   for(j=0;j<iextralong;j++) printf(" L%i %d", j+1,extralong[j]);
-  printf("\n"); 
+  printf("\n");
   #endif
-    
+
   return(OK);
 }
 
@@ -158,7 +158,7 @@ short iaea_record_type::read_particle()
   float floatArray[NUM_EXTRA_FLOAT+7];
   IAEA_I32 longArray[NUM_EXTRA_LONG+7];
   int i,j,is,reclength;
-  char ctmp; 
+  char ctmp;
 
   // IAEA_I32 pos = ftell(p_file); // To check file position
 
@@ -167,7 +167,7 @@ short iaea_record_type::read_particle()
     fprintf(stderr, "\n ERROR: read_particle: Failed to read particle type\n");
     return (FAIL);;
   }
-  
+
   particle = (short) ctmp;
 
   is = 1; // getting sign of Z director cosine w
@@ -189,16 +189,16 @@ short iaea_record_type::read_particle()
     fprintf(stderr, "\n ERROR: read_particle: Failed to read FLOATs \n");
     return (FAIL);;
   }
-  
+
   reclength += rec_to_read*sizeof(float);
 
-  
+
   IsNewHistory = 0;
-  if(floatArray[0]<0) IsNewHistory = 1; // like egsnrc   
+  if(floatArray[0]<0) IsNewHistory = 1; // like egsnrc
   energy = fabs(floatArray[0]);
 
   i = 0;
-  if(ix > 0) x = floatArray[++i]; 
+  if(ix > 0) x = floatArray[++i];
   if(iy > 0) y = floatArray[++i];
   if(iz > 0) z = floatArray[++i];
   if(iu > 0) u = floatArray[++i];
@@ -212,14 +212,14 @@ short iaea_record_type::read_particle()
       double aux = (u*u + v*v);
       if (aux<=1.0) w = (float) (is * sqrt((float)(1.0 - aux)));
       else
-      { 
+      {
             aux = sqrt((float)aux);
             u /= (float)aux;
             v /= (float)aux;
       }
   }
 
-  if(iextralong > 0) 
+  if(iextralong > 0)
   {
      if( fread(longArray, sizeof(IAEA_I32), (size_t)iextralong, p_file) != (size_t)iextralong)
      {
@@ -231,7 +231,7 @@ short iaea_record_type::read_particle()
   }
 
   #ifdef DEBUG
-  // charge defined 
+  // charge defined
   int iaea_charge[MAX_NUM_PARTICLES]={0,-1,+1,0,+1};
   int charge = iaea_charge[particle - 1];
 
@@ -239,11 +239,11 @@ short iaea_record_type::read_particle()
                reclength,IsNewHistory);
   printf("\n Q %d E %f X %f Y %f Z %f \n\t u %f v %f w %f W %f Part %d \n",
   charge, energy, x, y, z, u, v, w, weight, particle);
-  if( iextrafloat > 0) printf(" EXTRA FLOATs:"); 
+  if( iextrafloat > 0) printf(" EXTRA FLOATs:");
   for(j=0;j<iextrafloat;j++) printf(" F%i %f",j+1,extrafloat[j]);
-  if( iextralong > 0)  printf(" EXTRA LONGs:"); 
+  if( iextralong > 0)  printf(" EXTRA LONGs:");
   for(j=0;j<iextralong;j++)  printf(" L%i %d",j+1,extralong[j]);
-  printf("\n"); 
+  printf("\n");
   #endif
   return(reclength);
 }

@@ -36,23 +36,23 @@ class GateEccentRotMove;
 
 /*! \class  GateSystemComponent
     \brief  A GateSystemComponent is a level of a system (GateVSystem)
-    
+
     - GateSystemComponent - by Daniel.Strul@iphe.unil.ch (Oct 2002)
-    
+
     - A system component is part of of a component tree: it handles a tree of subcomponents,
       and may be a daughter of some higher-level component. The whole tree defines a 'system',
       i.e. a geometry model: in this model, each component has a predefined role (detector
       head, crystal matrix, collimator...)
-    
-    - A component tree provides a pre-defined model of a geometry, such as a scanner or a 
-      detector block. In this model, each component has a specific role (detector head, 
+
+    - A component tree provides a pre-defined model of a geometry, such as a scanner or a
+      detector block. In this model, each component has a specific role (detector head,
       crystal matrix, collimator...)
-    
+
     - System components are activated when they are connected to an creator of the geometry.
       Once a component is thus connected, it can read the creator properties, such as its
       dimensions, position, movement parameters, number of copies...
-      
-    - For example, a typical PET scanner would incorporate a component for the detector 
+
+    - For example, a typical PET scanner would incorporate a component for the detector
       blocks ('rsector', 'block', 'bucket'...). This component would then be connected
       to the one geometry creator that models this detector block. Once this connection
       is done, one can read the scanner properties that are related to the blocks: number
@@ -63,12 +63,12 @@ class GateEccentRotMove;
       just answers for itself; for others, it recursively calls the methods of all its subcomponents
 
     - Note: from July to Oct. 2002, a system was a vector of system-levels, each level managing a
-      vector of components. On Oct. 2002, the whole system (which was too complex) was redesigned, 
+      vector of components. On Oct. 2002, the whole system (which was too complex) was redesigned,
       and the current mechanism (tree of system-components) replaced the previous one (vector of
       system-levels)
 
     \sa GateVSystem
-*/      
+*/
 class GateSystemComponent  : public GateClockDependent
 {
   public:
@@ -77,14 +77,14 @@ class GateSystemComponent  : public GateClockDependent
 	\param itsName:       	    the name chosen for this system-component
 	\param itsMotherComponent:  the mother of the component (0 if top of a tree)
 	\param itsSystem:           the system to which the component belongs
-    */    
+    */
     GateSystemComponent(const G4String& itsName,
       	      	      	GateSystemComponent* itsMotherComponent,
 		      	GateVSystem* itsSystem);
     //! Destructor
     virtual ~GateSystemComponent();
-    
- 
+
+
     //! \name Description/print-out methods
     //@{
 
@@ -92,7 +92,7 @@ class GateSystemComponent  : public GateClockDependent
       	\brief This methods prints-out a description of the system component
 
 	\param indent:        	    the print-out indentation (cosmetic parameter)
-    */    
+    */
     virtual void Describe(size_t indent=0);
     //@}
 
@@ -104,7 +104,7 @@ class GateSystemComponent  : public GateClockDependent
       { return m_system; }
 
     //! Get the mother of the component
-    GateSystemComponent* GetMotherComponent() const 
+    GateSystemComponent* GetMotherComponent() const
       {  return m_motherComponent;}
 
     //! Set the mother of the component
@@ -130,7 +130,7 @@ class GateSystemComponent  : public GateClockDependent
     //@{
 
     //! Returns the creator attached to the component
-    inline virtual GateVVolume* GetCreator() const   	
+    inline virtual GateVVolume* GetCreator() const
       { return m_creator; }
 
 
@@ -139,21 +139,21 @@ class GateSystemComponent  : public GateClockDependent
     virtual void SetCreator(GateVVolume* anCreator);
 
     /*! \brief Check whether an creator is connected to the component tree
-      	
+
 	\param anCreator: the creator we want to check
-	
+
 	\return true if the creator is attached to one of the components of the component-tree
     */
     G4bool CheckConnectionToCreator(GateVVolume* anCreator);
-    
-    
+
+
     //! Tells whether an creator may be attached to this component
     //! This virtual method makes a number of tests: is the creator pointer valid,
     //! does the creator owns a movement-list, does it own a repeater-list...
     //! It can be and should be overloaded when we want to do specific tests (for specific components)
     virtual G4bool IsValidAttachmentRequest(GateVVolume*
     anCreator) const;
-   
+
     //! Returns the number of physical volumes created by the creator
     virtual size_t GetVolumeNumber() const;
 
@@ -179,7 +179,7 @@ class GateSystemComponent  : public GateClockDependent
      virtual const G4ThreeVector&   GetCurrentTranslation(size_t copyNumber=0) const;
      //! Returns the rotation matrix for one of the physical volumes created by the creator
      virtual G4RotationMatrix* 	   GetCurrentRotation(size_t copyNumber=0) const;
-    
+
     //@}
 
 
@@ -210,7 +210,7 @@ class GateSystemComponent  : public GateClockDependent
     GateRotationMove* FindRotationMove() const;
     //! The function returns the creator's rotation velocity, if a rotation can be find was found in the creator's move list
     G4double GetRotationVelocity() const;
-    
+
     //@}
 
 
@@ -221,7 +221,7 @@ class GateSystemComponent  : public GateClockDependent
     GateOrbitingMove* FindOrbitingMove() const;
     //! The function returns the creator's orbiting velocity, if an orbiting can be find was found in the creator's move list
     G4double GetOrbitingVelocity() const;
- 
+
     //! \name Access to the EccentRot move properties (if any)
     //@{
 
@@ -233,8 +233,8 @@ class GateSystemComponent  : public GateClockDependent
 
     //! The function returns the creator's shift position, if a EccentRot can be find was found in the creator's move list
     const G4ThreeVector& GetEccentRotShift() const;
-    
-    
+
+
     //@}
 
 
@@ -280,9 +280,9 @@ class GateSystemComponent  : public GateClockDependent
 
     //! Finds the first sphere-repeater in the creator's repeater list
     GateSphereRepeater* FindSphereRepeater();
-    //! Finds the first sphere-repeater's repeat axial pitch 
+    //! Finds the first sphere-repeater's repeat axial pitch
     G4double GetSphereAxialRepeatPitch();
-    //! Finds the first sphere-repeater's repeat azimuthal pitch 
+    //! Finds the first sphere-repeater's repeat azimuthal pitch
     G4double GetSphereAzimuthalRepeatPitch();
     //! Finds the first sphere-repeater's axial repeat number
     G4int GetSphereAxialRepeatNumber();
@@ -297,27 +297,27 @@ class GateSystemComponent  : public GateClockDependent
 
     //@}
 
-    
+
     //! \name Computation of offsets to get radiuses
     //@{
 
     //! Alignment constants used by ComputeOffset()
     enum Alignment1D {
-        align_right=-1,       
+        align_right=-1,
         align_center = 0,
       	align_left=+1,
 	align_unknown=999
       };
 
     /*! \brief	Compute the offset (displacement) between a feature of the creator and a feature of its mother creator
-    
-      	By default, all alignments are set to align_center, so that we compute the offset between the creator's center 
+
+      	By default, all alignments are set to align_center, so that we compute the offset between the creator's center
 	and the center of its mother's reference frame
 	We could select align_left for both alignments: in that case, we would compute the offset between the left edge
 	of the creator and the left edge of its mother
 	To compute an internal ring diameter from a block position, we actually select align_left for the block and
 	align_center for its mother: thus, we compute the distance between the block's left edge and its mother's center
-    
+
       	\param	axis: 	      	      the axis along which we want to compute the offset
 	\param	alignment:    	      the feature of the creator for which we want to compute the offset
 	      	      	      	      it can be its center (align_center), its left border (align_left) or its right border (align_right)
@@ -345,7 +345,7 @@ class GateSystemComponent  : public GateClockDependent
       { return m_childComponentList->GetChildNumber(); }
 
     //! Return one of the daughter-components
-    GateSystemComponent* GetChildComponent(size_t i) const 
+    GateSystemComponent* GetChildComponent(size_t i) const
       {  return m_childComponentList->GetChildComponent(i); }
 
     //! Append a new component at the end of the child-list
@@ -355,7 +355,7 @@ class GateSystemComponent  : public GateClockDependent
     //! Compute the number of active daughter-components (i.e. components that are linked to an creator)
     size_t GetActiveChildNumber() const
     {  return m_childComponentList->GetActiveChildNumber(); }
-      
+
     //! Finds a component in the component tree from its name
     GateSystemComponent* FindSystemComponent(const G4String& componentName);
 
@@ -370,7 +370,7 @@ class GateSystemComponent  : public GateClockDependent
     GateSystemComponentList         *m_childComponentList; //!< List of daughter components (next level of the component tree)
 
 	G4int m_minSectorDiff;
-    std::vector<G4String> m_coincidence_rsector; // for rsector only 
+    std::vector<G4String> m_coincidence_rsector; // for rsector only
     G4int m_ringID;
 };
 
@@ -407,4 +407,3 @@ C* GateSystemComponent::FindRepeater() const
 
 
 #endif
-

@@ -34,7 +34,7 @@ GatePulseProcessorChain::GatePulseProcessorChain( GateDigitizer* itsDigitizer,
 
 //  G4cout << " in GatePulseProcessorChain call GateSingleDigiMaker" << G4endl;
   itsDigitizer->InsertDigiMakerModule( new GateSingleDigiMaker(itsDigitizer, itsOutputName,true) );
-  
+
 //  G4cout << " FIN Constructor GatePulseProcessorChain " << G4endl;
 }
 
@@ -42,7 +42,7 @@ GatePulseProcessorChain::GatePulseProcessorChain( GateDigitizer* itsDigitizer,
 
 
 GatePulseProcessorChain::~GatePulseProcessorChain()
-{  
+{
     delete m_messenger;
 }
 
@@ -87,7 +87,7 @@ GatePulseList* GatePulseProcessorChain::ProcessPulseList()
     return 0;
 
   // Sequentially launch all pulse processors
-  for (size_t processorID = 0 ; processorID < GetProcessorNumber(); processorID++) 
+  for (size_t processorID = 0 ; processorID < GetProcessorNumber(); processorID++)
     if (GetProcessor(processorID)->IsEnabled()) {
       pulseList = GetProcessor(processorID)->ProcessPulseList(pulseList);
       if (pulseList) GateDigitizer::GetInstance()->StorePulseList(pulseList);
@@ -97,5 +97,3 @@ GatePulseList* GatePulseProcessorChain::ProcessPulseList()
   if (pulseList)  GateDigitizer::GetInstance()->StorePulseListAlias(m_outputName,pulseList);
   return pulseList;
 }
-
-

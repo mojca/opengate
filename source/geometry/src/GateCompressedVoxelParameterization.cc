@@ -24,9 +24,9 @@
 #include "GateGeometryVoxelRangeTranslator.hh"
 
 //! Constructor.
-GateCompressedVoxelParameterization::GateCompressedVoxelParameterization( 
-						     GateVGeometryVoxelReader* voxR, 
-						     const G4ThreeVector& voxN, 
+GateCompressedVoxelParameterization::GateCompressedVoxelParameterization(
+						     GateVGeometryVoxelReader* voxR,
+						     const G4ThreeVector& voxN,
 						     const G4ThreeVector& voxS):
   GatePVParameterisation(),
   voxelNumber(voxN),
@@ -36,15 +36,15 @@ GateCompressedVoxelParameterization::GateCompressedVoxelParameterization(
   voxelTranslator( voxelReader->GetVoxelTranslator() ),
   nxy( static_cast<int> ( voxelNumber.x() * voxelNumber.y() ) ),
   nx ( static_cast<int> ( voxelNumber.x() ) ){
-  
-  
+
+
 }
 
 G4int GateCompressedVoxelParameterization::GetNbOfCopies() {
 
 GateVoxelCompressor* Compressor =  voxelReader->GetCompressorPtr();
 
-if ( Compressor != 0 ) {return Compressor->GetNbOfCopies();} 
+if ( Compressor != 0 ) {return Compressor->GetNbOfCopies();}
 else {return G4int(voxelNumber.x() * voxelNumber.y() * voxelNumber.z());}
 
 }
@@ -54,7 +54,7 @@ else {return G4int(voxelNumber.x() * voxelNumber.y() * voxelNumber.z());}
 // relative to center of the enclosing box
 
 void GateCompressedVoxelParameterization::ComputeTransformation(G4int copyNo  ,G4VPhysicalVolume * pv) const{
-  
+
   // Calculate the relative distance "relPos" of the center of the current voxel
   // from the center of the corner voxel (voxel #0), and
   // calculate the position (relative to the center of the matrix) by adding to relpos the corner position
@@ -67,7 +67,7 @@ void GateCompressedVoxelParameterization::ComputeTransformation(G4int copyNo  ,G
 
   G4ThreeVector relPos( KroneckerProduct( location + (size-unity)/2.0, voxelSize) );
   G4ThreeVector xlat  ( relPos+voxelZeroPos );
- 
+
   pv->SetTranslation( xlat );
   pv->SetRotation(0);
 
@@ -75,22 +75,22 @@ void GateCompressedVoxelParameterization::ComputeTransformation(G4int copyNo  ,G
 
 // ---------------------------------------------------------------------------------------
 // Compute Dimensions
-void GateCompressedVoxelParameterization::ComputeDimensions(G4Box& box, const G4int copyNo, const G4VPhysicalVolume* ) const{                                                   
+void GateCompressedVoxelParameterization::ComputeDimensions(G4Box& box, const G4int copyNo, const G4VPhysicalVolume* ) const{
 
   G4ThreeVector size;
   if ( voxelReader->GetCompressorPtr()->GetCompressionRatio() == 0 ) size = G4ThreeVector(voxelReader->GetVoxelNx(),voxelReader->GetVoxelNy(),voxelReader->GetVoxelNz());
   else
   {
    const GateCompressedVoxel& voxel( voxelReader->GetCompressor().GetVoxel(copyNo) );
-  
-   const G4ThreeVector size    ( voxel[5], voxel[4], voxel[3] );  
+
+   const G4ThreeVector size    ( voxel[5], voxel[4], voxel[3] );
    G4ThreeVector halfDimensions( KroneckerProduct( size , voxelSize)/2.0 );
 
    box.SetXHalfLength( halfDimensions.x() );
    box.SetYHalfLength( halfDimensions.y() );
    box.SetZHalfLength( halfDimensions.z() );
 
-  } 
+  }
 }
 
 // ---------------------------------------------------------------------------------------
@@ -103,7 +103,7 @@ G4Material* GateCompressedVoxelParameterization::ComputeMaterial(G4int copyNo , 
 
   G4Material*      mp( (*G4Material::GetMaterialTable())[voxel[6]] );
   G4LogicalVolume* lv( pv->GetLogicalVolume()                  );
-  
+
   if (voxelTranslator){
     lv->SetVisAttributes( voxelTranslator->GetMaterialAttributes(mp) );
   }
@@ -111,4 +111,3 @@ G4Material* GateCompressedVoxelParameterization::ComputeMaterial(G4int copyNo , 
   return mp;
 
 }
-  

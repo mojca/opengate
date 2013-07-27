@@ -17,6 +17,6 @@ int main(int /*argc*/, char **argv)
     std::cout << "Dimension #" << i << "=" << m_MetaImage.DimSize(i)/m_SubSamplingFactor << std::endl;
     std::cout << "Dimension #" << i << "=" << m_MetaImage.ElementSpacing(i)*m_SubSamplingFactor << std::endl;
     std::cout << "Origin #" << i << "=" << m_MetaImage.Position(i) << std::endl;
-    } 
+    }
   return 0;
 }

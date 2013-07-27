@@ -21,7 +21,7 @@ GateToPlatform::GateToPlatform(G4int numberOfSplits, G4String thePlatform, G4Str
 }
 
 GateToPlatform::~GateToPlatform()
-{ 
+{
 }
 
 int GateToPlatform::GenerateSubmitfile(G4String outputMacDir)
@@ -33,7 +33,7 @@ int GateToPlatform::GenerateSubmitfile(G4String outputMacDir)
 	if (platform=="openmosix"){
 		err=GenerateOpenMosixSubmitfile();
 		if (err>0) return 1;
-	} 
+	}
 	if (platform=="openPBS"){
 		err+=GenerateOpenPBSScriptfile();
 		err+=GenerateOpenPBSSubmitfile();
@@ -46,28 +46,28 @@ int GateToPlatform::GenerateSubmitfile(G4String outputMacDir)
 	if (platform=="xgrid"){
 		err+=GenerateXgridSubmitfile();
 		if (err>0) return 1;
-	} 
+	}
 	return(0);
 }
 
 int GateToPlatform::GenerateOpenPBSScriptfile()
 {
 	G4String dir=getenv("GC_GATE_EXE_DIR");
-	if (dir.substr(dir.length()-1,dir.length())!="/") dir=dir+"/"; 
-	
+	if (dir.substr(dir.length()-1,dir.length())!="/") dir=dir+"/";
+
 	//check if we have an existing directory
-	ifstream dirstream(dir.c_str()); 
-	if (!dirstream) { 
+	ifstream dirstream(dir.c_str());
+	if (!dirstream) {
 		cout<<"Error : Failed to detect the Gate executable directory"<<endl;
-		cout<<"Please check your environment variables!"<<endl; 
-		cout<<"Generated submit file may be invalid..."<<endl;  
+		cout<<"Please check your environment variables!"<<endl;
+		cout<<"Generated submit file may be invalid..."<<endl;
 		return 1;
 	}
 	dirstream.close();
-	
+
 	//create script file to be submitted with qsub (PBS)
-	
-	
+
+
 	char out_name[1000];
 	G4String buf;
 	for (G4int i=1;i<=nSplits;i++)
@@ -111,24 +111,24 @@ int GateToPlatform::GenerateOpenPBSScriptfile()
 		scriptFile.close();
 		inFile.close();
 	}
-	return 0; 
+	return 0;
 }
 
 int GateToPlatform::GenerateOpenPBSSubmitfile()
 {
 	G4String dir=getenv("GC_GATE_EXE_DIR");
-	if (dir.substr(dir.length()-1,dir.length())!="/") dir=dir+"/"; 
-	
+	if (dir.substr(dir.length()-1,dir.length())!="/") dir=dir+"/";
+
 	//check if we have an existing director
-	ifstream dirstream(dir.c_str()); 
-	if (!dirstream) { 
+	ifstream dirstream(dir.c_str());
+	if (!dirstream) {
 		cout<<"Error : Failed to detect the Gate executable directory"<<endl;
-		cout<<"Please check your environment variables!"<<endl; 
-		cout<<"Generated submit file may be invalid..."<<endl;  
+		cout<<"Please check your environment variables!"<<endl;
+		cout<<"Generated submit file may be invalid..."<<endl;
 		return 1;
 	}
 	dirstream.close();
-	
+
 	G4String submitFilename=outputMacfilename+".submit";
 	ofstream submitFile(submitFilename.c_str());
 	if (!submitFile) {
@@ -150,18 +150,18 @@ int GateToPlatform::GenerateOpenPBSSubmitfile()
 int GateToPlatform::GenerateOpenMosixSubmitfile()
 {
 	G4String dir=getenv("GC_GATE_EXE_DIR");
-	if (dir.substr(dir.length()-1,dir.length())!="/") dir=dir+"/"; 
-	
+	if (dir.substr(dir.length()-1,dir.length())!="/") dir=dir+"/";
+
 	//check if we have an existing directory
-	ifstream dirstream(dir.c_str()); 
-	if (!dirstream) { 
+	ifstream dirstream(dir.c_str());
+	if (!dirstream) {
 		cout<<"Error : Failed to detect the Gate executable directory"<<endl;
-		cout<<"Please check your environment variables!"<<endl; 
-		cout<<"Generated submit file may be invalid..."<<endl;  
+		cout<<"Please check your environment variables!"<<endl;
+		cout<<"Generated submit file may be invalid..."<<endl;
 		return(1);
 	}
 	dirstream.close();
-	
+
 	G4String submitFilename=outputMacfilename+".submit";
 	ofstream submitFile(submitFilename.c_str());
 	if (!submitFile) {
@@ -171,9 +171,9 @@ int GateToPlatform::GenerateOpenMosixSubmitfile()
 	submitFile<<"#! /bin/sh"<<endl;
 	for (G4int i=1;i<=nSplits;i++)
 	{
-		if (useTiming==1) submitFile<<"\\time "<<dir+"Gate "<<outputDir<<i<<+".mac"<<" 2>timefile"<<i<<" &"<<endl; 
+		if (useTiming==1) submitFile<<"\\time "<<dir+"Gate "<<outputDir<<i<<+".mac"<<" 2>timefile"<<i<<" &"<<endl;
 		else submitFile<<dir+"Gate "<<outputDir<<i<<+".mac"<<" &"<<endl;
-		submitFile<<"sleep 10s"<<endl;  
+		submitFile<<"sleep 10s"<<endl;
 	}
 	submitFile.close();
 	return 0;
@@ -184,19 +184,19 @@ int GateToPlatform::GenerateCondorSubmitfile()
 	char buffer[256];
 	G4String scriptline;
 	G4String dir=getenv("GC_GATE_EXE_DIR");
-	G4int noCopy=0; 
-	if (dir.substr(dir.length()-1,dir.length())!="/") dir=dir+"/"; 
-	
+	G4int noCopy=0;
+	if (dir.substr(dir.length()-1,dir.length())!="/") dir=dir+"/";
+
 	//check if we have an existing directory
-	ifstream dirstream(dir.c_str()); 
-	if (!dirstream) { 
+	ifstream dirstream(dir.c_str());
+	if (!dirstream) {
 		cout<<"Error : Failed to detect the Gate executable directory"<<endl;
-		cout<<"Please check your environment variables!"<<endl; 
-		cout<<"Generated submit file may be invalid..."<<endl;  
+		cout<<"Please check your environment variables!"<<endl;
+		cout<<"Generated submit file may be invalid..."<<endl;
 		return(1);
 	}
 	dirstream.close();
-	
+
 	G4String submitFilename=outputMacfilename+".submit";
 	ofstream submitFile(submitFilename.c_str());
 	if (!submitFile) {
@@ -213,22 +213,22 @@ int GateToPlatform::GenerateCondorSubmitfile()
 		scriptFile.getline(buffer,256);
 		scriptline=buffer;
 		if (scriptline.contains("#GJS PART => DO NOT REMOVE")!=0) noCopy=1;
-		if (noCopy==0) 
+		if (noCopy==0)
 		{
-			if (scriptline.contains("Executable")!=0 && scriptline.contains("$GC_EXEC")!=0) 
+			if (scriptline.contains("Executable")!=0 && scriptline.contains("$GC_EXEC")!=0)
 				submitFile<<"Executable     = "<<dir+"Gate"<<endl;
 			else submitFile<<scriptline<<endl;
-			
+
 		}
 	}
 	submitFile<<endl;
 	for (G4int i=1;i<=nSplits;i++)
 	{
-		submitFile<<"Arguments      = "<<outputDir<<i<<+".mac"<<endl;                                              
+		submitFile<<"Arguments      = "<<outputDir<<i<<+".mac"<<endl;
 		submitFile<<"Output         = "<<outputDir<<i<<+".out"<<endl;
 		submitFile<<"Error          = "<<outputDir<<i<<+".err"<<endl;
 		submitFile<<"Log            = "<<outputDir<<i<<+".log"<<endl;
-		submitFile<<"Queue"<<endl<<endl;   
+		submitFile<<"Queue"<<endl<<endl;
 	}
 	scriptFile.close();
 	submitFile.close();
@@ -237,14 +237,14 @@ int GateToPlatform::GenerateCondorSubmitfile()
 int GateToPlatform::GenerateXgridSubmitfile()
 {
 	G4String dir=getenv("GC_GATE_EXE_DIR");
-	if (dir.substr(dir.length()-1,dir.length())!="/") dir=dir+"/"; 
-	
+	if (dir.substr(dir.length()-1,dir.length())!="/") dir=dir+"/";
+
 	//check if we have an existing directory
-	ifstream dirstream(dir.c_str()); 
-	if (!dirstream) { 
+	ifstream dirstream(dir.c_str());
+	if (!dirstream) {
 		cout<<"Error : Failed to detect the Gate executable directory"<<endl;
-		cout<<"Please check your environment variables!"<<endl; 
-		cout<<"Generated submit file may be invalid..."<<endl;  
+		cout<<"Please check your environment variables!"<<endl;
+		cout<<"Generated submit file may be invalid..."<<endl;
 		return(1);
 	}
 	dirstream.close();
@@ -270,5 +270,3 @@ int GateToPlatform::GenerateXgridSubmitfile()
 	submitXgridFile.close();
 	return 0;
 }
-
-

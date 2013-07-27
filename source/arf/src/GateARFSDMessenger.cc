@@ -32,7 +32,7 @@ See GATE/LICENSE.txt for further details
 
 GateARFSDMessenger::GateARFSDMessenger(GateARFSD* ARFSD )
 : GateMessenger( ARFSD->GetName() ), m_ARFSD( ARFSD )
-{ 
+{
 
   G4String cmdName;
 
@@ -40,12 +40,12 @@ GateARFSDMessenger::GateARFSDMessenger(GateARFSD* ARFSD )
   setDepth= new G4UIcmdWithADoubleAndUnit(cmdName,this);
   setDepth->SetGuidance("sets the YZ projection plane relative to the ARF device center");
 
-  
+
   cmdName = GetDirectoryName()+"setEnergyDepositionThreshHold";
   setEThreshHoldcmd = new G4UIcmdWithADoubleAndUnit(cmdName,this);
 
 
-  
+
  }
 
 
@@ -70,7 +70,7 @@ if ( command == setDepth )
   return;}
 if ( command == setEThreshHoldcmd)
    m_ARFSD->setEnergyDepositionThreshold( setEThreshHoldcmd->GetNewDoubleValue( newValue  ) );
-   
+
 }
 
 #endif

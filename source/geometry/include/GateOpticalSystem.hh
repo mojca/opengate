@@ -10,12 +10,12 @@
 
 /*! \file GateOpticalSystem.hh
    Created on   2012/07/09  by vesna.cuplov@gmail.com
-   Implemented new class GateOpticalSystem for Optical photons: very similar to SPECT. 
+   Implemented new class GateOpticalSystem for Optical photons: very similar to SPECT.
     - 3 components: the base, the crystal and the pixel
-    - The base is the OPTICAL camera head itself. 
+    - The base is the OPTICAL camera head itself.
     - The level below is the crystal, which can be monoblock or pixellated.
     - The level below is optional, and is meant to be used for pixellated cameras.
-*/  
+*/
 
 #ifndef GateOpticalSystem_h
 #define GateOpticalSystem_h 1
@@ -60,4 +60,3 @@ class GateOpticalSystem : public GateVSystem
 };
 
 #endif
-

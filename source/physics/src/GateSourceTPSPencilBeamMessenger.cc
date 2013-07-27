@@ -27,7 +27,7 @@
 //----------------------------------------------------------------------------------------
   GateSourceTPSPencilBeamMessenger::GateSourceTPSPencilBeamMessenger(GateSourceTPSPencilBeam* source)
 : GateVSourceMessenger(source)
-{ 
+{
   pSourceTPSPencilBeam = source;
   G4String cmdName;
 
@@ -77,7 +77,7 @@ GateSourceTPSPencilBeamMessenger::~GateSourceTPSPencilBeamMessenger()
   delete pSourceFileCmd;
   //Configuration of spot intensity
   delete pSpotIntensityCmd;
-  //Convergent or divergent beam model 
+  //Convergent or divergent beam model
   delete pDivergenceCmd;
 }
 //----------------------------------------------------------------------------------------

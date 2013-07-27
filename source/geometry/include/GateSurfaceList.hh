@@ -25,12 +25,12 @@ class GateSurfaceListMessenger;
 /*! \class GateSurfaceList
 
   \brief Contains all the GateSurface object belonging to one GateVVolume
-  
+
   Each volume in Gate has a list of surfaces associated with it. After the geometry is
-  built, all surfaces are built. The BuildSurfaces() method is used for this. 
-  
+  built, all surfaces are built. The BuildSurfaces() method is used for this.
+
   - GateSurfaceList - by d.j.vanderlaan@tnw.tudelft.nl
-  
+
   */
 class GateSurfaceList : public GateModuleListManager
 {
@@ -46,7 +46,7 @@ class GateSurfaceList : public GateModuleListManager
     void AddSurface(GateSurface* surface);
     //! displays a list of all the surfaces
     void DescribeSurfaces(size_t indent=0);
-     
+
     //! Calls DescribeSurfaces(0)
     void ListElements();
 

@@ -35,23 +35,23 @@ class GateARFSDMessenger;
 
 
 /*! \class  GateARFSD
-    \brief  The GateARFSD is a sensitive detector , derived from G4VSensitiveDetector, 
+    \brief  The GateARFSD is a sensitive detector , derived from G4VSensitiveDetector,
     \brief  to be attached to one or more volumes of a scanner
-    
+
     - GateVolumeID - by Giovanni.Santin@cern.ch
-    
+
     - A GateGeomColliSD can be attached to one or more volumes of a scanner. These volumes are
       essentially meant to be scintillating elements (crystals) but the GateGeomColliSD can also be
       attached to non-scintillating elements such as collimators, shields or septa.
-      
+
     - A GateGeomColliSD can be attached only to those volumes that belong to a system (i.e. that
       are connected to an object derived from GateVSystem). Once a GateGeomColliSD has been attached
-      to a volume that belongs to a given system, it is considered as attached to this system, and 
+      to a volume that belongs to a given system, it is considered as attached to this system, and
       can be attached only to volumes that belong to the same system.
-      
+
     - The GateGeomColliSD generates hits of the class GateCrystalHit, which are stored in a regular
       hit collection.
-*/      
+*/
 class GateVVolume;
 class GateARFTableMgr;
 
@@ -73,7 +73,7 @@ class GateARFSD : public G4VSensitiveDetector
 
       //! Method overloading the virtual method Initialize() of G4VSensitiveDetector
       void Initialize(G4HCofThisEvent*HCE);
-      
+
       //! Implementation of the pure virtual method ProcessHits().
       //! This methods generates a GateCrystalHit and stores it into the SD's hit collection
       G4bool ProcessHits(G4Step*aStep,G4TouchableHistory*ROhist);
@@ -82,7 +82,7 @@ class GateARFSD : public G4VSensitiveDetector
       static inline const G4String& GetCrystalCollectionName()
          { return theARFCollectionName; }
 
-      //! Returns the system to which the SD is attached   
+      //! Returns the system to which the SD is attached
       inline GateVSystem* GetSystem()
          { return m_system;}
       //! Set the system to which the SD is attached
@@ -94,7 +94,7 @@ class GateARFSD : public G4VSensitiveDetector
 
       inline void setEnergyDepositionThreshold(G4double aT){m_edepthreshold = aT;};
       void SetInserter( GateVVolume* aInserter ){ m_inserter = aInserter; };
-      GateVVolume* GetInserter() { return m_inserter;}; 
+      GateVVolume* GetInserter() { return m_inserter;};
 
       void computeTables();
 
@@ -109,13 +109,13 @@ class GateARFSD : public G4VSensitiveDetector
 
       void SetStage( G4int I ){ m_ARFStage = I; };
       G4int GetStage(){ return m_ARFStage; };
-      
+
       protected:
       GateVSystem* m_system;                       //! System to which the SD is attached
 
   private:
       GateCrystalHitsCollection * ARFCollection;  //! Hit collection
-      
+
       static const G4String theARFCollectionName; //! Name of the hit collection
 
       GateARFSDMessenger* m_messenger;

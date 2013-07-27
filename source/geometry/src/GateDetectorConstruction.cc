@@ -49,34 +49,34 @@ GateDetectorConstruction* GateDetectorConstruction::pTheGateDetectorConstruction
 
 //---------------------------------------------------------------------------------
 GateDetectorConstruction::GateDetectorConstruction()
- :  pworld(0), 
-    pworldPhysicalVolume(0), 
-    nGeometryStatus(geometry_needs_rebuild),    
+ :  pworld(0),
+    pworldPhysicalVolume(0),
+    nGeometryStatus(geometry_needs_rebuild),
     flagAutoUpdate(false),
     m_crystalSD(0),
     m_phantomSD(0),
-    pdetectorMessenger(0), 
+    pdetectorMessenger(0),
     moveFlag(0),
     m_magField(0), m_magFieldValue(0)
-{   
+{
 
-    GateMessage("Geometry", 1, "GateDetectorConstruction instantiating...\n");    
+    GateMessage("Geometry", 1, "GateDetectorConstruction instantiating...\n");
     GateMessage("Geometry", 5, " GateDetectorConstruction constructor -- begin ");
     GateMessage("Geometry", 5, " nGeometryStatus = " << nGeometryStatus << G4endl;);
-        
+
     pTheGateDetectorConstruction = this;
-    
+
     pcreatorStore = GateObjectStore::GetInstance();
-    psystemStore=GateSystemListManager::GetInstance(); 
-    
+    psystemStore=GateSystemListManager::GetInstance();
+
     pdetectorMessenger = new GateDetectorMessenger(this);
-    
+
     m_magFieldValue = G4ThreeVector(0.,0.,0. * tesla);
-    
+
     G4double pworld_x = 50.*cm;
     G4double pworld_y = 50.*cm;
     G4double pworld_z = 50.*cm;
-    
+
     //-------------------------------------------------------------------------
     // Create default material (air) for the world
     G4Element* N  = new G4Element("worldDefaultN","N" , 7., 14.01*g/mole );
@@ -87,26 +87,26 @@ GateDetectorConstruction::GateDetectorConstruction()
     //-------------------------------------------------------------------------
 
     pworld = new GateBox("world", "worldDefaultAir",  pworld_x, pworld_y, pworld_z, true);
-    pworld->SetMaterialName("worldDefaultAir");    
-  
+    pworld->SetMaterialName("worldDefaultAir");
+
     G4SDManager* SDman = G4SDManager::GetSDMpointer();
-    
+
     if(!m_crystalSD) {
       G4String crystalSDname = "/gate/crystal";
       m_crystalSD = new GateCrystalSD(crystalSDname);
       SDman->AddNewDetector(m_crystalSD);
     }
-  
+
     if(!m_phantomSD) {
     G4String phantomSDname = "/gate/phantom";
     m_phantomSD = new GatePhantomSD(phantomSDname);
     SDman->AddNewDetector(m_phantomSD);
   }
   GateMessage("Geometry", 5, "  GateDetectorConstruction constructor -- end ");
-  
-  
+
+
    /* instantiate the singleton RTPhantom Manager  - PY Descourt 08/09/2008 */
-  
+
   m_RTPhantomMgr = GateRTPhantomMgr::GetInstance();
      m_ARFSD = 0;
 }
@@ -115,20 +115,20 @@ GateDetectorConstruction::GateDetectorConstruction()
 //---------------------------------------------------------------------------------
 GateDetectorConstruction::~GateDetectorConstruction()
 {
-  if (pworld) {  
-    DestroyGeometry();    
-    delete pworld;    
+  if (pworld) {
+    DestroyGeometry();
+    delete pworld;
     pworld = 0;
-  }  
+  }
   delete pdetectorMessenger;
 }
 //---------------------------------------------------------------------------------
 
 //---------------------------------------------------------------------------------
 G4VPhysicalVolume* GateDetectorConstruction::Construct()
-{  
+{
    GateMessage("Geometry", 3, "Geometry construction starts. \n");
-   
+
    pworldPhysicalVolume = pworld->GateVVolume::Construct();
    SetGeometryStatusFlag(geometry_is_uptodate);
 
@@ -140,13 +140,13 @@ G4VPhysicalVolume* GateDetectorConstruction::Construct()
    for(unsigned int i =0;i<(*theTable).size();i++){
      if(theListOfIonisationPotential[(*theTable)[i]->GetName()]){
           (*theTable)[i]->GetIonisation()->SetMeanExcitationEnergy(theListOfIonisationPotential[(*theTable)[i]->GetName()]);
-          GateMessage("Physic", 1, " - " << (*theTable)[i]->GetName() << "\t defaut value: I = " << 
-                      G4BestUnit((*theTable)[i]->GetIonisation()->GetMeanExcitationEnergy(),"Energy") << 
-                      "\t-->  new value: I = " <<  
+          GateMessage("Physic", 1, " - " << (*theTable)[i]->GetName() << "\t defaut value: I = " <<
+                      G4BestUnit((*theTable)[i]->GetIonisation()->GetMeanExcitationEnergy(),"Energy") <<
+                      "\t-->  new value: I = " <<
                       G4BestUnit((*theTable)[i]->GetIonisation()->GetMeanExcitationEnergy(),"Energy") << G4endl);
      }
      else {
-       GateMessage("Physic", 1, " - " << (*theTable)[i]->GetName() << "\t defaut value: I = " << 
+       GateMessage("Physic", 1, " - " << (*theTable)[i]->GetName() << "\t defaut value: I = " <<
                    G4BestUnit((*theTable)[i]->GetIonisation()->GetMeanExcitationEnergy(),"Energy") << G4endl);
      }
    }
@@ -158,7 +158,7 @@ G4VPhysicalVolume* GateDetectorConstruction::Construct()
    BuildSurfaces();
 #endif
    BuildMagField();
-      
+
    return pworldPhysicalVolume;
 }
 //---------------------------------------------------------------------------------
@@ -206,7 +206,7 @@ void GateDetectorConstruction::BuildSurfaces()
   for (GateObjectStore::iterator p = store->begin(); p != store->end(); p++)
   {
     p->second->GetSurfaceList()->BuildSurfaces();
-  }    
+  }
 
 }
 #endif
@@ -221,22 +221,22 @@ void GateDetectorConstruction::UpdateGeometry()
     GateMessage("Geometry", 3,"Geometry is uptodate.\n");
     return;
   }
- 
+
   switch (nGeometryStatus){
-  case geometry_needs_update:   
+  case geometry_needs_update:
     pworld->Construct(true);
     break;
-    
-  case geometry_needs_rebuild:	  
+
+  case geometry_needs_rebuild:
   default:
     DestroyGeometry();
     Construct();
     break;
   }
   GateRunManager::GetRunManager()->DefineWorldVolume(pworldPhysicalVolume);
-  
+
   nGeometryStatus = geometry_is_uptodate;
-  
+
   GateMessage("Geometry", 3, "nGeometryStatus = geometry_is_uptodate \n");
   GateMessage("Geometry", 3, "UpdateGeometry finished. \n");
 }
@@ -287,20 +287,20 @@ void GateDetectorConstruction::DestroyGeometry()
 
 //---------------------------------------------------------------------------------
 void GateDetectorConstruction::ClockHasChanged()
-{  
-  GateMessage("Move", 5, "ClockHasChanged = " << GetFlagMove() << G4endl; );  
-    
-  if ( GetFlagMove()) { 
-    GateMessage("Move", 6, "moveFlag = 1\n"); 
+{
+  GateMessage("Move", 5, "ClockHasChanged = " << GetFlagMove() << G4endl; );
+
+  if ( GetFlagMove()) {
+    GateMessage("Move", 6, "moveFlag = 1\n");
     nGeometryStatus = geometry_needs_update;
   }
-  else { 
-    GateMessage("Move", 6, "Geometry is uptodate.\n");  
+  else {
+    GateMessage("Move", 6, "Geometry is uptodate.\n");
     nGeometryStatus = geometry_is_uptodate;
-  }  
-  
+  }
+
   GateMessage("Move", 6, "  Geometry status = " << nGeometryStatus << G4endl;);
- 
+
   UpdateGeometry();
   GateMessage("Move", 6, "Clock has changed.\n");
 }
@@ -309,7 +309,7 @@ void GateDetectorConstruction::ClockHasChanged()
 void GateDetectorConstruction::insertARFSD( G4String aName , G4int stage )
 {
 	  G4cout << " GateDetectorConstruction::insertARFSD  entered " << G4endl;
-	  
+
  if ( m_ARFSD == 0 )
    {
 	 m_ARFSD = new GateARFSD("/gate/arf", aName );

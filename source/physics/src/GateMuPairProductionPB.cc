@@ -15,11 +15,11 @@ See GATE/LICENSE.txt for further details
 
 //-----------------------------------------------------------------------------
 GateMuPairProductionPB::GateMuPairProductionPB():GateVProcess("MuPairProduction")
-{  
+{
   SetDefaultParticle("mu+");
   SetDefaultParticle("mu-");
   SetProcessInfo("Direct production of (e+, e-) pairs by mu+ and mu-");
-  pMessenger = new GateEMStandardProcessMessenger(this);  
+  pMessenger = new GateEMStandardProcessMessenger(this);
 }
 //-----------------------------------------------------------------------------
 
@@ -35,7 +35,7 @@ G4VProcess* GateMuPairProductionPB::CreateProcess(G4ParticleDefinition *)
 //-----------------------------------------------------------------------------
 void GateMuPairProductionPB::ConstructProcess(G4ProcessManager * manager)
 {
-  manager->AddDiscreteProcess(GetProcess());           
+  manager->AddDiscreteProcess(GetProcess());
 }
 //-----------------------------------------------------------------------------
 

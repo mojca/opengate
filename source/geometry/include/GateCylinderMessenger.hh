@@ -25,10 +25,10 @@ class GateCylinderMessenger: public GateVolumeMessenger
   public:
     GateCylinderMessenger(GateCylinder* itsCreator);
    ~GateCylinderMessenger();
-    
+
     void SetNewValue(G4UIcommand*, G4String);
-    
-    virtual inline GateCylinder* GetCylinderCreator() 
+
+    virtual inline GateCylinder* GetCylinderCreator()
       { return (GateCylinder*)GetVolumeCreator(); }
 
   private:
@@ -40,4 +40,3 @@ class GateCylinderMessenger: public GateVolumeMessenger
 };
 
 #endif
-

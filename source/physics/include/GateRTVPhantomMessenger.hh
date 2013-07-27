@@ -16,9 +16,9 @@ class GateRTVPhantomMessenger: public GateMessenger
 public:
   GateRTVPhantomMessenger(GateRTVPhantom* Ph);
   ~GateRTVPhantomMessenger();
-  
+
   void SetNewValue(G4UIcommand*, G4String);
-    
+
 private:
   GateRTVPhantom*                       m_RTVPhantom;
 
@@ -35,5 +35,3 @@ private:
 };
 
 #endif
-
-

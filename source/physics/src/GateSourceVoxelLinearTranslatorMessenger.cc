@@ -29,15 +29,15 @@ See GATE/LICENSE.txt for further details
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
 GateSourceVoxelLinearTranslatorMessenger::GateSourceVoxelLinearTranslatorMessenger(GateSourceVoxelLinearTranslator* voxelTranslator)
-  : GateMessenger(G4String("source/") + 
-		  voxelTranslator->GetReader()->GetSource()->GetName() + 
+  : GateMessenger(G4String("source/") +
+		  voxelTranslator->GetReader()->GetSource()->GetName() +
 		  G4String("/") +
-		  voxelTranslator->GetReader()->GetName() + 
+		  voxelTranslator->GetReader()->GetName() +
 		  G4String("/") +
-		  voxelTranslator->GetName(), 
+		  voxelTranslator->GetName(),
 		  true),
   m_voxelTranslator(voxelTranslator)
-{ 
+{
 
   G4String cmdName;
 
@@ -59,13 +59,10 @@ GateSourceVoxelLinearTranslatorMessenger::~GateSourceVoxelLinearTranslatorMessen
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
 void GateSourceVoxelLinearTranslatorMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
   if( command == ValueToActivityScaleCmd ) {
     m_voxelTranslator->SetValueToActivityScale(ValueToActivityScaleCmd->GetNewDoubleValue(newValue));
-  } 
+  }
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
-
-
-

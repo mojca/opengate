@@ -27,7 +27,7 @@ See GATE/LICENSE.txt for further details
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
 GateARFTableMgrMessenger::GateARFTableMgrMessenger(G4String aName, GateARFTableMgr* ARFTableMgr)
-{ 
+{
   m_ARFTableMgr = ARFTableMgr;
 
   G4String dirName = "/gate/"+aName+"/ARFTables/";
@@ -102,7 +102,7 @@ GateARFTableMgrMessenger::~GateARFTableMgrMessenger()
   delete setEResocmd;
   delete setERefcmd;
   delete SetNBinsCmd;
-  delete cptTableEWCmd; 
+  delete cptTableEWCmd;
   delete setEThreshHoldcmd ;
   delete   setEUpHoldcmd ;
   delete SaveToBinaryFileCmd;
@@ -113,13 +113,13 @@ GateARFTableMgrMessenger::~GateARFTableMgrMessenger()
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
 void GateARFTableMgrMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
 
 
   if ( command == setDistancecmd ) { m_ARFTableMgr->SetDistanceFromSourceToDetector( setDistancecmd->GetNewDoubleValue(newValue) );
                                   return; }
    if( command == SetNBinsCmd)
- {       
+ {
          m_ARFTableMgr->SetNBins(SetNBinsCmd->GetNewIntValue(newValue));
     return;
   }
@@ -142,7 +142,7 @@ void GateARFTableMgrMessenger::SetNewValue(G4UIcommand* command,G4String newValu
    if( command == VerboseCmd ) {
     m_ARFTableMgr->SetVerboseLevel(VerboseCmd->GetNewIntValue(newValue));
     return;
-  } 
+  }
 
 if( command == ListARFTableCmd ) {
     m_ARFTableMgr->ListTables();
@@ -151,7 +151,7 @@ if( command == ListARFTableCmd ) {
 
 if( command == cptTableEWCmd ) {
     m_ARFTableMgr->ComputeARFTablesFromEW(newValue);return;
-  } 
+  }
 
 
 }

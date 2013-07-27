@@ -32,9 +32,9 @@ class GateApplicationMgrMessenger: public G4UImessenger
   public:
     GateApplicationMgrMessenger();
    ~GateApplicationMgrMessenger();
-    
+
     void SetNewValue(G4UIcommand*, G4String);
-    
+
   private:
     GateApplicationMgr* gateApplicationMgr;
 
@@ -55,7 +55,7 @@ class GateApplicationMgrMessenger: public G4UImessenger
   G4UIcmdWithAnInteger*      VerboseCmd;
   G4UIcmdWithABool*          ExitFlagCmd;
   G4UIcmdWithoutParameter*   DescribeCmd;
-  
+
   G4UIcmdWithoutParameter * NoOutputCmd;
   G4UIcmdWithAString * TimeStudyCmd;
   G4UIcmdWithAString * TimeStudyForStepsCmd;
@@ -67,4 +67,3 @@ class GateApplicationMgrMessenger: public G4UImessenger
 };
 
 #endif
-

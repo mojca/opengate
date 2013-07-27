@@ -28,7 +28,7 @@ GateSourceVoxelTestReaderMessenger::~GateSourceVoxelTestReaderMessenger()
 }
 
 void GateSourceVoxelTestReaderMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
   if( command == ReadFileCmd ) {
     m_voxelReader->ReadFile(ReadFileCmd->GetNewVectorValue(newValue)[0]);
   } else {

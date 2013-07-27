@@ -40,7 +40,7 @@ GateLinearRepeater::GateLinearRepeater(GateVVolume* itsObjectInserter,
 
 //--------------------------------------------------------------------------------------------------------------
 GateLinearRepeater::~GateLinearRepeater()
-{  
+{
   delete m_Messenger;
 }
 //--------------------------------------------------------------------------------------------------------------
@@ -51,17 +51,17 @@ void GateLinearRepeater::PushMyPlacements(const G4RotationMatrix& currentRotatio
 	        	      	      	  const G4ThreeVector& currentPosition,
 			      	      	  G4double )
 {
- 
+
   G4ThreeVector firstCopyOffset(0.,0.,0.);
-  
+
   if (GetAutoCenterFlag())
       firstCopyOffset = m_repeatVector * .5 * ( 1 - m_repeatNumber );
-  
+
   for ( G4int i=0 ; i < m_repeatNumber ; i++) {
-   
-    
+
+
     G4ThreeVector newPosition = currentPosition + firstCopyOffset + m_repeatVector * i ;
-   
+
     PushBackPlacement(currentRotationMatrix,newPosition);
   }
 

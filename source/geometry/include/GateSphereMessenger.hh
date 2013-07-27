@@ -25,10 +25,10 @@ class GateSphereMessenger: public GateVolumeMessenger
   public:
     GateSphereMessenger(GateSphere* itsCreator);
    ~GateSphereMessenger();
-    
+
     void SetNewValue(G4UIcommand*, G4String);
-    
-    virtual inline GateSphere* GetSphereCreator() 
+
+    virtual inline GateSphere* GetSphereCreator()
       { return (GateSphere*)GetVolumeCreator(); }
 
   private:
@@ -41,4 +41,3 @@ class GateSphereMessenger: public GateVolumeMessenger
 };
 
 #endif
-

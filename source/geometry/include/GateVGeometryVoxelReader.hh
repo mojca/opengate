@@ -29,23 +29,23 @@ class GateVGeometryVoxelTranslator;
 
 /*! \class  GateVGeometryVoxelReader
     \brief  This class can read a file with the material info for a matrix of voxels (digital image)
-    
+
     - GateVGeometryVoxelReader - by Giovanni.Santin@cern.ch
-    
-    - It reads the image file, asks the translator to convert the digital info into material info, and 
+
+    - It reads the image file, asks the translator to convert the digital info into material info, and
       stores the material information. This material info is used by the GateVoxelReplicaMatrixInserter
       at the moment of the matrix construction
 
     - The translator has to be inserted befor reading the image file
 
-    - The material information is a generic map to allow for non cubic voxel material distribution 
+    - The material information is a generic map to allow for non cubic voxel material distribution
       (like voxels in a spheric envelope)
-      
+
       \sa GateVGeometryVoxelReaderMessenger
       \sa GateVGeometryVoxelTranslator
       \sa GateVSourceVoxelReader
       \sa GateVSourceVoxelTranslator
-*/      
+*/
 
 //class GateVGeometryVoxelReader : public GateGeometryVoxelMapStore
 class GateVGeometryVoxelReader : public GateGeometryVoxelArrayStore

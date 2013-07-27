@@ -15,7 +15,7 @@ See GATE/LICENSE.txt for further details
 
 //-----------------------------------------------------------------------------
 GateRadioactiveDecayPB::GateRadioactiveDecayPB():GateVProcess("RadioactiveDecay")
-{  
+{
   SetDefaultParticle("GenericIon");
 
 
@@ -34,7 +34,7 @@ G4VProcess* GateRadioactiveDecayPB::CreateProcess(G4ParticleDefinition *)
 
 //-----------------------------------------------------------------------------
 void GateRadioactiveDecayPB::ConstructProcess( G4ProcessManager * manager)
-{  
+{
 //  manager->AddDiscreteProcess(GetProcess());
 	  manager ->AddProcess(GetProcess());
 	  manager ->SetProcessOrdering(GetProcess(), idxPostStep);
@@ -48,7 +48,7 @@ void GateRadioactiveDecayPB::ConstructProcess( G4ProcessManager * manager)
 //-----------------------------------------------------------------------------
 bool GateRadioactiveDecayPB::IsApplicable(G4ParticleDefinition * /*par*/)
 {
-   return true; 
+   return true;
 }
 //-----------------------------------------------------------------------------
 

@@ -25,14 +25,14 @@ See GATE/LICENSE.txt for further details
 // -----------------------------------------------------------------------------
 GateSurface::GateSurface(const G4String& itsName, GateVVolume* inserter) :
   GateClockDependent(itsName,true),
-  m_inserter1(inserter), 
+  m_inserter1(inserter),
   m_inserter2(0),
   m_opticalsurface(0)
 {
   m_messenger = new GateSurfaceMessenger(this);
 }
 // -----------------------------------------------------------------------------
-  
+
 // -----------------------------------------------------------------------------
 GateSurface::~GateSurface()
 {

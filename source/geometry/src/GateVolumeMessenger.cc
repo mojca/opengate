@@ -27,19 +27,19 @@ See GATE/LICENSE.txt for further details
 GateVolumeMessenger::GateVolumeMessenger(GateVVolume* itsCreator, const G4String& itsDirectoryName)
   //: GateClockDependentMessenger(itsCreator, itsCreator->GetObjectName()+"/geometry"),
   : GateClockDependentMessenger(itsCreator, itsDirectoryName)
-{ 
-    
+{
+
   G4String guidance = G4String("Controls the geometry for '") + GetVolumeCreator()->GetObjectName() +"'";
 
   GetDirectory()->SetGuidance(guidance.c_str());
 
-  //  G4cout << " before new GateVisAttributesMessenger creating GetVolumeCreator() ="  << GetVolumeCreator()->GetObjectName() << G4endl;  
-  pVisAttributesMessenger  = 
+  //  G4cout << " before new GateVisAttributesMessenger creating GetVolumeCreator() ="  << GetVolumeCreator()->GetObjectName() << G4endl;
+  pVisAttributesMessenger  =
       	new GateVisAttributesMessenger(GetVolumeCreator()->GetVisAttributes(), GetVolumeCreator()->GetObjectName()+"/vis");
-  
+
   G4String cmdName;
-  cmdName = GetDirectoryName()+"setMaterial"; 
-  
+  cmdName = GetDirectoryName()+"setMaterial";
+
   pSetMaterCmd = new G4UIcmdWithAString(cmdName.c_str(),this);
   pSetMaterCmd->SetGuidance("Select Material of the detector");
   pSetMaterCmd->SetParameterName("choice",false);
@@ -68,19 +68,19 @@ GateVolumeMessenger::~GateVolumeMessenger()
 
 //-------------------------------------------------------------------------------------
 void GateVolumeMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{     
+{
     if( command == pSetMaterCmd )
-   { 
+   {
     GetVolumeCreator()->SetMaterialName(newValue);
    }
    else if( command==pAttachCrystalSDCmd )
-    { 
+    {
       GetVolumeCreator()->AttachCrystalSD();
-    } 
+    }
    else if( command==pAttachPhantomSDCmd )
-    { 
+    {
       GetVolumeCreator()->AttachPhantomSD();
-    }  
+    }
    else{
     GateClockDependentMessenger::SetNewValue(command,newValue);
    }

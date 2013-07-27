@@ -30,15 +30,15 @@ See GATE/LICENSE.txt for further details
 // Constructor
 GateSystemComponentMessenger::GateSystemComponentMessenger(GateSystemComponent* itsSystemComponent)
    : GateClockDependentMessenger( itsSystemComponent, FabricateDirName(itsSystemComponent))
-{ 
-  
+{
+
   G4String guidance;
   G4String cmdName;
 
   SetDirectoryGuidance(G4String("Controls the system-component '") + itsSystemComponent->GetObjectName() + "'" );
 
   cmdName = GetDirectoryName() + "attach";
-    
+
   AttachCmd = new G4UIcmdWithAString(cmdName,this);
   AttachCmd->SetGuidance("Attach a new volume to the system-component.");
   AttachCmd->SetParameterName("choice",false);
@@ -93,7 +93,7 @@ GateSystemComponentMessenger::~GateSystemComponentMessenger()
 
 // UI command interpreter method
 void GateSystemComponentMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
 	if ( command == minSectorDiffCmd ) {GetSystemComponent()->SetminSectorDiff( minSectorDiffCmd->GetNewIntValue(newValue) );
                                                            return;}
 
@@ -101,10 +101,10 @@ void GateSystemComponentMessenger::SetNewValue(G4UIcommand* command,G4String new
                                                                        return;}
 
    if ( command == setRingIDCmd ) { GetSystemComponent()->SetRingID( setRingIDCmd->GetNewIntValue(newValue) ); return;}
- 
+
   if( command==AttachCmd )
-    { 
-    AddCreator(newValue); }   
+    {
+    AddCreator(newValue); }
   else
     GateClockDependentMessenger::SetNewValue(command,newValue);
 }
@@ -116,15 +116,15 @@ void GateSystemComponentMessenger::SetNewValue(G4UIcommand* command,G4String new
 // Method to apply the UI command 'attach'
 // Finds an creator from its name and attaches this creator to the system component
 void GateSystemComponentMessenger::AddCreator(const G4String& creatorName)
-{ 
-  
+{
+
   // Find the creator from the creator's name
   GateVVolume* anCreator = GateObjectStore::GetInstance()->FindCreator(creatorName);
-  
+
 //  G4cout << " GateObjectStore::GetInstance()->FindCreator(creatorName) "  << G4endl;
-  
-  // If an creator was found, ask the system component to perform the attachement  
-  if (anCreator) 
+
+  // If an creator was found, ask the system component to perform the attachement
+  if (anCreator)
     {  GetSystemComponent()->SetCreator(anCreator); }
   else
     G4cerr  << "[GateSystemComponentMessenger]: " << G4endl
@@ -132,7 +132,7 @@ void GateSystemComponentMessenger::AddCreator(const G4String& creatorName)
 	    << "Attachment request will be ignored!" << G4endl << G4endl;
 }
 
-// Next method was added for the multi-system approach 
+// Next method was added for the multi-system approach
 G4String GateSystemComponentMessenger::FabricateDirName(const GateSystemComponent* component)
 {
    G4String dirName = "";
@@ -142,7 +142,7 @@ G4String GateSystemComponentMessenger::FabricateDirName(const GateSystemComponen
    sysComponentName = sysComponentName.substr(pos);
    if(sysComponentName.compare("/base") == 0)
       return dirName;
-   
+
    G4String systemOwnName = component->GetSystem()->GetOwnName();
 
    if(!systemOwnName.empty())
@@ -151,7 +151,6 @@ G4String GateSystemComponentMessenger::FabricateDirName(const GateSystemComponen
       dirName += component->GetSystem()->GetName();
 
    dirName += sysComponentName;
-   
+
    return dirName;
 }
-

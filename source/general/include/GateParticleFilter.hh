@@ -28,7 +28,7 @@ See GATE/LICENSE.txt for further details
 #include "G4ParticleTable.hh"
 #include "G4ParticleDefinition.hh"
 
-class  GateParticleFilter : 
+class  GateParticleFilter :
   public GateVFilter
 {
 public:
@@ -49,7 +49,7 @@ private:
  std::vector<G4String> thePdef;
  std::vector<G4String> theParentPdef;
  GateParticleFilterMessenger * pPartMessenger;
- 
+
   int nFilteredParticles;
 };
 

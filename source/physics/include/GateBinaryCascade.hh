@@ -47,7 +47,7 @@ public:
   G4int operator==(GateBinaryCascade& right) {return (this == &right);}
   G4int operator!=(GateBinaryCascade& right) {return (this != &right);}
 
-  G4HadFinalState* ApplyYourself(const G4HadProjectile& aTrack, 
+  G4HadFinalState* ApplyYourself(const G4HadProjectile& aTrack,
                                               G4Nucleus& theNucleus);
   virtual G4ReactionProductVector * Propagate(G4KineticTrackVector *,
 					      G4V3DNucleus *);
@@ -70,7 +70,7 @@ private:
     std::vector<G4KineticTrack *>::iterator i;
     for(i = aV.begin(); i != aV.end(); ++i)
     {
-       if ( (*i)->GetDefinition()->GetBaryonNumber() != 0 ){ 
+       if ( (*i)->GetDefinition()->GetBaryonNumber() != 0 ){
              result += G4lrint((*i)->GetDefinition()->GetPDGCharge());
        }
     }
@@ -92,7 +92,7 @@ private:
 				 G4KineticTrackVector * oldTarget,
 				 G4KineticTrackVector * newSecondaries);
   G4bool DoTimeStep(G4double timeStep);
-  G4KineticTrackVector* CorrectBarionsOnBoundary(G4KineticTrackVector *in, 
+  G4KineticTrackVector* CorrectBarionsOnBoundary(G4KineticTrackVector *in,
                                                G4KineticTrackVector *out);
   G4Fragment * FindFragments();
   void StepParticlesOut();
@@ -101,7 +101,7 @@ private:
   G4ReactionProductVector * Propagate1H1(G4KineticTrackVector *,
 					 G4V3DNucleus *);
   G4double GetIonMass(G4int Z, G4int A);
-  
+
 // utility methods
   G4ThreeVector GetSpherePoint(G4double r, const G4LorentzVector & momentumdirection);
   void ClearAndDestroy(G4KineticTrackVector * ktv);
@@ -110,10 +110,10 @@ private:
 // for debugging purpose
   void PrintKTVector(G4KineticTrackVector * ktv, std::string comment=std::string(""));
   void PrintKTVector(G4KineticTrack* kt, std::string comment=std::string(""));
-  void DebugApplyCollision(G4CollisionInitialState * collision, 
+  void DebugApplyCollision(G4CollisionInitialState * collision,
                            G4KineticTrackVector *products);
-  void DebugEpConservation(const G4HadProjectile & aTrack, G4ReactionProductVector* products);			   
-			   
+  void DebugEpConservation(const G4HadProjectile & aTrack, G4ReactionProductVector* products);
+
 private:
   G4KineticTrackVector theProjectileList;
   G4KineticTrackVector theTargetList;
@@ -123,7 +123,7 @@ private:
 
   G4ExcitationHandler * theExcitationHandler;
   G4CollisionManager * theCollisionMgr;
-  
+
   G4Scatterer * theH1Scatterer;
 
   std::vector<G4BCAction *> theImR;
@@ -143,13 +143,9 @@ private:
   G4bool thePrimaryEscape;
   G4ParticleDefinition * thePrimaryType;
   G4ThreeVector theMomentumTransfer;
-  
-  
+
+
 
 };
 
 #endif
-
-
-
-

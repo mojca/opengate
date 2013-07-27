@@ -20,13 +20,13 @@ class GateClockDependentMessenger;
 
 /*! \class  GatePETScannerSystem
     \brief  The GatePETScannerSystem is a generic-purpose model for PET scanners
-    
+
     - GatePETScannerSystem - by Daniel.Strul@iphe.unil.ch
-    
+
    it just derives from GateScannerSystem and add Coincidences
    which can not be defined for GateScannerSystem, in order
    to be coherent with SPECT systems
-*/      
+*/
 class GatePETScannerSystem : public GateScannerSystem
 {
   public:
@@ -36,4 +36,3 @@ class GatePETScannerSystem : public GateScannerSystem
 };
 
 #endif
-

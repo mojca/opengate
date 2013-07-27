@@ -38,7 +38,7 @@ class GateCoincidencePulseProcessorChain : public GateModuleListManager
      /*! \brief Virtual method to print-out a description of the object
 
 	\param indent: the print-out indentation (cosmetic parameter)
-     */    
+     */
      virtual void Describe(size_t indent=0);
 
      virtual void DescribeProcessors(size_t indent=0);
@@ -50,7 +50,7 @@ class GateCoincidencePulseProcessorChain : public GateModuleListManager
      void ProcessCoincidencePulses();
      virtual size_t GetProcessorNumber()
       	  { return size();}
-	  
+
      std::vector<G4String>& GetInputNames()
        { return m_inputNames; }
      const G4String& GetOutputName() const
@@ -61,12 +61,12 @@ class GateCoincidencePulseProcessorChain : public GateModuleListManager
        { return m_system;}
      virtual inline void SetSystem(GateVSystem* aSystem)
        { m_system = aSystem; }
-     
+
      // Next two methods were added for the multi-system approach
      virtual inline void SetSystem(G4String& inputName)
      {SetSystem(FindSystem(inputName));}
      virtual GateVSystem* FindSystem(G4String& inputName);
-     
+
      void SetNoPriority(G4bool b){m_noPriority = b;}
   protected:
       GateCoincidencePulseProcessorChainMessenger*    m_messenger;
@@ -77,4 +77,3 @@ class GateCoincidencePulseProcessorChain : public GateModuleListManager
 };
 
 #endif
-

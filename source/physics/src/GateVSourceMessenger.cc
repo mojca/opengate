@@ -31,7 +31,7 @@ See GATE/LICENSE.txt for further details
 GateVSourceMessenger::GateVSourceMessenger(GateVSource* source)
   : GateMessenger(G4String("source/") + source->GetName()),
     m_source(source)
-{ 
+{
 
 //    GateSourceDir = new G4UIdirectory("/gate/source/");
 //    GateSourceDir->SetGuidance("GATE source manager control.");
@@ -109,23 +109,23 @@ GateVSourceMessenger::GateVSourceMessenger(GateVSource* source)
   ForcedHalfLifeCmd->SetParameterName("forcedHalfLife",false);
   ForcedHalfLifeCmd->SetUnitCategory("Time");
   ForcedHalfLifeCmd->SetRange("forcedHalfLife>0.0");
-  
+
   cmdName = GetDirectoryName() + "useDefaultHalfLife";
   useDefaultHalfLifeCmd= new G4UIcommand(cmdName,this);
   useDefaultHalfLifeCmd->SetGuidance("Set ion halftime to its default one");
-  
+
   /*
   cmdName = GetDirectoryName()+"setSourceTime";
   BeamTimeCmd = new G4UIcmdWithADoubleAndUnit(cmdName,this);
   BeamTimeCmd->SetGuidance("Set the time interval of the source");
   BeamTimeCmd->SetParameterName("Time interval",false);
   BeamTimeCmd->SetUnitCategory("Time");
- 
+
   cmdName = GetDirectoryName()+"setNumberOfParticles";
   NbrOfParticlesCmd = new G4UIcmdWithAnInteger(cmdName,this);
   NbrOfParticlesCmd -> SetGuidance("Set the number of particles produced by the source");
   NbrOfParticlesCmd ->SetParameterName("Number of particles",false);
-  
+
   cmdName = GetDirectoryName()+"setSourceWeight";
   WeightCmd = new G4UIcmdWithADouble(cmdName,this);
   WeightCmd->SetGuidance("Set the weight of the source");
@@ -140,17 +140,17 @@ GateVSourceMessenger::GateVSourceMessenger(GateVSource* source)
   /*  cmdName = GetDirectoryName()+"setTimeActivity";
   TimeActivityCmd = new G4UIcmdWithAString(cmdName,this);
   TimeActivityCmd->SetGuidance("Set a filename to read time-activity");
- 
+
   cmdName = GetDirectoryName()+"addSlice";
   TimeParticleSliceCmd = new GateUIcmdWithADoubleWithUnitAndInteger(cmdName,this);
   TimeParticleSliceCmd->SetGuidance("Add a slice to the source");
   TimeParticleSliceCmd->SetParameterName("Time","Time unit","Number of particles",false,false,false);*/
-  
+
   cmdName = GetDirectoryName()+"setMinEnergy";
   setMinEnergycmd = new G4UIcmdWithADoubleAndUnit(cmdName,this);
   cmdName = GetDirectoryName()+"setEnergyRange";
   setEnergyRangecmd = new G4UIcmdWithADoubleAndUnit(cmdName,this);
-  
+
   cmdName = GetDirectoryName()+"visualize";
   VisualizeCmd = new G4UIcmdWithAString(cmdName,this);
   VisualizeCmd->SetGuidance("Visualize the source in the geometry");
@@ -190,7 +190,7 @@ GateVSourceMessenger::~GateVSourceMessenger()
 
 //----------------------------------------------------------------------------------------
 void GateVSourceMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
   if( command == VerboseCmd ) {
     m_source->SetVerboseLevel(VerboseCmd->GetNewIntValue(newValue));
   } else if( command == ActivityCmd ) {
@@ -245,5 +245,3 @@ void GateVSourceMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
   }
 }
 //----------------------------------------------------------------------------------------
-
-

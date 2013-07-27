@@ -27,7 +27,7 @@ See GATE/LICENSE.txt for further details
 
 class G4Material;
 
-  
+
 //---------------------------------------------------------------------------------
 // Initialisation
 // Constructor
@@ -36,35 +36,35 @@ GateCylinder::GateCylinder(const G4String& itsName, const G4String& /*itsMateria
       	      	              	            G4double itsRmax, G4double itsHeight,
 				            G4double itsRmin,
 	              	      	            G4double itsSPhi, G4double itsDPhi,
-				            G4bool itsFlagAcceptChildren, G4int depth)				      
+				            G4bool itsFlagAcceptChildren, G4int depth)
   : GateVVolume(itsName, itsFlagAcceptChildren, depth),
-    pCylinderSolid(0), pCylinderLog(0), 
+    pCylinderSolid(0), pCylinderLog(0),
     mCylinderHeight(itsHeight),
     mCylinderRmin(itsRmin), mCylinderRmax(itsRmax),
-    mCylinderSPhi(itsSPhi), mCylinderDPhi(itsDPhi) 
+    mCylinderSPhi(itsSPhi), mCylinderDPhi(itsDPhi)
    {
-   
+
     pMessenger = new GateCylinderMessenger(this);
-    
+
    }
-//--------------------------------------------------------------------------------- 
+//---------------------------------------------------------------------------------
 
 
 //---------------------------------------------------------------------------------
    GateCylinder::GateCylinder(const G4String& itsName,
 		                            G4bool itsFlagAcceptChildren,
-			                    G4int depth)				      
+			                    G4int depth)
   : GateVVolume(itsName, itsFlagAcceptChildren, depth),
     pCylinderSolid(0), pCylinderLog(0)
    {
-    mCylinderHeight = 1.0*cm; 
+    mCylinderHeight = 1.0*cm;
     mCylinderRmin = 0.0*cm;
     mCylinderRmax = 1.0*cm;
     mCylinderSPhi = 0.;
     mCylinderDPhi = 2*M_PI;
     pMessenger = new GateCylinderMessenger(this);
    }
-//--------------------------------------------------------------------------------- 
+//---------------------------------------------------------------------------------
 
 
 //---------------------------------------------------------------------------------
@@ -72,22 +72,22 @@ GateCylinder::GateCylinder(const G4String& itsName, const G4String& /*itsMateria
 //---------------------------------------------------------------------------------
    GateCylinder::~GateCylinder()
    {
-     
+
      delete pMessenger;
-     
+
    }
-//--------------------------------------------------------------------------------- 
+//---------------------------------------------------------------------------------
 
 
 //---------------------------------------------------------------------------------
 G4LogicalVolume* GateCylinder::ConstructOwnSolidAndLogicalVolume(G4Material* mater, G4bool flagUpdateOnly)
 {
-  
+
   if (!flagUpdateOnly || !pCylinderSolid) {
     // Build mode: build the solid, then the logical volume
     pCylinderSolid
-      = new G4Tubs(GetSolidName(), 
-      		   mCylinderRmin, 
+      = new G4Tubs(GetSolidName(),
+      		   mCylinderRmin,
 	  	   mCylinderRmax,
 		   mCylinderHeight/2.,
 		   mCylinderSPhi,
@@ -95,7 +95,7 @@ G4LogicalVolume* GateCylinder::ConstructOwnSolidAndLogicalVolume(G4Material* mat
     pCylinderLog
       = new G4LogicalVolume(pCylinderSolid, mater, GetLogicalVolumeName(),0,0,0);
 
-  } 
+  }
   else {
     // Update mode: refresh the dimensions of the solid
 	    pCylinderSolid->SetZHalfLength(GetCylinderHalfHeight());
@@ -104,9 +104,9 @@ G4LogicalVolume* GateCylinder::ConstructOwnSolidAndLogicalVolume(G4Material* mat
 	    pCylinderSolid->SetStartPhiAngle(GetCylinderSPhi());
 	    pCylinderSolid->SetDeltaPhiAngle(GetCylinderDPhi());
   }
-  
+
   return pCylinderLog;
- 
+
 }
 //---------------------------------------------------------------------------------
 
@@ -114,7 +114,7 @@ G4LogicalVolume* GateCylinder::ConstructOwnSolidAndLogicalVolume(G4Material* mat
 //---------------------------------------------------------------------------------
 void GateCylinder::DestroyOwnSolidAndLogicalVolume()
 {
-    
+
   if (pCylinderLog)
     delete pCylinderLog;
     pCylinderLog = 0;

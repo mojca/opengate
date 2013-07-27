@@ -61,7 +61,7 @@ G4int GateMacfileParser::GenerateResolvedMacros(G4String directory)
 	G4String dir=directory+macNameDir+"/";
 	ifstream dirstream(dir.c_str());
 	int i=0;
-	stringstream i_str; 
+	stringstream i_str;
 	while (dirstream)
 	{
 		i++;
@@ -72,10 +72,10 @@ G4int GateMacfileParser::GenerateResolvedMacros(G4String directory)
 		dirstream.open(dir.c_str());
 	}
 	dirstream.close();
- 
-	const G4String mkdir("mkdir "+dir); 
-	const int res = system(mkdir.c_str()); 
-	if (res!=0) 
+
+	const G4String mkdir("mkdir "+dir);
+	const int res = system(mkdir.c_str());
+	if (res!=0)
 	{
 		cout<<"failed to create directory in .Gate"<<endl;
 		return 1;
@@ -84,7 +84,7 @@ G4int GateMacfileParser::GenerateResolvedMacros(G4String directory)
 
 	G4String splitfileName=dir+macNameDir+".split";
 	ofstream splitfile(splitfileName.c_str());
-	splitfile<<"Number of files: "<<nSplits<<endl<<endl; 
+	splitfile<<"Number of files: "<<nSplits<<endl<<endl;
 
 	outputDir=dir;
 
@@ -92,15 +92,15 @@ G4int GateMacfileParser::GenerateResolvedMacros(G4String directory)
 	{
 		i_str.str("");
 		i_str<<j;
-		GenerateResolvedMacro(dir+macNameDir+i_str.str()+".mac",j,splitfile); 
-		splitfile<<endl;  
+		GenerateResolvedMacro(dir+macNameDir+i_str.str()+".mac",j,splitfile);
+		splitfile<<endl;
 	}
 	if (filenames[ROOT]==1)
 		splitfile<<"Original Root filename: "<<originalRootFileName<<endl;
 	splitfile.close();
 
 	outputMacDir=dir+macNameDir;
-	return 0; 
+	return 0;
 }
 
 void GateMacfileParser::CleanAbort(ofstream& output, ofstream& splitfile)
@@ -117,11 +117,11 @@ void GateMacfileParser::CleanAbort(ofstream& output, ofstream& splitfile)
 			G4cout << "Could not remove files " << outputDir << "/*" << endl;
 			G4cout << "Please remove manually !" << endl;
 		}
-		const G4String rmdir="rm -f -r "+outputDir; 
+		const G4String rmdir="rm -f -r "+outputDir;
 		const int res2 = system(rmdir.c_str());
 		if(res2)
 		{
-			G4cout<<"Could not remove "<<outputDir<<endl; 
+			G4cout<<"Could not remove "<<outputDir<<endl;
 			G4cout<<"Please remove manually !"<<endl;
 		}
 	}
@@ -136,13 +136,13 @@ G4int GateMacfileParser::GenerateResolvedMacro(G4String outputName,G4int splitNu
 {
 	char buffer[256];
 	ifstream macfile;
-	const G4String dir(outputName); 
+	const G4String dir(outputName);
 	ofstream outputMacfile(dir.c_str());
- 
+
 	macfile.open(macName);
 	if (!macfile || !outputMacfile)
-	{  
-		cout<< "Error accessing macro input file! "<<macName<< endl; 
+	{
+		cout<< "Error accessing macro input file! "<<macName<< endl;
 		return 1;
 	}
 
@@ -161,7 +161,7 @@ G4int GateMacfileParser::GenerateResolvedMacro(G4String outputName,G4int splitNu
 			InsertSubMacros(outputMacfile,splitNumber,splitfile);
 			DealWithTimeCommands(outputMacfile,splitNumber,splitfile);
 			IgnoreRandomEngineCommand();
-			outputMacfile<<macline<<endl; 
+			outputMacfile<<macline<<endl;
 		}
 	}
 	if(splitNumber==1)
@@ -192,9 +192,9 @@ G4int GateMacfileParser::GenerateResolvedMacro(G4String outputName,G4int splitNu
 		if(flag==false)
 		{
 			G4cerr<<"Could not use the following aliases from the command line:"<<G4endl;
-			for (G4int i=1;i<nAliases;i+=2) 
+			for (G4int i=1;i<nAliases;i+=2)
 				if(!usedAliases[i]) G4cout<<" "<<aliases[i]<<G4endl;
-			return 1; 
+			return 1;
 		}
 	}
 	macfile.close();
@@ -234,7 +234,7 @@ void GateMacfileParser::InsertSubMacros(ofstream& output,G4int splitNumber,ofstr
 			extMacfile.open(localname);
 			if (!extMacfile)
 			{
-				cout<< "Error reading from file: "<<extMacfileName<< endl; 
+				cout<< "Error reading from file: "<<extMacfileName<< endl;
 				CleanAbort(output,splitfile);
 				exit(1);
 			}
@@ -385,7 +385,7 @@ void GateMacfileParser::DealWithTimeCommands(ofstream& output,G4int splitNumber,
                 if (!strcmp(temp,".")) timeSlice_str=timeSlice_str+"0";
                 stringstream timeSlice_ss(timeSlice_str);
                 timeSlice_ss>>timeSlice;
-		splitfile<<"Timeslice is: "<<macline.substr(31,256)<<endl;  
+		splitfile<<"Timeslice is: "<<macline.substr(31,256)<<endl;
 	}
 	else if (macline.contains("/gate/application/addSlice"))
         {
@@ -499,8 +499,8 @@ void GateMacfileParser::DealWithTimeCommands(ofstream& output,G4int splitNumber,
 		// And we set a brand new seed for the random engine !
 		unsigned long int theSeed = rand()*time(NULL);
 		output << "/gate/random/setEngineSeed " << theSeed << endl;
- 
-		// after this command the job will start 
+
+		// after this command the job will start
 		// so all output should be defined
 		if(splitNumber==1) CheckOutputPrint();
 		CheckOutput(output,splitfile,splitNumber);
@@ -586,7 +586,7 @@ void GateMacfileParser::DealWithTimeCommands(ofstream& output,G4int splitNumber,
 			virtualStartTime=timeStart+(timeStop-timeStart)/(G4double)nSplits*(splitNumber-1);
 			virtualStopTime=timeStart+(timeStop-timeStart)/(G4double)nSplits*splitNumber;
 		}
-		output<<"/gate/application/startDAQCluster "<<virtualStartTime<<" "<<virtualStopTime<<" "<<"0 "<<timeUnit<<endl; 
+		output<<"/gate/application/startDAQCluster "<<virtualStartTime<<" "<<virtualStopTime<<" "<<"0 "<<timeUnit<<endl;
 		splitfile<<"Virtual startTime: "<<virtualStartTime<<" "<<timeUnit<<endl;
 		splitfile<<"Virtual stopTime: "<<virtualStopTime<<" "<<timeUnit<<endl;
 		macline="";
@@ -613,7 +613,7 @@ void GateMacfileParser::CalculateTimeSplit(G4int splitNumber)
 	}
 	if (splitNumber>2)
 	{
-		virtualStartTime=(log(((splitNumber-1)*exp(-lambda*t1))-((splitNumber-2)*exp(-lambda*timeStart))))/(-lambda); 
+		virtualStartTime=(log(((splitNumber-1)*exp(-lambda*t1))-((splitNumber-2)*exp(-lambda*timeStart))))/(-lambda);
 		if (splitNumber!=nSplits) virtualStopTime=(log((splitNumber*exp(-lambda*t1))-((splitNumber-1)*exp(-lambda*timeStart))))/(-lambda);
 		else virtualStopTime=timeStop;
 	}
@@ -668,7 +668,7 @@ void GateMacfileParser::CheckOutputPrint()
 	// {ROOT=0,ASCII=1,ARF=2,PROJ=3,ECAT=4,SINO=5,ACCEL=6,LMF=7,CT=8,DAQ=9,MDB=10,SIZE=11,
 	//GPUSPECT=12}
 	//cases are:
-	//1) output disabled and not filename is given -> ok 
+	//1) output disabled and not filename is given -> ok
 	//2) output disabled but a filename is given -> output is let disabled
 	//3) output enabled but no filename is given -> output is disabled
 	//4) output enabled and filename given -> ok
@@ -959,7 +959,7 @@ void GateMacfileParser::FormatMacline()
 	{
 		subString=macline.substr(size,macline.length());
 		macline=subString;
-	} 
+	}
 
 	//remove intermediate spaces >1
 	subString=macline;
@@ -1041,5 +1041,3 @@ bool GateMacfileParser::ReadColNameAndUnit(std::istream & is, std::string name, 
   is >> unit;
   return true;
 }
-
-

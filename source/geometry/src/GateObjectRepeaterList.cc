@@ -31,11 +31,11 @@ GateObjectRepeaterList::GateObjectRepeaterList( GateVVolume* itsInserter,
 {
   GateMessage("Repeater", 8, itsName << " GateObjectRepeaterList::GateObjectRepeaterList\n");
   GateMessage("Repeater", 8, itsName << " itsElementTypeName = " << itsElementTypeName << G4endl;);
-     
+
   if (itsElementTypeName == "move" )
-    {     
+    {
       m_messenger = new GateObjectMoveListMessenger(this);}
-  else 
+  else
     m_messenger = new GateObjectRepeaterListMessenger(this);
 }
 //-------------------------------------------------------------------------------------
@@ -43,7 +43,7 @@ GateObjectRepeaterList::GateObjectRepeaterList( GateVVolume* itsInserter,
 
 //-------------------------------------------------------------------------------------
 GateObjectRepeaterList::~GateObjectRepeaterList()
-{  
+{
   if (m_messenger)
     delete m_messenger;
 }
@@ -85,7 +85,7 @@ GatePlacementQueue* GateObjectRepeaterList::ComputePlacements(GatePlacementQueue
       pQueue = GetRepeater(i)->ComputePlacements(pQueue);
 
   return pQueue;
-} 
+}
 //-------------------------------------------------------------------------------------
 
 
@@ -94,8 +94,7 @@ void GateObjectRepeaterList::ComputeParameters()
 {
   G4double aTime = GetCurrentTime();
   for (size_t i=0; i<theListOfNamedObject.size(); i++)
-    if ( GetRepeater(i) ) 
+    if ( GetRepeater(i) )
       GetRepeater(i)->ComputeParameters(aTime);
 }
 //-------------------------------------------------------------------------------------
-

@@ -285,7 +285,7 @@ int ZEXPORT deflateInit2_(strm, level, method, windowBits, memLevel, strategy,
     s->hash_shift =  ((s->hash_bits+MIN_MATCH-1)/MIN_MATCH);
 
     s->window = (Bytef *) ZALLOC(strm, s->w_size, 2*sizeof(Byte));
-        
+
     // The following memset eliminates the valgrind uninitialized warning
     // "swept under the carpet" here:
     // http://www.zlib.net/zlib_faq.html#faq36

@@ -28,23 +28,23 @@ class GateDetectorMessenger: public G4UImessenger
   public:
     GateDetectorMessenger(GateDetectorConstruction* );
     virtual ~GateDetectorMessenger();
-    
+
     virtual void SetNewValue(G4UIcommand*, G4String);
-    
+
   private:
 
     GateDetectorConstruction* pDetectorConstruction;
-    
+
     G4UIdirectory*             pGateDir;
     G4UIdirectory*             pGateGeometryDir;
-    
+
     G4UIcmdWithAString*        pMaterialDatabaseFilenameCmd;
     G4UIcmdWith3VectorAndUnit* pMagFieldCmd;
     G4UIcmdWithoutParameter*   pListCreatorsCmd;
     G4UIcmdWithAString*        IoniCmd;
 
-    //G4UIcmdWithABool* 	       pEnableAutoUpdateCmd;    
-    //G4UIcmdWithABool* 	       pDisableAutoUpdateCmd; 
+    //G4UIcmdWithABool* 	       pEnableAutoUpdateCmd;
+    //G4UIcmdWithABool* 	       pDisableAutoUpdateCmd;
     //G4UIcmdWithoutParameter*   pUpdateCmd;
     //G4UIcmdWithoutParameter*   pInitCmd;
 

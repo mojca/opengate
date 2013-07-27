@@ -28,21 +28,21 @@ GateParticleFilter::GateParticleFilter(G4String name)
 //---------------------------------------------------------------------------
 GateParticleFilter::~GateParticleFilter()
 {
-  if(nFilteredParticles==0) GateWarning("No particle has been selected by filter: "<<GetObjectName()); 
+  if(nFilteredParticles==0) GateWarning("No particle has been selected by filter: "<<GetObjectName());
   delete pPartMessenger ;
 }
 //---------------------------------------------------------------------------
 
 
 //---------------------------------------------------------------------------
-G4bool GateParticleFilter::Accept(const G4Track* aTrack) 
+G4bool GateParticleFilter::Accept(const G4Track* aTrack)
 {
  // if(theParentPdef.size()==0)
  // {
- 
+
     for ( size_t i = 0; i < thePdef.size(); i++){
-      if ( thePdef[i] == aTrack->GetDefinition()->GetParticleName() || 
-	   (aTrack->GetDefinition()->GetParticleSubType()=="generic" && thePdef[i] == "GenericIon") ) 
+      if ( thePdef[i] == aTrack->GetDefinition()->GetParticleName() ||
+	   (aTrack->GetDefinition()->GetParticleSubType()=="generic" && thePdef[i] == "GenericIon") )
       {
          nFilteredParticles++;
          return true;
@@ -51,12 +51,12 @@ G4bool GateParticleFilter::Accept(const G4Track* aTrack)
  // }
 
  // if(thePdef.size()==0)
-//  {    
+//  {
     GateTrackIDInfo  *trackInfo = GateUserActions::GetUserActions()->GetTrackIDInfo(aTrack->GetParentID());
     while(trackInfo)
     {
       for ( size_t i = 0; i < theParentPdef.size(); i++){
-        if ( theParentPdef[i] == trackInfo->GetParticleName()) 
+        if ( theParentPdef[i] == trackInfo->GetParticleName())
         {
            nFilteredParticles++;
            return true;
@@ -66,7 +66,7 @@ G4bool GateParticleFilter::Accept(const G4Track* aTrack)
       trackInfo = GateUserActions::GetUserActions()->GetTrackIDInfo(id);
     }
 //  }
- 
+
   return false;
 }
 

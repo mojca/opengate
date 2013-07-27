@@ -22,9 +22,9 @@ class GateOpticalBiolumGPUMessenger: public GateSourceVoxellizedMessenger
 public:
   GateOpticalBiolumGPUMessenger(GateOpticalBiolumGPU* source);
   ~GateOpticalBiolumGPUMessenger();
-  
+
   virtual void SetNewValue(G4UIcommand*, G4String);
-  
+
 private:
   GateOpticalBiolumGPU * m_gpu_source;
   G4UIcmdWithAString * m_attach_to_cmd;
@@ -34,4 +34,3 @@ private:
 };
 
 #endif
-

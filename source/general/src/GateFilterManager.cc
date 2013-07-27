@@ -30,7 +30,7 @@ GateFilterManager::~GateFilterManager()
   {
     // get first 'element'
     filter = theFilters.front();
-        
+
     // remove it from the list
     theFilters.erase(theFilters.begin());
 
@@ -78,9 +78,7 @@ void GateFilterManager::show(){
   std::vector<GateVFilter*>::iterator sit;
   for(sit= theFilters.begin(); sit!=theFilters.end(); ++sit)
      (*sit)->show();
-  
+
   G4cout << "-------------------------------------------"<<G4endl;
 }
 //---------------------------------------------------------------------------
-
-

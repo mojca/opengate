@@ -10,11 +10,11 @@ void GPU_GateEmisTomo(const GateGPUIO_Input * input, GateGPUIO_Output * output) 
     double tinit = time();
 
     // Select a GPU
-    cudaSetDevice(input->cudaDeviceID); 
+    cudaSetDevice(input->cudaDeviceID);
 
     // Vars
     int gamma_max_sim = input->nb_events;
-    int positron = gamma_max_sim / 2;     // positron generated (nb gamma = 2*ptot) 
+    int positron = gamma_max_sim / 2;     // positron generated (nb gamma = 2*ptot)
     int* gamma_sim_d;
     int gamma_sim_h = 0;
     cudaMalloc((void**) &gamma_sim_d, sizeof(int));
@@ -80,9 +80,9 @@ void GPU_GateEmisTomo(const GateGPUIO_Input * input, GateGPUIO_Output * output) 
     phantom_d.nb_voxel_volume = phantom_d.nb_voxel_slice * phantom_d.size_in_vox.z;
     phantom_d.mem_data = phantom_d.nb_voxel_volume * sizeof(unsigned short int);
 
-    volume_device_malloc(phantom_d, phantom_d.nb_voxel_volume); 
+    volume_device_malloc(phantom_d, phantom_d.nb_voxel_volume);
 
-    cudaMemcpy(phantom_d.data, &(input->phantom_material_data[0]), 
+    cudaMemcpy(phantom_d.data, &(input->phantom_material_data[0]),
                phantom_d.mem_data, cudaMemcpyHostToDevice);
     printf(" :: Phantom ok\n");
 
@@ -90,12 +90,12 @@ void GPU_GateEmisTomo(const GateGPUIO_Input * input, GateGPUIO_Output * output) 
     Activities activities_d;
     activities_d.nb_activities = input->activity_data.size();
     activities_d.tot_activity = 0.0f; // FIXME not used
-    
+
     activities_device_malloc(activities_d, activities_d.nb_activities);
 
-    cudaMemcpy(activities_d.act_index, &(input->activity_index[0]), 
+    cudaMemcpy(activities_d.act_index, &(input->activity_index[0]),
                activities_d.nb_activities*sizeof(unsigned int), cudaMemcpyHostToDevice);
-    cudaMemcpy(activities_d.act_cdf, &(input->activity_data[0]), 
+    cudaMemcpy(activities_d.act_cdf, &(input->activity_data[0]),
                activities_d.nb_activities*sizeof(float), cudaMemcpyHostToDevice);
     printf(" :: Activities ok\n");
 
@@ -107,7 +107,7 @@ void GPU_GateEmisTomo(const GateGPUIO_Input * input, GateGPUIO_Output * output) 
     grid.x = grid_size;
 
     // Init random
-    int* tmp = (int*)malloc(positron * sizeof(int));	
+    int* tmp = (int*)malloc(positron * sizeof(int));
     int n=0; while (n<positron) {tmp[n] = rand(); ++n;};
     cudaMemcpy(gamma1_d.seed, tmp, positron * sizeof(int), cudaMemcpyHostToDevice);
     n=0; while (n<positron) {tmp[n] = rand(); ++n;};
@@ -140,7 +140,7 @@ void GPU_GateEmisTomo(const GateGPUIO_Input * input, GateGPUIO_Output * output) 
 
     // TIMING
     tsrc = time() - tsrc;
-    double ttrack = time();    
+    double ttrack = time();
 
     // Main loop
     int step=0;
@@ -152,10 +152,10 @@ void GPU_GateEmisTomo(const GateGPUIO_Input * input, GateGPUIO_Output * output) 
         kernel_NavRegularPhan_Photon_NoSec<<<grid, threads>>>(gamma2_d, phantom_d,
                                                               materials_d, gamma_sim_d);
         cudaThreadSynchronize();
-          
+
         // get back the number of simulated photons
         cudaMemcpy(&gamma_sim_h, gamma_sim_d, sizeof(int), cudaMemcpyDeviceToHost);
-        
+
         printf("sim %i %i / %i tot\n", step, gamma_sim_h, gamma_max_sim);
 
         //if (step > 100) break;
@@ -173,7 +173,7 @@ void GPU_GateEmisTomo(const GateGPUIO_Input * input, GateGPUIO_Output * output) 
     // TIMING
     copy = time() - copy;
     double texport = time();
-   
+
     /*
     // Debuging
     int i=0; while(i<gamma1_d.size) {
@@ -233,7 +233,7 @@ void GPU_GateEmisTomo(const GateGPUIO_Input * input, GateGPUIO_Output * output) 
 
     // TIMING
     tg = time() - tg;
-    printf(">> GPU: init %e src %e track %e copy %e exp %e tot %e\n", 
+    printf(">> GPU: init %e src %e track %e copy %e exp %e tot %e\n",
             tinit, tsrc, ttrack, copy, texport, tg);
 
     DD(output->particles.size());
@@ -241,4 +241,3 @@ void GPU_GateEmisTomo(const GateGPUIO_Input * input, GateGPUIO_Output * output) 
     cudaThreadExit();
     printf("====> GPU STOP\n");
 }
-

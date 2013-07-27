@@ -21,7 +21,7 @@ class GateVVolume;
 class GateRTPhantom {
 public:
 
-  GateRTPhantom(G4String name = "" ); 
+  GateRTPhantom(G4String name = "" );
 
   virtual ~GateRTPhantom();
   void SetVerboseLevel(G4int val) { m_VerboseLevel = val; };
@@ -30,7 +30,7 @@ public:
 
   void SetTimeActivTables( G4String aFName);
 
-  //! Provides a description of the properties of the Mgr and of its output modules 
+  //! Provides a description of the properties of the Mgr and of its output modules
   void Describe();
 
   G4int IsAttachedTo(GateVVolume*);
@@ -96,7 +96,7 @@ GateVVolume* GetInserter() { return m_inserter; };
 
   G4int p_cK;   // get previous cK value  start value is 1 set in .cc;
 
-G4int IsVoxellized; 
+G4int IsVoxellized;
 
 G4int IsEnabled;
 
@@ -105,10 +105,10 @@ G4int IsInitialized;
 GateVVolume *m_inserter; // inserter to which the RTPhantom is attached to
 
 GateVGeometryVoxelReader* itsGReader;
- 
+
 /* the Geometry Voxel Reader attached to the RTPhantom to Fill in Voxel material*/
 
-GateVSourceVoxelReader* itsSReader; 
+GateVSourceVoxelReader* itsSReader;
 
 /* the Source Voxel Reader attached to the RTPhantom to Fill in Voxel activity*/
 

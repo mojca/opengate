@@ -23,10 +23,10 @@ class GateParallelBeamMessenger: public GateMessenger
   public:
     GateParallelBeamMessenger(GateParallelBeam* itsInserter);
    ~GateParallelBeamMessenger();
-    
+
     void SetNewValue(G4UIcommand*, G4String);
-    
-    virtual inline GateParallelBeam* GetParallelBeamInserter() 
+
+    virtual inline GateParallelBeam* GetParallelBeamInserter()
       { return m_inserter; }
 
   private:
@@ -42,4 +42,3 @@ class GateParallelBeamMessenger: public GateMessenger
 };
 
 #endif
-

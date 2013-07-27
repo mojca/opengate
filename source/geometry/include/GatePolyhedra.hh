@@ -16,18 +16,18 @@ See GATE/LICENSE.txt for further details
 
 /*! \class  GatePolyhedra
     \brief  Class derived from G4Polyhedra as a quick-fix to the hexagon-trapping bug
-    
-    - GatePolyhedra - by Daniel.Strul@iphe.unil.ch 
-    
+
+    - GatePolyhedra - by Daniel.Strul@iphe.unil.ch
+
     - This class overloads G4VCSGfaceted::DistanceToOut() to fix the problem caused
       by particules trapped in hexagons
-*/      
+*/
 class GatePolyhedra : public G4Polyhedra
 {
   public:
 
   //! Constructor: calls the G4Polyhedra's constructor
-  GatePolyhedra( const G4String& name, 
+  GatePolyhedra( const G4String& name,
                        G4double phiStart,    // initial phi starting angle
                        G4double phiTotal,    // total phi angle
                        G4int numSide,        // number sides
@@ -41,7 +41,7 @@ class GatePolyhedra : public G4Polyhedra
 
 
   //! Constructor: calls the G4Polyhedra's constructor
-  GatePolyhedra( const G4String& name, 
+  GatePolyhedra( const G4String& name,
                        G4double phiStart,    // initial phi starting angle
                        G4double phiTotal,    // total phi angle
                        G4int    numSide,     // number sides
@@ -50,7 +50,7 @@ class GatePolyhedra : public G4Polyhedra
                  const G4double z[]       )  // z coordinate of these corners
 	: G4Polyhedra(name,phiStart,phiTotal,numSide,numRZ,r,z)
 	{}
-	
+
   //! Overload of G4VCSGfaceted::DistanceToOut to fix the hexagon-trapping bug
   using G4VCSGfaceted::DistanceToOut;
   virtual G4double DistanceToOut( const G4ThreeVector& p,

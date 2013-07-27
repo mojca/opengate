@@ -9,7 +9,7 @@ See GATE/LICENSE.txt for further details
 ----------------------*/
 
 
-/*! 
+/*!
    \class GateImageRegionalizedVolumeMessenger
    \author thibault.frisson@creatis.insa-lyon.fr
            laurent.guigues@creatis.insa-lyon.fr
@@ -32,14 +32,13 @@ class GateImageRegionalizedVolumeMessenger : public GateVImageVolumeMessenger
 public:
   GateImageRegionalizedVolumeMessenger(GateImageRegionalizedVolume* volume);
   ~GateImageRegionalizedVolumeMessenger();
-    
+
   void SetNewValue(G4UIcommand*, G4String);
 
 private:
-  GateImageRegionalizedVolume* pVolume;   
+  GateImageRegionalizedVolume* pVolume;
   G4UIcmdWithAString* pDistanceMapNameCmd;
 };
 //====================================================================
 
 #endif
-

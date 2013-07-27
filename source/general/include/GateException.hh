@@ -11,19 +11,19 @@ See GATE/LICENSE.txt for further details
 
 
 /**
- *  \file 
- *  \brief  class Exception:generic class for throwing any exception (header) 
+ *  \file
+ *  \brief  class Exception:generic class for throwing any exception (header)
  *
  *    Long description:
  */
 
 /**
- *  \class Gate::Exception 
- *  \brief  class Exception : generic class for throwing any exception 
+ *  \class Gate::Exception
+ *  \brief  class Exception : generic class for throwing any exception
  *
  *    Long description:
  */
- 
+
 #ifndef __GateException_h__
 #define __GateException_h__
 
@@ -48,7 +48,7 @@ namespace Gate
     ~Exception() throw() {}
     void Print() throw()
     {
-      std::cout << "* ERROR  : " << mMessage <<std::endl; 
+      std::cout << "* ERROR  : " << mMessage <<std::endl;
       //       printf("ERROR : [%s]\n",mLabel.c_str());
       int lev = GateMessageManager::GetMessageLevel("Error");
       if (lev > 0) {

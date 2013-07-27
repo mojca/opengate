@@ -11,8 +11,8 @@ See GATE/LICENSE.txt for further details
 
 /*!
   \file GateMDBCreators.cc
-  
-  \brief Classes GateElementCreator, GateComponentCreator, GateElemComponentCreator, 
+
+  \brief Classes GateElementCreator, GateComponentCreator, GateElemComponentCreator,
   \brief GateEByFComponentCreator,GateEByNComponentCreator, GateMatComponentCreator, GateMaterialCreator
   \brief GateScratchMaterialCreator, GateCompoundMaterialCreator
 */
@@ -95,7 +95,7 @@ G4Material* GateScratchMaterialCreator::Construct()
 G4Material* GateCompoundMaterialCreator::Construct()
 {
   G4Material* material = new G4Material(name,density,nComponents,state,temp,pressure);
-  
+
   if (!material)
 	{
 		G4String msg = "Failed to create a new material for '" + name + "'!";
@@ -120,11 +120,11 @@ G4Material* GateCompoundMaterialCreator::Construct()
 	}
   }
   if (f > 1.001 || f < 0.999) {
-	GateError("Sum of fraction is not 1.0 for mat " 
+	GateError("Sum of fraction is not 1.0 for mat "
 			  << material->GetName()
 			  << " " << f);
 	for(unsigned int j=0; j<material->GetNumberOfElements(); j++) {
-	  GateError("Element " << j << " " 
+	  GateError("Element " << j << " "
 				<< material->GetElement(j)->GetName()
 				<< " = " << material->GetFractionVector()[j]);
 	}

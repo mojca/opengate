@@ -19,7 +19,7 @@ See GATE/LICENSE.txt for further details
 #include "GateActorManager.hh"
 #include "GateMaterialFilterMessenger.hh"
 
-class  GateMaterialFilter : 
+class  GateMaterialFilter :
   public GateVFilter
 {
 public:
@@ -36,7 +36,7 @@ public:
 private:
  std::vector<G4String> theMdef;
  GateMaterialFilterMessenger * pMatMessenger;
- 
+
  int nFilteredParticles;
 };
 

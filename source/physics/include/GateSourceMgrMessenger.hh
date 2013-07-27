@@ -35,12 +35,12 @@ class GateSourceMgrMessenger: public G4UImessenger
 public:
   GateSourceMgrMessenger(GateSourceMgr*);
   ~GateSourceMgrMessenger();
-  
+
   void SetNewValue(G4UIcommand*, G4String);
-    
+
 private:
   GateSourceMgr*                     m_sourceMgr;
-    
+
   G4UIdirectory*                       GateSourceDir;
   G4UIcmdWithAString*                  SelectSourceCmd;
   GateUIcmdWithAVector<G4String>*      AddSourceCmd;
@@ -51,4 +51,3 @@ private:
 };
 
 #endif
-

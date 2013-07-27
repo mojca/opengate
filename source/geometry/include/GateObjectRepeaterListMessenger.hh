@@ -35,7 +35,7 @@ class GateObjectRepeaterListMessenger: public GateListMessenger
   public:
     GateObjectRepeaterListMessenger(GateObjectRepeaterList* itsRepeaterList);
    ~GateObjectRepeaterListMessenger();
-    
+
     void SetNewValue(G4UIcommand*, G4String);
 
   private:
@@ -49,8 +49,7 @@ class GateObjectRepeaterListMessenger: public GateListMessenger
 
 
   private:
-  
+
 };
 
 #endif
-

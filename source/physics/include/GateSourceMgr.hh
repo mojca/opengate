@@ -24,33 +24,33 @@
 
 class GateSourceMgrMessenger;
 
-/** 
+/**
  * @class GateSourceMgr
  *
  * @brief A class to manage multiple sources
  *
  * This class is used to build and use the sources
- * In particular 
+ * In particular
  *
  *   - it builds the source with AddSource
  *   - it prepare the events for the PrimaryGeneratorAction with PrepareNextEvent
  *   - it initialize the Run variables at PrepareNextRun
  *
- * It has its own internal time, that is updated to the general GATE clock time at 
- * the beginning of the Run. 
+ * It has its own internal time, that is updated to the general GATE clock time at
+ * the beginning of the Run.
  * For each event, it decides which source is to be used and it asks to this source
  * to generate the primary vertices.
- * 
+ *
  * GateSourceMgr is a singleton.
  * @author G.Santin
- *    
+ *
  */
 
 class GateSourceMgr
 {
 public:
   ~GateSourceMgr();
-  
+
   // Need to be in header (not in cc)
   static GateSourceMgr* GetInstance() {
     if( mInstance == 0 )
@@ -64,7 +64,7 @@ public:
   GateVSource* GetSourceByName( G4String name );
   GateVSource* GetSource(int i);
 
-  /** 
+  /**
    * @brief to obtain the used sources at the end of the event
    *
    * It permits to ask to the SourceMgr at the end of the event
@@ -73,7 +73,7 @@ public:
    */
   inline GateVSourceVector GetSourcesForThisEvent()
   { return m_currentSources; }
-  
+
 /* PY Descourt 08/09/2009 Tracker/Detector */
   G4int GetCurrentSourceID() { return m_currentSourceID; };
   void SetCurrentSourceID( G4int aID ) { m_currentSourceID = aID ; };
@@ -102,7 +102,7 @@ public:
   void ListSources();
 
   /** Old method to select a source to change then its attributes.
-   * To be eliminated. 
+   * To be eliminated.
    */
   void SelectSourceByName( G4String value );
   void SetVerboseLevel( G4int value );
@@ -136,10 +136,10 @@ protected:
   GateVSource*              m_previousSource;
   GateVSourceVector         m_currentSources;
   GateSourceMgrMessenger*   m_sourceMgrMessenger;
-  GateVSource*              m_selectedSource;	
+  GateVSource*              m_selectedSource;
   G4bool                    m_needSourceInit;
   G4double                  m_time;
-  G4double                  m_timeLimit; 
+  G4double                  m_timeLimit;
   G4double                  m_timeClock;
 	G4double                  m_firstTime;
   G4bool                    m_launchLastBuffer;

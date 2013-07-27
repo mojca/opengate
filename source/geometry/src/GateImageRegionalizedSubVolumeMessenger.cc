@@ -9,7 +9,7 @@ See GATE/LICENSE.txt for further details
 ----------------------*/
 
 
-/*! \file 
+/*! \file
   \brief Implementation of GateImageRegionalizedSubVolumeMessenger
  */
 
@@ -20,11 +20,11 @@ See GATE/LICENSE.txt for further details
 
 //====================================================================
 GateImageRegionalizedSubVolumeMessenger::GateImageRegionalizedSubVolumeMessenger(GateImageRegionalizedSubVolume* volume)
-  : 
+  :
   GateVolumeMessenger(volume),
   pVolume(volume)
 {
-  
+
   //GateMessage("Volume",5,"GateImageRegionalizedSubVolumeMessenger()"<<G4endl);
 }
 //====================================================================
@@ -38,19 +38,16 @@ GateImageRegionalizedSubVolumeMessenger::~GateImageRegionalizedSubVolumeMessenge
 //====================================================================
 
 
-//====================================================================    
-void GateImageRegionalizedSubVolumeMessenger::SetNewValue(G4UIcommand* command, 
+//====================================================================
+void GateImageRegionalizedSubVolumeMessenger::SetNewValue(G4UIcommand* command,
 						 G4String newValue)
 {
-  ////GateMessage("Volume",5,"GateImageRegionalizedSubVolumeMessenger::SetNewValue " 
+  ////GateMessage("Volume",5,"GateImageRegionalizedSubVolumeMessenger::SetNewValue "
 	    //  << command->GetCommandPath()
 	   //   << " newValue=" << newValue << G4endl);
-  
+
   GateVolumeMessenger::SetNewValue(command,newValue);
-  
+
 }
 
 //====================================================================
-
-
-

@@ -25,7 +25,7 @@ class G4Region;
 #include "GateCrossSectionsTable.hh"
 #include "G4ThreeVector.hh"
 #include <vector>
-#include "G4GeometryTolerance.hh" 
+#include "G4GeometryTolerance.hh"
 
 typedef G4Region G4Envelope;
 
@@ -71,7 +71,7 @@ inline G4int GateFictitiousVoxelMap::GetNz() const
 
 inline const GateCrossSectionsTable* GateFictitiousVoxelMap::GetCrossSectionsTable() const
 {
-	return pCrossSectionsTable; 
+	return pCrossSectionsTable;
 }
 inline G4Material* GateFictitiousVoxelMap::GetMaterial ( const G4ThreeVector& localPos ) const
 {

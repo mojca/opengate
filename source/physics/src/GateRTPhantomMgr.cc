@@ -1,16 +1,16 @@
 /*----------------------
 
-   GATE - Geant4 Application for Tomographic Emission 
-   OpenGATE Collaboration 
-     
-   Giovanni Santin <giovanni.santin@cern.ch> 
-   Daniel Strul <daniel.strul@iphe.unil.ch> 
-     
-   Copyright (C) 2002,2003 UNIL/IPHE, CH-1015 Lausanne 
+   GATE - Geant4 Application for Tomographic Emission
+   OpenGATE Collaboration
 
-This software is distributed under the terms 
-of the GNU Lesser General  Public Licence (LGPL) 
-See GATE/LICENSE.txt for further details 
+   Giovanni Santin <giovanni.santin@cern.ch>
+   Daniel Strul <daniel.strul@iphe.unil.ch>
+
+   Copyright (C) 2002,2003 UNIL/IPHE, CH-1015 Lausanne
+
+This software is distributed under the terms
+of the GNU Lesser General  Public Licence (LGPL)
+See GATE/LICENSE.txt for further details
 ----------------------*/
 
 #include "GateRTPhantomMgr.hh"
@@ -45,7 +45,7 @@ if( m_RTPhantom[iMod]->GetSReader()->GetName() == aname )
      break;
     }
 }
-return Ph;      
+return Ph;
 }
 
 GateRTPhantom * GateRTPhantomMgr::CheckGeometryAttached( G4String aname)
@@ -59,7 +59,7 @@ for (size_t iMod = 0; iMod < m_RTPhantom.size(); iMod++)
       break;
      }
     }
-return Ph;      
+return Ph;
 }
 
 GateRTPhantomMgr::GateRTPhantomMgr(const G4String name)

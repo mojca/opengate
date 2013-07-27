@@ -19,7 +19,7 @@ See GATE/LICENSE.txt for further details
 #include "GateMaterialDatabase.hh"
 
 //-----------------------------------------------------------------------------------------------
-GateGeometryVoxelTabulatedTranslator::GateGeometryVoxelTabulatedTranslator(GateVGeometryVoxelReader* voxelReader) 
+GateGeometryVoxelTabulatedTranslator::GateGeometryVoxelTabulatedTranslator(GateVGeometryVoxelReader* voxelReader)
   : GateVGeometryVoxelTranslator(voxelReader)
 {
   m_name = G4String("tabulatedTranslator");
@@ -29,7 +29,7 @@ GateGeometryVoxelTabulatedTranslator::GateGeometryVoxelTabulatedTranslator(GateV
 
 
 //-----------------------------------------------------------------------------------------------
-GateGeometryVoxelTabulatedTranslator::~GateGeometryVoxelTabulatedTranslator() 
+GateGeometryVoxelTabulatedTranslator::~GateGeometryVoxelTabulatedTranslator()
 {
   delete m_messenger;
 }
@@ -82,10 +82,10 @@ void GateGeometryVoxelTabulatedTranslator::ReadTranslationTable(G4String fileNam
     } else {
       is >> std::boolalpha >> visible >> red >> green >> blue >> alpha ;
     }
-    
-    G4cout << std::boolalpha << "  imageValue: " << imageValue << "  material: " << material 
+
+    G4cout << std::boolalpha << "  imageValue: " << imageValue << "  material: " << material
 	   <<", visible " << visible << ", rgba(" << red << ',' << green << ',' << blue<< ',' << alpha << ')' << G4endl;
-    
+
 
     m_voxelMaterialTranslation[imageValue] = material;
     m_voxelAttributesTranslation[ GateDetectorConstruction::GetGateDetectorConstruction()->mMaterialDatabase.GetMaterial(material) ]= new G4VisAttributes(visible,G4Colour(red,green,blue,alpha));
@@ -99,7 +99,7 @@ void GateGeometryVoxelTabulatedTranslator::ReadTranslationTable(G4String fileNam
 
 
 //-----------------------------------------------------------------------------------------------
-void GateGeometryVoxelTabulatedTranslator::Describe(G4int) 
+void GateGeometryVoxelTabulatedTranslator::Describe(G4int)
 {
 }
 //-----------------------------------------------------------------------------------------------
@@ -109,14 +109,14 @@ void GateGeometryVoxelTabulatedTranslator::Describe(G4int)
 G4String GateGeometryVoxelTabulatedTranslator::GetNextMaterial(G4bool doReset)
 {
   static GateVoxelMaterialTranslationMap::iterator anIterator = m_voxelMaterialTranslation.begin();
-  
+
   if (doReset)
     anIterator = m_voxelMaterialTranslation.begin();
-    
+
   G4String aMaterial = ( anIterator!=m_voxelMaterialTranslation.end() ) ? anIterator->second : G4String("") ;
   if (aMaterial!="")
     anIterator++;
-    
+
   return aMaterial;
 }
 //-----------------------------------------------------------------------------------------------

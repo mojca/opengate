@@ -27,24 +27,24 @@ class G4UIcmdWithADouble;
 
 /*! \class GateListMessenger
     \brief Abstract base class for managing an attachment list (GateListManager) and for inserting new objects
-    
-    - GateListMessenger - by Daniel.Strul@iphe.unil.ch 
-    
+
+    - GateListMessenger - by Daniel.Strul@iphe.unil.ch
+
     - The GateListMessenger inherits from the abilities/responsabilities
       of the GateClockDependentMessenger base-class, i.e. the creation and management
       of a Gate UI directory for a Gate object
-      
+
     - In addition, the main responsability of this messenger is to handle
       an attachment list, and to allow the insertion of new attachments.
 
     - It proposes and manages commands specific to the attachment lists
       definition of the name of a new attachment, listing of possible choices,
       list of already created attachments, and insertion of a new attachment
-      
+
     - The class contains two pure virtual methods: DumpMap() and DoInsertion()
       These methods must be implemented in derived concrete classes.
 
-*/      
+*/
 //    Last modification in 12/2011 by Abdul-Fattah.Mohamad-Hadi@subatech.in2p3.fr, for the multi-system approach.
 
 class GateListMessenger: public GateClockDependentMessenger
@@ -55,26 +55,26 @@ class GateListMessenger: public GateClockDependentMessenger
 
     //! destructor
     virtual ~GateListMessenger();
-    
+
     //! UI command interpreter method
     void SetNewValue(G4UIcommand*, G4String);
 
     //! Get a pointer to the list manager
-    inline GateListManager* GetListManager() 
+    inline GateListManager* GetListManager()
       { return (GateListManager*) GetClockDependent(); }
 
     //! Get the current value of the insertion name
-    inline const G4String& GetNewInsertionBaseName() 
+    inline const G4String& GetNewInsertionBaseName()
       { return mNewInsertionBaseName; }
 
     //! Setter and getter for the system type.
     inline void SetSystemType(const G4String& val) { mSystemType = val; }
     inline G4String GetSystemType() const { return mSystemType; }
-    
+
     //! Set the value of the insertion name
-    inline void SetNewInsertionBaseName(const G4String& val) 
+    inline void SetNewInsertionBaseName(const G4String& val)
       { mNewInsertionBaseName = val; }
-      
+
     //! Check whether there is a name conflict between a new
     //! attachment and an already existing one
     virtual G4bool CheckNameConflict(const G4String& name);
@@ -89,7 +89,7 @@ class GateListMessenger: public GateClockDependentMessenger
     virtual const G4String& DumpMap() =0;
 
     //! Lists all the system-names onto the standard output
-    virtual void ListChoices() 
+    virtual void ListChoices()
       { G4cout << "The available choices are: " << DumpMap() << "\n"; }
 
     //! Pure virtual method: create and insert a new attachment
@@ -102,7 +102,7 @@ class GateListMessenger: public GateClockDependentMessenger
     G4UIcmdWithoutParameter*    pListChoicesCmd;       //!< the UI command 'info'
     G4UIcmdWithoutParameter*    pListCmd;	      //!< the UI command 'list'
     G4UIcmdWithAString*       	pInsertCmd;	      //!< the UI command 'insert'
-    
+
   private:
     static G4String  	      	mSystemType;    //!< carries the system type.
     G4String  	      	mNewInsertionBaseName;  //!< the name to be given to the next insertion
@@ -110,4 +110,3 @@ class GateListMessenger: public GateClockDependentMessenger
 };
 
 #endif
-

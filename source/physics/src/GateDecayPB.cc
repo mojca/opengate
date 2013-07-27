@@ -16,7 +16,7 @@ See GATE/LICENSE.txt for further details
 
 //-----------------------------------------------------------------------------
 GateDecayPB::GateDecayPB():GateVProcess("Decay")
-{  
+{
   SetDefaultParticle("mu+");  SetDefaultParticle("mu-");
   SetDefaultParticle("tau+");  SetDefaultParticle("tau-");
   SetDefaultParticle("sigma0");  SetDefaultParticle("anti_sigma0");
@@ -47,7 +47,7 @@ G4VProcess* GateDecayPB::CreateProcess(G4ParticleDefinition *)
 
 //-----------------------------------------------------------------------------
 void GateDecayPB::ConstructProcess( G4ProcessManager * manager)
-{  
+{
   manager->AddProcess(GetProcess());
 }
 //-----------------------------------------------------------------------------
@@ -62,7 +62,7 @@ bool GateDecayPB::IsApplicable(G4ParticleDefinition * par)
    } else if (par->GetPDGMass() <= 0.0*MeV) {
      return false;
    } else {
-     return true; 
+     return true;
    }
 }
 //-----------------------------------------------------------------------------

@@ -14,8 +14,3 @@ See GATE/LICENSE.txt for further details
 GatePVParameterisation::GatePVParameterisation()
 {
 }
-
-
-
-
-

@@ -25,7 +25,7 @@
 GateRTPhantomMgrMessenger::GateRTPhantomMgrMessenger(GateRTPhantomMgr* PhMgr)
   : GateMessenger(PhMgr->GetName()),
     m_PhMgr(PhMgr)
-{ 
+{
 
   G4String cmdName;
 
@@ -61,7 +61,7 @@ GateRTPhantomMgrMessenger::~GateRTPhantomMgrMessenger()
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
 void GateRTPhantomMgrMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
   if( command == VerboseCmd ) {
     m_PhMgr->SetVerboseLevel(VerboseCmd->GetNewIntValue(newValue));
   }
@@ -73,6 +73,3 @@ void GateRTPhantomMgrMessenger::SetNewValue(G4UIcommand* command,G4String newVal
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
-
-
-

@@ -48,7 +48,7 @@ class GateSourcePhaseSpace : public GateVSource
 public:
   GateSourcePhaseSpace( G4String name);
   ~GateSourcePhaseSpace();
-	
+
   void Initialize();
   void GenerateROOTVertex( G4Event* );
   void GenerateIAEAVertex( G4Event* );
@@ -107,8 +107,8 @@ protected:
 
   float energy;
   float x, y, z;
-  float dx, dy, dz, t; 
-  float weight; 
+  float dx, dy, dz, t;
+  float weight;
   //  char volumeName;
   char particleName[64];
   G4String mParticleTypeNameGivenByUser;
@@ -145,9 +145,9 @@ protected:
   bool mUseRegularSymmetry;
   bool mUseRandomSymmetry;
   double mAngle;
- 
+
   double PI;
-  
+
   bool mUseNbOfParticleAsIntensity;
 
 };

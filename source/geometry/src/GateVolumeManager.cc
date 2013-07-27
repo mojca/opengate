@@ -19,5 +19,3 @@ GateVolumeManager::GateVolumeManager()
   // pVolumeManagerMessenger = new GateVolumeManagerMessenger(this);
 }
 //---------------------------------------------------------------------------------
-
-

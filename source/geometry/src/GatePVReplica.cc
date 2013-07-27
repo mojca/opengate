@@ -18,12 +18,12 @@ GatePVReplica::GatePVReplica(const G4String& pName,
                       	     const G4int nReplicas,
 		      	     const G4double width,
                       	     const G4double offset)
-  : G4PVReplica(pName,pLogical,pMother,pAxis,nReplicas ,width,offset) 
+  : G4PVReplica(pName,pLogical,pMother,pAxis,nReplicas ,width,offset)
 {
-  if ((pAxis!=kXAxis) && (pAxis!=kYAxis) && (pAxis!=kZAxis) ) 
+  if ((pAxis!=kXAxis) && (pAxis!=kYAxis) && (pAxis!=kZAxis) )
     G4Exception( "GatePVReplica::GatePVReplica", "GatePVReplica", FatalException, "Sorry, an object tried to create a replicate along a non-Caretsian axis, but this kind of replication is not handled by GATE." );
 }
-			     
+
 
 
 
@@ -35,7 +35,7 @@ GatePVReplica::~GatePVReplica()
 void GatePVReplica::Update(const EAxis pAxis,const G4int nReplicas,
 		      	   const G4double width,const G4double offset)
 {
-  if ((pAxis!=kXAxis) && (pAxis!=kYAxis) && (pAxis!=kZAxis) ) 
+  if ((pAxis!=kXAxis) && (pAxis!=kYAxis) && (pAxis!=kZAxis) )
     G4Exception( "GatePVReplica::Update", "Update", FatalException, "Sorry, an object tried to create a replicate along a non-Caretsian axis, but this kind of replication is not handled by GATE" );
   faxis=pAxis;
 
@@ -49,5 +49,3 @@ void GatePVReplica::Update(const EAxis pAxis,const G4int nReplicas,
 
   foffset=offset;
 }
-
-

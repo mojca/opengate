@@ -29,31 +29,31 @@ class GateLinearRepeater;
 
 /*! \class GateLinearRepeaterMessenger
     \brief Messenger for a GateLinearRepeater
-    
-    - GateLinearRepeaterMessenger - by Daniel.Strul@iphe.unil.ch 
-    
+
+    - GateLinearRepeaterMessenger - by Daniel.Strul@iphe.unil.ch
+
     - The GateLinearRepeaterMessenger inherits from the abilities/responsabilities
       of the GateObjectRepeaterMessenger base-class: creation and management
       of a Gate UI directory for a Gate object; UI commands "describe",
       'enable' and 'disable'.
-      
+
     - In addition, it creates UI commands to manage a linear repeater:
       'setRepeatVector', 'setRepeatNumber', 'autoCenter'
 
-*/      
+*/
 
 class GateLinearRepeaterMessenger: public GateObjectRepeaterMessenger
 {
   public:
     GateLinearRepeaterMessenger(GateLinearRepeater* itsLinearRepeater);
    ~GateLinearRepeaterMessenger();
-    
+
     void SetNewValue(G4UIcommand*, G4String);
 
   public:
-    virtual inline GateLinearRepeater* GetLinearRepeater() 
+    virtual inline GateLinearRepeater* GetLinearRepeater()
       { return (GateLinearRepeater*)GetObjectRepeater(); }
-    
+
   private:
     G4UIcmdWith3VectorAndUnit* SetRepeatVectorCmd;
     G4UIcmdWithAnInteger*      SetRepeatNumberCmd;
@@ -62,4 +62,3 @@ class GateLinearRepeaterMessenger: public GateObjectRepeaterMessenger
 };
 
 #endif
-

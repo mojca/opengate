@@ -57,7 +57,7 @@ See GATE/LICENSE.txt for further details
 
 GatePulseProcessorChainMessenger::GatePulseProcessorChainMessenger(GatePulseProcessorChain* itsProcessorChain)
 :GateListMessenger(itsProcessorChain)
-{ 
+{
   pInsertCmd->SetCandidates(DumpMap());
 
   G4String cmdName;
@@ -80,8 +80,8 @@ GatePulseProcessorChainMessenger::~GatePulseProcessorChainMessenger()
 
 
 void GatePulseProcessorChainMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
-  if (command == SetInputNameCmd) 
+{
+  if (command == SetInputNameCmd)
     { GetProcessorChain()->SetInputName(newValue); }
   else
     GateListMessenger::SetNewValue(command,newValue);
@@ -100,10 +100,10 @@ const G4String& GatePulseProcessorChainMessenger::DumpMap()
 
 void GatePulseProcessorChainMessenger::DoInsertion(const G4String& childTypeName)
 {
-  
+
   if (GetNewInsertionBaseName().empty())
     SetNewInsertionBaseName(childTypeName);
-    
+
   AvoidNameConflicts();
 
   GateVPulseProcessor* newProcessor=0;
@@ -127,9 +127,9 @@ void GatePulseProcessorChainMessenger::DoInsertion(const G4String& childTypeName
   else if (childTypeName=="localBlurring")
     newProcessor = new GateLocalBlurring(GetProcessorChain(),newInsertionName);
   else if (childTypeName=="transferEfficiency")
-    newProcessor = GateTransferEfficiency::GetInstance(GetProcessorChain(),newInsertionName); 
+    newProcessor = GateTransferEfficiency::GetInstance(GetProcessorChain(),newInsertionName);
   else if (childTypeName=="lightYield")
-    newProcessor = GateLightYield::GetInstance(GetProcessorChain(),newInsertionName); 
+    newProcessor = GateLightYield::GetInstance(GetProcessorChain(),newInsertionName);
   else if (childTypeName=="crosstalk")
     newProcessor = GateCrosstalk::GetInstance(GetProcessorChain(),newInsertionName,0.,0.);
   else if (childTypeName=="quantumEfficiency")
@@ -170,7 +170,7 @@ void GatePulseProcessorChainMessenger::DoInsertion(const G4String& childTypeName
     G4cout << "Pulse-processor type name '" << childTypeName << "' was not recognised --> insertion request must be ignored!\n";
     return;
   }
-  
+
   GetProcessorChain()->InsertProcessor(newProcessor);
   SetNewInsertionBaseName("");
 }
@@ -181,8 +181,3 @@ G4bool GatePulseProcessorChainMessenger::CheckNameConflict(const G4String& name)
   // Check whether an object with the same name already exists in the list
   return ( GetListManager()->FindElement( GetListManager()->GetObjectName() + "/" + name ) != 0 ) ;
 }
-
-
-
-
-

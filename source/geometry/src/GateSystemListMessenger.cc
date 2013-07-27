@@ -29,9 +29,9 @@ See GATE/LICENSE.txt for further details
 // constructor
 GateSystemListMessenger::GateSystemListMessenger(GateSystemListManager* itsListManager)
 : GateListMessenger(itsListManager)
-{ 
+{
   G4String guidance;
-  
+
   guidance = G4String("Control the GATE systems" );
   SetDirectoryGuidance(guidance);
 
@@ -53,7 +53,7 @@ GateSystemListMessenger::~GateSystemListMessenger()
 //------------------------------------------------------------------------------------------------------------------
 // UI command interpreter method
 void GateSystemListMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
     GateListMessenger::SetNewValue(command,newValue);
 }
 //------------------------------------------------------------------------------------------------------------------

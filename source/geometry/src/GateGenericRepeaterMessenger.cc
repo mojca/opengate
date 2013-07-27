@@ -21,8 +21,8 @@
 
 //--------------------------------------------------------------------------------------------
 GateGenericRepeaterMessenger::GateGenericRepeaterMessenger(GateGenericRepeater* itsRepeater)
-  :GateObjectRepeaterMessenger(itsRepeater) { 
-  G4String cmdName;  
+  :GateObjectRepeaterMessenger(itsRepeater) {
+  G4String cmdName;
   cmdName = GetDirectoryName()+"setPlacementsFilename";
   mFileCmd = new G4UIcmdWithAString(cmdName,this);
   mFileCmd->SetGuidance("Set a filename with a list of 3D translations and rotations.");
@@ -44,7 +44,7 @@ GateGenericRepeaterMessenger::~GateGenericRepeaterMessenger() {
 
 //--------------------------------------------------------------------------------------------
 void GateGenericRepeaterMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
   if (command == mFileCmd) GetGenericRepeater()->SetPlacementsFilename(newValue);
   else if (command == mRelativeTransCmd) GetGenericRepeater()->EnableRelativeTranslation(mRelativeTransCmd->GetNewBoolValue(newValue));
   else GateObjectRepeaterMessenger::SetNewValue(command,newValue);

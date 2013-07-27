@@ -22,16 +22,16 @@ class G4Material;
 GateObjectChildList::GateObjectChildList(GateVVolume* itsCreator, G4bool acceptNewChildren) :
   GateModuleListManager(itsCreator,itsCreator->GetObjectName()+"/daughters", "daughter", false, acceptNewChildren),
   pMessenger(0)
-{ 
+{
   if (acceptNewChildren) pMessenger = new GateObjectChildListMessenger(this);
- 
+
 }
 //-----------------------------------------------------------------------------------------------------------------
 
 
 //-----------------------------------------------------------------------------------------------------------------
 GateObjectChildList::~GateObjectChildList()
-{ 
+{
   if (pMessenger) delete pMessenger;
 //GetPhysicalVolumeName()
   /*for (size_t i=0; i<theListOfNamedObject.size(); i++){
@@ -42,9 +42,9 @@ GateObjectChildList::~GateObjectChildList()
 
 //-----------------------------------------------------------------------------------------------------------------
 void GateObjectChildList::ConstructChildGeometry(G4LogicalVolume* logical, G4bool flagUpdateOnly)
-{ 
- 
-  for (size_t i=0; i<theListOfNamedObject.size(); i++){ 
+{
+
+  for (size_t i=0; i<theListOfNamedObject.size(); i++){
     if (theListOfNamedObject[i])
     GetVolume(i)->ConstructGeometry(logical, flagUpdateOnly);
   }
@@ -56,14 +56,14 @@ void GateObjectChildList::ConstructChildGeometry(G4LogicalVolume* logical, G4boo
 //-----------------------------------------------------------------------------------------------------------------
 void GateObjectChildList::DestroyChildGeometry()
 {
-  
+
   if (IsEnabled()){
     for (size_t i=0; i<theListOfNamedObject.size(); i++){
       if (theListOfNamedObject[i])
-        GetVolume(i)->DestroyGeometry();  
+        GetVolume(i)->DestroyGeometry();
 	/*G4cout<<"GateObjectChildList :: listObject = "<<i<<G4endl;*/}
    }
-   		
+
 }
 //-----------------------------------------------------------------------------------------------------------------
 
@@ -74,9 +74,9 @@ void GateObjectChildList::AddChild(GateVVolume* pnewChildCreator)
 
 
   theListOfNamedObject.push_back(pnewChildCreator);
-  
+
   pnewChildCreator->SetMotherList(this);
-  
+
 }
 //-----------------------------------------------------------------------------------------------------------------
 
@@ -104,9 +104,9 @@ void GateObjectChildList::ListElements()
 G4int GateObjectChildList::GetChildNo(GateVVolume* anInserter, G4int copyNo)
 {
   G4int childNo=0;
-  
+
   for (size_t i=0; i<theListOfNamedObject.size(); i++) {
-    if ( GetVolume(i) != anInserter ) 
+    if ( GetVolume(i) != anInserter )
       childNo += GetVolume(i)->GetVolumeNumber();
     else
       return childNo+copyNo;

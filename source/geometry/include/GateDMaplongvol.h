@@ -43,7 +43,7 @@ public:
 
 	//! Constructor to build a volume from a .raw file *without* size informations.
 	Longvol( const char *fname, int sx, int sy, int sz, lvoxel defaultAlpha = 0 );
-	
+
 	//! Default constructor
 	Longvol();
 
@@ -78,25 +78,25 @@ public:
 
 
 	//! Returns the state of the object (false : bad, true : ok)
-	bool 	isOK() { 
+	bool 	isOK() {
 		return state_ok;
 	}
 
-	//! vol union 
+	//! vol union
 	Longvol &operator |= (const Longvol &);
 	//! longvol and
 	Longvol &operator &= (const Longvol &);
 	//! longvol minus
 	Longvol &operator -= (const Longvol &v);
 
-	
+
 	//! Returns NULL if this field is not found
 	const char *getHeaderValue( const char *type ) const;
 	//! Returns non-zero if failure
 	int			getHeaderValueAsDouble( const char *type, double *dest ) const;
 	//! Returns non-zero if failure
 	int			getHeaderValueAsInt( const char *type, int *dest ) const;
-	
+
 	//! Returns non-zero on failure
 	int setHeaderValue( const char *type, const char *value );
 	//! Returns non-zero on failure
@@ -113,13 +113,13 @@ public:
 	//! Draw Axis X, Y and Z
 	void		drawAxis( );
 
-	
+
 	//! longvol invert (/!\ All colors are lost)
 	void		invert();
 	//! rotate image in longvolume
 	void		rotate( double rx, double ry, double rz );
 	//! will compute the symetry of all positives points in the longvolume.
-	void		symetry( int maxx, int maxy, int maxz ); 
+	void		symetry( int maxx, int maxy, int maxz );
 	//! Translate contents of the longvolume
 	//! New lvoxels are transparents
 	void		translate( int vx, int vy, int vz );
@@ -145,21 +145,21 @@ public:
 	int		maxY() const { return cy + sy/2 + sy%2; }
 	//! The greatest Z ( warning : it is not included in bounds )
 	int		maxZ() const { return cz + sz/2 + sz%2; }
-	
+
 	//! The X-coordinate of the center
 	int 	cX() const { return cx; }
 	//! The Y-coordinate of the center
 	int		cY() const { return cy; }
 	//! The Z-coordinates of the center
 	int 	cZ() const { return cz; }
-	
+
 
 	//! Returns true if the point is valid for this longvolume
 	bool	inBounds( int x, int y, int z ) const;
 
 	//! Returns alpha color
 	lvoxel 	alpha() const;
-	
+
 	//! Position of a point in the lvoxel array
 	inline
 	int		posOf( int x, int y, int z ) const {
@@ -183,21 +183,21 @@ private:
 
 	//! Read longvol data from a file already open
 	int		readLongvolData( FILE *in );
-	//! Read raw data from a file already open 
+	//! Read raw data from a file already open
 	int		readV1RawData( FILE *in, bool headerInited, lvoxel defaultAlpha );
 	//! Read raw data from a file already open
 	int		readV2RawData( FILE *in, bool headerInited, int sx, int sy, int sz, lvoxel defaultAlpha );
-	
+
 	//! Write .raw data into fd
 	int		internalDumpRaw( int fd );
-	
+
 
 	bool	rotatePoint( int, int, int, double, double, double, int *, int *, int * );
 
 	//! This class help us to associate a field type and his value.
 	//! An object is a pair (type, value). You can copy and assign
 	//! such objects.
-	/*! In recent C++, we should use a std::map, but we prefer (badly) code it 
+	/*! In recent C++, we should use a std::map, but we prefer (badly) code it
 		by hand for compatibility with old compilers.
 		At this time, there is a limit of 30 fields in header :-} */
 	struct HeaderField {
@@ -212,7 +212,7 @@ private:
 		HeaderField( const HeaderField &h ) :
 			type( strdup(h.type) ), value( strdup(h.value) ) {};
 		//! Default constructor
-		HeaderField() : type(NULL), value(NULL) {};	
+		HeaderField() : type(NULL), value(NULL) {};
 		//! Assignement operator
 		const HeaderField &operator = (const HeaderField &h) {
 			free( type );
@@ -234,7 +234,7 @@ private:
 
 	//! Here are the fields. A field is empty when his type string is NULL.
 	HeaderField header[ MAX_HEADERNUMLINES ];
-	
+
 	//! Internal method which returns the index of a field or -1 if not found.
 	int getHeaderField( const char *type ) const;
 
@@ -251,7 +251,7 @@ private:
 			int 	i;
 			char 	ci[ sizeof(int) + 1 ];
 		} i_endian;
-		
+
 		//! Endian for the voxel type
 		union {
 			lvoxel	v;
@@ -262,9 +262,9 @@ private:
 	static endian_t initEndian();
 
 	int cx, cy, cz;
-	
+
 	static 	FILE *const debugFile;
-	
+
 };
 
 inline

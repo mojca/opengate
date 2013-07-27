@@ -22,16 +22,16 @@ See GATE/LICENSE.txt for further details
 #include "G4RunManager.hh"
 
 class GateFakeRunManager : public G4RunManager {
-  
-public: 
+
+public:
   // Constructor
   GateFakeRunManager():G4RunManager() {}
-  
+
   // Destructor
   virtual ~GateFakeRunManager() {}
-  
+
 }; // end class
-  
+
 #endif /* end #define GATEFAKERUNMANAGER_HH */
 
 //-----------------------------------------------------------------------------

@@ -22,21 +22,21 @@ See GATE/LICENSE.txt for further details
 #include "globals.hh"
 
 class GateFakePhysicsList : public G4VUserPhysicsList {
-  
-  public: 
+
+  public:
     // Constructor
   GateFakePhysicsList():G4VUserPhysicsList() {}
-  
+
     // Destructor
     virtual ~GateFakePhysicsList() {}
-  
+
     // Construct process, particules and cuts
     void ConstructProcess();
     void ConstructParticle();
     void SetCuts();
 
   protected:
-    // these methods Construct particles 
+    // these methods Construct particles
     void ConstructBosons();
     void ConstructLeptons();
 
@@ -46,7 +46,7 @@ class GateFakePhysicsList : public G4VUserPhysicsList {
     void ConstructEM();
 
 };
-  
+
 #endif /* end #define GATEFAKEPHYSICSLIST_HH */
 
 

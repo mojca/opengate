@@ -25,10 +25,10 @@ class GateElTubMessenger: public GateVolumeMessenger
   public:
     GateElTubMessenger(GateElTub* itsCreator);
    ~GateElTubMessenger();
-    
+
     void SetNewValue(G4UIcommand*, G4String);
-    
-    virtual inline GateElTub* GetElTubCreator() 
+
+    virtual inline GateElTub* GetElTubCreator()
       { return (GateElTub*)GetVolumeCreator(); }
 
   private:
@@ -38,4 +38,3 @@ class GateElTubMessenger: public GateVolumeMessenger
 };
 
 #endif
-

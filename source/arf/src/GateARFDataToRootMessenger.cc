@@ -29,7 +29,7 @@ See GATE/LICENSE.txt for further details
 GateARFDataToRootMessenger::GateARFDataToRootMessenger(GateARFDataToRoot* GateARFDataToRoot)
   : GateOutputModuleMessenger(GateARFDataToRoot)
   , m_GateARFDataToRoot(GateARFDataToRoot)
-{ 
+{
   G4String cmdName;
 
   //G4cout << " created directory " << GetDirectoryName()<<G4endl;
@@ -56,15 +56,15 @@ GateARFDataToRootMessenger::~GateARFDataToRootMessenger()
 delete setARFDataFilecmd;
 delete setDepth ;
 delete smoothDRFcmd ;
-    
+
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
 void GateARFDataToRootMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
 
- if ( command == smoothDRFcmd ) 
+ if ( command == smoothDRFcmd )
  {   if ( newValue == "smoothness" )
      {m_GateARFDataToRoot->setDRFDataprojectionmode(0);return;}
      if ( newValue == "line-projection" ){m_GateARFDataToRoot->setDRFDataprojectionmode(1);return;}
@@ -86,7 +86,7 @@ if ( command == setDepth )
    m_GateARFDataToRoot->SetARFDataRootFileName( newValue );return;
   }
 
-    GateOutputModuleMessenger::SetNewValue(command,newValue); 
+    GateOutputModuleMessenger::SetNewValue(command,newValue);
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....

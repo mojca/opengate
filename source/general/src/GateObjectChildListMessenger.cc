@@ -23,11 +23,11 @@
 #include "G4UIcmdWithAString.hh"
 
 #include <string>
- 
+
 //-----------------------------------------------------------------------------------------
 GateObjectChildListMessenger::GateObjectChildListMessenger(GateObjectChildList* itsChildList)
   :GateListMessenger(itsChildList)
-{ 
+{
 
   pInsertCmd->SetCandidates(DumpMap());
 
@@ -46,19 +46,19 @@ const G4String& GateObjectChildListMessenger::DumpMap()
 {
   static G4String theList;
   typedef GateVVolume *(*maker_volume)(const G4String& itsName, G4bool acceptsChildren, G4int depth);
-  
+
   std::map<G4String,maker_volume> Child;
   Child = GateVolumeManager::GetInstance()->theListOfVolumePrototypes;
-  std::map<G4String,maker_volume>::iterator iter; 
-  
-  GateMessage("Geometry", 10, "The available types of child-object are: \n"); 
+  std::map<G4String,maker_volume>::iterator iter;
+
+  GateMessage("Geometry", 10, "The available types of child-object are: \n");
   for (iter = Child.begin(); iter!=Child.end(); iter++) {
     theList+=iter->first;
-    theList+=" ";     
+    theList+=" ";
     GateMessage("Geometry", 10, " " << iter->first << G4endl;);
   }
-    
-  return theList;  
+
+  return theList;
 }
 //-----------------------------------------------------------------------------------------
 
@@ -68,13 +68,13 @@ void GateObjectChildListMessenger::ListChoices()
 
   static G4String theList;
   typedef GateVVolume *(*maker_volume)(const G4String& itsName, G4bool acceptsChildren, G4int depth);
-  
+
   std::map<G4String,maker_volume> Child;
   Child = GateVolumeManager::GetInstance()->theListOfVolumePrototypes;
-  std::map<G4String,maker_volume>::iterator iter; 
-   
+  std::map<G4String,maker_volume>::iterator iter;
+
   GateMessage("Geometry", 10, "The available types of child-object are: \n");
-  
+
   for (iter = Child.begin(); iter!=Child.end(); iter++) {
     GateMessage("Geometry", 10, " " << iter->first << G4endl;);
   }
@@ -95,7 +95,7 @@ void GateObjectChildListMessenger::InsertIntoCreator(const G4String& childTypeNa
   if (GetNewInsertionBaseName().empty())
     SetNewInsertionBaseName(childTypeName);
 
-  AvoidNameConflicts();  
+  AvoidNameConflicts();
 
   GateVVolume* newChild=0;
   G4bool acceptsNewChildren = true;
@@ -104,7 +104,7 @@ void GateObjectChildListMessenger::InsertIntoCreator(const G4String& childTypeNa
   if (GateVolumeManager::GetInstance()->theListOfVolumePrototypes[childTypeName]){
     newChild = (GateVolumeManager::GetInstance()->theListOfVolumePrototypes[childTypeName](GetNewInsertionBaseName(), acceptsNewChildren, depth));
 
-    // GateMessage("Core", 0, "Create child '" << newChild->GetObjectName() 
+    // GateMessage("Core", 0, "Create child '" << newChild->GetObjectName()
     //                 << "' with parent '" << GetCreator()->GetObjectName() << G4endl);
     newChild->SetParentVolume(GetCreator());
 
@@ -113,17 +113,16 @@ void GateObjectChildListMessenger::InsertIntoCreator(const G4String& childTypeNa
     GateError("Child type name '" << childTypeName << "' was not recognised --> insertion request must be ignored!\n");
     //G4cout << "Child type name '" << childTypeName << "' was not recognised --> insertion request must be ignored!\n";
     //return;
-  }    
+  }
   GetChildList()->AddChild(newChild);
-  SetNewInsertionBaseName("");   
+  SetNewInsertionBaseName("");
   GateSystemListManager::GetInstance()->CheckScannerAutoCreation(newChild);
 }
 //-----------------------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------------------
 G4bool GateObjectChildListMessenger::CheckNameConflict(const G4String& name)
-{ 
+{
   return ( GateObjectStore::GetInstance()->FindCreator(name) != 0 ) ;
 }
 //-----------------------------------------------------------------------------------------
-

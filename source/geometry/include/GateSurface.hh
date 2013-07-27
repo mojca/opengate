@@ -26,16 +26,16 @@ class G4LogicalBorderSurface;
 class G4OpticalSurface;
 
 /*! \class GateSurface
-  
-  \brief Is a surface between two GateVVolumes. 
 
-  A surface is defined by specifying two volumes, or GateVVolumes. The first one has 
-  to be speciefied in the constructor, the second by one of the methods. 
+  \brief Is a surface between two GateVVolumes.
+
+  A surface is defined by specifying two volumes, or GateVVolumes. The first one has
+  to be speciefied in the constructor, the second by one of the methods.
 
   - Has methods to load the surface properties from an xml-file
-  
+
   - GateSurface - by d.j.vanderlaan@tnw.tudelft.nl
-  
+
   */
 class GateSurface : public GateClockDependent
 {
@@ -65,7 +65,7 @@ class GateSurface : public GateClockDependent
     inline const std::string& GetOpticalSurfaceName() const
     { return m_opticalsurfacename;}
 
-    //! creates the surfaces 
+    //! creates the surfaces
     /** Creates the Geant4 objects that are needed to define a surface */
     void BuildSurfaces();
 
@@ -75,7 +75,7 @@ class GateSurface : public GateClockDependent
     //! reads the surface properties from the Surfaces.xml file
     /** \param name specifies the surface that has to read from the xml-file */
     G4OpticalSurface* ReadOpticalSurface(const G4String& name) const;
-    
+
   private:
     G4String                             m_opticalsurfacename; //!< Name of the surface properties, to be read from the xml-file
     GateVVolume*                 m_inserter1;          //!< first volume

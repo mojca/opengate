@@ -20,8 +20,8 @@
 // Constructor
 GateCompressedVoxelParam::GateCompressedVoxelParam(const  G4String& name, GateCompressedVoxelParameterized* vpi):GateBox(name,"Vacuum",1,1,1,false,false)
 ,itsInserter(vpi),m_parameterization(0),m_pvParameterized(0)
-{ 
-  
+{
+
 }
 
 
@@ -37,13 +37,13 @@ void GateCompressedVoxelParam::ConstructOwnPhysicalVolume(G4bool flagUpdate){
 
   // For the update case; there is nothing to do here.
   if (flagUpdate) return;
-    
+
   // Build the parameterization
   GateVGeometryVoxelReader* itsReader ( itsInserter->GetReader() );
   G4ThreeVector voxelSize(  itsReader->GetVoxelSize()  );
   G4ThreeVector voxelNumber(  itsReader->GetVoxelNx(),itsReader->GetVoxelNy(),itsReader->GetVoxelNz()  );
- 
- 
+
+
   m_parameterization = new GateCompressedVoxelParameterization(itsReader, voxelNumber, voxelSize );
 
   //  Suggestion by J. Apostolakis to reduce memory consumption
@@ -58,19 +58,19 @@ void GateCompressedVoxelParam::ConstructOwnPhysicalVolume(G4bool flagUpdate){
 					    m_parameterization
 					    );
   GateMessage("Geometry", 5,"GateCompressedVoxelParam::ConstructOwnPhysicalVolume " << GetPhysicalVolumeName() << " has been constructed." << G4endl;);
-					        
+
 
   PushPhysicalVolume(m_pvParameterized);
-	
+
 }
 
 void GateCompressedVoxelParam::DestroyGeometry(){
-  
+
   if (m_parameterization) {
     delete m_parameterization;
   }
   m_parameterization=0;
-  
+
   m_pvParameterized=0;
   GateVVolume::DestroyGeometry();
 }

@@ -16,12 +16,12 @@ See GATE/LICENSE.txt for further details
 GateVFilter::GateVFilter(G4String name)
   :GateNamedObject(name)
 {
- 
+
 }
 //-------------------------------------------------------------
 
 //-------------------------------------------------------------
-G4bool GateVFilter::Accept(const G4Step* aStep) 
+G4bool GateVFilter::Accept(const G4Step* aStep)
 {
 
   G4Track* aTrack = aStep->GetTrack();
@@ -34,7 +34,7 @@ G4bool GateVFilter::Accept(const G4Step* aStep)
 //-------------------------------------------------------------
 
 //-------------------------------------------------------------
-G4bool GateVFilter::Accept(const G4Track* /*aTrack*/) 
+G4bool GateVFilter::Accept(const G4Track* /*aTrack*/)
 {
   return true;
 }
@@ -44,11 +44,9 @@ G4bool GateVFilter::Accept(const G4Track* /*aTrack*/)
 void GateVFilter::show(){
   G4cout << "------Filter: "<<GetObjectName()<<" particle list------"<<G4endl;
 
- 
+
 
   G4cout << "-------------------------------------------"<<G4endl;
 
 }
 //-------------------------------------------------------------
-
-

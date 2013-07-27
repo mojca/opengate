@@ -23,7 +23,7 @@ See GATE/LICENSE.txt for further details
 //--------------------------------------------------------------------
 GateVolumePlacementMessenger::GateVolumePlacementMessenger(GateVolumePlacement* itsPlacementMove)
   :GateObjectRepeaterMessenger(itsPlacementMove)
-{ 
+{
     G4String cmdName;
 
     cmdName = GetDirectoryName()+"setTranslation";
@@ -94,41 +94,37 @@ GateVolumePlacementMessenger::~GateVolumePlacementMessenger()
 
 //--------------------------------------------------------------------
 void GateVolumePlacementMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{  
+{
   //G4cout << " GateVolumePlacementMessenger::SetNewValue = " << newValue << G4endl;
   if( command==TranslationCmd )
-    { GetVolumePlacement()->SetTranslation(TranslationCmd->GetNew3VectorValue(newValue)); /*TellGeometryToUpdate();*/}   
-  
+    { GetVolumePlacement()->SetTranslation(TranslationCmd->GetNew3VectorValue(newValue)); /*TellGeometryToUpdate();*/}
+
   else if( command==RotationAxisCmd )
-    { GetVolumePlacement()->SetRotationAxis(RotationAxisCmd->GetNew3VectorValue(newValue)); /*TellGeometryToUpdate();*/}   
-  
+    { GetVolumePlacement()->SetRotationAxis(RotationAxisCmd->GetNew3VectorValue(newValue)); /*TellGeometryToUpdate();*/}
+
   else if( command==RotationAngleCmd )
-  
-    { GetVolumePlacement()->SetRotationAngle(RotationAngleCmd->GetNewDoubleValue(newValue)); /*TellGeometryToUpdate();*/}   
-  
+
+    { GetVolumePlacement()->SetRotationAngle(RotationAngleCmd->GetNewDoubleValue(newValue)); /*TellGeometryToUpdate();*/}
+
   else if( command==AlignToXCmd )
-    { GetVolumePlacement()->AlignToX();  /*TellGeometryToUpdate();*/}   
+    { GetVolumePlacement()->AlignToX();  /*TellGeometryToUpdate();*/}
 
   else if( command==AlignToYCmd )
-    { GetVolumePlacement()->AlignToY();  /*TellGeometryToUpdate();*/}   
+    { GetVolumePlacement()->AlignToY();  /*TellGeometryToUpdate();*/}
 
   else if( command==AlignToZCmd )
-    { GetVolumePlacement()->AlignToZ(); /* TellGeometryToUpdate();*/}   
+    { GetVolumePlacement()->AlignToZ(); /* TellGeometryToUpdate();*/}
 
   else if( command==SetPhiCmd )
-    { GetVolumePlacement()->SetPhi(SetPhiCmd->GetNewDoubleValue(newValue)); /*TellGeometryToUpdate();*/}   
-  
+    { GetVolumePlacement()->SetPhi(SetPhiCmd->GetNewDoubleValue(newValue)); /*TellGeometryToUpdate();*/}
+
   else if( command==SetThetaCmd )
-    { GetVolumePlacement()->SetTheta(SetThetaCmd->GetNewDoubleValue(newValue)); /*TellGeometryToUpdate();*/}   
-  
+    { GetVolumePlacement()->SetTheta(SetThetaCmd->GetNewDoubleValue(newValue)); /*TellGeometryToUpdate();*/}
+
    else if( command==SetMagCmd )
-    { GetVolumePlacement()->SetMag(SetMagCmd->GetNewDoubleValue(newValue)); /*TellGeometryToUpdate();*/}   
-  
- else 
+    { GetVolumePlacement()->SetMag(SetMagCmd->GetNewDoubleValue(newValue)); /*TellGeometryToUpdate();*/}
+
+ else
     GateObjectRepeaterMessenger::SetNewValue(command,newValue);
 }
 //--------------------------------------------------------------------
-
-
-
-

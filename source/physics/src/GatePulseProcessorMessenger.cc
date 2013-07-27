@@ -25,7 +25,7 @@ See GATE/LICENSE.txt for further details
 
 GatePulseProcessorMessenger::GatePulseProcessorMessenger(GateVPulseProcessor* itsPulseProcessor)
 : GateClockDependentMessenger(itsPulseProcessor)
-{ 
+{
   G4String guidance;
   G4String cmdName;
 
@@ -42,9 +42,6 @@ GatePulseProcessorMessenger::~GatePulseProcessorMessenger()
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
 void GatePulseProcessorMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
-{ 
+{
   GateClockDependentMessenger::SetNewValue(command,newValue);
 }
-
-
-

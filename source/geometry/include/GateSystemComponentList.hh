@@ -41,13 +41,13 @@ class GateSystemComponentList : public GateModuleListManager
       	  { return size();}
 
     /*! \brief Check whether an inserter is connected to the component tree
-      	
+
 	\param anCreator: the inserter we want to check
-	
+
 	\return true if the inserter is attached to one of the componentsS
     */
     G4bool CheckConnectionToCreator(GateVVolume* anCreator);
-    
+
     //! Compute the number of active daughter-components (i.e. components that are linked to an inserter)
     size_t GetActiveChildNumber();
 
@@ -62,4 +62,3 @@ class GateSystemComponentList : public GateModuleListManager
 };
 
 #endif
-

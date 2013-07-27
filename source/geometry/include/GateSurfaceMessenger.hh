@@ -22,14 +22,14 @@ See GATE/LICENSE.txt for further details
 class G4UIcommand;
 
 /*! \class GateSurfaceMessenger
-  
-  \brief The messenger belonging to the GateSurface. 
+
+  \brief The messenger belonging to the GateSurface.
 
   - Add one macro command, namely one to specify the name of the optical surface. The properties
     of the optical surface are read from Surfaces.xml using this name.
-  
+
   - GateSurfaceMessenger - by d.j.vanderlaan@tnw.tudelft.nl
-  
+
   */
 class GateSurfaceMessenger : public GateClockDependentMessenger
 {

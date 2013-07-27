@@ -25,17 +25,16 @@ class GateHexagoneMessenger: public GateVolumeMessenger
   public:
     GateHexagoneMessenger(GateHexagone* itsCreator);
    ~GateHexagoneMessenger();
-    
+
     void SetNewValue(G4UIcommand*, G4String);
-    
-    virtual inline GateHexagone* GetHexagoneCreator() 
+
+    virtual inline GateHexagone* GetHexagoneCreator()
       { return (GateHexagone*)GetVolumeCreator(); }
 
   private:
     G4UIcmdWithADoubleAndUnit* HexagoneHeightCmd;
     G4UIcmdWithADoubleAndUnit* HexagoneRadiusCmd;
-    
+
 };
 
 #endif
-

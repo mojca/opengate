@@ -17,7 +17,7 @@ See GATE/LICENSE.txt for further details
 /**
  * \file GateXMLDocument.cpp
  * \brief Class GateXMLDocument
- */ 
+ */
 
 #include "GateConfiguration.h"
 
@@ -39,7 +39,7 @@ See GATE/LICENSE.txt for further details
   * */
 GateXMLDocument::GateXMLDocument(const G4String& filename) :
   m_ok(false), m_reset(true)
-{ 
+{
   std::cout << "===== XML PATH ====: " << filename.c_str() << std::endl;
 
   m_doc = xmlParseFile(filename.c_str());
@@ -60,10 +60,10 @@ GateXMLDocument::GateXMLDocument(const G4String& filename) :
   }
 }
 
-  
+
 //! Destructor.
 GateXMLDocument::~GateXMLDocument()
-{ 
+{
   if (m_doc) xmlFreeDoc(m_doc);
 }
 //@}
@@ -173,21 +173,21 @@ void GateXMLDocument::Leave()
   * Returns false when there is no more node, true otherwise. The method can therefore be used
   * in a while loop:
   * \code
-  * while (xmldoc.Next()) 
-  * {  
+  * while (xmldoc.Next())
+  * {
   *   // do something with the node
   * }
   * \endcode
 */
 G4bool GateXMLDocument::Next()
-{ 
-  if (m_cur->next!=0) 
-  { 
+{
+  if (m_cur->next!=0)
+  {
     m_cur   = m_cur->next;
     m_reset = false;
     return true;
   }
-  else 
+  else
   {
     m_reset = false;
     return false;
@@ -199,9 +199,9 @@ G4bool GateXMLDocument::Next()
   * Returns false when there is no more node, true otherwise. The method can therefore be used
   * in a while loop:
   * \code
-  * while (xmldoc.Previous()) 
-  * { 
-  *   // do something with the node 
+  * while (xmldoc.Previous())
+  * {
+  *   // do something with the node
   * }
   * \endcode
   * */
@@ -228,7 +228,7 @@ void GateXMLDocument::First()
 //@}
 
 //!@name Finding nodes
-//@{ 
+//@{
 
 //! Finds the next node the name given by 'tag'.
 /**
@@ -236,20 +236,20 @@ void GateXMLDocument::First()
   * Find only looks at the current depth.
   * */
 G4bool GateXMLDocument::Find(const G4String& tag)
-{ 
-  if (!m_reset) 
+{
+  if (!m_reset)
   { if (!Next()) return false;}
-  
+
   do
-  { 
-    if (GetName()==tag) 
+  {
+    if (GetName()==tag)
     {
       m_reset = false;
       return true;
     }
   }
   while (Next());
-  
+
   return false;
 }
 
@@ -269,15 +269,15 @@ G4bool GateXMLDocument::Find(const G4String& tag, const G4String& name)
   * Find only looks at the current depth.
   * */
 G4bool GateXMLDocument::Find(const G4String& tag, const G4String& property, const G4String& value)
-{ 
-  if (!m_reset) 
+{
+  if (!m_reset)
   { if (!Next()) return false;}
-  
+
   do
-  { 
+  {
     if (GetName()==tag)
-    { 
-      if (GetProperty(property)==value) 
+    {
+      if (GetProperty(property)==value)
       {
 	m_reset = false;
 	return true;
@@ -285,7 +285,7 @@ G4bool GateXMLDocument::Find(const G4String& tag, const G4String& property, cons
     }
   }
   while (Next());
-  
+
   return false;
 }
 //@}
@@ -308,7 +308,7 @@ void GateXMLDocument::SetState(GateXMLDocumentState state)
   m_cur   = state.cur;
   m_reset = state.reset;
 }
-    
+
 G4MaterialPropertiesTable* ReadMaterialPropertiesTable(GateXMLDocument* doc)
 {
   G4MaterialPropertiesTable* table = 0;

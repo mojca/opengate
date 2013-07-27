@@ -15,7 +15,7 @@ See GATE/LICENSE.txt for further details
 
 //-----------------------------------------------------------------------------
 GateFictitiousProcessPB::GateFictitiousProcessPB():GateVProcess("Fictitious")
-{  
+{
   SetDefaultParticle("gamma");
   SetProcessInfo("Fictitious interactions for gammas");
   pMessenger = new GateEMStandardProcessMessenger(this);

@@ -45,7 +45,7 @@ void GateMessageMessenger::SetNewValue(G4UIcommand* cmd, G4String newValue)
     if (pos<newValue.length()) {
       G4String code = newValue.substr(0,pos);
       G4String svalue = newValue.substr(pos,newValue.length()-pos);
-      int value = atoi(svalue);  
+      int value = atoi(svalue);
 
       pMessageManager->SetMessageLevel(code,value);
     }
@@ -53,10 +53,8 @@ void GateMessageMessenger::SetNewValue(G4UIcommand* cmd, G4String newValue)
       pMessageManager->PrintInfo();
     }
     else {
-      GateWarning("Bad syntax in '/gate/verbose "<<newValue<<"' command"); 
+      GateWarning("Bad syntax in '/gate/verbose "<<newValue<<"' command");
     }
-  } 
+  }
 }
 //-----------------------------------------------------------------------------
-
-

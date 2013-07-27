@@ -42,7 +42,7 @@ GateMaterialDatabase::~GateMaterialDatabase()
 void GateMaterialDatabase::AddMDBFile(const G4String& filename)
 {
   mMDBFile.push_back(new GateMDBFile(this,filename));
-  GateMessage("Materials",1, "New material database added - Number of files: "<<mMDBFile.size() << G4endl);	  
+  GateMessage("Materials",1, "New material database added - Number of files: "<<mMDBFile.size() << G4endl);
 }
 //-----------------------------------------------------------------------------
 
@@ -68,9 +68,9 @@ G4Element* GateMaterialDatabase::GetElement(const G4String& elementName)
 G4Material* GateMaterialDatabase::GetMaterial(const G4String& materialName)
 {
   GateMessage("Materials",3,"GateMaterialDatabase::GetMaterial("<<materialName<<")"<<G4endl);
-  
+
   G4Material* material = LookForMaterialInTable(materialName);
-  
+
   if (!material) {
     material = ReadMaterialFromDBFile(materialName);
     if (!material)
@@ -89,7 +89,7 @@ G4Element* GateMaterialDatabase::ReadElementFromDBFile(const G4String& elementNa
   GateElementCreator *Creator = 0;
   int nDef=0;
   G4String fileName= "";
- 
+
   std::vector<GateMDBFile*>::iterator i;
   for (i=mMDBFile.begin();i!=mMDBFile.end();++i) {
     CreatorTemp = (*i)->ReadElement(elementName);
@@ -101,7 +101,7 @@ G4Element* GateMaterialDatabase::ReadElementFromDBFile(const G4String& elementNa
   if (!Creator) GateError("GateMaterialDatabase: could not find the definition for element '" <<elementName << "' in material files");
   if(nDef>1) GateWarning("GateMaterialDatabase: Multiple definition of element: "<<elementName<<".\nThe definition in "<<fileName<<" was used.\n");
   G4Element* element =  Creator->Construct();
-  delete Creator;  
+  delete Creator;
   return element;
 }
 //-----------------------------------------------------------------------------
@@ -110,7 +110,7 @@ G4Element* GateMaterialDatabase::ReadElementFromDBFile(const G4String& elementNa
 G4Material* GateMaterialDatabase::ReadMaterialFromDBFile(const G4String& materialName)
 {
   GateMessage("Materials",3,"GateMaterialDatabase::ReadMaterialFromDBFile("<<materialName<<")"<<G4endl);
-    
+
   GateMaterialCreator *Creator = 0;
   GateMaterialCreator *CreatorTemp = 0;
   G4Material* material = G4NistManager::Instance()->FindOrBuildMaterial(materialName);
@@ -122,7 +122,7 @@ G4Material* GateMaterialDatabase::ReadMaterialFromDBFile(const G4String& materia
 
   std::vector<GateMDBFile*>::iterator i;
   for (i=mMDBFile.begin();i!=mMDBFile.end();++i) {
-    
+
     CreatorTemp = (*i)->ReadMaterial(materialName);
     if (CreatorTemp) {Creator = CreatorTemp; nDef++;fileName=(*i)->GetMDBFileName();}
     // if (Creator) break;
@@ -175,10 +175,10 @@ G4Material* GateMaterialDatabase::ReadMaterialFromDBFile(const G4String& materia
 	  doc->Leave();
 	}
       // if the properties table is found, set it
-      if (table) 
-      { 
+      if (table)
+      {
 	  material->SetMaterialPropertiesTable(table);
-	    
+
 	      GateMessage("Materials",2, "GateMaterialDatabase: loaded material properties table for material '" + materialName + "'\n");
 	      GateMessage("Materials",2,"  dumping properties table:\n");
 	      GateMessage("Materials",2,"-----------------------------------------------------------------------------\n\n");
@@ -197,7 +197,7 @@ G4Material* GateMaterialDatabase::ReadMaterialFromDBFile(const G4String& materia
 	  GateMessage("Materials",2, "GateMaterialDatabase: did not find the Materials.xml file: no properties read for material '" + materialName + "'\n");
 	  GateMessage("Materials",2,"  This is only a problem when OPTICAL PHOTONS are transported in this material.'\n");
     }
-     
+
 #endif
       //------------------------------------------------------------------------------------------------
 
@@ -205,4 +205,3 @@ G4Material* GateMaterialDatabase::ReadMaterialFromDBFile(const G4String& materia
       return material;
     }
   //-----------------------------------------------------------------------------
-

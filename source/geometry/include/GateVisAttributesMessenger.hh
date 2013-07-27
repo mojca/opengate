@@ -23,7 +23,7 @@ public:
   GateVisAttributesMessenger(G4VisAttributes* itsVisAttributes,
 			     const G4String& itsName);
   ~GateVisAttributesMessenger();
-    
+
   void SetNewValue(G4UIcommand*, G4String);
   virtual inline G4VisAttributes* GetVisAttributes() { return pVisAttributes; }
 
@@ -58,4 +58,3 @@ private:
 //-------------------------------------------------------------------------------------------------
 
 #endif
-

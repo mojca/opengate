@@ -19,30 +19,29 @@ class GateVGlobalPlacement;
 
 /*! \class GateObjectRepeaterMessenger
     \brief Base class for GateVGlobalPlacement messengers
-    
-    - GateObjectRepeaterMessenger - by Daniel.Strul@iphe.unil.ch 
-    
+
+    - GateObjectRepeaterMessenger - by Daniel.Strul@iphe.unil.ch
+
     - The GateObjectRepeaterMessenger inherits from the abilities/responsabilities
       of the GateClockDependentMessenger base-class: creation and management
       of a Gate UI directory for a Gate object; UI commands "describe",
       'enable' and 'disable'.
-      
-    - It currently does not propose any new command, but may have 
+
+    - It currently does not propose any new command, but may have
       some in the future
 
-*/      
+*/
 class GateObjectRepeaterMessenger: public GateClockDependentMessenger
 {
   public:
     GateObjectRepeaterMessenger(GateVGlobalPlacement* itsObjectRepeater);
    ~GateObjectRepeaterMessenger();
-    
+
     void SetNewValue(G4UIcommand*, G4String);
 
-    virtual inline GateVGlobalPlacement* GetObjectRepeater() 
+    virtual inline GateVGlobalPlacement* GetObjectRepeater()
       { return (GateVGlobalPlacement*) GetClockDependent(); }
-    
+
 };
 
 #endif
-

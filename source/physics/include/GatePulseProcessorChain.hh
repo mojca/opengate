@@ -35,7 +35,7 @@ class GatePulseProcessorChain : public GateModuleListManager
      /*! \brief Virtual method to print-out a description of the object
 
 	\param indent: the print-out indentation (cosmetic parameter)
-     */    
+     */
      virtual void Describe(size_t indent=0);
 
      virtual void DescribeProcessors(size_t indent=0);
@@ -47,7 +47,7 @@ class GatePulseProcessorChain : public GateModuleListManager
      GatePulseList* ProcessPulseList();
      virtual size_t GetProcessorNumber()
       	  { return size();}
-	  
+
      const G4String& GetInputName() const
        { return m_inputName; }
      void SetInputName(const G4String& anInputName)
@@ -68,4 +68,3 @@ class GatePulseProcessorChain : public GateModuleListManager
 };
 
 #endif
-

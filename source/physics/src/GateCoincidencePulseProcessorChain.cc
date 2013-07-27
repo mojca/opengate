@@ -31,7 +31,7 @@ GateCoincidencePulseProcessorChain::GateCoincidencePulseProcessorChain( GateDigi
     m_inputNames(),
     m_noPriority(true)
 {
-  
+
   m_messenger = new GateCoincidencePulseProcessorChainMessenger(this);
 
   G4cout << " in GateCoincidencePulseProcessorChain call new GateCoincidenceDigiMaker "  << G4endl;
@@ -42,7 +42,7 @@ GateCoincidencePulseProcessorChain::GateCoincidencePulseProcessorChain( GateDigi
 
 //------------------------------------------------------------------------------------------------------
 GateCoincidencePulseProcessorChain::~GateCoincidencePulseProcessorChain()
-{  
+{
     delete m_messenger;
 }
 //------------------------------------------------------------------------------------------------------
@@ -85,7 +85,7 @@ const std::vector<GateCoincidencePulse*> GateCoincidencePulseProcessorChain::Mak
 {
    std::vector<GateCoincidencePulse*> ans;
    for (std::vector<G4String>::const_iterator itName = m_inputNames.begin() ; itName != m_inputNames.end() ; ++itName){
-     std::vector<GateCoincidencePulse*> pulseList 
+     std::vector<GateCoincidencePulse*> pulseList
         = GateDigitizer::GetInstance()->FindCoincidencePulse( *itName );
      for (std::vector<GateCoincidencePulse*>::const_iterator it = pulseList.begin() ; it != pulseList.end() ; ++it){
 	GateCoincidencePulse* pulse = *it;
@@ -119,11 +119,11 @@ void GateCoincidencePulseProcessorChain::ProcessCoincidencePulses()
   std::vector<GateCoincidencePulse*> pulseList = MakeInputList();
 
   //mhadi_add[
-  for (size_t processorID = 0 ; processorID < GetProcessorNumber(); processorID++) 
+  for (size_t processorID = 0 ; processorID < GetProcessorNumber(); processorID++)
      if (GetProcessor(processorID)->IsEnabled() && GetProcessor(processorID)->IsTriCoincProcessor())
         GetProcessor(processorID)->CollectSingles();
   //mhadi_add]
-        
+
   if (pulseList.empty())
     return;
 
@@ -170,7 +170,7 @@ GateVSystem* GateCoincidencePulseProcessorChain::FindSystem(G4String& inputName)
    GateVSystem* system = 0;
    if(index != -1)
       system = digitizer->GetCoinSorterList()[index]->GetSystem();
-   
+
    return system;
 }
 //mhadi_add]

@@ -20,17 +20,17 @@ class GateClockDependentMessenger;
 
 /*! \class  GateCPETSystem
     \brief  The GateCPETSystem models a CPET-like scanner
-    
+
     - GateCPETSystem - By Juliette.Feuardent@imed.jussieu.fr and Daniel.Strul@iphe.unil.ch
-    
-    - A GateCPETSystem models a CPET-like scanner, using curved crystals. 
-      
+
+    - A GateCPETSystem models a CPET-like scanner, using curved crystals.
+
     - This system overloads two methods of the GateVSystem base-class, Describe() and
       PrintToStream()
 
-    - Beside the standard system methods, it also provides the method ComputeInternalRadius() 
+    - Beside the standard system methods, it also provides the method ComputeInternalRadius()
       to compute the internal radius of the scanner
-*/      
+*/
 class GateCPETSystem : public GateVSystem
 {
   public:
@@ -45,8 +45,8 @@ class GateCPETSystem : public GateVSystem
 	\brief optimised for creating LMF header files
 
 	\param indent: the print-out indentation (cosmetic parameter)
-    */    
-    virtual void Describe(size_t indent=0);   	    
+    */
+    virtual void Describe(size_t indent=0);
 
     /*! \brief Method overloading the base-class virtual method Describe().
       	\brief This methods prints out description of the system to a stream.
@@ -54,10 +54,10 @@ class GateCPETSystem : public GateVSystem
 
 	\param aStream: the output stream
 	\param doPrintNumbers: tells whether we print-out the volume numbers in addition to their dimensions
-    */    
+    */
     //virtual void PrintToStream(std::ostream& aStream,G4bool doPrintNumbers);
     virtual void PrintToStream(std::ostream& aStream,G4bool );
-    
+
     //! Compute the internal radius of the crystal ring.
     virtual G4double ComputeInternalRadius();
 

@@ -69,11 +69,11 @@ public:
   void RecordTracks(GateSteppingAction*){}
   void   RegisterNewSingleDigiCollection(const G4String& aCollectionName,G4bool outputFlag);
   void RegisterNewCoincidenceDigiCollection(const G4String& ,G4bool ){}
-  
-  void SetVerboseLevel(G4int val) 
-  { 
+
+  void SetVerboseLevel(G4int val)
+  {
     GateVOutputModule::SetVerboseLevel(val);
-    
+
   }
       G4int StoreARFData(GateSingleDigi*);
       void SetProjectionPlane(G4double aX){m_Xplane = aX;}
@@ -85,7 +85,7 @@ public:
 
       //! Implementation of the pure virtual method ProcessHits().
       //! This methods generates a GateCrystalHit and stores it into the SD's hit collection
-      
+
       void CloseARFDataRootFile();
 
       void SetARFDataRootFileName(G4String);
@@ -117,7 +117,7 @@ private:
 
       G4String m_ARFDatafilename; // the naeof the root output file
       TFile*  m_ARFDatafile;   // the root file
-      TTree*  m_ARFDataTree; // the root tree 
+      TTree*  m_ARFDataTree; // the root tree
       TTree*  m_NbOfPhotonsTree;
 
       // the datas to be saved in the root file

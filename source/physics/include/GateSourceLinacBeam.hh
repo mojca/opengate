@@ -11,7 +11,7 @@
 #ifndef GATESOURCELINACBEAM_H
 #define GATESOURCELINACBEAM_H 1
 
-#include <iomanip>   
+#include <iomanip>
 #include "globals.hh"
 #include "G4VPrimaryGenerator.hh"
 #include "G4ThreeVector.hh"
@@ -33,13 +33,13 @@ class GateSourceLinacBeam : public GateVSource
 public:
   GateSourceLinacBeam(G4String name);
   virtual ~GateSourceLinacBeam();
-  
+
   virtual void GeneratePrimaryVertex(G4Event* evt);
   // virtual void Update();
   void SetSourceFromPhaseSpaceFilename(G4String f);
   void SetRmaxFilename(G4String f);
   void SetReferencePosition(G4ThreeVector p);
-  
+
 protected:
   GateSourceLinacBeamMessenger* mMessenger;
   G4String mSourceFromPhaseSpaceFilename;
@@ -67,7 +67,7 @@ protected:
   int GetIndexFromTime(double time);
   std::vector<double> mTimeList;
   std::vector<double> mRmaxList;
-  
+
   void PrintHistoInfo(TH1D * h) {
     DD(h->GetName());
     DD(h->GetBinWidth(0));

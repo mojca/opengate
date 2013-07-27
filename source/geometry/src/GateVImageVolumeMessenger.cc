@@ -9,7 +9,7 @@ See GATE/LICENSE.txt for further details
 ----------------------*/
 
 
-/*! \file 
+/*! \file
   \brief Implementation of GateVImageVolumeMessenger
  */
 #include "GateVImageVolumeMessenger.hh"
@@ -22,53 +22,53 @@ See GATE/LICENSE.txt for further details
 
 //---------------------------------------------------------------------------
 GateVImageVolumeMessenger::GateVImageVolumeMessenger(GateVImageVolume* volume)
-  : 
+  :
   GateVolumeMessenger(volume),
   pVImageVolume(volume)
 {
-  
+
   GateMessage("Volume",5,"GateVImageVolumeMessenger("<<G4endl);
   G4String dir = GetDirectoryName() + "geometry";
   //  G4cout<<dir<<G4endl;
 
   G4String n = dir +"/SetImage";
   pImageFileNameCmd = 0;
-  pImageFileNameCmd = new G4UIcmdWithAString(n,this);  
+  pImageFileNameCmd = new G4UIcmdWithAString(n,this);
   pImageFileNameCmd->SetGuidance("Sets the name of the image file");
 
   // Disable this macro for the moment
   // n = dir +"/SetLabelToMaterialFile";
-  //   pLabelToMaterialFileNameCmd = new G4UIcmdWithAString(n,this);  
+  //   pLabelToMaterialFileNameCmd = new G4UIcmdWithAString(n,this);
   //   pLabelToMaterialFileNameCmd->SetGuidance("Sets the name of the file containing the label to material correspondence");
 
   n = dir +"/SetHUToMaterialFile";
   pHUToMaterialFileNameCmd = 0;
-  pHUToMaterialFileNameCmd = new G4UIcmdWithAString(n,this);  
+  pHUToMaterialFileNameCmd = new G4UIcmdWithAString(n,this);
   pHUToMaterialFileNameCmd->SetGuidance("Sets the name of the file containing the HU intervals to material correspondence");
 
   n = dir +"/TranslateTheImageAtThisIsoCenter";
   pIsoCenterCmd = 0;
-  pIsoCenterCmd = new G4UIcmdWith3VectorAndUnit(n,this);  
+  pIsoCenterCmd = new G4UIcmdWith3VectorAndUnit(n,this);
   pIsoCenterCmd->SetGuidance("translate the image so that its center is at the given isocenter coordinate (given according to the 3D image coordinate, in mm)");
 
   n = dir +"/setOrigin";
   pSetOriginCmd = 0;
-  pSetOriginCmd = new G4UIcmdWith3VectorAndUnit(n,this);  
+  pSetOriginCmd = new G4UIcmdWith3VectorAndUnit(n,this);
   pSetOriginCmd->SetGuidance("Set the image origin (like in dicom).");
 
   n = dir +"/buildAndDumpDistanceTransfo";
   pBuildDistanceTransfoCmd = 0;
-  pBuildDistanceTransfoCmd = new G4UIcmdWithAString(n,this);  
+  pBuildDistanceTransfoCmd = new G4UIcmdWithAString(n,this);
   pBuildDistanceTransfoCmd->SetGuidance("Build and dump the distance transfo into the given filename.");
 
   n = dir +"/buildAndDumpLabeledImage";
   pBuildLabeledImageCmd = 0;
-  pBuildLabeledImageCmd = new G4UIcmdWithAString(n,this);  
+  pBuildLabeledImageCmd = new G4UIcmdWithAString(n,this);
   pBuildLabeledImageCmd->SetGuidance("Build and dump the image labeled according to the materials list. Give the filename.");
 
   n = dir +"/enableBoundingBoxOnly";
   pDoNotBuildVoxelsCmd = 0;
-  pDoNotBuildVoxelsCmd = new G4UIcmdWithABool(n,this);  
+  pDoNotBuildVoxelsCmd = new G4UIcmdWithABool(n,this);
   pDoNotBuildVoxelsCmd->SetGuidance("Only build the bounding box (no voxels !), for visualization purpose only.");
 }
 //---------------------------------------------------------------------------
@@ -89,14 +89,14 @@ GateVImageVolumeMessenger::~GateVImageVolumeMessenger()
 }
 //---------------------------------------------------------------------------
 
-//---------------------------------------------------------------------------    
-void GateVImageVolumeMessenger::SetNewValue(G4UIcommand* command, 
+//---------------------------------------------------------------------------
+void GateVImageVolumeMessenger::SetNewValue(G4UIcommand* command,
 					    G4String newValue)
 {
-  GateMessage("Volume",5,"GateVImageVolumeMessenger::SetNewValue " 
+  GateMessage("Volume",5,"GateVImageVolumeMessenger::SetNewValue "
 	      << command->GetCommandPath()
 	      << " newValue=" << newValue << G4endl);
-  
+
   if (command == pImageFileNameCmd) {
     pVImageVolume->SetImageFilename(newValue);
   }
@@ -113,21 +113,18 @@ void GateVImageVolumeMessenger::SetNewValue(G4UIcommand* command,
     pVImageVolume->SetOriginByUser(pSetOriginCmd->GetNew3VectorValue(newValue));
   }
   else if (command == pBuildDistanceTransfoCmd) {
-    pVImageVolume->SetBuildDistanceTransfoFilename(newValue);  
+    pVImageVolume->SetBuildDistanceTransfoFilename(newValue);
   }
   else if (command == pBuildLabeledImageCmd) {
-    pVImageVolume->SetLabeledImageFilename(newValue);  
+    pVImageVolume->SetLabeledImageFilename(newValue);
   }
   else if (command == pDoNotBuildVoxelsCmd) {
-    pVImageVolume->EnableBoundingBoxOnly(pDoNotBuildVoxelsCmd->GetNewBoolValue(newValue));  
+    pVImageVolume->EnableBoundingBoxOnly(pDoNotBuildVoxelsCmd->GetNewBoolValue(newValue));
   }
   // It is necessary to call GateVolumeMessenger::SetNewValue if the command
-  // is not recognized  
+  // is not recognized
   else {
     GateVolumeMessenger::SetNewValue(command,newValue);
   }
 }
 //---------------------------------------------------------------------------
-
-
-

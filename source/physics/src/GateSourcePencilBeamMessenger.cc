@@ -26,7 +26,7 @@
 //----------------------------------------------------------------------------------------
   GateSourcePencilBeamMessenger::GateSourcePencilBeamMessenger(GateSourcePencilBeam* source)
 : GateVSourceMessenger(source)
-{ 
+{
   pSourcePencilBeam = source;
   G4String cmdName;
 
@@ -56,7 +56,7 @@
   cmdName = GetDirectoryName()+"setRotationAxis";
   pRotationAxisCmd = new G4UIcmdWith3Vector(cmdName,this);
   cmdName = GetDirectoryName()+"setRotationAngle";
-  pRotationAngleCmd = new G4UIcmdWithADoubleAndUnit(cmdName,this);  
+  pRotationAngleCmd = new G4UIcmdWithADoubleAndUnit(cmdName,this);
   //Correlation Position/Direction
   cmdName = GetDirectoryName()+"setEllipseXThetaEmittance";
   pEllipseXThetaAreaCmd = new G4UIcmdWithADoubleAndUnit(cmdName,this);

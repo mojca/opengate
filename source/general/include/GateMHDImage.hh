@@ -58,6 +58,4 @@ protected:
 
 };
 
-#endif 
-
-
+#endif

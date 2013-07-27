@@ -15,10 +15,10 @@ See GATE/LICENSE.txt for further details
 
 //-----------------------------------------------------------------------------
 GateOpticalAbsorptionPB::GateOpticalAbsorptionPB():GateVProcess("OpticalAbsorption")
-{  
+{
   SetDefaultParticle("opticalphoton");
   SetProcessInfo("Absorption process for optical photons");
-  pMessenger = new GateEMStandardProcessMessenger(this) ;  
+  pMessenger = new GateEMStandardProcessMessenger(this) ;
 }
 //-----------------------------------------------------------------------------
 
@@ -34,7 +34,7 @@ G4VProcess* GateOpticalAbsorptionPB::CreateProcess(G4ParticleDefinition *)
 //-----------------------------------------------------------------------------
 void GateOpticalAbsorptionPB::ConstructProcess(G4ProcessManager * manager)
 {
-  manager->AddDiscreteProcess(GetProcess());           
+  manager->AddDiscreteProcess(GetProcess());
 }
 //-----------------------------------------------------------------------------
 

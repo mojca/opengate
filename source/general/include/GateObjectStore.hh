@@ -22,24 +22,24 @@ class G4LogicalVolume;
 
 /*! \class  GateObjectStore
     \brief  Stores the list of object creators: allows to retrieve creators/volumes
-    
+
     - GateObjectStore - by Daniel.Strul@iphe.unil.ch (May 9 2002)
-    
-    - The GateObjectStore is a singleton. Its task is to provide tools for listing 
-      or retrieving object-creators 
-    
+
+    - The GateObjectStore is a singleton. Its task is to provide tools for listing
+      or retrieving object-creators
+
       \sa GateVVolume
-*/      
+*/
 class GateObjectStore : public GateMap<G4String,GateVVolume*>
 {
   public:
     //! This function allows to retrieve the current instance of the GateObjectStore singleton
-    /*! 
+    /*!
       	If the GateObjectStore already exists, GetInstance only returns a pointer to this singleton.
 	If this singleton does not exist yet, GetInstance creates it by calling the private
 	GateObjectStore constructor
     */
-    static GateObjectStore* GetInstance(); 
+    static GateObjectStore* GetInstance();
 
     virtual ~GateObjectStore(); //!< Public destructor
 
@@ -54,11 +54,11 @@ class GateObjectStore : public GateMap<G4String,GateVVolume*>
     virtual void UnregisterCreator(GateVVolume* creator);    //!< Removes a deleted object-creator from the creator-list
     virtual void ListCreators();      	      	      	      	    //!< List the object creators stored in the creator list
     //@}
-        
+
     //! \name Methods to retrieve a creator
     //@{
     GateVVolume* FindCreator(const G4String& name);                        //!< Retrieves a creator
-    GateVVolume* FindVolumeCreator(const G4String& volumeName);      	      	
+    GateVVolume* FindVolumeCreator(const G4String& volumeName);
     GateVVolume* FindVolumeCreator(G4VPhysicalVolume* volume);       	//!< Retrieves the creator of a logical volume
     //@}
 
@@ -75,4 +75,3 @@ class GateObjectStore : public GateMap<G4String,GateVVolume*>
 
 
 #endif
-
