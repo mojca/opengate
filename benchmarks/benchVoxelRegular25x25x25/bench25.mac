@@ -104,7 +104,7 @@
 #/gate/application/verbose 0
 #/gate/source/verbose 0
 #/gate/output/projection/verbose 0
-#/gate/output/verbose 2	
+#/gate/output/verbose 2
 
 
 
@@ -136,4 +136,3 @@
 /gate/application/setTimeStop 1. s
 
 /gate/application/startDAQ
-

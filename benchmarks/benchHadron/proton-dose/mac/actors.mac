@@ -34,4 +34,3 @@
 /gate/actor/dose1/enableUncertaintyDose true
 /gate/actor/dose1/enableSquaredDose     false
 #/gate/actor/dose1/save                  output/PDD-Chamber-226.7-Mev.txt
-

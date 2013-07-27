@@ -132,7 +132,7 @@
 /gate/cylindricalPET/orbiting/setPoint2 0 0 1 cm
 
 
-#	A T T A C H    S Y S T E M 
+#	A T T A C H    S Y S T E M
 /gate/systems/cylindricalPET/rsector/attach head
 /gate/systems/cylindricalPET/module/attach module
 /gate/systems/cylindricalPET/submodule/attach block
@@ -146,5 +146,3 @@
 /gate/BGO/attachCrystalSD
 
 /gate/systems/cylindricalPET/describe
-
-

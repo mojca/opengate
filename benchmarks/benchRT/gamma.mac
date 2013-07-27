@@ -56,7 +56,7 @@
 /gate/actor/doseDistribution/attachTo    	   mainbox2
 /gate/actor/doseDistribution/stepHitType           random
 /gate/actor/doseDistribution/setPosition           0 0 0 cm
-/gate/actor/doseDistribution/setResolution         1 1 400 
+/gate/actor/doseDistribution/setResolution         1 1 400
 /gate/actor/doseDistribution/saveEveryNSeconds     60
 /gate/actor/doseDistribution/enableEdep            true
 /gate/actor/doseDistribution/enableUncertaintyEdep false
@@ -120,4 +120,3 @@
 /gate/application/start
 
 exit
-

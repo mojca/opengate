@@ -1,4 +1,4 @@
-#	D I G I T I Z E R 
+#	D I G I T I Z E R
 /gate/digitizer/Singles/insert adder
 /gate/digitizer/Singles/insert readout
 /gate/digitizer/Singles/readout/setDepth 1
@@ -12,7 +12,7 @@
 
 
 
-#	C O I N C I    S O R T E R 
+#	C O I N C I    S O R T E R
 /gate/digitizer/Coincidences/setWindow 120. ns
 /gate/digitizer/Coincidences/MultiplesPolicy  takeWinnerOfGoods
 
@@ -21,4 +21,3 @@
 /gate/digitizer/delay/setWindow 120. ns
 /gate/digitizer/delay/setOffset 500. ns
 /gate/digitizer/delay/MultiplesPolicy  takeWinnerOfGoods
-

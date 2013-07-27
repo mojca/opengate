@@ -75,7 +75,7 @@
 # uncomment as needed
 /gate/physics/addProcess ProtonInelastic
 /gate/physics/processes/ProtonInelastic/setDataSet G4ProtonInelasticCrossSection
-# precompound 
+# precompound
 #/gate/physics/processes/ProtonInelastic/setModel PreCompound
 # or binary cascade
 /gate/physics/processes/ProtonInelastic/setModel G4BinaryCascade
@@ -135,7 +135,7 @@
 /gate/physics/processes/NeutronInelastic/G4NeutronHPInelastic/setEmax 20 MeV neutron
 /gate/physics/processes/NeutronInelastic/setDataSet G4HadronInelasticDataSet
 /gate/physics/processes/NeutronInelastic/setDataSet G4NeutronHPInelasticData
-# precompound 
+# precompound
 #/gate/physics/processes/NeutronInelastic/setModel PreCompound
 #/gate/physics/processes/NeutronInelastic/PreCompound/setEmin 20 MeV neutron
 #/gate/physics/processes/NeutronInelastic/PreCompound/setEmax 20 GeV neutron
@@ -146,4 +146,3 @@
 
 # display stuff
 /gate/physics/processList Enabled
-

@@ -48,7 +48,7 @@
 
 
 #=====================================
-#    Hadronic processes 
+#    Hadronic processes
 #=====================================
 
 /gate/physics/addProcess HadronElastic GenericIon

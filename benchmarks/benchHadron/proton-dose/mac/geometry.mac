@@ -36,8 +36,7 @@
 /gate/cylinder-4.08cm/setMaterial G4_WATER
 /gate/cylinder-4.08cm/geometry/setRmin 0 cm
 /gate/cylinder-4.08cm/geometry/setRmax 4.08 cm
-/gate/cylinder-4.08cm/geometry/setPhiStart 0 deg 
+/gate/cylinder-4.08cm/geometry/setPhiStart 0 deg
 /gate/cylinder-4.08cm/geometry/setDeltaPhi 360 deg
 /gate/cylinder-4.08cm/geometry/setHeight 40 cm
 /gate/cylinder-4.08cm/placement/setTranslation 0.0 0.0 0.0 cm
-
