@@ -1,5 +1,5 @@
 /*
-Copyright 2002, 2003 Alexis Guillaume <aguillau@liris.univ-lyon2.fr> for "Laboratoire LIRIS, université Lyon II, France."
+Copyright 2002, 2003 Alexis Guillaume <aguillau@liris.univ-lyon2.fr> for "Laboratoire LIRIS, universitÃ© Lyon II, France."
 Copyright 2002, 2008 David Coeurjolly < david.coeurjolly@liris.cnrs.fr> for "Laboratoire LIRIS, CNRS, France."
 
 This file is part of libvol.
