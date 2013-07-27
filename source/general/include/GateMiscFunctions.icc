@@ -18,7 +18,7 @@ template<typename T>
 bool ConvertFromString( const std::string & Str, T & Dest )
 {
   // http://c.developpez.com/faq/cpp/?page=strings#STRINGS_convert_to
-  // créer un flux à partir de la chaîne donnée
+  // crÃ©er un flux Ã  partir de la chaÃ®ne donnÃ©e
   std::istringstream iss( Str );
   // tenter la conversion vers Dest
   return iss >> Dest != 0;
