@@ -21,4 +21,3 @@ git add $(dirname $1)/.gitignore
 rm $1
 
 echo "GateAddBenchmarkData(\"DATA{${1#$(dirname $0)/}}\")" >> CMakeLists.txt
-

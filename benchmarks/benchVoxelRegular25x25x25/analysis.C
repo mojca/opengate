@@ -9,7 +9,7 @@
 
 //
 // Declaration of leaves types - TTree Singles
-//  
+//
    Int_t           RayleighCrystal;
    Int_t           RayleighPhantom;
    Int_t           comptonCrystal;
@@ -22,9 +22,9 @@
    Float_t         sourcePosY;
    Float_t         sourcePosZ;
 
-//   
+//
 // Set branch addresses - TTree Singles
-//  
+//
    Singles->SetBranchAddress("RayleighCrystal",&RayleighCrystal);
    Singles->SetBranchAddress("RayleighPhantom",&RayleighPhantom);
    Singles->SetBranchAddress("comptonCrystal",&comptonCrystal);
@@ -37,12 +37,12 @@
    Singles->SetBranchAddress("sourcePosY",&sourcePosY);
    Singles->SetBranchAddress("sourcePosZ",&sourcePosZ);
 
-   /////////////STAT////////   
+   /////////////STAT////////
    gStyle -> SetStatW(0.28);
    gStyle -> SetStatH(0.3);
-   gStyle -> SetStatColor(41);   
+   gStyle -> SetStatColor(41);
    gStyle -> SetStatX(1);
-   gStyle -> SetStatY(1);   
+   gStyle -> SetStatY(1);
    gStyle -> SetStatFont(42);
    gStyle->SetOptStat(0);
    gStyle->SetOptFit(0);
@@ -52,14 +52,14 @@
    TH1F *EnergyScatter  = new TH1F("EnergyScatter","Energy distribution of scattered Singles",120,0.,+700.);
 
    TH1F *DetectPosAxial = new TH1F("DetectPosAxial","Axial detection distribution",50,-200.,+200.);
-   
+
    TH2F *DetectPos      = new TH2F("DetectPos","Transaxial detection position",252,-504.,+504.,252,-504.,+504.);
 
    TH3F *Detect3D       = new TH3F("Detect3D","Global phantom view", 100,-200,+200,100,-200,+200,100,-400,+400);
 
    Int_t nentries = Singles->GetEntries();
    Int_t nbytes = 0, nscatter = 0, ntrue = 0, nscatCrystal = 0, ncompton = 0, nrayleigh = 0, nboth = 0;
-   
+
    Double_t StartTime   = 0.;
    Double_t StopTime    = 1.;
 
@@ -91,7 +91,7 @@
      // Crystal scattering
      if (comptonCrystal != 0 || RayleighCrystal != 0) {
          nscatCrystal++;
-     } 
+     }
    }
 
 //
@@ -107,7 +107,7 @@
    cout << " *                 --> 25*25*25 matrix" << endl;
    cout << " *                 --> 3 materials" << endl;
    cout << " *                 --> positrons" << endl;
-   cout << " *" << endl << " *" << endl;     
+   cout << " *" << endl << " *" << endl;
 
    cout << " *  Total number of Singles : " << nentries << endl;
    cout << " *" << endl;
@@ -130,7 +130,7 @@
    cout << " *" << endl;
    cout << " ************************************************************** " << endl;
    cout << endl;
- 
+
    c1 = new TCanvas("c1","Bench",0,0,1000,700);
    Int_t pos=1;
    c1->Divide(3,2);
@@ -141,11 +141,11 @@
    c1->cd(pos++);
    DetectPos->Draw();
    c1->cd(pos++);
-   Detect3D->Draw();  
+   Detect3D->Draw();
    c1->cd(pos++);
    EnergyTrue->Draw();
    c1->cd(pos++);
    EnergyScatter->Draw();
-   c1->Update();   
+   c1->Update();
    c1->SaveAs("bench.gif");
-}	
+}

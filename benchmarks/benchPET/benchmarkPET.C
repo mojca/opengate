@@ -9,7 +9,7 @@
 
 //
 //Declaration of leaves types - TTree Coincidences
-//  
+//
    Int_t           RayleighCrystal1;
    Int_t           RayleighCrystal2;
    Int_t           RayleighPhantom1;
@@ -26,13 +26,13 @@
    Int_t           comptonPhantom1;
    Int_t           comptonPhantom2;
    Float_t         energy1;
-   Float_t         energy2;   
+   Float_t         energy2;
    Int_t           eventID1;
    Int_t           eventID2;
    Float_t         globalPosX1;
    Float_t         globalPosX2;
    Float_t         globalPosY1;
-   Float_t         globalPosY2;      
+   Float_t         globalPosY2;
    Float_t         globalPosZ1;
    Float_t         globalPosZ2;
    Int_t           layerID1;
@@ -57,11 +57,11 @@
    Int_t           submoduleID2;
    Double_t         time1;
    Double_t         time2;
-   
+
    Float_t         zmin,zmax,z;
-//   
+//
 //Set branch addresses - TTree Coincicences
-//  
+//
    Coincidences->SetBranchAddress("RayleighCrystal1",&RayleighCrystal1);
    Coincidences->SetBranchAddress("RayleighCrystal2",&RayleighCrystal2);
    Coincidences->SetBranchAddress("RayleighPhantom1",&RayleighPhantom1);
@@ -78,13 +78,13 @@
    Coincidences->SetBranchAddress("comptonPhantom1",&comptonPhantom1);
    Coincidences->SetBranchAddress("comptonPhantom2",&comptonPhantom2);
    Coincidences->SetBranchAddress("energy1",&energy1);
-   Coincidences->SetBranchAddress("energy2",&energy2);   
+   Coincidences->SetBranchAddress("energy2",&energy2);
    Coincidences->SetBranchAddress("eventID1",&eventID1);
    Coincidences->SetBranchAddress("eventID2",&eventID2);
    Coincidences->SetBranchAddress("globalPosX1",&globalPosX1);
    Coincidences->SetBranchAddress("globalPosX2",&globalPosX2);
    Coincidences->SetBranchAddress("globalPosY1",&globalPosY1);
-   Coincidences->SetBranchAddress("globalPosY2",&globalPosY2);      
+   Coincidences->SetBranchAddress("globalPosY2",&globalPosY2);
    Coincidences->SetBranchAddress("globalPosZ1",&globalPosZ1);
    Coincidences->SetBranchAddress("globalPosZ2",&globalPosZ2);
    Coincidences->SetBranchAddress("layerID1",&layerID1);
@@ -109,15 +109,15 @@
    Coincidences->SetBranchAddress("submoduleID2",&submoduleID2);
    Coincidences->SetBranchAddress("time1",&time1);
    Coincidences->SetBranchAddress("time2",&time2);
-   
-  
 
-   /////////////STAT////////   
+
+
+   /////////////STAT////////
    gStyle -> SetStatW(0.28);
    gStyle -> SetStatH(0.3);
-   gStyle -> SetStatColor(41);   
+   gStyle -> SetStatColor(41);
    gStyle -> SetStatX(1);
-   gStyle -> SetStatY(1);   
+   gStyle -> SetStatY(1);
    gStyle -> SetStatFont(42);
    gStyle->SetOptStat(0);
    gStyle->SetOptFit(0);
@@ -131,24 +131,24 @@
    TH1F *AxialScattersDet = new TH1F("AxialScattersDet","Axial scatters distribution",50,-200.,+200.);
    TH1F *AxialProfileDet = new TH1F("AxialProfileDet","",50,-200.,+200.);
    TH1F *ScatterFractionAxialDet = new TH1F("ScatterFractionAxialDet","Axial scatter fraction",50,-200.,+200.);
-   
+
    TH2F *DetectPos1 = new TH2F("DetectPos1","Transaxial detection position",252,-504.,+504.,252,-504.,+504.);
    TH2F *DetectPos2 = new TH2F("DetectPos2","Transaxial detection position",252,-504.,+504.,252,-504.,+504.);
    Int_t nentries = Coincidences->GetEntries();
    Int_t nbytes = 0, nbytesdelay = 0, nrandom = 0, nscatter = 0, ntrue = 0;
-   
+
    Double_t O15Activity = 100000.;
    Double_t F18Activity = 100000.;
    Double_t StartTime   = 0.;
    Double_t StopTime    = 240.;
    Double_t O15HalfLife = 122.24;
-   Double_t F18HalfLife = 6586.2;    
+   Double_t F18HalfLife = 6586.2;
    Double_t O15DecayFactor = (1.0 - exp(-log(2.0)*(StopTime-StartTime)/O15HalfLife))/
-                             (exp(+log(2.0)*StartTime/O15HalfLife)*log(2.0)/O15HalfLife*(StopTime-StartTime));    
+                             (exp(+log(2.0)*StartTime/O15HalfLife)*log(2.0)/O15HalfLife*(StopTime-StartTime));
    Double_t F18DecayFactor = (1.0 - exp(-log(2.0)*(StopTime-StartTime)/F18HalfLife))/
-                             (exp(+log(2.0)*StartTime/F18HalfLife)*log(2.0)/F18HalfLife*(StopTime-StartTime)); 
-   Double_t O15Decay = O15Activity * (StopTime-StartTime) * O15DecayFactor;			     
-   Double_t F18Decay = F18Activity * (StopTime-StartTime) * F18DecayFactor;			     
+                             (exp(+log(2.0)*StartTime/F18HalfLife)*log(2.0)/F18HalfLife*(StopTime-StartTime));
+   Double_t O15Decay = O15Activity * (StopTime-StartTime) * O15DecayFactor;
+   Double_t F18Decay = F18Activity * (StopTime-StartTime) * F18DecayFactor;
 
 
 //
@@ -179,11 +179,11 @@
        } else { // true scattered coincidence
          AxialScattersDet->Fill(z);
          nscatter++;
-       }  
+       }
        AxialProfileDet->Fill(z);
        if ((sourceID1 == 1) && (sourceID2 == 1)) DecayO15->Fill(time1);
        else if ((sourceID1 == 0) && (sourceID2 == 0)) DecayF18->Fill(time1);
-     }  
+     }
    }
    cout << endl << endl;
    e1 = new TF1("e1","expo",0.,240.);
@@ -191,27 +191,27 @@
    //Acolinea_Angle_Distribution_deg->Fit("g1");
    DecayO15->Fit("e1","","",0.,240.);
    //Double_t ndecay = Ion_decay_time_s->GetEntries();
-   cout << endl << endl;     
+   cout << endl << endl;
    cout << " *********************************************************************************** " << endl;
    cout << " *                                                                                 * " << endl;
    cout << " *   G A T E    P E T    B E N C H M A R K    R E S U L T S    A N A L Y S I S     * " << endl;
    cout << " *                                                                                 * " << endl;
    cout << " *********************************************************************************** " << endl;
-   cout << endl << endl;     
+   cout << endl << endl;
    cout << " Acquisition start time = " << StartTime << " [s]" << endl;
    cout << " Acquisition stop time  = " << StopTime  << " [s]" << endl;
    cout << " O-15 decay factor = " << O15DecayFactor << endl;
    cout << " F-18 decay factor = " << F18DecayFactor << endl;
    cout << " O-15 initial activity = " << O15Activity << " [Bq]" << endl;
-   cout << " F-18 initial activity = " << F18Activity << " [Bq]" << endl;   
-   cout << " O-15 decays = " << O15Decay << endl;			        
-   cout << " F-18 decays = " << F18Decay << endl;			        
-   cout << " ==> Expected total number of decays during the acquisition is " << O15Decay+F18Decay << " +/- " << sqrt(O15Decay+F18Decay) << endl;   
+   cout << " F-18 initial activity = " << F18Activity << " [Bq]" << endl;
+   cout << " O-15 decays = " << O15Decay << endl;
+   cout << " F-18 decays = " << F18Decay << endl;
+   cout << " ==> Expected total number of decays during the acquisition is " << O15Decay+F18Decay << " +/- " << sqrt(O15Decay+F18Decay) << endl;
   // cout << " There are " << ndecay << " recorded decays" << endl;
    cout << " There are " << ntrue << " true unscattered coincidences" << endl;
    cout << " There are " << nrandom << " random coincidences" << endl;
    cout << " There are " << nscatter << " scattered coincidences" << endl;
-   cout << "  ==> there are " << nentries << " coincidences (true, scattered, and random)" << endl;   
+   cout << "  ==> there are " << nentries << " coincidences (true, scattered, and random)" << endl;
    cout << "  ==> global scatter fraction = " << (float)nscatter/(float)(nentries-nrandom) << endl;
   // cout << "  ==> absolute sensitivity = " << 100.*(float)ntrue/ndecay << " % " << endl;
    Double_t p1 = e1->GetParameter(1);
@@ -248,7 +248,7 @@
    c1->cd(pos++);
    AxialSensitivityDet->Draw();
    c1->cd(pos++);
-   ScatterFractionAxialDet->Divide(AxialScattersDet,AxialProfileDet,1.,1.,"");  
+   ScatterFractionAxialDet->Divide(AxialScattersDet,AxialProfileDet,1.,1.,"");
    ScatterFractionAxialDet->Draw();
    //c1->cd(pos++);
    //Acolinea_Angle_Distribution_deg->Draw();
@@ -263,9 +263,9 @@
    tex1->SetLineWidth(2);
    tex1->Draw();
    Coincidences->SetLineColor(2);
-   Coincidences->Draw("time1","eventID1 != eventID2","same"); 
+   Coincidences->Draw("time1","eventID1 != eventID2","same");
 
-   
-   c1->Update();   
+
+   c1->Update();
    c1->SaveAs("benchmarkPET.gif");
-}	
+}
