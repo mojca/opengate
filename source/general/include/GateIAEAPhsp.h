@@ -56,7 +56,7 @@
 *
 * Given a file name header_file of length hf_length, initialize a
 * new IAEA particle source, assign an unique source_ID to it and return 
-* this Id in result. Don’t assume header_file is null-terminated as the
+* this Id in result. Don't assume header_file is null-terminated as the
 * function may be called from a Fortran program.
 * The need for an Id arises from the fact that some applications may
 * want to use several IAEA sources at once. The implementation must therefore
@@ -289,12 +289,12 @@ void iaea_set_total_original_particles(const IAEA_I32 *id,
 * n_chunk the total number of calculation chunks. This function
 * should divide the available phase space of source with Id id
 * into n_chunk equal portions and from now on deliver particles
-* from the i_chunk’th portion. (i_chunk must be between 1 and n_chunk)
+* from the i_chunk'th portion. (i_chunk must be between 1 and n_chunk)
 * The extra parameter i_parallel is needed
 * for the cases where the source is an event generator and should
 * be used to adjust the random number sequence.
 * The variable is_ok should be set to 0 if everything went smoothly,
-* or to some error code if it didn’t.
+* or to some error code if it didn't.
 **************************************************************************/
 IAEA_EXTERN_C IAEA_EXPORT 
 void iaea_set_parallel(const IAEA_I32 *id, const IAEA_I32 *i_parallel,
